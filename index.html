@@ -689,13 +689,13 @@
     }
     
     function calcF26_knight(F3,F4,F8,F16){ 
-      const base1 = Math.round((F3+2)*F4/1000*92*(1+F8+0.04)+92*(1+F8+0.04)/4);
-      const base2 = Math.round((F3+2)*F4/1000*44*(1+F8+0.04)+44*(1+F8+0.04)/4);
-      const base3 = Math.round((F3+2)*F4/1000*34.08*(1+F8+0.04)+34.08*(1+F8+0.04)/4);
-      const orig1 = Math.round((F3)*F4/1000*92*(1+F8+0.04)+92*(1+F8+0.04)/4);
-      const orig2 = Math.round((F3)*F4/1000*44*(1+F8+0.04)+44*(1+F8+0.04)/4);
-      const orig3 = Math.round((F3)*F4/1000*34.08*(1+F8+0.04)+34.08*(1+F8+0.04)/4);
-      return (base1 + base2 + base3 - orig1 - orig2 - orig3) / 3;
+      const base1 = Math.round((F3+1)*F4/1000*92*(1+F8)+92*(1+F8)/4);
+      const base2 = Math.round((F3+1)*F4/1000*44*(1+F8)+44*(1+F8)/4);
+      const base3 = Math.round((F3+1)*F4/1000*34.08*(1+F8)+34.08*(1+F8)/4);
+      const orig1 = Math.round((F3)*F4/1000*92*(1+F8)+92*(1+F8)/4);
+      const orig2 = Math.round((F3)*F4/1000*44*(1+F8)+44*(1+F8)/4);
+      const orig3 = Math.round((F3)*F4/1000*34.08*(1+F8)+34.08*(1+F8)/4);
+      return (base1 + base2 + base3 - orig1 - orig2 - orig3) * (1 + (72*F16/100))/ 3;
     }
 
     /* ===== Execução ===== */
