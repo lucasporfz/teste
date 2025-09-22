@@ -39,6 +39,21 @@
     #themeToggle:checked + .switch .icon-sun{display:none}
     #themeToggle:not(:checked) + .switch .icon-moon{display:none}
 
+    /* Language switch */
+    .lang-switch{display:inline-flex;align-items:center;gap:6px;margin-left:4px}
+    .lang-btn{height:32px;padding:0 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font-weight:800;cursor:pointer}
+    .lang-btn.active{outline:3px solid rgba(37,99,235,.25);border-color:#2e3f6b}
+    .lang-btn:focus{outline:3px solid var(--focus-ring)}
+    .switch-wrap{display:inline-flex;align-items:center;height:32px}
+    #themeToggle{position:absolute;inset:0;width:0;height:0;opacity:0}
+    .switch{position:relative;width:var(--switch-w);height:32px;background:var(--sw-off);border-radius:999px;display:inline-flex;align-items:center;padding:var(--switch-p);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.15) inset, 0 2px 6px rgba(0,0,0,.12);transition:background .2s ease;border:none}
+    .switch .thumb{position:absolute;top:var(--switch-p);left:var(--switch-p);width:var(--knob);height:var(--knob);background:var(--sw-thumb);border-radius:50%;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+    .icon-sun svg,.icon-moon svg{width:16px;height:16px;fill:#FFD54A}
+    #themeToggle:checked + .switch{background:var(--sw-on)}
+    #themeToggle:checked + .switch .thumb{transform:translateX(calc(var(--switch-w) - var(--knob) - (var(--switch-p) * 2)))}
+    #themeToggle:checked + .switch .icon-sun{display:none}
+    #themeToggle:not(:checked) + .switch .icon-moon{display:none}
+
     /* Layout */
     .app{max-width:min(1280px,96vw);margin:0 auto 16px;position:relative}
     .card{background:var(--card);padding:14px;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,0.06);border:1px solid var(--border)}
@@ -96,7 +111,12 @@
           </span>
         </label>
       </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button id="btnPT" class="lang-btn active" aria-pressed="true">🇧🇷 PT</button>
+        <button id="btnEN" class="lang-btn" aria-pressed="false">🇬🇧 EN</button>
+      </div>
     </div>
+  </div>
   </div>
 
   <!-- Side calculator switcher -->
@@ -195,17 +215,23 @@
 
     /* Calculator mode */
     let calcMode='bow';
+    // carregar e salvar linguagem
+    try{ const storedLang=localStorage.getItem('calc_lang'); if(storedLang) lang=storedLang; }catch(e){}
 
     function applyModeUI(){
       const isEK = calcMode==='ek';
-      // Título
-      document.getElementById('appTitle').textContent = isEK? 'Calculadora Sanguine — Elite Knight' : 'Calculadora Perks Sanguine Bow';
-      // Labels inputs
-      document.getElementById('labMagic').textContent = isEK? 'Weapon Attack' : 'Magic Level';
-      document.getElementById('labDist').textContent  = isEK? 'Sword/axe/club' : 'Distance';
-      document.getElementById('labBase').textContent  = isEK? 'Base exori gram (wheel + gems) (%)' : 'Base mas san (roda + gemas) (%)';
-      document.getElementById('labRate').textContent  = isEK? 'Turns/hour' : 'Flechas/hora';
+      // Ajustes de visibilidade
       document.querySelectorAll('.bow-only').forEach(el=>{ el.style.display = isEK? 'none':'block'; });
+      // Ativar botões laterais
+      document.getElementById('btnBow').classList.toggle('active', !isEK);
+      document.getElementById('btnEK').classList.toggle('active', isEK);
+      document.getElementById('btnBow').setAttribute('aria-selected', String(!isEK));
+      document.getElementById('btnEK').setAttribute('aria-selected', String(isEK));
+      // Aplicar textos conforme idioma e modo
+      applyLang();
+      // Recalcular
+      rodarCalculadora();
+    });
 
       // Stage labels
       document.getElementById('labelF20').textContent = isEK? '+4% base damage for Fierce Berserk' : '+4% base damage para Divine Caldera';
@@ -226,6 +252,115 @@
 
     document.getElementById('btnBow').addEventListener('click',()=>{calcMode='bow';applyModeUI()});
     document.getElementById('btnEK').addEventListener('click',()=>{calcMode='ek';applyModeUI()});
+
+    // language events
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id==='btnPT'){ lang='pt'; try{localStorage.setItem('calc_lang','pt')}catch(_){}; applyModeUI(); }
+      if(e.target && e.target.id==='btnEN'){ lang='en'; try{localStorage.setItem('calc_lang','en')}catch(_){}; applyModeUI(); }
+    });
+
+    /* i18n */
+    let lang = 'pt';
+    const STR = {
+      pt: {
+        titleBow:'Calculadora Perks Sanguine Bow',
+        titleEK:'Calculadora Sanguine — Elite Knight',
+        sideBow:'🏹 Sanguine Bow',
+        sideEK:'🛡️ Elite Knight Sanguines',
+        level:'Level',
+        magic:'Magic Level',
+        weapon:'Weapon Attack',
+        distance:'Distance',
+        sword:'Sword/axe/club',
+        wheel:'Pontos Dmg/Healing Roda',
+        crit:'Chance de crítico (%)',
+        legs:'Chance ativação legs (%)',
+        baseBow:'Base mas san (roda + gemas) (%)',
+        baseEK:'Base exori gram (wheel + gems) (%)',
+        rateBow:'Flechas/hora',
+        rateEK:'Turns/hour',
+        holy:'Dano sofrido por Sagrado (%)',
+        phys:'Dano sofrido por Físico (%)',
+        share:'Compartilhar',
+        clear:'Limpar',
+        resumo:'Resumo',
+        out14:'Level dmg:', out15:'Base dmg:', out16:'Chance crítico ajustada:', out17:'Bônus legs → avatar 3:',
+        st4_base_bow:'+4% base damage para Divine Caldera',
+        st4_crit_bow:'+20% critical extra damage para Divine Caldera',
+        st4_base_ek:'+4% base damage for Fierce Berserk',
+        st4_crit_ek:'+20% critical extra damage for Fierce Berserk',
+        st5_skill_bow:'+10% Distance Fighting p/ spells',
+        st5_crit_bow:'+3% critical hit chance para Divine Caldera',
+        st5_atk_bow:'+2 attack',
+        st5_skill_ek:'+10% of skill as extra damage for your spells',
+        st5_crit_ek:'+3% critical hit chance for Fierce Berserk',
+        st5_atk_ek:'+1 attack'
+      },
+      en: {
+        titleBow:'Sanguine Bow Proficiency Calculator',
+        titleEK:'Sanguine — Elite Knight Calculator',
+        sideBow:'🏹 Sanguine Bow',
+        sideEK:'🛡️ Elite Knight Sanguines',
+        level:'Level',
+        magic:'Magic Level',
+        weapon:'Weapon Attack',
+        distance:'Distance',
+        sword:'Sword/axe/club',
+        wheel:'Dmg/Healing from Wheel',
+        crit:'Critical chance  (%)',
+        legs:'Transcendence Triggering Chance (legs) (%)',
+        baseBow:'Base mas san (wheel + gems) (%)',
+        baseEK:'Base exori gram (wheel + gems) (%)',
+        rateBow:'Arrows/h',
+        rateEK:'Turns/hour',
+        holy:'Damage taken from Holy',
+        phys:'Damage taken from Physical',
+        share:'Share',
+        clear:'Reset',
+        resumo:'Resume',
+        out14:'Level dmg:', out15:'Base dmg:', out16:'Ajusted Critical Chance:', out17:'Transcendence avatar 3 Bonus:',
+        st4_base_bow:'+4% base damage for Divine Caldera',
+        st4_crit_bow:'+20% critical extra damage for Divine Caldera',
+        st4_base_ek:'+4% base damage for Fierce Berserk',
+        st4_crit_ek:'+20% critical extra damage for Fierce Berserk',
+        st5_skill_bow:'+10% Distance Fighting as extra damage for spells',
+        st5_crit_bow:'+3% critical hit chance for Divine Caldera',
+        st5_atk_bow:'+2 attack',
+        st5_skill_ek:'+10% of skill as extra damage for your spells',
+        st5_crit_ek:'+3% critical hit chance for Fierce Berserk',
+        st5_atk_ek:'+1 attack'
+      }
+    };
+    function applyLang(){
+      const s=STR[lang];
+      const isEK = calcMode==='ek';
+      document.getElementById('appTitle').textContent = isEK? s.titleEK : s.titleBow;
+      document.getElementById('btnBow').textContent = s.sideBow;
+      document.getElementById('btnEK').textContent = s.sideEK;
+      document.getElementById('labLevel').textContent = s.level;
+      document.getElementById('labMagic').textContent = isEK? s.weapon : s.magic;
+      document.getElementById('labDist').textContent  = isEK? s.sword  : s.distance;
+      document.getElementById('labWheel').textContent = s.wheel;
+      document.getElementById('labCrit').textContent  = s.crit;
+      document.getElementById('labLegs').textContent  = s.legs;
+      document.getElementById('labBase').textContent  = isEK? s.baseEK : s.baseBow;
+      document.getElementById('labRate').textContent  = isEK? s.rateEK : s.rateBow;
+      document.getElementById('labHoly').textContent  = s.holy; 
+      document.getElementById('labPhys').textContent  = s.phys;
+      document.getElementById('shareBtn').textContent = s.share;
+      document.getElementById('clearBtn').textContent = s.clear;
+      document.querySelector('#groupResumo h3').textContent = s.resumo;
+      document.getElementById('labelF20').textContent = isEK? s.st4_base_ek : s.st4_base_bow;
+      document.getElementById('labelF21').textContent = isEK? s.st4_crit_ek : s.st4_crit_bow;
+      document.getElementById('labelF25').textContent = isEK? s.st5_skill_ek: s.st5_skill_bow;
+      document.getElementById('labelF24').textContent = isEK? s.st5_crit_ek : s.st5_crit_bow;
+      document.getElementById('labelF26').textContent = isEK? s.st5_atk_ek  : s.st5_atk_bow;
+      // lang buttons state
+      document.getElementById('btnPT').classList.toggle('active', lang==='pt');
+      document.getElementById('btnEN').classList.toggle('active', lang==='en');
+      document.getElementById('btnPT').setAttribute('aria-pressed', String(lang==='pt'));
+      document.getElementById('btnEN').setAttribute('aria-pressed', String(lang==='en'));
+    }
 
     /* Core formulas (Bow) */
     function calcF14(F2){if(F2<500)return Math.floor(F2/5);if(F2<1100)return Math.floor((F2-500)/6+100);if(F2<1800)return Math.floor((F2-1100)/7+200);if(F2<2600)return Math.floor((F2-1800)/8+300);return Math.floor((F2-2600)/9+400)}
@@ -260,9 +395,11 @@
     function calcF25_ek(F21,F20,F4,F16){ // =SE(F21>F20;ARRED(F4*0,1;0)*(1+98*F16/100); ARRED(F4*0,1;0)*(1+72*F16/100)) * F11 ; F11=1
       const base=Math.round(F4*0.1); const mult=(F21>F20)? (1+0.98*F16) : (1+0.72*F16); return base*mult*1
     }
-    function calcF26_ek(F3,F4,F16){ // =(((floor(f(6/5*(F3+2))) - floor(f(6/5*F3))))*0,5*(1+72*F16/100)*F12 ; F12=1 for EK
-      const F12=1; const ia=Math.floor((6/5)*(F3+2)), ib=Math.floor((6/5)*(F3)); const ta=Math.floor(ia*(Math.floor(F4)+4)/28); const tb=Math.floor(ib*(Math.floor(F4)+4)/28); const diff=(ta-tb); return diff*0.5*(1+(72*F16/100))*F12
-    }
+    function calcF26_ek(F3,F2,F8){
+      // Novo cálculo solicitado:
+      // Média das três variações ao subir +2 em F3 (Weapon Attack), com multiplicador (1+F8+0,04)
+      const m = (1 + F8 + 0.04);
+      const part = (atk)=>{
 
     function rodarCalculadora(){
       const F2=getNum('level'), F3=getNum('magicLevel'), F4=getNum('distance'), F5=getNum('pontosWheel');
@@ -320,6 +457,7 @@
       } else if(stRaw){ try{ const st=JSON.parse(stRaw); calcMode=st.mode||'bow'; const set=(id,val)=>{ if(val!==undefined && val!==null) document.getElementById(id).value=val }; set('level',st.F2); set('magicLevel',st.F3); set('distance',st.F4); set('pontosWheel',st.F5); if(st.F6!=null) chanceCrit.value=(st.F6*100).toString(); if(st.F7!=null) chanceLegs.value=(st.F7*100).toString(); if(st.F8!=null) baseMasSan.value=(st.F8*100).toString(); flechasHora.value=st.F9 ?? flechasHora.value; if(calcMode==='bow'){ if(st.F11!=null) holyWeak.value=(st.F11*100).toString(); if(st.F12!=null) physWeak.value=(st.F12*100).toString(); } }catch(e){}
       }
       applyModeUI();
+      applyLang();
       // listeners
       const ids=['level','magicLevel','distance','pontosWheel','chanceCrit','chanceLegs','baseMasSan','flechasHora','holyWeak','physWeak'];
       ids.forEach(id=>{ const el=document.getElementById(id); if(!el) return; el.addEventListener('input',rodarCalculadora); el.addEventListener('change',rodarCalculadora); });
