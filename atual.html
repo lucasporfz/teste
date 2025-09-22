@@ -2,400 +2,127 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <title>Calculadora Perks Sanguine Bow — versão web</title>
+  <title>Calculadora Sanguine — Bow & EK</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://static-cdn.jtvnw.net/emoticons/v2/305012938/static/light/1.0">
-
   <style>
-    /* ===== Design tokens ===== */
     :root{
-      --topbar-h: 54px;
-
-      /* ALTURAS UNIFICADAS (alinhamento da topbar) */
-      --ui-h: 32px;        /* altura visual de TODOS os botões da topbar */
-      --ui-gap: 10px;
-
-      /* switch (usa as mesmas medidas acima) */
-      --switch-w: 54px;
-      --switch-p: 4px;
-      --knob: 24px;
-
-      /* light */
-      --bg:#f4f6f9;
-      --fg:#111;
-      --card:#ffffff;
-      --surface:#ffffff;
-      --surface-2:#fafafa;
-      --muted:#666;
-      --border:#e6e6e6;
-      --border-2:#eeeeee;
-
-      --radius-ui: 12px;
-      --pill-bg:#0f172a;
-      --pill-border:#1f2a44;
-      --pill-text:#e5e7eb;
-      --input-border:#e6e6e6;
-      --input-border-hover:#d7dbe2;
-      --focus-ring: rgba(37,99,235,.15);
-
-      --brand:#2563eb;
-      --twitch:#9146FF;
-      --kick:#53fc18;
-      --best:#16a34a;
-
-      /* switch cores */
-      --sw-on:#4f46e5;   /* Indigo (Dark) */
-      --sw-off:#b45309;  /* Orange (Light) */
-      --sw-thumb:#ffffff;
+      --topbar-h:54px; --ui-h:32px; --ui-gap:10px;
+      --switch-w:54px; --switch-p:4px; --knob:24px;
+      --bg:#0b1020; --fg:#e7eaf2; --card:#11172c; --surface:#121a33; --surface-2:#0f162c; --muted:#a9b1c6; --border:#1f2a44; --border-2:#1b2749; --focus-ring: rgba(59,130,246,.30);
+      --pill-bg:#0b1227; --pill-border:#1d2a4a; --pill-text:#e7eaf2; --input-border:#263251; --input-border-hover:#304069;
+      --brand:#2563eb; --twitch:#9146FF; --kick:#53fc18; --best:#16a34a;
+      --sw-on:#4f46e5; --sw-off:#b45309; --sw-thumb:#ffffff;
+      --side-w: 200px;
     }
-    .theme-dark{
-      --bg:#0b1020;
-      --fg:#e7eaf2;
-      --card:#11172c;
-      --surface:#121a33;
-      --surface-2:#0f162c;
-      --muted:#a9b1c6;
-      --border:#1f2a44;
-      --border-2:#1b2749;
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--fg);padding-top:calc(var(--topbar-h) + 24px);min-height:100vh}
+    a{color:inherit}
 
-      --pill-bg:#0b1227;
-      --pill-border:#1d2a4a;
-      --pill-text:#e7eaf2;
-      --input-border:#263251;
-      --input-border-hover:#304069;
-      --focus-ring: rgba(59,130,246,.30);
+    /* Topbar */
+    .topbar{position:fixed;inset:0 0 auto 0;height:var(--topbar-h);background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,0)) , var(--card);display:flex;align-items:center;gap:var(--ui-gap);padding:0 16px;border-bottom:1px solid var(--border);z-index:60}
+    .topbar .spacer{flex:1}
+    .twitch-btn,.kick-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:32px;line-height:32px;padding:0 12px;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,.15);white-space:nowrap}
+    .twitch-btn{background:var(--twitch);color:#fff}
+    .kick-btn{background:var(--kick);color:#000}
 
-      --sw-on:#4f46e5;
-      --sw-off:#b45309;
-    }
+    /* Right controls */
+    .topbar-right{display:inline-flex;align-items:center;gap:var(--ui-gap);height:32px}
+    .switch-wrap{display:inline-flex;align-items:center;height:32px}
+    #themeToggle{position:absolute;inset:0;width:0;height:0;opacity:0}
+    .switch{position:relative;width:var(--switch-w);height:32px;background:var(--sw-off);border-radius:999px;display:inline-flex;align-items:center;padding:var(--switch-p);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.15) inset, 0 2px 6px rgba(0,0,0,.12);transition:background .2s ease;border:none}
+    .switch .thumb{position:absolute;top:var(--switch-p);left:var(--switch-p);width:var(--knob);height:var(--knob);background:var(--sw-thumb);border-radius:50%;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+    .icon-sun svg,.icon-moon svg{width:16px;height:16px;fill:#FFD54A}
+    #themeToggle:checked + .switch{background:var(--sw-on)}
+    #themeToggle:checked + .switch .thumb{transform:translateX(calc(var(--switch-w) - var(--knob) - (var(--switch-p) * 2)))}
+    #themeToggle:checked + .switch .icon-sun{display:none}
+    #themeToggle:not(:checked) + .switch .icon-moon{display:none}
 
-    /* ===== Resets úteis ===== */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height:100%; }
-    body { margin:0; }
-    input, button { -webkit-appearance: none; appearance: none; }
-    /* remove setinhas dos number */
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
-    input[type=number]{ -moz-appearance:textfield; }
+    /* Layout */
+    .app{max-width:min(1280px,96vw);margin:0 auto 16px;position:relative}
+    .card{background:var(--card);padding:14px;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,0.06);border:1px solid var(--border)}
+    h2{margin:8px 8px 16px;text-align:center}
+    .desktop-grid{display:grid;gap:16px}
+    @media (min-width:1100px){.desktop-grid{grid-template-columns:1fr 1fr;height:calc(100vh - var(--topbar-h) - 56px)}.pane{overflow:auto;padding-right:2px}}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:720px){.grid{grid-template-columns:1fr}}
 
-    /* ===== Topbar fixa ===== */
-    .topbar{
-      position:fixed; inset:0 0 auto 0; height:var(--topbar-h);
-      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,0)) , var(--card);
-      display:flex; align-items:center; gap:var(--ui-gap);
-      padding:0 16px;
-      border-bottom:1px solid var(--border);
-      z-index:50;
-    }
-    .topbar .spacer{ flex:1; }
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=number]{width:100%;height:42px;padding:10px 12px;border-radius:12px;border:1px solid var(--input-border);background:var(--surface);color:var(--fg);outline:none;transition:border-color .15s ease, box-shadow .15s ease}
+    input[type=number]:hover{border-color:var(--input-border-hover)}
+    input[type=number]:focus{border-color:#93c5fd;box-shadow:0 0 0 3px var(--focus-ring)}
+    .full{grid-column:1/-1}
+    .btn{padding:10px 14px;background:var(--brand);color:white;border:none;border-radius:10px;cursor:pointer;font-weight:600}
+    .btn.gray{background:#6b7280}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap}
 
-    /* Forçar alinhamento de todos elementos da topbar */
-    .topbar > *,
-    .topbar-right > *,
-    .switch-wrap > * {
-      margin:0;
-      vertical-align:middle;
-    }
+    .results-group{margin-top:14px;padding:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px}
+    .results-group h3{margin:0 0 10px;font-size:16px;text-align:center}
+    .result{background:var(--surface);padding:12px;border-radius:12px;border:1px solid var(--border-2);font-weight:600}
+    .muted{color:var(--muted);font-weight:500}
 
-    /* Twitch */
-    .twitch-btn{
-      display:inline-flex; 
-      align-items:center; 
-      justify-content:center;
-      gap:8px;
-      height:32px;
-      line-height:32px;
-      padding:0 12px; 
-      border-radius:999px;
-      background:var(--twitch); 
-      color:#fff; 
-      text-decoration:none; 
-      font-weight:700;
-      box-shadow:0 6px 18px rgba(0,0,0,.15);
-      white-space:nowrap;
-      vertical-align:middle;
-    }
+    .perk-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+    .perk-card{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;transition:background .15s ease,border-color .15s ease,box-shadow .15s ease}
+    .perk-card:hover{background:rgba(59,130,246,.08);border-color:#2e3f6b}
+    .perk-card__name{color:var(--fg);font-weight:600;font-size:clamp(.92rem,1.6vw,1rem);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .perk-card__value{display:flex;align-items:flex-end;gap:4px;justify-self:end;text-align:right;line-height:1}
+    .perk-card__num{font-size:clamp(1rem,2.2vw,1.25rem);font-weight:800;color:var(--fg);font-variant-numeric:tabular-nums lining-nums}
+    .perk-card.is-best{border:2px solid var(--best);box-shadow:0 0 0 3px rgba(16,185,129,.25)}
+    .perk-card__badge{display:none;position:absolute;top:-10px;right:10px;background:var(--best);color:#062b1e;font-weight:800;padding:2px 8px;border-radius:999px;font-size:.72rem;box-shadow:0 6px 16px rgba(16,185,129,.35)}
+    .perk-card.is-best .perk-card__badge{display:inline-block}
 
-    /* Kick */
-    .kick-btn{
-      display:inline-flex; 
-      align-items:center; 
-      justify-content:center;
-      gap:8px;
-      height:32px;
-      line-height:32px;
-      padding:0 12px; 
-      border-radius:999px;
-      background:var(--kick); 
-      color:#000; 
-      text-decoration:none; 
-      font-weight:700;
-      box-shadow:0 6px 18px rgba(0,0,0,.15);
-      white-space:nowrap;
-      vertical-align:middle;
-    }
+    /* Side switcher */
+    .side-switcher{position:fixed;left:16px;top:calc(var(--topbar-h) + 24px);display:flex;flex-direction:column;gap:8px;z-index:55}
+    .side-btn{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-width:var(--side-w);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font-weight:800;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .side-btn.active{outline:3px solid rgba(37,99,235,.25);border-color:#2e3f6b}
 
-    /* container da direita: garante MESMO eixo */
-    .topbar-right{
-      display:inline-flex; 
-      align-items:center; 
-      gap:var(--ui-gap);
-      height:32px;
-      vertical-align:middle;
-    }
-
-    /* ===== Switch Dark/Light (REFATORADO) ===== */
-    .switch-wrap{ 
-      display:inline-flex; 
-      align-items:center;
-      height:32px;
-      vertical-align:middle;
-    }
-    #themeToggle{ position:absolute; inset:0; width:0; height:0; opacity:0; }
-
-    .switch{
-      position:relative;
-      width:var(--switch-w); 
-      height:32px;
-      background:var(--sw-off);
-      border-radius:999px;
-      display:inline-flex; 
-      align-items:center;
-      padding:var(--switch-p);
-      cursor:pointer;
-      box-shadow:0 4px 14px rgba(0,0,0,.15) inset, 0 2px 6px rgba(0,0,0,.12);
-      transition:background .2s ease;
-      border:none;
-      vertical-align:middle;
-    }
-    .switch .thumb{
-      position:absolute; top:var(--switch-p); left:var(--switch-p);
-      width:var(--knob); height:var(--knob); background:var(--sw-thumb); border-radius:50%;
-      display:grid; place-items:center;
-      box-shadow:0 2px 6px rgba(0,0,0,.25);
-      transition:transform .25s cubic-bezier(.2,.8,.2,1);
-    }
-    .icon-sun svg, .icon-moon svg{ width:16px; height:16px; fill:#FFD54A; } /* sol/lua amarelos */
-    #themeToggle:checked + .switch{ background:var(--sw-on); }
-    /* deslocamento preciso: largura − knob − 2*padding */
-    #themeToggle:checked + .switch .thumb{
-      transform: translateX(calc(var(--switch-w) - var(--knob) - (var(--switch-p) * 2)));
-    }
-    #themeToggle:checked + .switch .icon-sun{ display:none; }
-    #themeToggle:not(:checked) + .switch .icon-moon{ display:none; }
-
-    /* ===== Seletor de idioma ===== */
-    .lang-switch{ 
-      position:relative; 
-      display:inline-flex; 
-      align-items:center; 
-      height:32px;
-      vertical-align:middle;
-    }
-    .lang-btn{
-      display:inline-flex; 
-      align-items:center; 
-      justify-content:center;
-      gap:8px;
-      height:32px;
-      line-height:32px;
-      padding:0 10px;
-      border-radius:999px;
-      border:1px solid var(--pill-border);
-      background:var(--pill-bg); 
-      color:var(--pill-text);
-      font-weight:800; 
-      box-shadow:0 4px 14px rgba(2,6,23,.15);
-      cursor:pointer;
-      vertical-align:middle;
-    }
-    .lang-btn .code{ font-size:12px; letter-spacing:.2px; }
-    .flag-img{ width:20px; height:14px; border-radius:4px; display:inline-block; vertical-align:middle; box-shadow:0 0 0 1px rgba(255,255,255,.25) inset; }
-    .lang-menu{
-      position:absolute; top:110%; right:0; z-index:30;
-      background:var(--pill-bg); color:var(--pill-text);
-      border:1px solid var(--pill-border);
-      border-radius:14px; padding:6px; min-width:150px;
-      box-shadow:0 10px 22px rgba(0,0,0,.25);
-    }
-    .lang-opt{ display:flex; align-items:center; gap:8px; width:100%; background:transparent; color:inherit; border:0; cursor:pointer; padding:8px 10px; border-radius:10px; font-weight:800; font-size:13px; }
-    .lang-opt:hover{ background:#1f2937; }
-
-    /* ===== Base ===== */
-    body { font-family: Inter, Arial, sans-serif; background:var(--bg); color:var(--fg); padding-top:calc(var(--topbar-h) + 24px); min-height:100vh; }
-    .app { max-width:min(1280px, 96vw); margin:0 auto 16px; }
-
-    .card { background:var(--card); padding:14px; border-radius:16px; box-shadow:0 6px 18px rgba(0,0,0,0.06); border:1px solid var(--border); }
-    .app h2{ margin:8px 8px 16px; text-align:center; } /* título centralizado */
-
-    /* ===== Layout principal (desktop: 2 colunas, altura da viewport) ===== */
-    .desktop-grid{ display:grid; gap:16px; }
-    @media (min-width: 1100px){
-      .desktop-grid{
-        grid-template-columns: 1fr 1fr;
-        height: calc(100vh - var(--topbar-h) - 56px);
-      }
-      .pane{ overflow:auto; padding-right:2px; }
-    }
-
-    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-    @media (max-width: 720px){ .grid { grid-template-columns: 1fr; } }
-
-    label { display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
-
-    /* Inputs */
-    input[type=number]{
-      width:100%;
-      height:42px;
-      padding:10px 12px;
-      border-radius:var(--radius-ui);
-      border:1px solid var(--input-border);
-      background:var(--surface);
-      color:var(--fg);
-      outline:none;
-      transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
-      background-clip:padding-box;
-      font-size:15px;
-    }
-    input[type=number]:hover{ border-color:var(--input-border-hover); }
-    input[type=number]:focus{
-      border-color:#93c5fd;
-      box-shadow:0 0 0 3px var(--focus-ring);
-    }
-
-    .full { grid-column: 1 / -1; }
-    .btn { padding:10px 14px; background:var(--brand); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:600; }
-    .btn.gray { background:#6b7280; }
-    .toolbar { display:flex; gap:8px; flex-wrap:wrap; }
-
-    /* Resultados */
-    .results-group { margin-top:14px; padding:12px; background:var(--surface-2); border:1px solid var(--border); border-radius:14px; }
-    .results-group h3 { margin:0 0 10px; font-size:16px; text-align:center; }
-    .result { background:var(--surface); padding:12px; border-radius:var(--radius-ui); border:1px solid var(--border-2); font-weight:600; }
-    .muted { color:var(--muted); font-weight:500; }
-
-    /* Perks */
-    .perk-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
-    .perk-card{
-      position:relative;
-      display:grid;
-      grid-template-columns: 1fr auto;
-      align-items:center;
-      gap:14px;
-      background:var(--surface);
-      border:1px solid var(--border-2);
-      border-radius:var(--radius-ui);
-      padding:12px 14px;
-      transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
-    }
-    .perk-card:hover{ background:rgba(59,130,246,.04); border-color:#dfe6ff; }
-    .theme-dark .perk-card:hover{ background:rgba(59,130,246,.08); border-color:#2e3f6b; }
-    .perk-card__name{ color:var(--fg); font-weight:600; font-size:clamp(.92rem, 1.6vw, 1rem); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .perk-card__value{ display:flex; align-items:flex-end; gap:4px; justify-self:end; text-align:right; line-height:1; }
-    .perk-card__num{ font-size:clamp(1rem, 2.2vw, 1.25rem); font-weight:800; color:var(--fg); font-variant-numeric: tabular-nums lining-nums; }
-    .perk-card.is-best{ border:2px solid var(--best); box-shadow:0 0 0 3px rgba(22,163,74,.15); }
-    .perk-card__badge{ display:none; position:absolute; top:-10px; right:10px; background:var(--best); color:#062b1e; font-weight:800; padding:2px 8px; border-radius:999px; font-size:.72rem; box-shadow:0 6px 16px rgba(16,185,129,.35); }
-    .perk-card.is-best .perk-card__badge{ display:inline-block; }
-
-    /* Responsivo topo (mantém alinhamento) */
-    @media (max-width: 640px){
-      :root{ --ui-h: 28px; --switch-w: 48px; --switch-p: 3px; --knob: 22px; --topbar-h: 48px; }
-      .topbar{ gap:6px; padding: 0 10px; min-height: var(--topbar-h); }
-      body { padding-top: calc(var(--topbar-h) + 20px); min-height: 100vh; }
-      .twitch-btn, .kick-btn { height: 28px; line-height: 28px; padding: 0 8px; font-size: 12px; }
-      .twitch-btn::before { content: "🎮 Twitch"; }
-      .twitch-btn span { display: none; }
-      .kick-btn::before { content: "⚡ Kick"; }
-      .kick-btn span { display: none; }
-      .topbar-right { height: 28px; }
-      .switch-wrap { height: 28px; }
-      .switch { height: 28px; }
-      .lang-switch { height: 28px; }
-      .lang-btn { height: 28px; line-height: 28px; padding: 0 8px; }
-      .lang-btn .code { font-size: 11px; }
-      .flag-img { width: 16px; height: 12px; }
-    }
-    
-    @media (max-width: 480px){
-      :root{ --topbar-h: 44px; }
-      body { padding-top: calc(var(--topbar-h) + 16px); }
-      .topbar { padding: 0 8px; gap: 4px; }
-      .twitch-btn, .kick-btn { font-size: 11px; padding: 0 6px; }
-      .lang-btn { padding: 0 6px; }
-    }
+    /* Responsive top adjustments */
+    @media (max-width:640px){:root{--ui-h:28px;--switch-w:48px;--switch-p:3px;--knob:22px;--topbar-h:48px}.topbar{gap:6px;padding:0 10px;min-height:var(--topbar-h)}body{padding-top:calc(var(--topbar-h) + 20px)}.twitch-btn,.kick-btn{height:28px;line-height:28px;padding:0 8px;font-size:12px}.topbar-right{height:28px}.switch-wrap{height:28px}.switch{height:28px}.side-switcher{left:8px;gap:6px}.side-btn{min-width:unset}}
   </style>
 </head>
 <body>
-  <!-- ===== Topbar ===== -->
-<div class="topbar">
-  <a class="twitch-btn" href="https://www.twitch.tv/teuzinfps" target="_blank" rel="noopener">
-    <span>🎮 Twitch.tv/teuzinfps</span>
-  </a>
-  
-  <a class="kick-btn" href="https://kick.com/teuzinfps" target="_blank" rel="noopener">
-    <span>⚡ Kick.com/teuzinfps</span>
-  </a>
-
-  <div class="spacer"></div>
-
-  <!-- AGRUPADOS para alinhamento perfeito -->
-  <div class="topbar-right">
-    <div class="switch-wrap">
-      <input id="themeToggle" type="checkbox" aria-label="Alternar tema (Dark/Light)">
-      <label for="themeToggle" class="switch">
-        <span class="thumb">
-          <span class="icon-sun" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><g><rect x="11" y="1" width="2" height="4"/><rect x="11" y="19" width="2" height="4"/><rect x="1" y="11" width="4" height="2"/><rect x="19" y="11" width="4" height="2"/></g><g transform="rotate(45 12 12)"><rect x="11" y="1" width="2" height="4"/><rect x="11" y="19" width="2" height="4"/><rect x="1" y="11" width="4" height="2"/><rect x="19" y="11" width="4" height="2"/></g></svg>
+  <div class="topbar">
+    <a class="twitch-btn" href="https://www.twitch.tv/teuzinfps" target="_blank" rel="noopener"><span>🎮 Twitch.tv/teuzinfps</span></a>
+    <a class="kick-btn" href="https://kick.com/teuzinfps" target="_blank" rel="noopener"><span>⚡ Kick.com/teuzinfps</span></a>
+    <div class="spacer"></div>
+    <div class="topbar-right">
+      <div class="switch-wrap">
+        <input id="themeToggle" type="checkbox" aria-label="Alternar tema (Dark/Light)">
+        <label for="themeToggle" class="switch">
+          <span class="thumb">
+            <span class="icon-sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><g><rect x="11" y="1" width="2" height="4"/><rect x="11" y="19" width="2" height="4"/><rect x="1" y="11" width="4" height="2"/><rect x="19" y="11" width="4" height="2"/></g><g transform="rotate(45 12 12)"><rect x="11" y="1" width="2" height="4"/><rect x="11" y="19" width="2" height="4"/><rect x="1" y="11" width="4" height="2"/><rect x="19" y="11" width="4" height="2"/></g></svg></span>
+            <span class="icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8z"/></svg></span>
           </span>
-          <span class="icon-moon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8z"/></svg>
-          </span>
-        </span>
-      </label>
-    </div>
-
-    <div class="lang-switch" id="langSwitch">
-      <button class="lang-btn" id="langCurrent" aria-haspopup="menu" aria-expanded="false">
-        <img class="flag-img" id="langFlag" alt="">
-        <span class="code" id="langCode">PT-BR</span>
-      </button>
-      <div class="lang-menu" id="langMenu" hidden role="menu" aria-label="Selecionar idioma">
-        <button class="lang-opt" data-lang="pt" role="menuitem">
-          <img class="flag-img" alt="">
-          <span>PT-BR</span>
-        </button>
-        <button class="lang-opt" data-lang="en" role="menuitem">
-          <img class="flag-img" alt="">
-          <span>ENG</span>
-        </button>
+        </label>
       </div>
     </div>
   </div>
-</div>
 
+  <!-- Side calculator switcher -->
+  <div class="side-switcher" role="tablist" aria-label="Escolher calculadora">
+    <button id="btnBow" class="side-btn active" role="tab" aria-selected="true">🏹 Sanguine Bow</button>
+    <button id="btnEK" class="side-btn" role="tab" aria-selected="false">🛡️ Elite Knight Sanguines</button>
+  </div>
 
-  <!-- ===== Conteúdo ===== -->
   <div class="app">
     <div class="card">
-      <h2>Calculadora Perks Sanguine Bow</h2>
+      <h2 id="appTitle">Calculadora Perks Sanguine Bow</h2>
 
       <div class="desktop-grid">
-        <!-- Pane esquerda: inputs -->
+        <!-- Inputs -->
         <section class="pane">
-          <div class="grid">
-            <div><label>Level</label><input id="level" type="number" value="1500"></div>
-            <div><label>Magic Level</label><input id="magicLevel" type="number" value="49"></div>
-            <div><label>Distance</label><input id="distance" type="number" value="150"></div>
-            <div><label>Pontos Dmg/Healing Roda</label><input id="pontosWheel" type="number" value="33"></div>
-            <div><label>Chance de crítico (%)</label><input id="chanceCrit" type="number" step="0.01" value="12"></div>
-            <div><label>Chance ativação legs (%)</label><input id="chanceLegs" type="number" step="0.01" value="0.44"></div>
-            <div><label>Base mas san (roda + gemas) (%)</label><input id="baseMasSan" type="number" step="0.1" value="8.5"></div>
-            <div><label>Flechas/hora</label><input id="flechasHora" type="number" value="1600"></div>
-            <div><label>Dano sofrido por Sagrado (%)</label><input id="holyWeak" type="number" step="1" value="100"></div>
-            <div><label>Dano sofrido por Físico (%)</label><input id="physWeak" type="number" step="1" value="100"></div>
+          <div class="grid" id="inputsGrid">
+            <div><label id="labLevel">Level</label><input id="level" type="number" value="1500"></div>
+            <div><label id="labMagic">Magic Level</label><input id="magicLevel" type="number" value="49"></div>
+            <div><label id="labDist">Distance</label><input id="distance" type="number" value="150"></div>
+            <div><label id="labWheel">Pontos Dmg/Healing Roda</label><input id="pontosWheel" type="number" value="33"></div>
+            <div><label id="labCrit">Chance de crítico (%)</label><input id="chanceCrit" type="number" step="0.01" value="12"></div>
+            <div><label id="labLegs">Chance ativação legs (%)</label><input id="chanceLegs" type="number" step="0.01" value="0.44"></div>
+            <div><label id="labBase">Base mas san (roda + gemas) (%)</label><input id="baseMasSan" type="number" step="0.1" value="8.5"></div>
+            <div><label id="labRate">Flechas/hora</label><input id="flechasHora" type="number" value="1600"></div>
+            <div class="bow-only"><label id="labHoly">Dano sofrido por Sagrado (%)</label><input id="holyWeak" type="number" step="1" value="100"></div>
+            <div class="bow-only"><label id="labPhys">Dano sofrido por Físico (%)</label><input id="physWeak" type="number" step="1" value="100"></div>
 
             <div class="full toolbar">
               <button class="btn" id="shareBtn">Compartilhar</button>
@@ -405,7 +132,7 @@
           </div>
         </section>
 
-        <!-- Pane direita: resultados -->
+        <!-- Results -->
         <section class="pane">
           <div class="results-group" id="groupResumo">
             <h3>Resumo</h3>
@@ -459,303 +186,148 @@
   </div>
 
   <script>
-    /* ===== Flags em SVG (data URI) ===== */
-    function svgDataUri(svg){ return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg.trim()); }
-    const FLAG_SVG = {
-      pt: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16">
-            <rect width="24" height="16" rx="2.5" fill="#009b3a"/>
-            <polygon points="12,2 22,8 12,14 2,8" fill="#ffdf00"/>
-            <circle cx="12" cy="8" r="4" fill="#002776"/>
-          </svg>`,
-      en: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16">
-            <rect width="24" height="16" rx="2.5" fill="#012169"/>
-            <path d="M0,0 24,16 M24,0 0,16" stroke="#fff" stroke-width="3"/>
-            <path d="M0,0 24,16 M24,0 0,16" stroke="#C8102E" stroke-width="2"/>
-            <path d="M12,0 v16 M0,8 h24" stroke="#fff" stroke-width="5"/>
-            <path d="M12,0 v16 M0,8 h24" stroke="#C8102E" stroke-width="3"/>
-          </svg>`
-    };
-    function setFlagImages(lang){
-      const current = document.getElementById('langFlag');
-      if(current) current.src = svgDataUri(FLAG_SVG[lang]);
-      const menu = document.getElementById('langMenu');
-      const ptImg = menu.querySelector('[data-lang="pt"] .flag-img');
-      const enImg = menu.querySelector('[data-lang="en"] .flag-img');
-      if(ptImg) ptImg.src = svgDataUri(FLAG_SVG.pt);
-      if(enImg) enImg.src = svgDataUri(FLAG_SVG.en);
+    /* Utils */
+    function getNum(id){const el=document.getElementById(id);const s=String(el.value).replace(',', '.');const n=Number(s);return Number.isFinite(n)?n:0}
+    function getPctFraction(id){let s=String(document.getElementById(id).value).trim().replace(',', '.');if(s.endsWith('%')) s=s.slice(0,-1);const n=Number(s);return Number.isFinite(n)?n/100:0}
+    function getPctMultiplier(id){let s=String(document.getElementById(id).value).trim().replace(',', '.');if(s.endsWith('%')) s=s.slice(0,-1);const n=Number(s);return Number.isFinite(n)?n/100:0}
+    function setText(id,t){document.getElementById(id).innerText=t}
+    function clearHighlights(){['cardF20','cardF21','cardF24','cardF25','cardF26'].forEach(id=>document.getElementById(id).classList.remove('is-best'))}
+
+    /* Calculator mode */
+    let calcMode='bow';
+
+    function applyModeUI(){
+      const isEK = calcMode==='ek';
+      // Título
+      document.getElementById('appTitle').textContent = isEK? 'Calculadora Sanguine — Elite Knight' : 'Calculadora Perks Sanguine Bow';
+      // Labels inputs
+      document.getElementById('labMagic').textContent = isEK? 'Weapon Attack' : 'Magic Level';
+      document.getElementById('labDist').textContent  = isEK? 'Sword/axe/club' : 'Distance';
+      document.getElementById('labBase').textContent  = isEK? 'Base exori gram (wheel + gems) (%)' : 'Base mas san (roda + gemas) (%)';
+      document.getElementById('labRate').textContent  = isEK? 'Turns/hour' : 'Flechas/hora';
+      document.querySelectorAll('.bow-only').forEach(el=>{ el.style.display = isEK? 'none':'block'; });
+
+      // Stage labels
+      document.getElementById('labelF20').textContent = isEK? '+4% base damage for Fierce Berserk' : '+4% base damage para Divine Caldera';
+      document.getElementById('labelF21').textContent = isEK? '+20% critical extra damage for Fierce Berserk' : '+20% critical extra damage para Divine Caldera';
+      document.getElementById('labelF25').textContent = isEK? '+10% of skill as extra damage for your spells' : '+10% Distance Fighting p/ spells';
+      document.getElementById('labelF24').textContent = isEK? '+3% critical hit chance for Fierce Berserk' : '+3% critical hit chance para Divine Caldera';
+      document.getElementById('labelF26').textContent = isEK? '+1 attack' : '+2 attack';
+
+      // Placeholders/values unchanged; just re-run
+      rodarCalculadora();
+
+      // Side buttons state
+      document.getElementById('btnBow').classList.toggle('active', !isEK);
+      document.getElementById('btnEK').classList.toggle('active', isEK);
+      document.getElementById('btnBow').setAttribute('aria-selected', String(!isEK));
+      document.getElementById('btnEK').setAttribute('aria-selected', String(isEK));
     }
 
-    /* ===== Utils ===== */
-    function getNum(id){ const el=document.getElementById(id); const s=String(el.value).replace(',', '.'); const n=Number(s); return Number.isFinite(n)?n:0; }
-    function getPctFraction(id){ let s=String(document.getElementById(id).value).trim().replace(',', '.'); if(s.endsWith('%')) s=s.slice(0,-1); const n=Number(s); return Number.isFinite(n)?n/100:0; }
-    function getPctMultiplier(id){ let s=String(document.getElementById(id).value).trim().replace(',', '.'); if(s.endsWith('%')) s=s.slice(0,-1); const n=Number(s); return Number.isFinite(n)?n/100:0; }
-    function setText(id, text){ document.getElementById(id).innerText = text; }
-    function clearHighlights(){ ['cardF20','cardF21','cardF24','cardF25','cardF26'].forEach(id=>document.getElementById(id).classList.remove('is-best')); }
-    function currentLang(){ try{ const saved=localStorage.getItem("calc_lang"); if(saved) return saved; }catch(e){} return "pt"; }
-    function numberFormatter(){ const lang=currentLang()==='en' ? 'en-US' : 'pt-BR'; return new Intl.NumberFormat(lang,{minimumFractionDigits:2, maximumFractionDigits:3}); }
-    const fmtCache={ get(){ this._fmt=this._fmt||numberFormatter(); return this._fmt; }, reset(){ this._fmt=null; } };
+    document.getElementById('btnBow').addEventListener('click',()=>{calcMode='bow';applyModeUI()});
+    document.getElementById('btnEK').addEventListener('click',()=>{calcMode='ek';applyModeUI()});
 
-    /* ===== Fórmulas ===== */
-    function calcF14(F2){
-      if (F2 < 500)  return Math.floor(F2/5);
-      if (F2 < 1100) return Math.floor((F2-500)/6 + 100);
-      if (F2 < 1800) return Math.floor((F2-1100)/7 + 200);
-      if (F2 < 2600) return Math.floor((F2-1800)/8 + 300);
-      return Math.floor((F2-2600)/9 + 400);
+    /* Core formulas (Bow) */
+    function calcF14(F2){if(F2<500)return Math.floor(F2/5);if(F2<1100)return Math.floor((F2-500)/6+100);if(F2<1800)return Math.floor((F2-1100)/7+200);if(F2<2600)return Math.floor((F2-1800)/8+300);return Math.floor((F2-2600)/9+400)}
+    function calcF15_bow(F3,F8){return Math.floor(F3*140*(1+F8)/25 + 140*(1+F8)/4)}
+    function calcF16_bow(F9,F7,F6){const prod=F6*2*F9; if(Math.floor(prod)>prod){return F6} const p1=Math.floor(F9*F7*6);const p2=Math.floor(((F9*2)-p1)*F6);return (p1+p2)/(F9*2)}
+    function calcF17_bow(F9,F7){const p1=Math.floor(F9*F7*6);return (p1*15/(F9*2))/100}
+    function calcF20_bow(F14,F3,F8,F5,F16,F17){const baseRight=Math.floor(F3*140*(1+F8+0.04)/25 + 140*(1+F8+0.04)/4);return (F14+baseRight+F5)*(1+(F16)*0.8+F17)}
+    function calcF21_bow(F14,F15,F5,F16,F17){return (F14+F15+F5)*(1+(F16+F17))}
+    function calcF24_bow(F14,F15,F11,F9,F7,F5,F6){const base=(F14+F15+F5)*0.03*0.25*F11;const p1=Math.floor(F9*F7*6);const numer=Math.floor((F9*2)-p1);const ratio=numer/(F9*2);return base*ratio*(1-F6)}
+    function calcF25_bow(F21,F20,F4,F11,F16){const base=Math.round(F4*0.1);const mult=(F21>F20)?(0.2485*(1+(100*F16/100))+0.0435*(1+(72*F16/100))):(0.2485*(1+(80*F16/100))+0.0435*(1+(72*F16/100)));return base*mult*F11}
+    function calcF26_bow(F4,F12,F16){const ia=Math.floor((6/5)*48),ib=Math.floor((6/5)*46);const ta=Math.floor(ia*(Math.floor(F4)+4)/28);const tb=Math.floor(ib*(Math.floor(F4)+4)/28);const diff=(ta-tb);return diff*0.5*(1+(72*F16/100))*F12}
+
+    /* Core formulas (EK) — conforme instruções */
+    function calcF15_ek(F3,F2,F8){ // Base dmg EK: ARRED(F3*F2/1000*92*(1+F8)/25 + 92*(1+F8)/4;0)
+      const v = (F3*F2/1000)*92*(1+F8)/25 + 92*(1+F8)/4; return Math.round(v)
     }
-    function calcF15(F3,F8){ return Math.floor(F3*140*(1+F8)/25 + 140*(1+F8)/4); }
-    function calcF16(F9,F7,F6){ 
-      // f16novo:
-      // =SE(ARREDONDAR.PARA.BAIXO(F6*2*F9;0)<F6*2*F9;F6;(ARREDONDAR.PARA.BAIXO((F9*F7*6);0)+ARREDONDAR.PARA.BAIXO(((F9*2)-(ARREDONDAR.PARA_BAIXO((F9*F7*6);0)))*F6;0))/(F9*2))
-      const prod = F6*2*F9;
-      if(Math.floor(prod) > prod){
-        return F6; // se não é inteiro, devolve F6 diretamente
-      }
-      const p1 = Math.floor(F9*F7*6);
-      const p2 = Math.floor(((F9*2)-p1)*F6);
-      return (p1+p2)/(F9*2);
+    function calcF16_ek(F9,F7,F6){ // =SE(ARRED.P.BAIXO(F6*F9;0)>F6*F9;F6; (ARRED.P.BAIXO(F9*F7*3)+ARRED.P.BAIXO(((F9)-(ARRED.P.BAIXO(F9*F7*3)))*F6))/(F9))
+      const prod=F6*F9; if(Math.floor(prod)>prod){return F6} const p1=Math.floor(F9*F7*3); const p2=Math.floor(((F9)-p1)*F6); return (p1+p2)/(F9)
     }
-    function calcF17(F9,F7){ const p1=Math.floor(F9*F7*6); return (p1*15/(F9*2))/100; }
-    function calcF20(F14,F3,F8,F5,F16,F17){ const baseRight=Math.floor(F3*140*(1+F8+0.04)/25 + 140*(1+F8+0.04)/4); return (F14+baseRight+F5)*(1+(F16)*0.8+F17); }
-    function calcF21(F14,F15,F5,F16,F17){ return (F14+F15+F5)*(1+(F16+F17)); }
-    function calcF24(F14,F15,F11,F9,F7,F5,F6){
-      const base = (F14 + F15 + F5) * 0.03 * 0.25 * F11;
-      const p1 = Math.floor(F9 * F7 * 6);
-      const numer = Math.floor((F9 * 2) - p1);
-      const ratio = numer / (F9 * 2);
-      return base * ratio * (1 - F6);
+    function calcF17_ek(F9,F7){ // =(ARRED.P.BAIXO((F9*F7*3);0)*15/(F9))/100
+      const p1=Math.floor(F9*F7*3); return (p1*15/(F9))/100
     }
-    function calcF25(F21,F20,F4,F11,F16){ 
-      // f25novo:
-      // =SE(F21>F20;ARRED(F4*0,1;0)*(0,2485*(1+100*F16/100)+0,0435*(1+72*F16/100))*F11;
-      //             ARRED(F4*0,1;0)*(0,2485*(1+80*F16/100)+0,0435*(1+72*F16/100))*F11)
-      const base = Math.round(F4*0.1);
-      const mult = (F21>F20)
-        ? (0.2485*(1 + (100*F16/100)) + 0.0435*(1 + (72*F16/100)))
-        : (0.2485*(1 + (80*F16/100)) + 0.0435*(1 + (72*F16/100)));
-      return base * mult * F11;
+    function calcF20_ek(F3,F2,F8){ // Stage 4 base option becomes only the rounded base with +0.04
+      const v = ( (F3*F2/1000)*92*(1+F8+0.04)/25 + 92*(1+F8+0.04)/4 ); return Math.round(v)
     }
-    function calcF26(F4,F12,F16){ 
-      // f26novo:
-      // =(((ARREDONDAR.PARA.BAIXO(ARREDONDAR.PARA.BAIXO(6/5*(48);0)*(ARREDONDAR.PARA.BAIXO(F4;0)+4)/28;0)))-((ARREDONDAR.PARA.BAIXO(ARREDONDAR.PARA.BAIXO(6/5*(46);0)*(ARREDONDAR.PARA.BAIXO(F4;0)+4)/28;0))))*0,5*(1+72*F16/100)*F12
-      const ia = Math.floor((6/5)*48), ib = Math.floor((6/5)*46);
-      const ta = Math.floor(ia*(Math.floor(F4)+4)/28);
-      const tb = Math.floor(ib*(Math.floor(F4)+4)/28);
-      const diff = (ta - tb);
-      return diff * 0.5 * (1 + (72*F16/100)) * F12;
+    function calcF21_ek(F14,F15,F5,F16,F17){ // (F14+F15+F5)*(1+(F16*98/100+F17))
+      return (F14+F15+F5) * (1 + (F16*0.98 + F17))
+    }
+    function calcF24_ek(F14,F15,F9,F7,F5,F6){ // =(F14+F15+F5)*0,0294*0,3334*F11* floor((F9)-(floor(F9*F7*3)))/(F9) * (1-F6) ; F11=1
+      const F11=1; const base=(F14+F15+F5)*0.0294*0.3334*F11; const numer=Math.floor( (F9) - Math.floor(F9*F7*3) ); const ratio = numer/(F9); return base*ratio*(1-F6)
+    }
+    function calcF25_ek(F21,F20,F4,F16){ // =SE(F21>F20;ARRED(F4*0,1;0)*(1+98*F16/100); ARRED(F4*0,1;0)*(1+72*F16/100)) * F11 ; F11=1
+      const base=Math.round(F4*0.1); const mult=(F21>F20)? (1+0.98*F16) : (1+0.72*F16); return base*mult*1
+    }
+    function calcF26_ek(F3,F4,F16){ // =(((floor(f(6/5*(F3+2))) - floor(f(6/5*F3))))*0,5*(1+72*F16/100)*F12 ; F12=1 for EK
+      const F12=1; const ia=Math.floor((6/5)*(F3+2)), ib=Math.floor((6/5)*(F3)); const ta=Math.floor(ia*(Math.floor(F4)+4)/28); const tb=Math.floor(ib*(Math.floor(F4)+4)/28); const diff=(ta-tb); return diff*0.5*(1+(72*F16/100))*F12
     }
 
-    /* ===== Execução ===== */
     function rodarCalculadora(){
       const F2=getNum('level'), F3=getNum('magicLevel'), F4=getNum('distance'), F5=getNum('pontosWheel');
       const F6=getPctFraction('chanceCrit'), F7=getPctFraction('chanceLegs'), F8=getPctFraction('baseMasSan');
-      const F9=getNum('flechasHora'); const F11=getPctMultiplier('holyWeak'); const F12=getPctMultiplier('physWeak');
+      const F9=getNum('flechasHora'); const F11 = calcMode==='bow' ? getPctMultiplier('holyWeak') : 1; const F12 = calcMode==='bow' ? getPctMultiplier('physWeak') : 1;
 
       const F14=calcF14(F2);
-      const F15=calcF15(F3,F8);
-      const F16=calcF16(F9,F7,F6);
-      const F17=calcF17(F9,F7);
-      const F20=calcF20(F14,F3,F8,F5,F16,F17);
-      const F21=calcF21(F14,F15,F5,F16,F17);
-      const F24=calcF24(F14, F15, F11, F9, F7, F5, F6);
-      const F25 = calcF25(F21,F20,F4,F11, F16);
-      const F26 = calcF26(F4,F12, F16);
+      const F15 = (calcMode==='bow') ? calcF15_bow(F3,F8) : calcF15_ek(F3,F2,F8);
+      const F16 = (calcMode==='bow') ? calcF16_bow(F9,F7,F6) : calcF16_ek(F9,F7,F6);
+      const F17 = (calcMode==='bow') ? calcF17_bow(F9,F7)   : calcF17_ek(F9,F7);
+      const F20 = (calcMode==='bow') ? calcF20_bow(F14,F3,F8,F5,F16,F17) : calcF20_ek(F3,F2,F8);
+      const F21 = (calcMode==='bow') ? calcF21_bow(F14,F15,F5,F16,F17) : calcF21_ek(F14,F15,F5,F16,F17);
+      const F24 = (calcMode==='bow') ? calcF24_bow(F14,F15,F11,F9,F7,F5,F6) : calcF24_ek(F14,F15,F9,F7,F5,F6);
+      const F25 = (calcMode==='bow') ? calcF25_bow(F21,F20,F4,F11,F16) : calcF25_ek(F21,F20,F4,F16);
+      const F26 = (calcMode==='bow') ? calcF26_bow(F4,F12,F16) : calcF26_ek(F3,F4,F16);
 
-      /* Resumo: Level dmg exibe F14 + F5 */
-      const F14Resumo = F14 + F5;
+      const F14Resumo = F14 + F5; // Level dmg exibe F14+F5
 
       setText('outF14', F14Resumo);
       setText('outF15', F15);
       setText('outF16', (F16*100).toFixed(4) + ' %');
       setText('outF17', (F17*100).toFixed(4) + ' %');
+      document.getElementById('outF20').textContent = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(F20);
+      document.getElementById('outF21').textContent = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(F21);
+      document.getElementById('outF24').textContent = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(F24);
+      document.getElementById('outF25').textContent = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(F25);
+      document.getElementById('outF26').textContent = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(F26);
 
-      const fmt = fmtCache.get();
-      document.getElementById('outF20').textContent = fmt.format(F20);
-      document.getElementById('outF21').textContent = fmt.format(F21);
-      document.getElementById('outF24').textContent = fmt.format(F24);
-      document.getElementById('outF25').textContent = fmt.format(F25);
-      document.getElementById('outF26').textContent = fmt.format(F26);
-
-      try{ localStorage.setItem('calc_state', JSON.stringify({F2,F3,F4,F5,F6,F7,F8,F9,F11,F12})); }catch(e){}
+      try{ localStorage.setItem('calc_state_v2', JSON.stringify({mode:calcMode,F2,F3,F4,F5,F6,F7,F8,F9,F11:F11,F12:F12})); }catch(e){}
 
       clearHighlights();
-      const w4 = (F20>=F21)?'cardF20':'cardF21';
-      document.getElementById(w4).classList.add('is-best');
-
-      let w5='cardF24', m5=F24;
-      if(F25>m5){ w5='cardF25'; m5=F25; }
-      if(F26>m5){ w5='cardF26'; m5=F26; }
-      document.getElementById(w5).classList.add('is-best');
+      const w4 = (F20>=F21)?'cardF20':'cardF21'; document.getElementById(w4).classList.add('is-best');
+      let w5='cardF24', m5=F24; if(F25>m5){w5='cardF25'; m5=F25;} if(F26>m5){w5='cardF26'; m5=F26;} document.getElementById(w5).classList.add('is-best');
     }
 
-    /* ===== Share ===== */
+    // Share & Clear
     function buildShareURL(){
-      const raw = {
-        level: level.value, magicLevel: magicLevel.value, distance: distance.value, pontosWheel: pontosWheel.value,
-        chanceCrit: chanceCrit.value, chanceLegs: chanceLegs.value, baseMasSan: baseMasSan.value,
-        flechasHora: flechasHora.value, holyWeak: holyWeak.value, physWeak: physWeak.value
-      };
-      const params=new URLSearchParams(raw);
-      const base=window.location.origin+window.location.pathname;
-      return base+'?'+params.toString();
+      const raw={mode:calcMode,level:level.value,magicLevel:magicLevel.value,distance:distance.value,pontosWheel:pontosWheel.value,chanceCrit:chanceCrit.value,chanceLegs:chanceLegs.value,baseMasSan:baseMasSan.value,flechasHora:flechasHora.value};
+      if(calcMode==='bow'){raw.holyWeak=holyWeak.value;raw.physWeak=physWeak.value}
+      const params=new URLSearchParams(raw); const base=window.location.origin+window.location.pathname; return base+'?'+params.toString();
     }
-    async function doShare(){
-      const lang=currentLang(); const t=i18n[lang]||i18n.pt; const url=buildShareURL();
-      const txt=[
-        t.shareSummary+":",
-        t.summary.f14+": "+document.getElementById("outF14").innerText,
-        t.summary.f15+": "+document.getElementById("outF15").innerText,
-        t.summary.f16+": "+document.getElementById("outF16").innerText,
-        t.summary.f17+": "+document.getElementById("outF17").innerText,
-        t.groups.stage4+" – "+document.getElementById("labelF20").innerText+": "+document.getElementById("outF20").innerText,
-        t.groups.stage4+" – "+document.getElementById("labelF21").innerText+": "+document.getElementById("outF21").innerText,
-        t.groups.stage5+" – "+document.getElementById("labelF25").innerText+": "+document.getElementById("outF25").innerText,
-        t.groups.stage5+" – "+document.getElementById("labelF24").innerText+": "+document.getElementById("outF24").innerText,
-        t.groups.stage5+" – "+document.getElementById("labelF26").innerText+": "+document.getElementById("outF26").innerText
-      ].join("\n");
+    async function doShare(){const url=buildShareURL(); try{await navigator.clipboard.writeText(url); statusText.innerText='Link copiado ✔'; setTimeout(()=>statusText.innerText='',1500);}catch(e){statusText.innerText=url}}
 
-      if(navigator.share){
-        try{ await navigator.share({ title:t.shareTitle, text:txt, url }); statusText.innerText=(lang==="en"?"Shared!":"Compartilhado!"); setTimeout(()=>statusText.innerText="",1500); return; }catch(e){}
-      }
-      try{ await navigator.clipboard.writeText(url); statusText.innerText=(lang==="en"?"Link copied ✔":"Link copiado ✔"); setTimeout(()=>statusText.innerText="",1500); }catch(e){ statusText.innerText=url; }
-    }
-
-    /* ===== i18n ===== */
-    const i18n = {
-      pt: {
-        appTitle:"Calculadora Perks Sanguine Bow", title:"Calculadora Perks Sanguine Bow",
-        buttons:{ share:"Compartilhar", reset:"Limpar" },
-        groups:{ resumo:"Resumo", stage4:"Stage 4", stage5:"Stage 5" },
-        labels:{ level:"Level", magicLevel:"Magic Level", distance:"Distance", pontosWheel:"Pontos Dmg/Healing Roda", chanceCrit:"Chance de crítico (%)", chanceLegs:"Chance ativação legs (%)", baseMasSan:"Base mas san (roda + gemas) (%)", flechasHora:"Flechas/hora", holyWeak:"Dano sofrido por Sagrado (%)", physWeak:"Dano sofrido por Físico (%)" },
-        summary:{ f14:"Level dmg", f15:"Base dmg", f16:"Chance crítico ajustada", f17:"Bônus legs → avatar 3" },
-        stage4:{ f20:"+4% base damage para Divine Caldera", f21:"+20% critical extra damage para Divine Caldera" },
-        stage5:{ f24:"+3% critical hit chance para Divine Caldera", f25:"+10% Distance Fighting p/ spells", f26:"+2 attack" },
-        shareTitle:"Minha simulação — Calculadora", shareSummary:"Resumo", badge:"Melhor 🏆",
-        ui:{ code:"PT-BR" }
-      },
-      en: {
-        appTitle:"Sanguine Bow Proficiency Calculator", title:"Sanguine Bow Proficiency Calculator",
-        buttons:{ share:"Share", reset:"Reset" },
-        groups:{ resumo:"Resume", stage4:"Stage 4", stage5:"Stage 5" },
-        labels:{ level:"Level", magicLevel:"Magic Level", distance:"Distance", pontosWheel:"Dmg/Healing from Wheel", chanceCrit:"Critical chance (%)", chanceLegs:"Trancendence Triggering Chance (legs) (%)", baseMasSan:"Base mas san (wheel + gems) (%)", flechasHora:"Arrows/hour", holyWeak:"Damage taken from Holy (%)", physWeak:"Damage taken from Physical (%)" },
-        summary:{ f14:"Level dmg", f15:"Base dmg", f16:"Ajusted Critical Chance", f17:"Transcendence avatar 3 Bonus" },
-        stage4:{ f20:"+4% base damage for Divine Caldera", f21:"+20% critical extra damage for Divine Caldera" },
-        stage5:{ f24:"+3% critical hit chance for Divine Caldera", f25:"+10% Distance Fighting as extra damage for spells", f26:"+2 attack" },
-        shareTitle:"My simulation — Calculator", shareSummary:"Resume", badge:"Best 🏆",
-        ui:{ code:"ENG" }
-      }
-    };
-
-    function applyLang(lang){
-      const t=i18n[lang]||i18n.pt;
-
-      document.title=t.appTitle+" — versão web";
-      document.querySelector(".card h2").textContent=t.title;
-      shareBtn.textContent=t.buttons.share;
-      clearBtn.textContent=t.buttons.reset;
-
-      const gResumo=document.querySelector("#groupResumo h3"); if(gResumo) gResumo.textContent=t.groups.resumo;
-      const g4=document.querySelector("#groupStage4 h3"); if(g4) g4.textContent=t.groups.stage4;
-      const g5=document.querySelector("#groupStage5 h3"); if(g5) g5.textContent=t.groups.stage5;
-
-      // labels
-      const labelOf=(id)=>document.getElementById(id)?.previousElementSibling;
-      const L=t.labels;
-      const map={ level:L.level, magicLevel:L.magicLevel, distance:L.distance, pontosWheel:L.pontosWheel, chanceCrit:L.chanceCrit, chanceLegs:L.chanceLegs, baseMasSan:L.baseMasSan, flechasHora:L.flechasHora, holyWeak:L.holyWeak, physWeak:L.physWeak };
-      Object.entries(map).forEach(([id,txt])=>{ const lab=labelOf(id); if(lab) lab.textContent=txt; });
-
-      // Resumo prefixes
-      const setPrefix=(outId, txt)=>{ const span=document.getElementById(outId); if(span && span.parentElement){ span.parentElement.innerHTML = txt + ": <span id='"+outId+"'>" + span.textContent + "</span>"; } };
-      setPrefix("outF14",t.summary.f14); setPrefix("outF15",t.summary.f15); setPrefix("outF16",t.summary.f16); setPrefix("outF17",t.summary.f17);
-
-      // nomes dos perks
-      labelF20.textContent=t.stage4.f20; labelF21.textContent=t.stage4.f21;
-      labelF24.textContent=t.stage5.f24; labelF25.textContent=t.stage5.f25; labelF26.textContent=t.stage5.f26;
-
-      // badges
-      document.querySelectorAll('.perk-card__badge').forEach(el=>el.textContent=t.badge);
-
-      // botão atual (código + flag)
-      document.getElementById('langCode').textContent = t.ui.code;
-      setFlagImages(lang);
-
-      document.documentElement.lang=(lang==='en'?'en':'pt-BR');
-      fmtCache.reset();
-      rodarCalculadora();
-      try{ localStorage.setItem("calc_lang", lang); }catch(e){}
-    }
-
-    /* ===== Tema escuro/claro com switch ===== */
-    function setTheme(theme){
-      const root=document.body;
-      if(theme==='dark'){ root.classList.add('theme-dark'); }
-      else { root.classList.remove('theme-dark'); }
-      try{ localStorage.setItem('calc_theme', theme); }catch(e){}
-      const cb=document.getElementById('themeToggle');
-      const isDark = theme==='dark';
-      if(cb) cb.checked = isDark;
-    }
-    function initTheme(){
-      let t='light';
-      try{
-        const saved=localStorage.getItem('calc_theme');
-        if(saved) t=saved;
-        else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) t='dark';
-      }catch(e){}
-      setTheme(t);
-      const cb=document.getElementById('themeToggle');
-      cb.addEventListener('change', ()=> setTheme(cb.checked ? 'dark' : 'light'));
-    }
-
-    /* ===== Menu de idioma ===== */
-    (function setupLangMenu(){
-      const btn=document.getElementById('langCurrent');
-      const menu=document.getElementById('langMenu');
-      function openMenu(){ menu.hidden=false; btn.setAttribute('aria-expanded','true'); }
-      function closeMenu(){ menu.hidden=true; btn.setAttribute('aria-expanded','false'); }
-      btn.addEventListener('click', (e)=>{ e.stopPropagation(); menu.hidden?openMenu():closeMenu(); });
-      menu.querySelectorAll('.lang-opt').forEach(opt=>{
-        opt.addEventListener('click',(e)=>{ const lang=e.currentTarget.dataset.lang; applyLang(lang); closeMenu(); });
-      });
-      document.addEventListener('click',(e)=>{ if(!menu.hidden && !document.getElementById('langSwitch').contains(e.target)) closeMenu(); });
-
-      const initial=currentLang();
-      applyLang(initial);
-      setFlagImages(initial);
-      initTheme();
-    })();
-
-    /* ===== Boot restore + eventos ===== */
-    (function restoreAndRun(){
-      const params=new URLSearchParams(window.location.search);
+    // Theme init
+    (function init(){
+      // theme
+      const stored=localStorage.getItem('calc_theme')||'dark'; if(stored==='dark'){document.body.classList.add('theme-dark')} else {document.body.classList.remove('theme-dark')}
+      const cb=document.getElementById('themeToggle'); cb.checked = (stored==='dark'); cb.addEventListener('change',()=>{const val=cb.checked?'dark':'light'; if(val==='dark') document.body.classList.add('theme-dark'); else document.body.classList.remove('theme-dark'); localStorage.setItem('calc_theme',val)});
+      // restore
+      const params=new URLSearchParams(window.location.search); const stRaw=localStorage.getItem('calc_state_v2');
       if(params && Array.from(params.keys()).length){
-        const set=(id,key)=>{ if(params.has(key)) document.getElementById(id).value=params.get(key); };
-        set('level','level'); set('magicLevel','magicLevel'); set('distance','distance'); set('pontosWheel','pontosWheel');
-        set('chanceCrit','chanceCrit'); set('chanceLegs','chanceLegs'); set('baseMasSan','baseMasSan'); set('flechasHora','flechasHora');
-        set('holyWeak','holyWeak'); set('physWeak','physWeak');
-      }else{
-        try{
-          const raw=localStorage.getItem('calc_state');
-          if(raw){
-            const st=JSON.parse(raw);
-            const set=(id,val)=>{ if(val!==undefined && val!==null) document.getElementById(id).value=val; };
-            set('level',st.F2); set('magicLevel',st.F3); set('distance',st.F4); set('pontosWheel',st.F5);
-            if(st.F6!=null) chanceCrit.value=(st.F6*100).toString();
-            if(st.F7!=null) chanceLegs.value=(st.F7*100).toString();
-            if(st.F8!=null) baseMasSan.value=(st.F8*100).toString();
-            flechasHora.value=st.F9 ?? flechasHora.value;
-            if(st.F11!=null) holyWeak.value=(st.F11*100).toString();
-            if(st.F12!=null) physWeak.value=(st.F12*100).toString();
-          }
-        }catch(e){}
+        const set=(id,key)=>{ if(params.has(key)) document.getElementById(id).value=params.get(key) };
+        const get=(k,d)=> params.get(k)??d;
+        calcMode = get('mode','bow'); set('level','level'); set('magicLevel','magicLevel'); set('distance','distance'); set('pontosWheel','pontosWheel'); set('chanceCrit','chanceCrit'); set('chanceLegs','chanceLegs'); set('baseMasSan','baseMasSan'); set('flechasHora','flechasHora'); if(calcMode==='bow'){ set('holyWeak','holyWeak'); set('physWeak','physWeak') }
+      } else if(stRaw){ try{ const st=JSON.parse(stRaw); calcMode=st.mode||'bow'; const set=(id,val)=>{ if(val!==undefined && val!==null) document.getElementById(id).value=val }; set('level',st.F2); set('magicLevel',st.F3); set('distance',st.F4); set('pontosWheel',st.F5); if(st.F6!=null) chanceCrit.value=(st.F6*100).toString(); if(st.F7!=null) chanceLegs.value=(st.F7*100).toString(); if(st.F8!=null) baseMasSan.value=(st.F8*100).toString(); flechasHora.value=st.F9 ?? flechasHora.value; if(calcMode==='bow'){ if(st.F11!=null) holyWeak.value=(st.F11*100).toString(); if(st.F12!=null) physWeak.value=(st.F12*100).toString(); } }catch(e){}
       }
+      applyModeUI();
+      // listeners
+      const ids=['level','magicLevel','distance','pontosWheel','chanceCrit','chanceLegs','baseMasSan','flechasHora','holyWeak','physWeak'];
+      ids.forEach(id=>{ const el=document.getElementById(id); if(!el) return; el.addEventListener('input',rodarCalculadora); el.addEventListener('change',rodarCalculadora); });
+      document.getElementById('clearBtn').addEventListener('click',()=>{ ['level','magicLevel','distance','pontosWheel','chanceCrit','chanceLegs','baseMasSan','flechasHora','holyWeak','physWeak'].forEach(id=>{const el=document.getElementById(id); if(el) el.value=''}); ['outF14','outF15','outF16','outF17','outF20','outF21','outF24','outF25','outF26'].forEach(id=>setText(id,'--')); try{localStorage.removeItem('calc_state_v2')}catch(e){} clearHighlights(); statusText.innerText='' });
+      document.getElementById('shareBtn').addEventListener('click',doShare);
+      // first run
       rodarCalculadora();
     })();
-
-    const ids=['level','magicLevel','distance','pontosWheel','chanceCrit','chanceLegs','baseMasSan','flechasHora','holyWeak','physWeak'];
-    ids.forEach(id=>{ const el=document.getElementById(id); el.addEventListener('input', rodarCalculadora); el.addEventListener('change', rodarCalculadora); });
-    clearBtn.addEventListener('click',()=>{ ids.forEach(id=>document.getElementById(id).value=''); ['outF14','outF15','outF16','outF17','outF20','outF21','outF24','outF25','outF26'].forEach(id=>setText(id,'--')); try{ localStorage.removeItem('calc_state'); }catch(e){} clearHighlights(); statusText.innerText=''; });
-    shareBtn.addEventListener('click', doShare);
   </script>
 </body>
 </html>
