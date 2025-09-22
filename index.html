@@ -239,8 +239,8 @@
     function calcF26_bow(F4,F12,F16){const ia=Math.floor((6/5)*48),ib=Math.floor((6/5)*46);const ta=Math.floor(ia*(Math.floor(F4)+4)/28);const tb=Math.floor(ib*(Math.floor(F4)+4)/28);const diff=(ta-tb);return diff*0.5*(1+(72*F16/100))*F12}
 
     /* Core formulas (EK) — conforme instruções */
-    function calcF15_ek(F3,F2,F8){ // Base dmg EK: ARRED(F3*F2/1000*92*(1+F8)/25 + 92*(1+F8)/4;0)
-      const v = (F3*F2/1000)*92*(1+F8)/25 + 92*(1+F8)/4; return Math.round(v)
+    function calcF15_ek(F3,F2,F8){ // Base dmg EK: ARRED(F3*F2/1000*92*(1+F8) + 92*(1+F8)/4;0)
+      const v = (F3*F2/1000)*92*(1+F8) + 92*(1+F8)/4; return Math.round(v)
     }
     function calcF16_ek(F9,F7,F6){ // =SE(ARRED.P.BAIXO(F6*F9;0)>F6*F9;F6; (ARRED.P.BAIXO(F9*F7*3)+ARRED.P.BAIXO(((F9)-(ARRED.P.BAIXO(F9*F7*3)))*F6))/(F9))
       const prod=F6*F9; if(Math.floor(prod)>prod){return F6} const p1=Math.floor(F9*F7*3); const p2=Math.floor(((F9)-p1)*F6); return (p1+p2)/(F9)
@@ -249,7 +249,7 @@
       const p1=Math.floor(F9*F7*3); return (p1*15/(F9))/100
     }
     function calcF20_ek(F3,F2,F8){ // Stage 4 base option becomes only the rounded base with +0.04
-      const v = ( (F3*F2/1000)*92*(1+F8+0.04)/25 + 92*(1+F8+0.04)/4 ); return Math.round(v)
+      const v = ( (F3*F2/1000)*92*(1+F8+0.04) + 92*(1+F8+0.04)/4 ); return Math.round(v)
     }
     function calcF21_ek(F14,F15,F5,F16,F17){ // (F14+F15+F5)*(1+(F16*98/100+F17))
       return (F14+F15+F5) * (1 + (F16*0.98 + F17))
