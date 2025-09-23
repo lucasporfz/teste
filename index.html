@@ -83,19 +83,18 @@
 
     /* ===== Calculator Switcher ===== */
     .calc-switcher {
-      position: fixed;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 40;
+      position: static;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 8px;
+      justify-content: center;
+      margin: 16px 0;
+      z-index: 40;
     }
     .calc-btn {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      padding: 12px 8px;
+      writing-mode: horizontal-tb;
+      text-orientation: initial;
+      padding: 12px 16px;
       background: var(--pill-bg);
       color: var(--pill-text);
       border: 1px solid var(--pill-border);
@@ -106,10 +105,12 @@
       white-space: nowrap;
       box-shadow: 0 4px 14px rgba(2,6,23,.15);
       transition: all 0.2s ease;
-      min-height: 120px;
+      min-height: auto;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
+      flex-direction: row;
     }
     .calc-btn:hover {
       background: var(--brand);
@@ -119,22 +120,6 @@
       background: var(--brand);
       border-color: var(--brand);
       box-shadow: 0 0 0 3px rgba(37,99,235,.15);
-    }
-
-    @media (max-width: 1200px) {
-      .calc-switcher {
-        position: static;
-        transform: none;
-        flex-direction: row;
-        justify-content: center;
-        margin: 16px 0;
-      }
-      .calc-btn {
-        writing-mode: horizontal-tb;
-        text-orientation: initial;
-        min-height: auto;
-        padding: 8px 16px;
-      }
     }
 
     /* ===== Topbar fixa ===== */
@@ -390,15 +375,15 @@
       body { padding-left: 0; }
     }
     @media (min-width: 1200px) {
-      body { padding-left: 80px; }
+      body { padding-left: 0; }
     }
   </style>
 </head>
 <body>
   <!-- ===== Calculator Switcher ===== -->
   <div class="calc-switcher">
-    <button class="calc-btn active" data-calc="sanguine">Sanguine Bow</button>
-    <button class="calc-btn" data-calc="knight">Elite Knight Sanguines</button>
+    <button class="calc-btn active" data-calc="sanguine">🏹 Sanguine Bow</button>
+    <button class="calc-btn" data-calc="knight">🛡️ Elite Knight Sanguines</button>
   </div>
 
   <!-- ===== Topbar ===== -->
