@@ -355,9 +355,91 @@ input[type="range"] { accent-color: var(--accent); }
 }
 .guide-content li { margin: 4px 0; }
 
+/* ====== Log de hunt ====== */
+.log-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.log-controls select, .log-controls input {
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.log-meta {
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-family: 'Menlo', 'Consolas', monospace;
+  line-height: 1.5;
+}
+.log-meta strong { color: var(--text); font-weight: 500; }
+.log-table-wrap {
+  max-height: 60vh;
+  overflow: auto;
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+}
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-family: 'Menlo', 'Consolas', monospace;
+}
+.log-table th {
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 8px 10px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.log-table td {
+  padding: 6px 10px;
+  border-bottom: 0.5px solid rgba(30, 58, 95, 0.4);
+  color: var(--text);
+  white-space: nowrap;
+  vertical-align: top;
+}
+.log-table tr:hover td { background: rgba(0, 196, 154, 0.05); }
+.log-table tr.box-end td {
+  background: rgba(245, 158, 11, 0.1);
+  border-bottom: 1px solid var(--amber);
+}
+.log-table tr.box-end td:first-child::after { content: " · fim da box"; color: var(--amber); font-size: 9px; }
+.log-table .col-crit { color: var(--amber); font-weight: 500; }
+.log-table .col-charm { color: var(--accent); }
+.log-table .col-kills { color: #EF4444; font-weight: 500; }
+.log-table .hp-cell {
+  font-size: 10px;
+  color: var(--text-muted);
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.modal-log { max-width: 1100px; }
+
 /* ====== Loading Overlay ====== */
 .loading-overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: rgba(10, 22, 40, 0.85);
   backdrop-filter: blur(2px);
@@ -454,6 +536,37 @@ input[type="range"] { accent-color: var(--accent); }
   </div>
 </div>
 
+<div class="modal-backdrop" id="logModal">
+  <div class="modal modal-log">
+    <button class="modal-close" id="closeLogModal" aria-label="Fechar">×</button>
+    <h2 style="font-size:20px;font-weight:500;margin:0 0 8px" data-i18n="log_title">Log detalhado de uma sessão</h2>
+    <p style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin:0 0 16px" data-i18n="log_desc">
+      Esta tabela mostra evento por evento o que acontece numa sessão simulada com os parâmetros atuais.
+      Cada linha é um turno: dano sorteado, charm ativado em quais mobs, HP antes e depois. A seed é mostrada
+      acima — qualquer pessoa pode rodar com a mesma seed e obter exatamente os mesmos eventos.
+    </p>
+
+    <div class="log-controls">
+      <span data-i18n="log_dmg_level">nível de dano:</span>
+      <select id="logLevel"></select>
+      <span data-i18n="log_n_turns">máx turnos:</span>
+      <select id="logMaxTurns">
+        <option value="50">50</option>
+        <option value="100" selected>100</option>
+        <option value="200">200</option>
+        <option value="500">500</option>
+      </select>
+      <span data-i18n="log_seed">seed:</span>
+      <input type="number" id="logSeed" value="42" style="width:90px">
+      <button id="btnGenLog" data-i18n="log_generate">gerar log</button>
+      <button id="btnCopyCsv" style="background:var(--blue);color:#fff" data-i18n="log_copy_csv">copiar como CSV</button>
+    </div>
+
+    <div class="log-meta" id="logMeta"></div>
+    <div class="log-table-wrap" id="logTableWrap"></div>
+  </div>
+</div>
+
 <h4 data-i18n="section_mob">parâmetros do mob e da box</h4>
 <div class="inputs-grid">
   <div class="input-card">
@@ -503,6 +616,7 @@ input[type="range"] { accent-color: var(--accent); }
   <span class="cfg-badge" id="cfgLabel">Baseline</span>
   <button id="btnRun" data-i18n="btn_run">recalcular</button>
   <button id="btnShare" data-i18n="btn_share">copiar link</button>
+  <button id="btnLog" data-i18n="btn_log" style="background:#3B82F6">ver log de hunt</button>
   <span class="sim-status" id="simStatus" data-i18n="status_ready">pronto</span>
 </div>
 
@@ -620,7 +734,32 @@ const I18N = {
     btn_run: 'recalcular',
     btn_share: 'copiar link',
     btn_share_copied: 'link copiado!',
+    btn_log: 'ver log de hunt',
     btn_guide: 'guia',
+
+    log_title: 'Log detalhado de uma sessão',
+    log_desc: 'Esta tabela mostra evento por evento o que acontece numa sessão simulada com os parâmetros atuais. Cada linha é um turno: dano sorteado, charm ativado em quais mobs, HP antes e depois. A seed é mostrada acima — qualquer pessoa pode rodar com a mesma seed e obter exatamente os mesmos eventos.',
+    log_dmg_level: 'nível de dano:',
+    log_n_turns: 'máx turnos:',
+    log_seed: 'seed:',
+    log_generate: 'gerar log',
+    log_copy_csv: 'copiar como CSV',
+    log_csv_copied: 'CSV copiado!',
+    log_col_turn: '#',
+    log_col_box: 'box',
+    log_col_dmg_base: 'dano base',
+    log_col_var: 'var',
+    log_col_crit: 'crit',
+    log_col_dmg_final: 'dano final',
+    log_col_charm: 'charm em',
+    log_col_hp_before: 'HP antes',
+    log_col_hp_after: 'HP depois',
+    log_col_kills: 'mortes',
+    log_meta_seed: 'seed:',
+    log_meta_cycle: 'ciclo dano:',
+    log_meta_total: 'total simulado:',
+    log_meta_kills: 'mortes:',
+    log_meta_boxes: 'boxes completas:',
     status_ready: 'pronto',
     status_simulating: 'simulando...',
     status_done: '{n} × {h}h × 41 níveis = {total}h · {elapsed}s',
@@ -704,7 +843,32 @@ const I18N = {
     btn_run: 'recalculate',
     btn_share: 'copy link',
     btn_share_copied: 'link copied!',
+    btn_log: 'view hunt log',
     btn_guide: 'guide',
+
+    log_title: 'Detailed session log',
+    log_desc: 'This table shows event by event what happens in a simulated session with current parameters. Each row is a turn: rolled damage, charm activated on which mobs, HP before and after. The seed is shown above — anyone can run with the same seed and get exactly the same events.',
+    log_dmg_level: 'damage level:',
+    log_n_turns: 'max turns:',
+    log_seed: 'seed:',
+    log_generate: 'generate log',
+    log_copy_csv: 'copy as CSV',
+    log_csv_copied: 'CSV copied!',
+    log_col_turn: '#',
+    log_col_box: 'box',
+    log_col_dmg_base: 'base dmg',
+    log_col_var: 'var',
+    log_col_crit: 'crit',
+    log_col_dmg_final: 'final dmg',
+    log_col_charm: 'charm on',
+    log_col_hp_before: 'HP before',
+    log_col_hp_after: 'HP after',
+    log_col_kills: 'kills',
+    log_meta_seed: 'seed:',
+    log_meta_cycle: 'damage cycle:',
+    log_meta_total: 'total simulated:',
+    log_meta_kills: 'kills:',
+    log_meta_boxes: 'completed boxes:',
     status_ready: 'ready',
     status_simulating: 'simulating...',
     status_done: '{n} × {h}h × 41 levels = {total}h · {elapsed}s',
@@ -1019,30 +1183,36 @@ const N_SESSIONS = 60;
 
 // ========== Setup do pool de Workers ==========
 const workerSource = document.getElementById('simWorker').textContent;
-// Tenta data: URL, mas se falhar (preview do Claude), usa fallback inline
-let workerUrl = null;
-let USE_WORKERS = true;
 
-try {
-  workerUrl = 'data:application/javascript;base64,' + btoa(unescape(encodeURIComponent(workerSource)));
-  // Testa se consegue criar worker
-  const testWorker = new Worker(workerUrl);
-  testWorker.terminate();
-} catch (e) {
-  console.warn('Workers não disponíveis, usando fallback inline:', e.message);
-  USE_WORKERS = false;
+// Detecta ambientes que sabemos que bloqueiam workers (preview do Claude usa
+// claudeusercontent.com com CSP restritivo). Nesses casos, usa fallback inline
+// direto sem nem tentar criar worker — evita esperar erro async.
+const HOST = (typeof location !== 'undefined' && location.hostname) || '';
+const KNOWN_NO_WORKER_HOSTS = ['claudeusercontent.com', 'claude.ai'];
+let USE_WORKERS = !KNOWN_NO_WORKER_HOSTS.some(h => HOST.includes(h));
+
+let workerUrl = null;
+if (USE_WORKERS) {
+  try {
+    workerUrl = 'data:application/javascript;base64,' + btoa(unescape(encodeURIComponent(workerSource)));
+  } catch (e) {
+    console.warn('Não foi possível criar worker URL:', e.message);
+    USE_WORKERS = false;
+  }
 }
 
 // Número de workers: 1 por core, mas no máximo N_LEVELS (41) e mínimo 1.
 const HW_CORES = (navigator.hardwareConcurrency || 4);
 const N_WORKERS = USE_WORKERS ? Math.max(1, Math.min(N_LEVELS, HW_CORES - 1)) : 1;
 
+console.log('[Calculadora] modo:', USE_WORKERS ? ('workers paralelos (' + N_WORKERS + ')') : 'inline (single-thread com yields)');
+
 // Pool de workers — recriado a cada runSim pra evitar race conditions
 let workerPool = [];
 function createWorkerPool() {
-  workerPool.forEach(w => w.terminate());
+  workerPool.forEach(w => { try { w.terminate(); } catch(e) {} });
   workerPool = [];
-  if (!USE_WORKERS) return; // fallback inline não precisa de pool
+  if (!USE_WORKERS) return;
   for (let i = 0; i < N_WORKERS; i++) {
     workerPool.push(new Worker(workerUrl));
   }
@@ -1700,6 +1870,358 @@ function fallbackCopy(text, onDone) {
 }
 
 $('btnShare').addEventListener('click', copyShareLink);
+
+// ========== Log detalhado de uma sessão ==========
+// Esta função reimplementa a lógica da simulação, mas em vez de descartar os
+// eventos turno-a-turno, registra cada um com detalhe completo. Permite que
+// qualquer pessoa audite turno por turno o que está acontecendo na simulação.
+//
+// IMPORTANTE: usa a MESMA PRNG e a MESMA ordem de consumo de números aleatórios
+// que a simulação principal — então os mesmos parâmetros + mesma seed produzem
+// resultado idêntico. Isso é o que torna o log "reproduzível".
+
+let lastLogData = null; // pra exportar como CSV
+
+function generateHuntLog(level, maxTurns, seed) {
+  const inp = getInputs();
+  const flags = getFlags();
+  const critMult = flags.crit ? CRIT_BASE + inp.critBoost / 100 : CRIT_BASE;
+
+  const CHARM_RATE = 0.1, CRIT_RATE = 0.1, TURN_DURATION = 2.25, SPAWN_CURVE = 2.4;
+  const dmgs = [
+    inp.baseDmgs[0] + level,
+    inp.baseDmgs[1] + level,
+    inp.baseDmgs[2] + level
+  ];
+
+  // PRNG idêntica à do worker
+  let s = (seed >>> 0) || 1;
+  function rng() {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return s / 4294967296;
+  }
+
+  const boxFloor = Math.floor(inp.boxSize);
+  const boxFrac = inp.boxSize - boxFloor;
+  function rollBoxSize() {
+    if (boxFrac === 0) return boxFloor;
+    return rng() < boxFrac ? boxFloor + 1 : boxFloor;
+  }
+
+  function pPresent(elapsed, spawnDuration) {
+    if (elapsed <= 0) return 0;
+    if (elapsed >= spawnDuration) return 1;
+    return 1 - Math.pow(1 - elapsed / spawnDuration, SPAWN_CURVE);
+  }
+
+  // Estado mutável
+  let mobHps = []; // mobs vivos atualmente atacáveis
+  let spawning = []; // mobs em transição (chegando)
+  let spawnTimer = 0;
+  let timeElapsed = 0;
+  let ac = 0;
+  let totalKills = 0;
+  let boxNum = 1;
+  let turnsThisBox = 0;
+  let boxesCompleted = 0;
+
+  const firstN = rollBoxSize();
+  for (let i = 0; i < firstN; i++) mobHps.push(inp.mobHp);
+
+  // Eventos coletados (cada turno gera 1 entrada)
+  const events = [];
+
+  let turnNum = 0;
+  while (turnNum < maxTurns) {
+    const aliveTotal = mobHps.length + spawning.length;
+
+    // Inteligência: arrasta pra próxima box quando atinge threshold
+    if (flags.intel && aliveTotal <= inp.exitThreshold && spawning.length === 0) {
+      const nextN = rollBoxSize();
+      spawning = new Array(nextN).fill(inp.mobHp);
+      spawnTimer = 0;
+      events.push({
+        turn: turnNum,
+        box: boxNum,
+        type: 'box_drag',
+        note: (LANG === 'pt' ? 'arrastou pra próxima box (' + nextN + ' mobs entrando)' : 'dragged to next box (' + nextN + ' mobs incoming)'),
+        hpBefore: [...mobHps, ...spawning.map(()=>inp.mobHp)],
+        hpAfter: [...mobHps, ...spawning.map(()=>inp.mobHp)]
+      });
+      boxesCompleted++;
+      boxNum++;
+      turnsThisBox = 0;
+      continue;
+    }
+
+    // Box vazia: aguarda walking time, spawn fresh
+    if (aliveTotal === 0) {
+      events.push({
+        turn: turnNum,
+        box: boxNum,
+        type: 'box_walk',
+        note: (LANG === 'pt' ? 'box vazia — caminhou ' + inp.boxChangeTime + 's pra próxima' : 'empty box — walked ' + inp.boxChangeTime + 's to next'),
+        hpBefore: [],
+        hpAfter: []
+      });
+      boxesCompleted++;
+      boxNum++;
+      turnsThisBox = 0;
+      mobHps = [];
+      const nextN = rollBoxSize();
+      for (let i = 0; i < nextN; i++) mobHps.push(inp.mobHp);
+      spawning = [];
+      timeElapsed += inp.boxChangeTime;
+      continue;
+    }
+
+    // Turno normal de combate
+    turnNum++;
+    turnsThisBox++;
+    timeElapsed += TURN_DURATION;
+
+    // Captura HP antes
+    const hpBefore = [...mobHps];
+
+    // Resolução de spawn (mobs em transição podem aparecer)
+    const newlyArrived = [];
+    if (spawning.length > 0) {
+      spawnTimer += TURN_DURATION;
+      const pNow = pPresent(spawnTimer, inp.boxChangeTime);
+      const pPrev = pPresent(spawnTimer - TURN_DURATION, inp.boxChangeTime);
+      const pCond = pPrev >= 1 ? 1 : (pNow - pPrev) / (1 - pPrev);
+      const stillSpawning = [];
+      for (const hp of spawning) {
+        if (rng() < pCond) {
+          mobHps.push(hp);
+          newlyArrived.push(hp);
+        } else {
+          stillSpawning.push(hp);
+        }
+      }
+      spawning = stillSpawning;
+    }
+
+    // Charm individual
+    const charmHits = []; // [{mobIdx, dmg}]
+    if (flags.charm) {
+      for (let i = 0; i < mobHps.length; i++) {
+        if (mobHps[i] > 0 && rng() < CHARM_RATE) {
+          mobHps[i] -= inp.charmDmg;
+          if (mobHps[i] < 0) mobHps[i] = 0;
+          charmHits.push({ idx: i, dmg: inp.charmDmg });
+        }
+      }
+    }
+
+    // Dano do turno
+    const baseDmg = dmgs[ac % 3];
+    let varMul = 1;
+    if (flags.var) varMul = 0.8 + rng() * 0.4;
+    const isCrit = rng() < CRIT_RATE;
+    const critMul = isCrit ? critMult : 1;
+    const finalDmg = baseDmg * varMul * critMul;
+
+    // Aplica em todos
+    if (mobHps.length > 0) {
+      for (let i = 0; i < mobHps.length; i++) {
+        if (mobHps[i] > 0) {
+          mobHps[i] -= finalDmg;
+          if (mobHps[i] <= 0) mobHps[i] = 0;
+        }
+      }
+    }
+
+    // Conta mortes e compacta
+    let killsThisTurn = 0;
+    const newHps = [];
+    for (const hp of mobHps) {
+      if (hp === 0) {
+        killsThisTurn++;
+        totalKills++;
+      } else {
+        newHps.push(hp);
+      }
+    }
+    mobHps = newHps;
+
+    events.push({
+      turn: turnNum,
+      box: boxNum,
+      type: 'attack',
+      ac: ac % 3 + 1,
+      baseDmg: baseDmg,
+      varMul: varMul,
+      isCrit: isCrit,
+      finalDmg: finalDmg,
+      charmHits: charmHits,
+      newlyArrived: newlyArrived.length,
+      hpBefore: hpBefore,
+      hpAfter: [...mobHps],
+      kills: killsThisTurn
+    });
+
+    ac++;
+  }
+
+  return {
+    events,
+    seed,
+    level,
+    dmgs,
+    flags,
+    critMult,
+    totalKills,
+    boxesCompleted,
+    finalTime: timeElapsed,
+    inp
+  };
+}
+
+function fmtHpArr(arr) {
+  if (arr.length === 0) return '—';
+  if (arr.length <= 8) return '[' + arr.map(h => Math.round(h)).join(', ') + ']';
+  return '[' + arr.slice(0, 6).map(h => Math.round(h)).join(', ') + ', ...+' + (arr.length - 6) + ']';
+}
+
+function renderHuntLog(data) {
+  const meta = $('logMeta');
+  const dec = LANG === 'pt' ? ',' : '.';
+  const flagsStr = [
+    data.flags.charm ? 'charm' : null,
+    data.flags.crit ? 'crit+' + (data.inp.critBoost) + '%' : null,
+    data.flags.intel ? 'intel' : null,
+    data.flags.var ? 'var' : null
+  ].filter(x => x).join(' + ') || 'baseline';
+
+  meta.innerHTML =
+    '<strong>' + t('log_meta_seed') + '</strong> ' + data.seed + ' &nbsp;·&nbsp; ' +
+    '<strong>' + t('log_meta_cycle') + '</strong> [' + data.dmgs.join(', ') + '] (+' + data.level + ') &nbsp;·&nbsp; ' +
+    '<strong>flags:</strong> ' + flagsStr + '<br>' +
+    '<strong>' + t('log_meta_total') + '</strong> ' + data.events.length + ' turnos · ' +
+    data.finalTime.toFixed(1) + 's · ' +
+    '<strong>' + t('log_meta_kills') + '</strong> ' + data.totalKills + ' &nbsp;·&nbsp; ' +
+    '<strong>' + t('log_meta_boxes') + '</strong> ' + data.boxesCompleted;
+
+  let html = '<table class="log-table"><thead><tr>' +
+    '<th>' + t('log_col_turn') + '</th>' +
+    '<th>' + t('log_col_box') + '</th>' +
+    '<th>' + t('log_col_dmg_base') + '</th>' +
+    '<th>' + t('log_col_var') + '</th>' +
+    '<th>' + t('log_col_crit') + '</th>' +
+    '<th>' + t('log_col_dmg_final') + '</th>' +
+    '<th>' + t('log_col_charm') + '</th>' +
+    '<th>' + t('log_col_hp_before') + '</th>' +
+    '<th>' + t('log_col_hp_after') + '</th>' +
+    '<th>' + t('log_col_kills') + '</th>' +
+    '</tr></thead><tbody>';
+
+  for (const ev of data.events) {
+    if (ev.type === 'box_drag') {
+      html += '<tr class="box-end"><td colspan="10" style="text-align:center;color:var(--amber);font-style:italic">' +
+        '⟶ turno ' + ev.turn + ' · ' + ev.note + '</td></tr>';
+      continue;
+    }
+    if (ev.type === 'box_walk') {
+      html += '<tr class="box-end"><td colspan="10" style="text-align:center;color:var(--text-dim);font-style:italic">' +
+        '⟶ turno ' + ev.turn + ' · ' + ev.note + '</td></tr>';
+      continue;
+    }
+
+    const charmStr = ev.charmHits.length === 0
+      ? '—'
+      : ev.charmHits.map(c => 'mob ' + (c.idx + 1) + ' (-' + c.dmg + ')').join(', ');
+
+    html += '<tr>' +
+      '<td>' + ev.turn + '</td>' +
+      '<td>' + ev.box + '</td>' +
+      '<td>' + ev.baseDmg + ' <span style="color:var(--text-dim);font-size:9px">(at' + ev.ac + ')</span></td>' +
+      '<td>' + ev.varMul.toFixed(3).replace('.', dec) + '</td>' +
+      '<td class="' + (ev.isCrit ? 'col-crit' : '') + '">' + (ev.isCrit ? '✦ ' + data.critMult.toFixed(2).replace('.', dec) + 'x' : '—') + '</td>' +
+      '<td><strong>' + Math.round(ev.finalDmg) + '</strong></td>' +
+      '<td class="col-charm">' + charmStr + '</td>' +
+      '<td class="hp-cell">' + fmtHpArr(ev.hpBefore) + '</td>' +
+      '<td class="hp-cell">' + fmtHpArr(ev.hpAfter) + '</td>' +
+      '<td class="' + (ev.kills > 0 ? 'col-kills' : '') + '">' + (ev.kills > 0 ? '✗ ' + ev.kills : '—') + '</td>' +
+      '</tr>';
+  }
+  html += '</tbody></table>';
+  $('logTableWrap').innerHTML = html;
+}
+
+function huntLogToCSV(data) {
+  const rows = [];
+  rows.push(['turn', 'box', 'type', 'attack_cycle', 'dmg_base', 'var_mul', 'crit', 'dmg_final', 'charm_hits', 'hp_before', 'hp_after', 'kills'].join(','));
+  for (const ev of data.events) {
+    if (ev.type === 'attack') {
+      rows.push([
+        ev.turn, ev.box, 'attack', ev.ac, ev.baseDmg,
+        ev.varMul.toFixed(4),
+        ev.isCrit ? '1' : '0',
+        ev.finalDmg.toFixed(2),
+        '"' + (ev.charmHits.length === 0 ? '' : ev.charmHits.map(c => 'mob' + (c.idx + 1) + ':-' + c.dmg).join(';')) + '"',
+        '"' + ev.hpBefore.map(h => Math.round(h)).join(';') + '"',
+        '"' + ev.hpAfter.map(h => Math.round(h)).join(';') + '"',
+        ev.kills
+      ].join(','));
+    } else {
+      rows.push([ev.turn, ev.box, ev.type, '', '', '', '', '', '', '', '', ''].join(','));
+    }
+  }
+  return rows.join('\n');
+}
+
+function populateLogLevelSelect() {
+  const sel = $('logLevel');
+  sel.innerHTML = '';
+  for (let i = 0; i < N_LEVELS; i++) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = '+' + i;
+    sel.appendChild(opt);
+  }
+  sel.value = $('sliderDmg').value;
+}
+
+function openLogModal() {
+  populateLogLevelSelect();
+  $('logModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Gera log inicial automaticamente
+  generateAndRender();
+}
+function closeLogModal() {
+  $('logModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function generateAndRender() {
+  const level = +$('logLevel').value;
+  const maxTurns = +$('logMaxTurns').value;
+  const seed = +$('logSeed').value || 42;
+  lastLogData = generateHuntLog(level, maxTurns, seed);
+  renderHuntLog(lastLogData);
+}
+
+$('btnLog').addEventListener('click', openLogModal);
+$('closeLogModal').addEventListener('click', closeLogModal);
+$('logModal').addEventListener('click', (e) => {
+  if (e.target === $('logModal')) closeLogModal();
+});
+$('btnGenLog').addEventListener('click', generateAndRender);
+$('btnCopyCsv').addEventListener('click', () => {
+  if (!lastLogData) return;
+  const csv = huntLogToCSV(lastLogData);
+  const btn = $('btnCopyCsv');
+  const showCopied = () => {
+    btn.textContent = t('log_csv_copied');
+    setTimeout(() => { btn.textContent = t('log_copy_csv'); }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(csv).then(showCopied).catch(() => fallbackCopy(csv, showCopied));
+  } else {
+    fallbackCopy(csv, showCopied);
+  }
+});
 
 // ========== guia ==========
 const GUIDE = {
