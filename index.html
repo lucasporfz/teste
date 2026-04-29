@@ -428,6 +428,7 @@ input[type="range"] { accent-color: var(--accent); }
 .log-table .col-crit { color: var(--amber); font-weight: 500; }
 .log-table .col-charm { color: var(--accent); }
 .log-table .col-kills { color: #EF4444; font-weight: 500; }
+.log-table .col-spawn { color: var(--blue); font-weight: 500; }
 .log-table .hp-cell {
   font-size: 10px;
   color: var(--text-muted);
@@ -755,6 +756,7 @@ const I18N = {
     log_col_hp_before: 'HP antes',
     log_col_hp_after: 'HP depois',
     log_col_kills: 'mortes',
+    log_col_spawn: 'spawn',
     log_meta_seed: 'seed:',
     log_meta_cycle: 'ciclo dano:',
     log_meta_total: 'total simulado:',
@@ -864,6 +866,7 @@ const I18N = {
     log_col_hp_before: 'HP before',
     log_col_hp_after: 'HP after',
     log_col_kills: 'kills',
+    log_col_spawn: 'spawn',
     log_meta_seed: 'seed:',
     log_meta_cycle: 'damage cycle:',
     log_meta_total: 'total simulated:',
@@ -2114,16 +2117,17 @@ function renderHuntLog(data) {
     '<th>' + t('log_col_hp_before') + '</th>' +
     '<th>' + t('log_col_hp_after') + '</th>' +
     '<th>' + t('log_col_kills') + '</th>' +
+    '<th>' + t('log_col_spawn') + '</th>' +
     '</tr></thead><tbody>';
 
   for (const ev of data.events) {
     if (ev.type === 'box_drag') {
-      html += '<tr class="box-end"><td colspan="10" style="text-align:center;color:var(--amber);font-style:italic">' +
+      html += '<tr class="box-end"><td colspan="11" style="text-align:center;color:var(--amber);font-style:italic">' +
         '⟶ turno ' + ev.turn + ' · ' + ev.note + '</td></tr>';
       continue;
     }
     if (ev.type === 'box_walk') {
-      html += '<tr class="box-end"><td colspan="10" style="text-align:center;color:var(--text-dim);font-style:italic">' +
+      html += '<tr class="box-end"><td colspan="11" style="text-align:center;color:var(--text-dim);font-style:italic">' +
         '⟶ turno ' + ev.turn + ' · ' + ev.note + '</td></tr>';
       continue;
     }
@@ -2143,6 +2147,7 @@ function renderHuntLog(data) {
       '<td class="hp-cell">' + fmtHpArr(ev.hpBefore) + '</td>' +
       '<td class="hp-cell">' + fmtHpArr(ev.hpAfter) + '</td>' +
       '<td class="' + (ev.kills > 0 ? 'col-kills' : '') + '">' + (ev.kills > 0 ? '✗ ' + ev.kills : '—') + '</td>' +
+      '<td class="' + (ev.newlyArrived > 0 ? 'col-spawn' : '') + '">' + (ev.newlyArrived > 0 ? '+' + ev.newlyArrived : '—') + '</td>' +
       '</tr>';
   }
   html += '</tbody></table>';
@@ -2151,7 +2156,7 @@ function renderHuntLog(data) {
 
 function huntLogToCSV(data) {
   const rows = [];
-  rows.push(['turn', 'box', 'type', 'attack_cycle', 'dmg_base', 'var_mul', 'crit', 'dmg_final', 'charm_hits', 'hp_before', 'hp_after', 'kills'].join(','));
+  rows.push(['turn', 'box', 'type', 'attack_cycle', 'dmg_base', 'var_mul', 'crit', 'dmg_final', 'charm_hits', 'hp_before', 'hp_after', 'kills', 'spawn'].join(','));
   for (const ev of data.events) {
     if (ev.type === 'attack') {
       rows.push([
@@ -2162,10 +2167,11 @@ function huntLogToCSV(data) {
         '"' + (ev.charmHits.length === 0 ? '' : ev.charmHits.map(c => 'mob' + (c.idx + 1) + ':-' + c.dmg).join(';')) + '"',
         '"' + ev.hpBefore.map(h => Math.round(h)).join(';') + '"',
         '"' + ev.hpAfter.map(h => Math.round(h)).join(';') + '"',
-        ev.kills
+        ev.kills,
+        ev.newlyArrived
       ].join(','));
     } else {
-      rows.push([ev.turn, ev.box, ev.type, '', '', '', '', '', '', '', '', ''].join(','));
+      rows.push([ev.turn, ev.box, ev.type, '', '', '', '', '', '', '', '', '', ''].join(','));
     }
   }
   return rows.join('\n');
