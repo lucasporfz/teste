@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Simulador — Dano e XP/h</title>
+<style>
+:root {
+  --bg: #0A1628;
+  --bg-surface: #0D1F3C;
+  --text: #FFFFFF;
+  --text-muted: #8BA4C2;
+  --text-dim: #5B7590;
+  --border: #1E3A5F;
+  --accent: #00C49A;
+  --blue: #3B82F6;
+  --amber: #F59E0B;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 20px;
+  font-size: 14px;
+}
+.container { max-width: 1100px; margin: 0 auto; position: relative; }
+h1 { font-size: 22px; font-weight: 500; margin: 0 0 20px; }
+h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 24px 0 10px;
+}
+h4 {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.input-card {
+  padding: 10px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+.input-card label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.input-card input[type=number] {
+  width: 80px;
+  font-size: 13px;
+  padding: 4px 8px;
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+}
+.input-card .hint {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+.row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.checks { display: flex; gap: 8px; flex-wrap: wrap; }
+.cb-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+.cb-wrap:hover { background: var(--bg-surface); }
+.cb-wrap.active {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+  color: var(--text);
+  font-weight: 500;
+}
+.cb-wrap input {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+label { font-size: 13px; color: var(--text-muted); }
+.cfg-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--bg-surface);
+  color: var(--text);
+  border: 0.5px solid var(--border);
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin: 12px 0 20px;
+}
+.metric {
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+}
+.metric-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.metric-value {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.1;
+}
+.metric-delta {
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+.delta-pos { color: var(--accent); }
+.delta-neu { color: var(--text-dim); }
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.leg-item { display: flex; align-items: center; gap: 4px; }
+.leg-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.sim-status {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-left: auto;
+}
+button {
+  font-size: 12px;
+  padding: 6px 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: #0A1628;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+button:hover { filter: brightness(1.1); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.compare-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.resume-table {
+  width: 100%;
+  font-size: 12px;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.resume-table th, .resume-table td {
+  padding: 8px 12px;
+  text-align: right;
+  border-bottom: 0.5px solid var(--border);
+}
+.resume-table th:first-child, .resume-table td:first-child { text-align: left; }
+.resume-table th {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.resume-table td { color: var(--text); }
+.highlight { background: rgba(0, 196, 154, 0.12); }
+.chart-container {
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  position: relative;
+}
+input[type="range"] { accent-color: var(--accent); }
+
+.lang-toggle {
+  display: flex;
+  gap: 0;
+  font-size: 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  user-select: none;
+  flex-shrink: 0;
+}
+.lang-toggle button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 0;
+}
+.lang-toggle button:hover {
+  background: var(--bg-surface);
+  color: var(--text);
+}
+.lang-toggle button.active {
+  background: var(--accent);
+  color: #0A1628;
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.header-row h1 { margin: 0; flex: 1; min-width: 0; }
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.guide-btn {
+  background: transparent;
+  border: 0.5px solid var(--border);
+  color: var(--text-muted);
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.guide-btn:hover {
+  background: var(--bg-surface);
+  color: var(--text);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 40px 20px;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  padding: 32px 40px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: inherit;
+}
+.modal-close:hover {
+  background: var(--bg-surface);
+  color: var(--text);
+}
+.guide-content h2 {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0 0 16px;
+  color: var(--text);
+}
+.guide-content h3 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 24px 0 8px;
+  color: var(--accent);
+}
+.guide-content h4 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 16px 0 6px;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.guide-content p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 8px 0;
+}
+.guide-content strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.guide-content code {
+  background: var(--bg-surface);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12.5px;
+  color: var(--text);
+  border: 0.5px solid var(--border);
+}
+.guide-content ul {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  padding-left: 20px;
+}
+.guide-content li { margin: 4px 0; }
+
+/* ====== Loading Overlay ====== */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.85);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.loading-overlay.active {
+  display: flex;
+  pointer-events: auto;
+  opacity: 1;
+}
+.loading-card {
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  min-width: 280px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 500;
+  text-align: center;
+}
+.loading-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}
+.progress-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 0.5px solid var(--border);
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #00E5B0);
+  width: 0%;
+  transition: width 0.15s ease-out;
+  border-radius: 3px;
+}
+
+/* Quando a UI está calculando, sutilmente atenua os controles */
+.calculating .metrics-grid,
+.calculating .chart-container,
+.calculating .resume-table {
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header-row">
+  <h1 data-i18n="title">Simulador — Dano e XP/h em hunts de Tibia</h1>
+  <div class="header-actions">
+    <button id="btnGuide" class="guide-btn" data-i18n="btn_guide">guia</button>
+    <div class="lang-toggle">
+      <button id="langPt" class="active">PT</button>
+      <button id="langEn">EN</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="guideModal">
+  <div class="modal">
+    <button class="modal-close" id="closeModal" aria-label="Fechar">×</button>
+    <div class="guide-content" id="guideContent"></div>
+  </div>
+</div>
+
+<h4 data-i18n="section_mob">parâmetros do mob e da box</h4>
+<div class="inputs-grid">
+  <div class="input-card">
+    <label data-i18n="label_mobHp">HP do mob</label>
+    <input type="number" id="mobHp" value="8000" min="100" max="99999" step="100">
+    <div class="hint" data-i18n="hint_mobHp">cada mob tem esse HP</div>
+  </div>
+  <div class="input-card">
+    <label data-i18n="label_mobXp">XP do mob</label>
+    <input type="number" id="mobXp" value="10000" min="1" max="999999" step="100">
+    <div class="hint" data-i18n="hint_mobXp">XP por mob morto</div>
+  </div>
+  <div class="input-card">
+    <label data-i18n="label_boxSize">tamanho da box</label>
+    <input type="number" id="boxSize" value="8" min="0.1" max="20" step="0.1">
+    <div class="hint" data-i18n="hint_boxSize">mobs por spawn</div>
+  </div>
+  <div class="input-card">
+    <label data-i18n="label_exitThreshold">ponto de saída</label>
+    <input type="number" id="exitThreshold" value="3" min="1" max="19" step="1">
+    <div class="hint" data-i18n="hint_exitThreshold">inteligência: sai com ≤ N vivos</div>
+  </div>
+  <div class="input-card">
+    <label data-i18n="label_boxTime">tempo entre box (s)</label>
+    <input type="number" id="boxTime" value="6" min="0" max="60" step="0.5">
+    <div class="hint" data-i18n="hint_boxTime">troca sem intel / arraste com intel</div>
+  </div>
+</div>
+
+<h4 data-i18n="section_damage">parâmetros de dano</h4>
+<div class="inputs-grid">
+  <div class="input-card"><label data-i18n="label_dmg1">dano ataque 1</label><input type="number" id="dmg1" value="500" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_dmg1">turno 1 do ciclo</div></div>
+  <div class="input-card"><label data-i18n="label_dmg2">dano ataque 2</label><input type="number" id="dmg2" value="600" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_dmg2">turno 2 do ciclo</div></div>
+  <div class="input-card"><label data-i18n="label_dmg3">dano ataque 3</label><input type="number" id="dmg3" value="1000" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_dmg3">turno 3 do ciclo</div></div>
+  <div class="input-card"><label data-i18n="label_charmDmg">dano do charm</label><input type="number" id="charmDmg" value="500" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_charmDmg">dano por ativação</div></div>
+  <div class="input-card"><label data-i18n="label_critBoost">aumento crítico (%)</label><input type="number" id="critBoost" value="44" min="0" max="500" step="1"><div class="hint"><span data-i18n="hint_critFinal_prefix">final: 1,72 +</span> <span id="critBoostHint">0,44</span> = <span id="critFinal">2,16</span>x</div></div>
+</div>
+
+<h4 data-i18n="section_config">configuração ativa</h4>
+<div class="row">
+  <div class="checks">
+    <label class="cb-wrap" id="wrap-charm"><input type="checkbox" id="cb-charm"> <span data-i18n="cb_charm">charm</span></label>
+    <label class="cb-wrap" id="wrap-crit"><input type="checkbox" id="cb-crit"> <span data-i18n="cb_crit">crítico aumentado</span></label>
+    <label class="cb-wrap" id="wrap-int"><input type="checkbox" id="cb-int"> <span data-i18n="cb_int">inteligência</span></label>
+    <label class="cb-wrap" id="wrap-var"><input type="checkbox" id="cb-var"> <span data-i18n="cb_var">dano variável (±20%)</span></label>
+  </div>
+  <span class="cfg-badge" id="cfgLabel">Baseline</span>
+  <button id="btnRun" data-i18n="btn_run">recalcular</button>
+  <button id="btnShare" data-i18n="btn_share">copiar link</button>
+  <span class="sim-status" id="simStatus" data-i18n="status_ready">pronto</span>
+</div>
+
+<h4 data-i18n="section_metrics">métricas do nível selecionado</h4>
+<div class="metrics-grid">
+  <div class="metric">
+    <div class="metric-label" data-i18n="met_turns">turnos médios por box</div>
+    <div class="metric-value" id="metTurns">—</div>
+    <div class="metric-delta" id="metTurnsDelta">—</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label" data-i18n="met_xph">XP/h estimado</div>
+    <div class="metric-value" id="metXph">—</div>
+    <div class="metric-delta" id="metXphDelta">—</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label" data-i18n="met_xph_abs_diff">diferença absoluta de XP/h</div>
+    <div class="metric-value" id="metAbsDiff">—</div>
+    <div class="metric-delta" data-i18n="vs_base">vs nível +0</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label" data-i18n="met_gain100">ganho em 100h de hunt</div>
+    <div class="metric-value" id="metGain100">—</div>
+    <div class="metric-delta" data-i18n="vs_base">vs nível +0</div>
+  </div>
+</div>
+
+<div class="row">
+  <label data-i18n="label_slider">nível de dano bônus</label>
+  <input type="range" id="sliderDmg" min="0" max="40" value="0" step="1" style="width:180px">
+  <span id="lblDmg" style="font-size:14px;font-weight:500;min-width:50px">+0</span>
+</div>
+
+<h3 data-i18n="h_compare">distribuição de turnos — comparar dois níveis</h3>
+<div class="compare-row">
+  <label data-i18n="label_compare">comparar</label>
+  <input type="range" id="sliderA" min="0" max="40" value="0" step="1" style="width:140px">
+  <span id="lblA" style="font-size:13px;font-weight:500;min-width:36px;color:#3B82F6">+0</span>
+  <label style="margin-left:8px" data-i18n="label_with">com</label>
+  <input type="range" id="sliderB" min="0" max="40" value="40" step="1" style="width:140px">
+  <span id="lblB" style="font-size:13px;font-weight:500;min-width:36px;color:#F59E0B">+40</span>
+</div>
+<div class="chart-container">
+  <div style="position:relative;height:220px"><canvas id="compareChart"></canvas></div>
+</div>
+
+<h3 data-i18n="h_evol">evolução dos turnos médios e XP/h por nível</h3>
+<div class="chart-container">
+  <div style="position:relative;height:220px"><canvas id="evolChart"></canvas></div>
+</div>
+
+<h3 data-i18n="h_curves">curvas de distribuição — todos os níveis</h3>
+<div class="legend" id="legendCurve"></div>
+<div class="chart-container">
+  <div style="position:relative;height:260px"><canvas id="curveChart"></canvas></div>
+</div>
+
+<h3 data-i18n="h_resume">resumo — ganho a cada +5 de dano</h3>
+<div style="overflow-x:auto">
+  <table class="resume-table" id="resumeTable"></table>
+</div>
+
+<!-- Loading overlay (preso ao container, cobre toda a área) -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-card">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Simulando hunts...</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="loading-sub" id="loadingSub">0 / 41 níveis</div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ========== i18n ==========
+const I18N = {
+  pt: {
+    title: 'Simulador — Dano e XP/h em hunts de Tibia',
+    section_mob: 'parâmetros do mob e da box',
+    section_damage: 'parâmetros de dano',
+    section_config: 'configuração ativa',
+    section_metrics: 'métricas do nível selecionado',
+
+    label_mobHp: 'HP do mob',
+    hint_mobHp: 'cada mob tem esse HP',
+    label_mobXp: 'XP do mob',
+    hint_mobXp: 'XP por mob morto',
+    label_boxSize: 'tamanho da box',
+    hint_boxSize: 'mobs por spawn',
+    label_exitThreshold: 'ponto de saída',
+    hint_exitThreshold: 'inteligência: sai com ≤ N vivos',
+    label_boxTime: 'tempo entre box (s)',
+    hint_boxTime: 'troca sem intel / arraste com intel',
+
+    label_dmg1: 'dano ataque 1',
+    hint_dmg1: 'turno 1 do ciclo',
+    label_dmg2: 'dano ataque 2',
+    hint_dmg2: 'turno 2 do ciclo',
+    label_dmg3: 'dano ataque 3',
+    hint_dmg3: 'turno 3 do ciclo',
+    label_charmDmg: 'dano do charm',
+    hint_charmDmg: 'dano por ativação',
+    label_critBoost: 'aumento crítico (%)',
+    hint_critFinal_prefix: 'final: 1,72 +',
+
+    cb_charm: 'charm',
+    cb_crit: 'crítico aumentado',
+    cb_int: 'inteligência',
+    cb_var: 'dano variável (±20%)',
+
+    btn_run: 'recalcular',
+    btn_share: 'copiar link',
+    btn_share_copied: 'link copiado!',
+    btn_guide: 'guia',
+    status_ready: 'pronto',
+    status_simulating: 'simulando...',
+    status_done: '{n} × {h}h × 41 níveis = {total}h · {elapsed}s',
+
+    loading_text: 'Simulando hunts...',
+    loading_progress: '{done} / {total} níveis',
+
+    met_turns: 'turnos médios por box',
+    met_xph: 'XP/h estimado',
+    met_xph_abs_diff: 'diferença absoluta de XP/h',
+    met_gain100: 'ganho em 100h de hunt',
+    vs_base: 'vs nível +0',
+    base_level: 'nível base',
+
+    label_slider: 'nível de dano bônus',
+    h_compare: 'distribuição de turnos — comparar dois níveis',
+    label_compare: 'comparar',
+    label_with: 'com',
+    h_evol: 'evolução dos turnos médios e XP/h por nível',
+    h_curves: 'curvas de distribuição — todos os níveis',
+    h_resume: 'resumo — ganho a cada +5 de dano',
+
+    table_level: 'nível',
+    table_turns: 'turnos médios',
+    table_xph: 'XP/h',
+    table_delta: 'Δ XP/h vs +0',
+    table_abs_diff: 'diferença abs. XP/h',
+    table_gain: 'ganho em 100h',
+
+    chart_turns_label: 'turnos médios',
+    chart_xph_label: 'XP/h',
+    chart_turns_axis: 'turnos',
+    chart_turns_per_box: 'turnos por box',
+    chart_pct_boxes: '% das boxes',
+
+    cfg: {
+      '0000': 'Baseline', '0001': 'Baseline + Var',
+      '1000': 'Charm', '1001': 'Charm + Var',
+      '0100': 'Crítico aumentado', '0101': 'Crítico aumentado + Var',
+      '0010': 'Inteligência', '0011': 'Inteligência + Var',
+      '1100': 'Charm + Crit', '1101': 'Charm + Crit + Var',
+      '1010': 'Charm + Int', '1011': 'Charm + Int + Var',
+      '0110': 'Crit + Int', '0111': 'Crit + Int + Var',
+      '1110': 'Charm + Crit + Int', '1111': 'Charm + Crit + Int + Var'
+    }
+  },
+  en: {
+    title: 'Simulator — Damage and XP/h in Tibia hunts',
+    section_mob: 'mob and box parameters',
+    section_damage: 'damage parameters',
+    section_config: 'active configuration',
+    section_metrics: 'metrics for selected level',
+
+    label_mobHp: 'mob HP',
+    hint_mobHp: 'each mob has this HP',
+    label_mobXp: 'mob XP',
+    hint_mobXp: 'XP per mob killed',
+    label_boxSize: 'box size',
+    hint_boxSize: 'mobs per spawn',
+    label_exitThreshold: 'exit threshold',
+    hint_exitThreshold: 'intelligence: leaves with ≤ N alive',
+    label_boxTime: 'box change time (s)',
+    hint_boxTime: 'walk time / drag duration',
+
+    label_dmg1: 'attack damage 1',
+    hint_dmg1: 'turn 1 of cycle',
+    label_dmg2: 'attack damage 2',
+    hint_dmg2: 'turn 2 of cycle',
+    label_dmg3: 'attack damage 3',
+    hint_dmg3: 'turn 3 of cycle',
+    label_charmDmg: 'charm damage',
+    hint_charmDmg: 'damage per proc',
+    label_critBoost: 'crit boost (%)',
+    hint_critFinal_prefix: 'final: 1.72 +',
+
+    cb_charm: 'charm',
+    cb_crit: 'boosted crit',
+    cb_int: 'intelligence',
+    cb_var: 'damage variance (±20%)',
+
+    btn_run: 'recalculate',
+    btn_share: 'copy link',
+    btn_share_copied: 'link copied!',
+    btn_guide: 'guide',
+    status_ready: 'ready',
+    status_simulating: 'simulating...',
+    status_done: '{n} × {h}h × 41 levels = {total}h · {elapsed}s',
+
+    loading_text: 'Simulating hunts...',
+    loading_progress: '{done} / {total} levels',
+
+    met_turns: 'average turns per box',
+    met_xph: 'estimated XP/h',
+    met_xph_abs_diff: 'absolute XP/h difference',
+    met_gain100: 'gain over 100h of hunting',
+    vs_base: 'vs level +0',
+    base_level: 'base level',
+
+    label_slider: 'damage bonus level',
+    h_compare: 'turn distribution — compare two levels',
+    label_compare: 'compare',
+    label_with: 'with',
+    h_evol: 'evolution of average turns and XP/h per level',
+    h_curves: 'distribution curves — all levels',
+    h_resume: 'summary — gain every +5 damage',
+
+    table_level: 'level',
+    table_turns: 'avg turns',
+    table_xph: 'XP/h',
+    table_delta: 'Δ XP/h vs +0',
+    table_abs_diff: 'abs. XP/h diff',
+    table_gain: 'gain over 100h',
+
+    chart_turns_label: 'average turns',
+    chart_xph_label: 'XP/h',
+    chart_turns_axis: 'turns',
+    chart_turns_per_box: 'turns per box',
+    chart_pct_boxes: '% of boxes',
+
+    cfg: {
+      '0000': 'Baseline', '0001': 'Baseline + Var',
+      '1000': 'Charm', '1001': 'Charm + Var',
+      '0100': 'Boosted crit', '0101': 'Boosted crit + Var',
+      '0010': 'Intelligence', '0011': 'Intelligence + Var',
+      '1100': 'Charm + Crit', '1101': 'Charm + Crit + Var',
+      '1010': 'Charm + Int', '1011': 'Charm + Int + Var',
+      '0110': 'Crit + Int', '0111': 'Crit + Int + Var',
+      '1110': 'Charm + Crit + Int', '1111': 'Charm + Crit + Int + Var'
+    }
+  }
+};
+
+let LANG = 'pt';
+const t = key => (I18N[LANG] && I18N[LANG][key]) || key;
+
+function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : 'en';
+  document.title = t('title');
+  document.getElementById('langPt').classList.toggle('active', LANG === 'pt');
+  document.getElementById('langEn').classList.toggle('active', LANG === 'en');
+  if (typeof updateUI === 'function') updateUI();
+  if (typeof drawAll === 'function' && typeof cache !== 'undefined' && cache) drawAll();
+  const st = document.getElementById('simStatus');
+  if (st && typeof cache !== 'undefined' && cache && typeof N_SESSIONS !== 'undefined') {
+    const totalHours = N_SESSIONS * SESSION_SECONDS / 3600 * N_LEVELS;
+    const locale = LANG === 'pt' ? 'pt-BR' : 'en-US';
+    st.textContent = t('status_done')
+      .replace('{n}', N_SESSIONS)
+      .replace('{h}', SESSION_SECONDS / 3600)
+      .replace('{total}', totalHours.toLocaleString(locale))
+      .replace('{elapsed}', lastElapsed || '—');
+  }
+  const modal = document.getElementById('guideModal');
+  if (modal && modal.classList.contains('open')) {
+    document.getElementById('guideContent').innerHTML = GUIDE[LANG];
+  }
+}
+
+document.getElementById('langPt').addEventListener('click', () => { LANG = 'pt'; applyI18n(); });
+document.getElementById('langEn').addEventListener('click', () => { LANG = 'en'; applyI18n(); });
+</script>
+
+<!-- ========================================================================
+     WEB WORKER (inline via Blob)
+     Toda a simulação roda numa thread separada, mantendo a UI 100% responsiva.
+     O worker reporta progresso a cada nível processado (1 de 41, 2 de 41, ...)
+     ======================================================================== -->
+<script id="simWorker" type="javascript/worker">
+'use strict';
+
+const CHARM_RATE = 0.1;
+const CRIT_RATE = 0.1;
+const TURN_DURATION = 2.25;
+const SPAWN_CURVE = 2.4;
+
+// PRNG inline (LCG numerix-recipes) — ultra-rápido
+function makeRng(seed) {
+  let s = (seed >>> 0) || 1;
+  return function() {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+}
+
+// Lookup table de pPresent: como spawnDuration (boxChangeTime) é fixo dentro
+// de uma execução e elapsed avança em passos fixos de TURN_DURATION, podemos
+// pré-calcular pPresent em todos os pontos discretos que vamos consultar.
+function buildPresentTable(spawnDuration) {
+  if (spawnDuration <= 0) return null;
+  // Quantos turnos cabem no intervalo de spawn
+  const maxSteps = Math.ceil(spawnDuration / TURN_DURATION) + 2;
+  const tbl = new Float64Array(maxSteps + 1);
+  for (let i = 0; i <= maxSteps; i++) {
+    const elapsed = i * TURN_DURATION;
+    if (elapsed <= 0) tbl[i] = 0;
+    else if (elapsed >= spawnDuration) tbl[i] = 1;
+    else tbl[i] = 1 - Math.pow(1 - elapsed / spawnDuration, SPAWN_CURVE);
+  }
+  return tbl;
+}
+
+function simSession(seed, dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl) {
+  const rng = makeRng(seed);
+
+  const boxFloor = Math.floor(boxSize);
+  const boxFrac = boxSize - boxFloor;
+
+  // Capacidade máxima de mobs simultaneamente (alive + spawning) — usado pra dimensionar buffers
+  const maxMobs = (boxFloor + 2) * 2;
+
+  // Buffers tipados — alive e spawning são gerenciados in-place via length
+  const aliveHp = new Float32Array(maxMobs);
+  let aliveLen = 0;
+  const spawnHp = new Float32Array(maxMobs);
+  let spawnLen = 0;
+
+  let timeElapsed = 0;
+  let ac = 0;
+  let totalKills = 0;
+  let turnsThisBox = 0;
+  // Como turnos por box raramente passa de algumas dezenas, pré-aloca um array Int
+  // grande e usa um índice em vez de push (evita realocações)
+  const turnCountsBuf = new Int32Array(Math.ceil(seconds / TURN_DURATION / 2) + 100);
+  let turnCountsLen = 0;
+
+  // Spawn da primeira box
+  let firstN;
+  if (boxFrac === 0) firstN = boxFloor;
+  else firstN = rng() < boxFrac ? boxFloor + 1 : boxFloor;
+  for (let i = 0; i < firstN; i++) aliveHp[aliveLen++] = mobHp;
+
+  let spawnStep = 0; // índice do passo de spawn (em múltiplos de TURN_DURATION)
+
+  while (timeElapsed < seconds) {
+    const aliveTotal = aliveLen + spawnLen;
+
+    if (flags.intel && aliveTotal <= exitThreshold && spawnLen === 0) {
+      // Inicia transição para próxima box
+      let nextN;
+      if (boxFrac === 0) nextN = boxFloor;
+      else nextN = rng() < boxFrac ? boxFloor + 1 : boxFloor;
+      spawnLen = 0;
+      for (let i = 0; i < nextN; i++) spawnHp[spawnLen++] = mobHp;
+      spawnStep = 0;
+      turnCountsBuf[turnCountsLen++] = turnsThisBox;
+      turnsThisBox = 0;
+      continue;
+    }
+
+    if (aliveTotal === 0) {
+      turnCountsBuf[turnCountsLen++] = turnsThisBox;
+      turnsThisBox = 0;
+      // sem intel: walking time + spawn fresh
+      let nextN;
+      if (boxFrac === 0) nextN = boxFloor;
+      else nextN = rng() < boxFrac ? boxFloor + 1 : boxFloor;
+      aliveLen = 0;
+      for (let i = 0; i < nextN; i++) aliveHp[aliveLen++] = mobHp;
+      spawnLen = 0;
+      timeElapsed += boxChangeTime;
+      if (timeElapsed >= seconds) break;
+      continue;
+    }
+
+    turnsThisBox++;
+    timeElapsed += TURN_DURATION;
+    if (timeElapsed > seconds) break;
+
+    // Resolução de spawn: mobs em transição podem aparecer neste turno
+    if (spawnLen > 0 && presentTbl) {
+      spawnStep++;
+      const pNow = spawnStep < presentTbl.length ? presentTbl[spawnStep] : 1;
+      const pPrev = (spawnStep - 1) >= 0 && (spawnStep - 1) < presentTbl.length ? presentTbl[spawnStep - 1] : 0;
+      const pCond = pPrev >= 1 ? 1 : (pNow - pPrev) / (1 - pPrev);
+      // Compactação in-place: mantém em spawnHp só os que ainda não apareceram
+      let writeIdx = 0;
+      for (let i = 0; i < spawnLen; i++) {
+        if (rng() < pCond) {
+          // apareceu — vai pra alive
+          aliveHp[aliveLen++] = spawnHp[i];
+        } else {
+          spawnHp[writeIdx++] = spawnHp[i];
+        }
+      }
+      spawnLen = writeIdx;
+    }
+
+    if (aliveLen === 0) { ac++; continue; }
+
+    // Charm: cada mob individualmente pode ativar
+    if (flags.charm) {
+      for (let i = 0; i < aliveLen; i++) {
+        if (aliveHp[i] > 0 && rng() < CHARM_RATE) {
+          aliveHp[i] -= charmDmg;
+          if (aliveHp[i] < 0) aliveHp[i] = 0;
+        }
+      }
+    }
+
+    // Dano base do turno
+    let base = dmgs[ac % 3];
+    if (flags.var) base *= 0.8 + rng() * 0.4;
+    if (rng() < CRIT_RATE) base *= critMult;
+
+    // Aplica em todos + compactação in-place
+    let writeIdx = 0;
+    for (let i = 0; i < aliveLen; i++) {
+      let hp = aliveHp[i];
+      if (hp > 0) {
+        hp -= base;
+        if (hp <= 0) {
+          totalKills++;
+          continue; // morto, não escreve de volta
+        }
+      } else {
+        // já estava morto (charm matou) — conta o kill
+        totalKills++;
+        continue;
+      }
+      aliveHp[writeIdx++] = hp;
+    }
+    aliveLen = writeIdx;
+    ac++;
+  }
+
+  const xph = totalKills * mobXp / (seconds / 3600);
+  return { xph, turnCounts: turnCountsBuf.subarray(0, turnCountsLen) };
+}
+
+function simulateLevel(dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl) {
+  const counter = Object.create(null);
+  let totalXph = 0;
+  let totalBoxes = 0;
+  let totalTurnsAccum = 0;
+
+  for (let s = 0; s < nSessions; s++) {
+    const sessionSeed = (Math.imul(levelSeed, 104729) + s * 7919) >>> 0;
+    const res = simSession(sessionSeed, dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, sessionSeconds, presentTbl);
+    totalXph += res.xph;
+    const tc = res.turnCounts;
+    totalBoxes += tc.length;
+    for (let i = 0; i < tc.length; i++) {
+      const v = tc[i];
+      counter[v] = (counter[v] || 0) + 1;
+      totalTurnsAccum += v;
+    }
+  }
+  const avgXph = totalXph / nSessions;
+  const avgTurns = totalBoxes > 0 ? totalTurnsAccum / totalBoxes : 0;
+  const dist = {};
+  if (totalBoxes > 0) {
+    const inv = 100 / totalBoxes;
+    for (const k in counter) {
+      dist[k] = +(counter[k] * inv).toFixed(2);
+    }
+  }
+  return { dist, avgTurns, xph: avgXph };
+}
+
+// O worker agora processa apenas os níveis listados em `levels` (array de ints).
+// Isso permite distribuir os 41 níveis entre múltiplos workers paralelos.
+// IMPORTANTE: a simulação de cada nível é byte-por-byte idêntica à versão serial,
+// porque o levelSeed depende só de runSeed e inc — não da ordem de processamento.
+self.onmessage = function(e) {
+  const cfg = e.data;
+  const {
+    baseDmgs, charmDmg, critMult, mobHp, mobXp,
+    boxSize, exitThreshold, boxChangeTime, flags,
+    runSeed, levels, nSessions, sessionSeconds
+  } = cfg;
+
+  const presentTbl = buildPresentTable(boxChangeTime);
+
+  const result = {};
+  for (let i = 0; i < levels.length; i++) {
+    const inc = levels[i];
+    const dmgs = [baseDmgs[0] + inc, baseDmgs[1] + inc, baseDmgs[2] + inc];
+    const levelSeed = (runSeed ^ (inc * 31337)) >>> 0;
+    result[inc] = simulateLevel(dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl);
+    self.postMessage({ type: 'progress', level: inc });
+  }
+  self.postMessage({ type: 'done', result });
+};
+</script>
+
+<script>
+// ========== Constantes (expostas pro código UI) ==========
+const CRIT_BASE = 1.72;
+const N_LEVELS = 41;
+const SESSION_SECONDS = 3600 * 10;
+const N_SESSIONS = 60;
+
+// ========== Setup do pool de Workers ==========
+const workerSource = document.getElementById('simWorker').textContent;
+// Tenta data: URL, mas se falhar (preview do Claude), usa fallback inline
+let workerUrl = null;
+let USE_WORKERS = true;
+
+try {
+  workerUrl = 'data:application/javascript;base64,' + btoa(unescape(encodeURIComponent(workerSource)));
+  // Testa se consegue criar worker
+  const testWorker = new Worker(workerUrl);
+  testWorker.terminate();
+} catch (e) {
+  console.warn('Workers não disponíveis, usando fallback inline:', e.message);
+  USE_WORKERS = false;
+}
+
+// Número de workers: 1 por core, mas no máximo N_LEVELS (41) e mínimo 1.
+const HW_CORES = (navigator.hardwareConcurrency || 4);
+const N_WORKERS = USE_WORKERS ? Math.max(1, Math.min(N_LEVELS, HW_CORES - 1)) : 1;
+
+// Pool de workers — recriado a cada runSim pra evitar race conditions
+let workerPool = [];
+function createWorkerPool() {
+  workerPool.forEach(w => w.terminate());
+  workerPool = [];
+  if (!USE_WORKERS) return; // fallback inline não precisa de pool
+  for (let i = 0; i < N_WORKERS; i++) {
+    workerPool.push(new Worker(workerUrl));
+  }
+}
+
+// Distribui os níveis entre os workers em round-robin.
+function partitionLevels(nLevels, nWorkers) {
+  const buckets = Array.from({length: nWorkers}, () => []);
+  for (let i = 0; i < nLevels; i++) {
+    buckets[i % nWorkers].push(i);
+  }
+  return buckets;
+}
+
+// ========== Fallback: simulação inline (sem workers) ==========
+// Cópia da lógica do worker, rodando na main thread com yields pra não travar UI
+function runSimInline(config, onProgress) {
+  const { baseDmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, runSeed } = config;
+  
+  // Importa as funções do worker inline
+  const CHARM_RATE = 0.1, CRIT_RATE = 0.1, TURN_DURATION = 2.25, SPAWN_CURVE = 2.4;
+  
+  function makeRng(seed) {
+    let s = (seed >>> 0) || 1;
+    return function() {
+      s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+      return s / 4294967296;
+    };
+  }
+  
+  function buildPresentTable(spawnDuration) {
+    if (spawnDuration <= 0) return null;
+    const maxSteps = Math.ceil(spawnDuration / TURN_DURATION) + 2;
+    const tbl = new Float64Array(maxSteps + 1);
+    for (let i = 0; i <= maxSteps; i++) {
+      const elapsed = i * TURN_DURATION;
+      if (elapsed <= 0) tbl[i] = 0;
+      else if (elapsed >= spawnDuration) tbl[i] = 1;
+      else tbl[i] = 1 - Math.pow(1 - elapsed / spawnDuration, SPAWN_CURVE);
+    }
+    return tbl;
+  }
+  
+  function simSession(seed, dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl) {
+    const rng = makeRng(seed);
+    const boxFloor = Math.floor(boxSize), boxFrac = boxSize - boxFloor;
+    const maxMobs = (boxFloor + 2) * 2;
+    const aliveHp = new Float32Array(maxMobs);
+    let aliveLen = 0;
+    const spawnHp = new Float32Array(maxMobs);
+    let spawnLen = 0;
+    let timeElapsed = 0, ac = 0, totalKills = 0, turnsThisBox = 0;
+    const turnCountsBuf = new Int32Array(Math.ceil(seconds / TURN_DURATION / 2) + 100);
+    let turnCountsLen = 0;
+    
+    let firstN = boxFrac === 0 ? boxFloor : (rng() < boxFrac ? boxFloor + 1 : boxFloor);
+    for (let i = 0; i < firstN; i++) aliveHp[aliveLen++] = mobHp;
+    let spawnStep = 0;
+    
+    while (timeElapsed < seconds) {
+      const aliveTotal = aliveLen + spawnLen;
+      if (flags.intel && aliveTotal <= exitThreshold && spawnLen === 0) {
+        let nextN = boxFrac === 0 ? boxFloor : (rng() < boxFrac ? boxFloor + 1 : boxFloor);
+        spawnLen = 0;
+        for (let i = 0; i < nextN; i++) spawnHp[spawnLen++] = mobHp;
+        spawnStep = 0;
+        turnCountsBuf[turnCountsLen++] = turnsThisBox;
+        turnsThisBox = 0;
+        continue;
+      }
+      if (aliveTotal === 0) {
+        turnCountsBuf[turnCountsLen++] = turnsThisBox;
+        turnsThisBox = 0;
+        let nextN = boxFrac === 0 ? boxFloor : (rng() < boxFrac ? boxFloor + 1 : boxFloor);
+        aliveLen = 0;
+        for (let i = 0; i < nextN; i++) aliveHp[aliveLen++] = mobHp;
+        spawnLen = 0;
+        timeElapsed += boxChangeTime;
+        if (timeElapsed >= seconds) break;
+        continue;
+      }
+      turnsThisBox++;
+      timeElapsed += TURN_DURATION;
+      if (timeElapsed > seconds) break;
+      
+      if (spawnLen > 0 && presentTbl) {
+        spawnStep++;
+        const pNow = spawnStep < presentTbl.length ? presentTbl[spawnStep] : 1;
+        const pPrev = (spawnStep - 1) >= 0 && (spawnStep - 1) < presentTbl.length ? presentTbl[spawnStep - 1] : 0;
+        const pCond = pPrev >= 1 ? 1 : (pNow - pPrev) / (1 - pPrev);
+        let writeIdx = 0;
+        for (let i = 0; i < spawnLen; i++) {
+          if (rng() < pCond) aliveHp[aliveLen++] = spawnHp[i];
+          else spawnHp[writeIdx++] = spawnHp[i];
+        }
+        spawnLen = writeIdx;
+      }
+      if (aliveLen === 0) { ac++; continue; }
+      if (flags.charm) {
+        for (let i = 0; i < aliveLen; i++) {
+          if (aliveHp[i] > 0 && rng() < CHARM_RATE) {
+            aliveHp[i] -= charmDmg;
+            if (aliveHp[i] < 0) aliveHp[i] = 0;
+          }
+        }
+      }
+      let base = dmgs[ac % 3];
+      if (flags.var) base *= 0.8 + rng() * 0.4;
+      if (rng() < CRIT_RATE) base *= critMult;
+      let writeIdx = 0;
+      for (let i = 0; i < aliveLen; i++) {
+        let hp = aliveHp[i];
+        if (hp > 0) {
+          hp -= base;
+          if (hp <= 0) { totalKills++; continue; }
+        } else { totalKills++; continue; }
+        aliveHp[writeIdx++] = hp;
+      }
+      aliveLen = writeIdx;
+      ac++;
+    }
+    const xph = totalKills * mobXp / (seconds / 3600);
+    return { xph, turnCounts: turnCountsBuf.subarray(0, turnCountsLen) };
+  }
+  
+  function simulateLevel(dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl) {
+    const counter = Object.create(null);
+    let totalXph = 0, totalBoxes = 0, totalTurnsAccum = 0;
+    for (let s = 0; s < nSessions; s++) {
+      const sessionSeed = (Math.imul(levelSeed, 104729) + s * 7919) >>> 0;
+      const res = simSession(sessionSeed, dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, sessionSeconds, presentTbl);
+      totalXph += res.xph;
+      const tc = res.turnCounts;
+      totalBoxes += tc.length;
+      for (let i = 0; i < tc.length; i++) {
+        const v = tc[i];
+        counter[v] = (counter[v] || 0) + 1;
+        totalTurnsAccum += v;
+      }
+    }
+    const avgXph = totalXph / N_SESSIONS;
+    const avgTurns = totalBoxes > 0 ? totalTurnsAccum / totalBoxes : 0;
+    const dist = {};
+    if (totalBoxes > 0) {
+      const inv = 100 / totalBoxes;
+      for (const k in counter) dist[k] = +(counter[k] * inv).toFixed(2);
+    }
+    return { dist, avgTurns, xph: avgXph };
+  }
+  
+  // Processa todos os níveis com yield a cada 3 níveis pra não travar UI
+  return new Promise(resolve => {
+    const presentTbl = buildPresentTable(boxChangeTime);
+    const result = {};
+    let inc = 0;
+    
+    function processChunk() {
+      const end = Math.min(inc + 3, N_LEVELS);
+      for (; inc < end; inc++) {
+        const dmgs = [baseDmgs[0] + inc, baseDmgs[1] + inc, baseDmgs[2] + inc];
+        const levelSeed = (runSeed ^ (inc * 31337)) >>> 0;
+        result[inc] = simulateLevel(dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, N_SESSIONS, SESSION_SECONDS, presentTbl);
+        onProgress(inc + 1, N_LEVELS);
+      }
+      if (inc < N_LEVELS) setTimeout(processChunk, 0);
+      else resolve(result);
+    }
+    processChunk();
+  });
+}
+
+// ========== Cores ==========
+const LEVEL_COLORS = Array.from({length: N_LEVELS}, (_, i) => {
+  const t = i / (N_LEVELS - 1);
+  const r = Math.round(0x3B + t * (0xF5 - 0x3B));
+  const g = Math.round(0x82 + t * (0xA6 - 0x82));
+  const b = Math.round(0xF6 + t * (0x23 - 0xF6));
+  return `rgb(${r},${g},${b})`;
+});
+
+const $ = id => document.getElementById(id);
+const cbCharm = $('cb-charm'), cbCrit = $('cb-crit'), cbInt = $('cb-int'), cbVar = $('cb-var');
+const slider = $('sliderDmg'), sliderA = $('sliderA'), sliderB = $('sliderB');
+const lblDmg = $('lblDmg'), lblA = $('lblA'), lblB = $('lblB');
+const cfgLbl = $('cfgLabel'), status = $('simStatus');
+const loadingOverlay = $('loadingOverlay');
+const progressBar = $('progressBar');
+const loadingText = $('loadingText');
+const loadingSub = $('loadingSub');
+const container = document.querySelector('.container');
+
+let lastElapsed = null;
+
+function getFlags() {
+  return { charm: cbCharm.checked, crit: cbCrit.checked, intel: cbInt.checked, var: cbVar.checked };
+}
+function getCfgName(f) {
+  const k = (f.charm?'1':'0') + (f.crit?'1':'0') + (f.intel?'1':'0') + (f.var?'1':'0');
+  return (I18N[LANG].cfg && I18N[LANG].cfg[k]) || k;
+}
+function getInputs() {
+  return {
+    baseDmgs: [+$('dmg1').value || 500, +$('dmg2').value || 600, +$('dmg3').value || 1000],
+    charmDmg: +$('charmDmg').value || 500,
+    critBoost: +$('critBoost').value || 0,
+    mobHp: +$('mobHp').value || 8000,
+    mobXp: +$('mobXp').value || 10000,
+    boxSize: Math.max(0.1, parseFloat($('boxSize').value) || 8),
+    exitThreshold: Math.max(1, +$('exitThreshold').value || 3),
+    boxChangeTime: Math.max(0, parseFloat($('boxTime').value) || 6)
+  };
+}
+function allTurns(cache) {
+  const s = new Set();
+  Object.values(cache).forEach(r => Object.keys(r.dist).forEach(k => s.add(+k)));
+  return [...s].sort((a, b) => a - b);
+}
+function fmtN(n) {
+  if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return (n / 1e3).toFixed(0) + 'k';
+  return n.toFixed(0);
+}
+function fmtDelta(pct) {
+  if (Math.abs(pct) < 0.01) return '—';
+  return (pct > 0 ? '+' : '') + pct.toFixed(2) + '%';
+}
+
+let cache = null, compareChart = null, evolChart = null, curveChart = null;
+
+// ========== Loading helpers ==========
+function showLoading() {
+  loadingOverlay.classList.add('active');
+  container.classList.add('calculating');
+  loadingText.textContent = t('loading_text');
+  setProgress(0, N_LEVELS);
+}
+function hideLoading() {
+  loadingOverlay.classList.remove('active');
+  container.classList.remove('calculating');
+}
+function setProgress(done, total) {
+  const pct = total > 0 ? (done / total) * 100 : 0;
+  progressBar.style.width = pct.toFixed(1) + '%';
+  loadingSub.textContent = t('loading_progress')
+    .replace('{done}', done)
+    .replace('{total}', total);
+}
+
+// ========== Execução da simulação (paralela ou fallback inline) ==========
+function runSim() {
+  const inp = getInputs();
+  const flags = getFlags();
+  const critMult = flags.crit ? CRIT_BASE + inp.critBoost / 100 : CRIT_BASE;
+  const dec = LANG === 'pt' ? ',' : '.';
+  $('critBoostHint').textContent = (inp.critBoost / 100).toFixed(2).replace('.', dec);
+  $('critFinal').textContent = (CRIT_BASE + inp.critBoost / 100).toFixed(2).replace('.', dec);
+
+  status.textContent = t('status_simulating');
+  $('btnRun').disabled = true;
+  showLoading();
+
+  const t0 = performance.now();
+  const runSeed = (Math.random() * 0xFFFFFFFF) >>> 0;
+
+  // FALLBACK: se workers não disponíveis, usa simulação inline
+  if (!USE_WORKERS) {
+    runSimInline({
+      baseDmgs: inp.baseDmgs,
+      charmDmg: inp.charmDmg,
+      critMult,
+      mobHp: inp.mobHp,
+      mobXp: inp.mobXp,
+      boxSize: inp.boxSize,
+      exitThreshold: inp.exitThreshold,
+      boxChangeTime: inp.boxChangeTime,
+      flags,
+      runSeed
+    }, (done, total) => {
+      setProgress(done, total);
+    }).then(result => {
+      const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
+      lastElapsed = elapsed;
+      cache = result;
+      const totalHours = N_SESSIONS * SESSION_SECONDS / 3600 * N_LEVELS;
+      const locale = LANG === 'pt' ? 'pt-BR' : 'en-US';
+      status.textContent = t('status_done')
+        .replace('{n}', N_SESSIONS)
+        .replace('{h}', SESSION_SECONDS / 3600)
+        .replace('{total}', totalHours.toLocaleString(locale))
+        .replace('{elapsed}', elapsed);
+      $('btnRun').disabled = false;
+      hideLoading();
+      drawAll();
+    });
+    return;
+  }
+
+  // WORKERS: versão paralela original
+  createWorkerPool();
+  const buckets = partitionLevels(N_LEVELS, N_WORKERS);
+
+  const aggregated = {};
+  let levelsDone = 0;
+  let workersDone = 0;
+  let hadError = false;
+
+  const finalize = () => {
+    const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
+    lastElapsed = elapsed;
+    cache = aggregated;
+    const totalHours = N_SESSIONS * SESSION_SECONDS / 3600 * N_LEVELS;
+    const locale = LANG === 'pt' ? 'pt-BR' : 'en-US';
+    status.textContent = t('status_done')
+      .replace('{n}', N_SESSIONS)
+      .replace('{h}', SESSION_SECONDS / 3600)
+      .replace('{total}', totalHours.toLocaleString(locale))
+      .replace('{elapsed}', elapsed);
+    $('btnRun').disabled = false;
+    hideLoading();
+    drawAll();
+  };
+
+  workerPool.forEach((w, idx) => {
+    const myLevels = buckets[idx];
+    if (myLevels.length === 0) {
+      workersDone++;
+      if (workersDone === N_WORKERS && !hadError) finalize();
+      return;
+    }
+
+    w.onmessage = function(e) {
+      const msg = e.data;
+      if (msg.type === 'progress') {
+        levelsDone++;
+        setProgress(levelsDone, N_LEVELS);
+      } else if (msg.type === 'done') {
+        Object.assign(aggregated, msg.result);
+        workersDone++;
+        if (workersDone === N_WORKERS && !hadError) finalize();
+      }
+    };
+    w.onerror = function(err) {
+      if (hadError) return;
+      hadError = true;
+      console.error('Worker error:', err);
+      status.textContent = 'erro: ' + err.message;
+      $('btnRun').disabled = false;
+      hideLoading();
+    };
+
+    w.postMessage({
+      baseDmgs: inp.baseDmgs,
+      charmDmg: inp.charmDmg,
+      critMult,
+      mobHp: inp.mobHp,
+      mobXp: inp.mobXp,
+      boxSize: inp.boxSize,
+      exitThreshold: inp.exitThreshold,
+      boxChangeTime: inp.boxChangeTime,
+      flags,
+      runSeed,
+      levels: myLevels,
+      nSessions: N_SESSIONS,
+      sessionSeconds: SESSION_SECONDS
+    });
+  });
+}
+
+function drawMetrics() {
+  if (!cache) return;
+  const inc = +slider.value;
+  const cur = cache[inc], ref = cache[0];
+  $('metTurns').textContent = cur.avgTurns.toFixed(2);
+  $('metXph').textContent = fmtN(cur.xph);
+  const turnsDelta = ref.avgTurns > 0 ? ((ref.avgTurns - cur.avgTurns) / ref.avgTurns) * 100 : 0;
+  const xphDelta = ref.xph > 0 ? ((cur.xph - ref.xph) / ref.xph) * 100 : 0;
+  const absDiff = cur.xph - ref.xph;
+  const baseLbl = t('base_level');
+  const vsBase = t('vs_base');
+  $('metTurnsDelta').textContent = inc === 0 ? baseLbl :
+    (turnsDelta > 0.01 ? '-' + turnsDelta.toFixed(2) + '% ' + vsBase : vsBase);
+  $('metTurnsDelta').className = 'metric-delta ' + (inc > 0 && turnsDelta > 0.01 ? 'delta-pos' : 'delta-neu');
+  $('metXphDelta').textContent = inc === 0 ? baseLbl : fmtDelta(xphDelta) + ' ' + vsBase;
+  $('metXphDelta').className = 'metric-delta ' + (xphDelta > 0.01 ? 'delta-pos' : 'delta-neu');
+  $('metAbsDiff').textContent = inc === 0 ? '—' : (absDiff >= 0 ? '+' : '') + fmtN(absDiff);
+  const gain100h = absDiff * 100;
+  $('metGain100').textContent = gain100h >= 0 ? '+' + fmtN(gain100h) : fmtN(gain100h);
+}
+
+function drawCompare() {
+  if (!cache) return;
+  const a = +sliderA.value, b = +sliderB.value;
+  lblA.textContent = '+' + a;
+  lblB.textContent = '+' + b;
+  const turns = allTurns(cache);
+  const dA = cache[a].dist, dB = cache[b].dist;
+  if (compareChart) compareChart.destroy();
+  compareChart = new Chart($('compareChart'), {
+    type: 'bar',
+    data: {
+      labels: turns.map(t => t + ' t'),
+      datasets: [
+        { label: '+' + a, data: turns.map(t => dA[t] || 0),
+          backgroundColor: 'rgba(59,130,246,0.7)', borderColor: '#3B82F6',
+          borderWidth: 1, borderRadius: 4 },
+        { label: '+' + b, data: turns.map(t => dB[t] || 0),
+          backgroundColor: 'rgba(245,166,35,0.7)', borderColor: '#F59E0B',
+          borderWidth: 1, borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { position: 'top', labels: { color: '#8BA4C2', font: { size: 11 }, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(139,164,194,0.1)' }, ticks: { color: '#8BA4C2', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(139,164,194,0.1)' }, ticks: { color: '#8BA4C2', font: { size: 11 }, callback: v => v + '%' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function drawEvol() {
+  if (!cache) return;
+  const levels = Array.from({length: N_LEVELS}, (_, i) => i);
+  const turnsData = levels.map(i => +cache[i].avgTurns.toFixed(3));
+  const xphData = levels.map(i => Math.round(cache[i].xph));
+  if (evolChart) evolChart.destroy();
+  evolChart = new Chart($('evolChart'), {
+    type: 'line',
+    data: {
+      labels: levels.map(i => '+' + i),
+      datasets: [
+        { label: t('chart_turns_label'), data: turnsData, borderColor: '#3B82F6', backgroundColor: '#3B82F6',
+          yAxisID: 'y', tension: 0.25, pointRadius: 3, borderWidth: 2 },
+        { label: t('chart_xph_label'), data: xphData, borderColor: '#10B981', backgroundColor: '#10B981',
+          yAxisID: 'y1', tension: 0.25, pointRadius: 3, borderWidth: 2, borderDash: [4, 3] }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { position: 'top', labels: { color: '#8BA4C2', font: { size: 11 }, boxWidth: 10, boxHeight: 10 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.dataset.label === t('chart_xph_label') ? ' ' + t('chart_xph_label') + ': ' + fmtN(ctx.parsed.y) : ' ' + t('chart_turns_axis') + ': ' + ctx.parsed.y.toFixed(2)
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(139,164,194,0.1)' }, ticks: { color: '#8BA4C2', font: { size: 10 } } },
+        y: { position: 'left', grid: { color: 'rgba(139,164,194,0.1)' },
+          ticks: { color: '#3B82F6', font: { size: 11 }, callback: v => v.toFixed(1) },
+          title: { display: true, text: t('chart_turns_axis'), color: '#3B82F6', font: { size: 11 } } },
+        y1: { position: 'right', grid: { display: false },
+          ticks: { color: '#10B981', font: { size: 11 }, callback: v => fmtN(v) },
+          title: { display: true, text: t('chart_xph_label'), color: '#10B981', font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function drawCurve() {
+  if (!cache) return;
+  const turns = allTurns(cache);
+  const items = [];
+  for (let i = 0; i < N_LEVELS; i += 8) {
+    items.push('<span class="leg-item"><span class="leg-swatch" style="background:' + LEVEL_COLORS[i] + '"></span>+' + i + '</span>');
+  }
+  $('legendCurve').innerHTML = items.join('');
+  if (curveChart) curveChart.destroy();
+  const datasets = Array.from({length: N_LEVELS}, (_, i) => ({
+    label: '+' + i,
+    data: turns.map(t => cache[i].dist[t] || 0),
+    borderColor: LEVEL_COLORS[i],
+    backgroundColor: 'transparent',
+    borderWidth: i % 10 === 0 ? 2.5 : 1.0,
+    borderDash: i % 10 === 0 ? [] : [4, 3],
+    pointRadius: 0,
+    tension: 0.4
+  }));
+  curveChart = new Chart($('curveChart'), {
+    type: 'line',
+    data: { labels: turns.map(String), datasets: datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(139,164,194,0.1)' },
+          ticks: { color: '#8BA4C2', font: { size: 11 } },
+          title: { display: true, text: t('chart_turns_per_box'), color: '#8BA4C2', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(139,164,194,0.1)' },
+          ticks: { color: '#8BA4C2', font: { size: 11 }, callback: v => v + '%' },
+          beginAtZero: true,
+          title: { display: true, text: t('chart_pct_boxes'), color: '#8BA4C2', font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function drawTable() {
+  if (!cache) return;
+  const rows = [0, 5, 10, 15, 20, 25, 30, 35, 40];
+  const ref = cache[0];
+  let html = '<thead><tr>' +
+    '<th>' + t('table_level') + '</th>' +
+    '<th>' + t('table_turns') + '</th>' +
+    '<th>' + t('table_xph') + '</th>' +
+    '<th>' + t('table_delta') + '</th>' +
+    '<th>' + t('table_abs_diff') + '</th>' +
+    '<th>' + t('table_gain') + '</th>' +
+    '</tr></thead><tbody>';
+  rows.forEach(i => {
+    const r = cache[i];
+    if (!r) return;
+    const deltaPct = ref.xph > 0 ? ((r.xph - ref.xph) / ref.xph) * 100 : 0;
+    const absDiff = r.xph - ref.xph;
+    const gain100 = absDiff * 100;
+    const cls = i > 0 && deltaPct > 0.01 ? 'highlight' : '';
+    html += '<tr class="' + cls + '">' +
+      '<td>+' + i + '</td>' +
+      '<td>' + r.avgTurns.toFixed(2) + '</td>' +
+      '<td>' + fmtN(r.xph) + '</td>' +
+      '<td>' + (i === 0 ? '—' : fmtDelta(deltaPct)) + '</td>' +
+      '<td>' + (i === 0 ? '—' : (absDiff >= 0 ? '+' : '') + fmtN(absDiff)) + '</td>' +
+      '<td>' + (i === 0 ? '—' : (gain100 >= 0 ? '+' : '') + fmtN(gain100)) + '</td>' +
+      '</tr>';
+  });
+  html += '</tbody>';
+  $('resumeTable').innerHTML = html;
+}
+
+function drawAll() {
+  drawMetrics();
+  drawCompare();
+  drawEvol();
+  drawCurve();
+  drawTable();
+}
+
+function updateUI() {
+  const f = getFlags();
+  cfgLbl.textContent = getCfgName(f);
+  ['charm', 'crit', 'int', 'var'].forEach(id => {
+    $('wrap-' + id).classList.toggle('active', $('cb-' + id).checked);
+  });
+  lblDmg.textContent = '+' + slider.value;
+}
+
+// ========== Debounce para inputs numéricos ==========
+// Evita disparar simulação a cada tecla quando o usuário tá digitando rápido
+let inputDebounceTimer = null;
+function debouncedRun() {
+  clearTimeout(inputDebounceTimer);
+  inputDebounceTimer = setTimeout(runSim, 250);
+}
+
+[cbCharm, cbCrit, cbInt, cbVar].forEach(cb => {
+  cb.addEventListener('change', () => { updateUI(); runSim(); });
+});
+['dmg1', 'dmg2', 'dmg3', 'charmDmg', 'critBoost', 'mobHp', 'mobXp', 'boxSize', 'exitThreshold', 'boxTime'].forEach(id => {
+  $(id).addEventListener('change', debouncedRun);
+});
+slider.addEventListener('input', () => { updateUI(); drawMetrics(); });
+sliderA.addEventListener('input', drawCompare);
+sliderB.addEventListener('input', drawCompare);
+$('btnRun').addEventListener('click', runSim);
+
+// ========== sistema de compartilhamento por URL ==========
+const URL_KEYS = {
+  d1: 'dmg1', d2: 'dmg2', d3: 'dmg3',
+  cd: 'charmDmg', cb: 'critBoost',
+  mh: 'mobHp', mx: 'mobXp',
+  bs: 'boxSize', et: 'exitThreshold', bt: 'boxTime',
+  lv: 'sliderDmg', la: 'sliderA', lb: 'sliderB'
+};
+
+function serializeState() {
+  const params = new URLSearchParams();
+  Object.entries(URL_KEYS).forEach(([short, id]) => {
+    const el = $(id);
+    if (el) params.set(short, el.value);
+  });
+  let flags = '';
+  flags += cbCharm.checked ? '1' : '0';
+  flags += cbCrit.checked ? '1' : '0';
+  flags += cbInt.checked ? '1' : '0';
+  flags += cbVar.checked ? '1' : '0';
+  params.set('f', flags);
+  params.set('l', LANG);
+  return params.toString();
+}
+
+function deserializeState() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.toString() === '') return false;
+  Object.entries(URL_KEYS).forEach(([short, id]) => {
+    if (params.has(short)) {
+      const el = $(id);
+      if (el) el.value = params.get(short);
+    }
+  });
+  if (params.has('f')) {
+    const flags = params.get('f');
+    cbCharm.checked = flags[0] === '1';
+    cbCrit.checked = flags[1] === '1';
+    cbInt.checked = flags[2] === '1';
+    cbVar.checked = flags[3] === '1';
+  }
+  if (params.has('l')) {
+    const lang = params.get('l');
+    if (lang === 'pt' || lang === 'en') LANG = lang;
+  }
+  return true;
+}
+
+function copyShareLink() {
+  const qs = serializeState();
+  const base = window.location.origin + window.location.pathname;
+  const fullUrl = base + '?' + qs;
+  const btn = $('btnShare');
+
+  const showCopied = () => {
+    btn.textContent = t('btn_share_copied');
+    setTimeout(() => { btn.textContent = t('btn_share'); }, 1800);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(fullUrl).then(showCopied).catch(() => {
+      fallbackCopy(fullUrl, showCopied);
+    });
+  } else {
+    fallbackCopy(fullUrl, showCopied);
+  }
+}
+
+function fallbackCopy(text, onDone) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); onDone(); }
+  catch (e) { prompt('Copie a URL:', text); }
+  document.body.removeChild(ta);
+}
+
+$('btnShare').addEventListener('click', copyShareLink);
+
+// ========== guia ==========
+const GUIDE = {
+  pt: `
+<h2>Guia — Calculadora de XP/h</h2>
+
+<h3>O que é</h3>
+<p>Esta é uma calculadora interativa que simula hunts de Tibia para responder uma pergunta específica: <strong>qualquer aumento de dano, por menor que seja, traz ganho real de XP/hora?</strong> A resposta curta é sim — e a calculadora existe para demonstrar isso de forma que ninguém possa contestar.</p>
+<p>Por baixo do capô, a cada recálculo são simuladas cerca de <strong>24.600 horas de hunt</strong> — 41 níveis de dano diferentes (de +0 até +40), cada um rodado em 60 sessões independentes de 10 horas. Isso dá dados suficientes para o ganho real emergir naturalmente do ruído aleatório, sem truques estatísticos. Cada clique em "recalcular" gera novas seeds aleatórias, então você pode rodar várias vezes e confirmar que o padrão crescente se mantém em qualquer execução.</p>
+
+<h3>O problema que ela resolve</h3>
+<p>Existe um argumento comum na comunidade que diz: "Tibia é um jogo de turnos. Cada box leva um número inteiro de turnos para morrer. Se seu dano extra não for suficiente para matar a box em um turno a menos, ele não muda nada." Esse argumento parece sólido à primeira vista, mas tem um erro central: ele assume <strong>dano fixo</strong>.</p>
+<p>Num cenário artificial onde você dá exatamente 500 de dano todo turno, sim, subir pra 501 pode não fazer diferença — você ainda precisa do mesmo número de turnos. Mas o jogo real não funciona assim. Há crítico que multiplica o dano. Há charm que soma dano individual em alvos aleatórios. Há variação natural que faz cada ataque cair entre ±20% do valor base. Tamanho de box que varia entre spawns. Todas essas fontes de variabilidade criam um espectro contínuo de resultados possíveis — e dentro desse espectro, cada ponto a mais de dano desloca a distribuição para a direita.</p>
+
+<h3>Os parâmetros — o que cada um representa</h3>
+
+<h4>Parâmetros do mob e da box</h4>
+<p><strong>HP do mob</strong> (padrão 8.000) — total de vida de cada mob individual. Mais HP significa mais turnos para matar.</p>
+<p><strong>XP do mob</strong> (padrão 10.000) — quanta experiência cada mob morto dá. Afeta apenas valores absolutos; ganhos percentuais permanecem os mesmos.</p>
+<p><strong>Tamanho da box</strong> (padrão 8) — quantos mobs spawnam juntos. <strong>Aceita decimais</strong>: digitando 8.5, cada box sorteará entre 8 mobs (50% chance) ou 9 mobs (50% chance). Para 8.7, fica 30% de chance de ser 8 e 70% de ser 9. Útil para simular hunts onde o tamanho varia.</p>
+<p><strong>Ponto de saída</strong> (padrão 3) — define com quantos mobs vivos a inteligência decide arrastar para a próxima box. Com valor 3, sai quando restam ≤3 vivos. Com valor 1, quase nunca arrasta. Com valor 5, sai mais cedo.</p>
+<p><strong>Tempo entre box</strong> (padrão 6 segundos) — esse parâmetro tem dois significados conforme o modo:</p>
+<ul>
+<li><strong>Sem inteligência:</strong> tempo gasto caminhando até a próxima box após limpar a atual. Durante esse tempo o jogador não ataca.</li>
+<li><strong>Com inteligência:</strong> duração total do arraste, que também é a duração ao longo da qual os mobs novos vão aparecendo na próxima box. Se você colocar 10s, os 8 (ou mais) mobs novos aparecem distribuídos ao longo desses 10 segundos, e o jogador continua atacando durante todo esse período.</li>
+</ul>
+
+<h4>Parâmetros de dano</h4>
+<p><strong>Dano ataque 1, 2 e 3</strong> (padrões 500, 600, 1000) — o ciclo de ataques. Tibia tem spells com cooldowns diferentes, então a cada 3 turnos você usa uma spell diferente. O slider de bônus aumenta os três valores igualmente.</p>
+<p><strong>Dano do charm</strong> (padrão 500) — quando o charm ativa em um mob, esse é o dano extra que ele sofre. É <strong>individual</strong>: ativa em mobs específicos, não em todos.</p>
+<p><strong>Aumento crítico (%)</strong> (padrão 44) — base é 1,72x. Esse input adiciona %. O padrão de 44% resulta em 2,16x.</p>
+
+<h4>Configurações ativas (checkboxes)</h4>
+<p><strong>Charm</strong> — quando marcado, cada mob tem 10% de chance por turno de sofrer dano extra do charm. Cria dispersão nos HPs.</p>
+<p><strong>Crítico aumentado</strong> — quando marcado, usa 2,16x em vez do base 1,72x.</p>
+<p><strong>Inteligência</strong> — quando marcado, o jogador arrasta para a próxima box ao atingir o ponto de saída. Quando desmarcado, fica até matar o último mob.</p>
+<p><strong>Dano variável (±20%)</strong> — cada ataque tem variação. Mecânica mais importante para o argumento: elimina breakpoints duros.</p>
+
+<h3>Como os parâmetros interagem</h3>
+<p>As variáveis não somam, elas se potencializam.</p>
+<p><strong>Crítico sozinho</strong> tem efeito modesto: amplifica em 10% dos turnos, mas atinge todos da box ao mesmo tempo, criando pouca dispersão.</p>
+<p><strong>Charm sozinho</strong> dispersa HPs, mas sem inteligência o jogador ainda espera o último mob.</p>
+<p><strong>Inteligência sozinha</strong> tem efeito quase zero: sem dispersão nos HPs, todos morrem juntos no mesmo turno.</p>
+<p><strong>Charm + Inteligência</strong> é onde a coisa começa: charm cria dispersão, intel captura o benefício. Ganho de +4-5% vs baseline.</p>
+<p><strong>Tudo junto (Charm + Crit + Int + Var)</strong> é o cenário mais próximo do jogo real. O ganho de +0 para +40 fica em torno de +5-8%, e mais importante: visível em praticamente todo incremento de +1, refutando o argumento dos breakpoints.</p>
+
+<h3>O que a calculadora mostra</h3>
+<p><strong>Métricas do nível selecionado</strong> — quatro cards que atualizam em tempo real conforme o slider de nível.</p>
+<p><strong>Comparação de dois níveis</strong> — dois sliders independentes para sobrepor distribuições. Padrão: +0 vs +40.</p>
+<p><strong>Evolução dos turnos e XP/h</strong> — gráfico mais importante: duas linhas, turnos médios (descendente) e XP/h (crescente), 41 níveis.</p>
+<p><strong>Curvas de distribuição</strong> — todas as 41 distribuições sobrepostas, mostrando o deslocamento.</p>
+<p><strong>Tabela resumo</strong> — números brutos a cada +5 de dano: turnos, XP/h, % de ganho, diferença absoluta e ganho em 100h.</p>
+
+<h3>Como usar para defender o argumento</h3>
+<p>Configure o simulador no cenário que representa sua hunt real, ative as variáveis presentes no jogo, mova o slider e observe as métricas subindo. Aperte <code>copiar link</code> e mande para o cético — ele vai abrir o simulador exatamente no estado que você configurou, impossível contestar com "você configurou diferente".</p>
+<p>Aperte <code>recalcular</code> várias vezes para mostrar que o padrão crescente é robusto: os números absolutos flutuam um pouco (aleatoriedade), mas a curva de XP/h sempre sobe.</p>
+<p>O argumento dos breakpoints só se sustenta quando você elimina artificialmente a variabilidade natural do jogo. A calculadora mostra a realidade: qualquer +1 de dano empurra a distribuição de resultados levemente para a direita, e o efeito acumulado ao longo de uma hunt é real, mensurável e consistente.</p>
+`,
+  en: `
+<h2>Guide — XP/h Calculator</h2>
+
+<h3>What it is</h3>
+<p>This is an interactive calculator that simulates Tibia hunts to answer one specific question: <strong>does any increase in damage, no matter how small, translate into real XP/hour gains?</strong> The short answer is yes — and this calculator exists to demonstrate it in a way nobody can dispute.</p>
+<p>Under the hood, each recalculation simulates roughly <strong>24,600 hours of hunting</strong> — 41 different damage levels (from +0 to +40), each run across 60 independent sessions of 10 hours. That provides enough data for the real gain to emerge naturally from random noise, without statistical tricks. Each click on "recalculate" generates new random seeds, so you can run several times and confirm the rising pattern holds across any execution.</p>
+
+<h3>The problem it solves</h3>
+<p>There's a common community argument that goes: "Tibia is a turn-based game. Each box takes an integer number of turns to die. If your extra damage isn't enough to kill the box in one turn less, it changes nothing." This seems solid at first, but has a central flaw: it assumes <strong>fixed damage</strong>.</p>
+<p>In an artificial scenario where you deal exactly 500 damage every turn, yes, going to 501 may not matter — you still need the same number of turns. But the real game doesn't work that way. There's critical hit that multiplies damage. There's charm that adds individual damage to random targets. There's natural variance making each attack land within ±20% of base. Box sizes that vary between spawns. All these sources of variability create a continuous spectrum of possible outcomes — and within that spectrum, each extra damage point shifts the distribution to the right.</p>
+
+<h3>The parameters — what each one represents</h3>
+
+<h4>Mob and box parameters</h4>
+<p><strong>Mob HP</strong> (default 8,000) — total life of each individual mob. More HP means more turns to kill.</p>
+<p><strong>Mob XP</strong> (default 10,000) — experience per killed mob. Only affects absolute values; percentage gains stay the same.</p>
+<p><strong>Box size</strong> (default 8) — how many mobs spawn together. <strong>Accepts decimals</strong>: typing 8.5, each box rolls between 8 mobs (50% chance) or 9 mobs (50% chance). For 8.7, it's 30% chance of being 8 and 70% of being 9. Useful to simulate hunts where box size varies.</p>
+<p><strong>Exit threshold</strong> (default 3) — defines with how many alive mobs intelligence decides to drag to the next box. With 3, leaves when ≤3 remain alive. With 1, almost never drags. With 5, leaves earlier.</p>
+<p><strong>Box change time</strong> (default 6 seconds) — this parameter has two meanings depending on the mode:</p>
+<ul>
+<li><strong>Without intelligence:</strong> time spent walking to the next box after clearing the current one. The player doesn't attack during this time.</li>
+<li><strong>With intelligence:</strong> total drag duration, which is also the duration over which new mobs will appear in the next box. If you set 10s, the 8 (or more) new mobs appear distributed across those 10 seconds, and the player keeps attacking throughout that period.</li>
+</ul>
+
+<h4>Damage parameters</h4>
+<p><strong>Attack damage 1, 2 and 3</strong> (defaults 500, 600, 1000) — the attack cycle. Tibia has spells with different cooldowns, so every 3 turns you use a different spell. The bonus slider raises all three values equally.</p>
+<p><strong>Charm damage</strong> (default 500) — when charm procs on a mob, this is the extra damage. It's <strong>individual</strong>: triggers on specific mobs, not on all.</p>
+<p><strong>Crit boost (%)</strong> (default 44) — base is 1.72x. This input adds %. The default 44% results in 2.16x.</p>
+
+<h4>Active configuration (checkboxes)</h4>
+<p><strong>Charm</strong> — when checked, each mob has 10% chance per turn to take extra charm damage. Creates HP dispersion.</p>
+<p><strong>Boosted crit</strong> — when checked, uses 2.16x instead of base 1.72x.</p>
+<p><strong>Intelligence</strong> — when checked, the player drags to the next box upon reaching exit threshold. When unchecked, stays until the last mob dies.</p>
+<p><strong>Damage variance (±20%)</strong> — each attack varies. Most important mechanic for the argument: eliminates hard breakpoints.</p>
+
+<h3>How the parameters interact</h3>
+<p>Variables don't add, they potentiate each other.</p>
+<p><strong>Crit alone</strong> has modest effect: amplifies on 10% of turns but hits all box mobs simultaneously, creating little dispersion.</p>
+<p><strong>Charm alone</strong> disperses HPs, but without intelligence the player still waits for the last mob.</p>
+<p><strong>Intelligence alone</strong> has near-zero effect: without HP dispersion, all mobs die together on the same turn.</p>
+<p><strong>Charm + Intelligence</strong> is where things start: charm creates dispersion, intel captures the benefit. Gain of +4-5% vs baseline.</p>
+<p><strong>Everything together (Charm + Crit + Int + Var)</strong> is the scenario closest to real game. Gain from +0 to +40 sits around +5-8%, and more importantly: visible across practically every +1 increment, refuting the breakpoints argument.</p>
+
+<h3>What the calculator displays</h3>
+<p><strong>Metrics for selected level</strong> — four cards that update in real time as you move the level slider.</p>
+<p><strong>Two-level comparison</strong> — two independent sliders to overlay distributions. Default: +0 vs +40.</p>
+<p><strong>Turns and XP/h evolution</strong> — most important graph: two lines, average turns (descending) and XP/h (rising), across 41 levels.</p>
+<p><strong>Distribution curves</strong> — all 41 distributions overlaid, showing the shift.</p>
+<p><strong>Summary table</strong> — raw numbers every +5 damage: turns, XP/h, gain %, absolute difference and gain over 100h.</p>
+
+<h3>How to use it to defend the argument</h3>
+<p>Configure the simulator to match your real hunt scenario, enable the variables active in your game, move the slider and watch metrics climb. Hit <code>copy link</code> and send it to the skeptic — they'll open the simulator in the exact state you configured, impossible to dispute with "you set it up differently".</p>
+<p>Hit <code>recalculate</code> several times to show the rising pattern is robust: absolute numbers fluctuate slightly (randomness), but the XP/h curve always rises.</p>
+<p>The breakpoint argument only stands when you artificially strip out the game's natural variability. The calculator shows the reality: any +1 damage nudges the outcome distribution slightly to the right, and the accumulated effect over a hunt is real, measurable, and consistent.</p>
+`
+};
+
+function openGuide() {
+  $('guideContent').innerHTML = GUIDE[LANG];
+  $('guideModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeGuide() {
+  $('guideModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+$('btnGuide').addEventListener('click', openGuide);
+$('closeModal').addEventListener('click', closeGuide);
+$('guideModal').addEventListener('click', (e) => {
+  if (e.target === $('guideModal')) closeGuide();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && $('guideModal').classList.contains('open')) closeGuide();
+});
+
+// ===== inicialização =====
+const hasUrlState = deserializeState();
+if (hasUrlState) applyI18n();
+updateUI();
+runSim();
+</script>
+</body>
+</html>
