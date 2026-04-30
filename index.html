@@ -677,6 +677,15 @@ input[type="range"] { accent-color: var(--accent); }
       <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_extracted">parâmetros extraídos do log</h3>
       <div id="valExtracted" class="val-grid"></div>
 
+      <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_histogram">distribuição de hits por turno no log</h3>
+      <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5" data-i18n="val_histogram_desc">
+        Histograma dos hits por turno detectados no log. As linhas verticais marcam o ponto de saída (vermelho, p5)
+        e o tamanho da box (verde, p95) — onde a calculadora estima que estão os limites da box.
+      </p>
+      <div class="chart-container">
+        <div style="position:relative;height:240px"><canvas id="valHistogram"></canvas></div>
+      </div>
+
       <div style="display:flex;gap:10px;align-items:center;margin:18px 0 10px;flex-wrap:wrap">
         <h3 style="font-size:14px;font-weight:500;margin:0;color:var(--accent)" data-i18n="val_h_compare">comparação real vs simulado</h3>
         <button id="btnRunComparison" style="background:var(--accent)" data-i18n="val_run_compare">rodar simulação com esses parâmetros</button>
@@ -871,6 +880,13 @@ const I18N = {
     val_status_no_data: 'log inválido — verifique se é um server log do Tibia',
     val_placeholder: 'Cole aqui o conteúdo do server log...',
     val_h_extracted: 'parâmetros extraídos do log',
+    val_h_histogram: 'distribuição de hits por turno no log',
+    val_histogram_desc: 'Histograma dos hits por turno detectados no log. As linhas verticais marcam o ponto de saída (vermelho, p5) e o tamanho da box (verde, p95) — onde a calculadora estima que estão os limites da box.',
+    val_histogram_label: 'turnos observados',
+    val_histogram_x: 'hits por turno (÷2 se paladino)',
+    val_histogram_y: 'frequência (qtd de turnos)',
+    val_histogram_exit: 'saída (p5)',
+    val_histogram_box: 'box (p95)',
     val_h_compare: 'comparação real vs simulado',
     val_run_compare: 'rodar simulação com esses parâmetros',
     val_card_duration: 'duração da hunt',
@@ -1046,6 +1062,13 @@ const I18N = {
     val_status_no_data: 'invalid log — make sure it\'s a Tibia server log',
     val_placeholder: 'Paste server log contents here...',
     val_h_extracted: 'parameters extracted from log',
+    val_h_histogram: 'distribution of hits per turn in log',
+    val_histogram_desc: 'Histogram of hits per turn detected in the log. Vertical lines mark the exit threshold (red, p5) and the box size (green, p95) — where the calculator estimates the box boundaries are.',
+    val_histogram_label: 'observed turns',
+    val_histogram_x: 'hits per turn (÷2 if paladin)',
+    val_histogram_y: 'frequency (turn count)',
+    val_histogram_exit: 'exit (p5)',
+    val_histogram_box: 'box (p95)',
     val_h_compare: 'real vs simulated comparison',
     val_run_compare: 'run simulation with these parameters',
     val_card_duration: 'hunt duration',
@@ -1206,6 +1229,7 @@ function applyI18n() {
   const valModal = document.getElementById('validatorModal');
   if (valModal && valModal.classList.contains('open') && typeof lastValidatorData !== 'undefined' && lastValidatorData) {
     if (typeof renderValidatorExtracted === 'function') renderValidatorExtracted(lastValidatorData);
+    if (typeof renderValidatorHistogram === 'function') renderValidatorHistogram(lastValidatorData);
   }
 }
 
@@ -2964,6 +2988,110 @@ function renderValidatorExtracted(data) {
   }
 }
 
+// Histograma dos hits/turno com linhas verticais marcando p5 (exit) e p95 (box size)
+let valHistogramChart = null;
+
+function renderValidatorHistogram(data) {
+  const hits = data.hitsPerTurn || [];
+  if (hits.length === 0) return;
+
+  // Construir histograma: contagem de cada valor de hits/turno
+  const counts = {};
+  let maxHit = 0;
+  for (const h of hits) {
+    counts[h] = (counts[h] || 0) + 1;
+    if (h > maxHit) maxHit = h;
+  }
+
+  // Eixo X: 0 até maxHit + 1 (pra dar espaço visual após a maior barra)
+  const xMax = maxHit + 1;
+  const labels = [];
+  const dataArr = [];
+  for (let i = 0; i <= xMax; i++) {
+    labels.push(i);
+    dataArr.push(counts[i] || 0);
+  }
+
+  // Plugin que desenha as 2 linhas verticais (p5 vermelho, p95 verde)
+  // O plugin precisa converter o valor X (em "hits") pra coordenada de pixel.
+  const verticalLinesPlugin = {
+    id: 'verticalLines',
+    afterDatasetsDraw(chart) {
+      const ctx = chart.ctx;
+      const xScale = chart.scales.x;
+      const yScale = chart.scales.y;
+
+      // Desenha uma linha vertical em x=value com cor + label
+      const drawLine = (value, color, label) => {
+        // xScale.getPixelForValue funciona pra category scale também (já que labels são 0..xMax)
+        const xPx = xScale.getPixelForValue(value);
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 4]);
+        ctx.moveTo(xPx, yScale.top);
+        ctx.lineTo(xPx, yScale.bottom);
+        ctx.stroke();
+        // Label na parte de cima
+        ctx.fillStyle = color;
+        ctx.font = '500 11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(label + ' = ' + value, xPx, yScale.top - 4);
+        ctx.restore();
+      };
+
+      drawLine(data.exitP5, '#EF4444', t('val_histogram_exit'));
+      drawLine(data.boxSizeP95, '#10B981', t('val_histogram_box'));
+    }
+  };
+
+  if (valHistogramChart) valHistogramChart.destroy();
+  valHistogramChart = new Chart($('valHistogram'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: t('val_histogram_label'),
+        data: dataArr,
+        backgroundColor: 'rgba(59, 130, 246, 0.5)',
+        borderColor: '#3B82F6',
+        borderWidth: 1,
+        borderRadius: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      animation: false,
+      // Margem superior pra caber os labels das linhas verticais
+      layout: { padding: { top: 18 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: items => (items[0].label) + ' ' + t('val_histogram_x').split('(')[0].trim(),
+            label: ctx => ' ' + ctx.parsed.y + ' ' + t('val_histogram_label')
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(139,164,194,0.1)' },
+          ticks: { color: '#8BA4C2', font: { size: 11 } },
+          title: { display: true, text: t('val_histogram_x'), color: '#8BA4C2', font: { size: 11 } }
+        },
+        y: {
+          grid: { color: 'rgba(139,164,194,0.1)' },
+          ticks: { color: '#8BA4C2', font: { size: 11 } },
+          beginAtZero: true,
+          title: { display: true, text: t('val_histogram_y'), color: '#8BA4C2', font: { size: 11 } }
+        }
+      }
+    },
+    plugins: [verticalLinesPlugin]
+  });
+}
+
 function runValidatorComparison(data) {
   // Aplica os parâmetros do log na calculadora (sem sobrescrever os campos visuais)
   // e roda a simulação com FLAGS forçadas pra refletir o que o log mostra
@@ -3151,6 +3279,7 @@ $('btnAnalyzeLog').addEventListener('click', () => {
     }
     lastValidatorData = data;
     renderValidatorExtracted(data);
+    renderValidatorHistogram(data);
     $('valResults').style.display = 'block';
     $('valComparison').innerHTML = '';
     $('valStatus').textContent = t('val_status_analyzed').replace('{n}', data.eventCount);
