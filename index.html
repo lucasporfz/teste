@@ -438,6 +438,86 @@ input[type="range"] { accent-color: var(--accent); }
 }
 .modal-log { max-width: 1100px; }
 
+/* ====== Validador ====== */
+.val-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.val-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.val-card {
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+}
+.val-card-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.val-card-value {
+  font-size: 18px;
+  color: var(--text);
+  font-weight: 500;
+  font-family: 'Menlo', 'Consolas', monospace;
+}
+.val-card-sub {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+.val-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.val-compare-table th, .val-compare-table td {
+  padding: 10px 14px;
+  text-align: right;
+  border-bottom: 0.5px solid var(--border);
+}
+.val-compare-table th:first-child, .val-compare-table td:first-child {
+  text-align: left;
+  color: var(--text-muted);
+}
+.val-compare-table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.val-compare-table .real-col { color: var(--blue); font-weight: 500; font-family: 'Menlo', monospace; }
+.val-compare-table .sim-col { color: var(--accent); font-weight: 500; font-family: 'Menlo', monospace; }
+.val-compare-table .err-good { color: var(--accent); font-weight: 500; }
+.val-compare-table .err-warn { color: var(--amber); font-weight: 500; }
+.val-compare-table .err-bad { color: #EF4444; font-weight: 500; }
+.val-verdict {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.val-verdict-icon { font-size: 28px; }
+.val-verdict.ok { background: rgba(0, 196, 154, 0.15); border: 0.5px solid var(--accent); color: var(--text); }
+.val-verdict.warn { background: rgba(245, 158, 11, 0.15); border: 0.5px solid var(--amber); color: var(--text); }
+.val-verdict.bad { background: rgba(239, 68, 68, 0.15); border: 0.5px solid #EF4444; color: var(--text); }
+
 /* ====== Loading Overlay ====== */
 .loading-overlay {
   position: absolute;
@@ -523,6 +603,7 @@ input[type="range"] { accent-color: var(--accent); }
   <h1 data-i18n="title">Simulador — Dano e XP/h em hunts de Tibia</h1>
   <div class="header-actions">
     <button id="btnGuide" class="guide-btn" data-i18n="btn_guide">guia</button>
+    <button id="btnValidator" class="guide-btn" data-i18n="btn_validator" style="border-color:var(--blue);color:var(--blue)">validador</button>
     <div class="lang-toggle">
       <button id="langPt" class="active">PT</button>
       <button id="langEn">EN</button>
@@ -565,6 +646,45 @@ input[type="range"] { accent-color: var(--accent); }
 
     <div class="log-meta" id="logMeta"></div>
     <div class="log-table-wrap" id="logTableWrap"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="validatorModal">
+  <div class="modal modal-log">
+    <button class="modal-close" id="closeValidatorModal" aria-label="Fechar">×</button>
+    <h2 style="font-size:20px;font-weight:500;margin:0 0 8px" data-i18n="val_title">Validador — comparar calculadora com hunt real</h2>
+    <p style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin:0 0 16px" data-i18n="val_desc">
+      Cole o conteúdo do <strong>server log</strong> de uma hunt real do Tibia. A ferramenta extrai automaticamente
+      os parâmetros (XP/h, dano, taxa de charm, tamanho da box) e compara com o que a calculadora prevê com os
+      mesmos parâmetros. Se os números baterem dentro de uma margem razoável, o modelo está validado empiricamente.
+    </p>
+
+    <div class="val-controls">
+      <input type="file" id="valFileInput" accept=".txt,.log" style="display:none">
+      <button id="btnLoadFile" style="background:var(--blue);color:#fff" data-i18n="val_load_file">abrir arquivo .txt</button>
+      <label class="cb-wrap" id="wrap-paladin">
+        <input type="checkbox" id="cb-paladin">
+        <span data-i18n="val_paladin">paladino (2x atk/turno)</span>
+      </label>
+      <button id="btnAnalyzeLog" data-i18n="val_analyze">analisar log</button>
+      <span id="valStatus" class="sim-status" data-i18n="val_status_ready">cole o log abaixo ou abra um arquivo</span>
+    </div>
+
+    <textarea id="valLogInput" data-i18n-placeholder="val_placeholder"
+      placeholder="Cole aqui o conteúdo do server log..."
+      style="width:100%;height:120px;background:var(--bg-surface);border:0.5px solid var(--border);border-radius:6px;padding:10px;color:var(--text);font-family:'Menlo','Consolas',monospace;font-size:11px;resize:vertical;margin-bottom:16px"></textarea>
+
+    <div id="valResults" style="display:none">
+      <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_extracted">parâmetros extraídos do log</h3>
+      <div id="valExtracted" class="val-grid"></div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin:18px 0 10px;flex-wrap:wrap">
+        <h3 style="font-size:14px;font-weight:500;margin:0;color:var(--accent)" data-i18n="val_h_compare">comparação real vs simulado</h3>
+        <button id="btnRunComparison" style="background:var(--accent)" data-i18n="val_run_compare">rodar simulação com esses parâmetros</button>
+        <span id="valCompareStatus" class="sim-status"></span>
+      </div>
+      <div id="valComparison"></div>
+    </div>
   </div>
 </div>
 
@@ -737,6 +857,46 @@ const I18N = {
     btn_share_copied: 'link copiado!',
     btn_log: 'ver log de hunt',
     btn_guide: 'guia',
+    btn_validator: 'validador',
+
+    val_title: 'Validador — comparar calculadora com hunt real',
+    val_desc: 'Cole o conteúdo do <strong>server log</strong> de uma hunt real do Tibia. A ferramenta extrai automaticamente os parâmetros (XP/h, dano, taxa de charm, tamanho da box) e compara com o que a calculadora prevê com os mesmos parâmetros. Se os números baterem dentro de uma margem razoável, o modelo está validado empiricamente.',
+    val_load_file: 'abrir arquivo .txt',
+    val_paladin: 'paladino (2x atk/turno)',
+    val_analyze: 'analisar log',
+    val_status_ready: 'cole o log abaixo ou abra um arquivo',
+    val_status_analyzing: 'analisando log...',
+    val_status_simulating: 'simulando com parâmetros do log...',
+    val_status_no_data: 'log inválido — verifique se é um server log do Tibia',
+    val_placeholder: 'Cole aqui o conteúdo do server log...',
+    val_h_extracted: 'parâmetros extraídos do log',
+    val_h_compare: 'comparação real vs simulado',
+    val_run_compare: 'rodar simulação com esses parâmetros',
+    val_card_duration: 'duração da hunt',
+    val_card_xph: 'XP/h real',
+    val_card_kills: 'mortes',
+    val_card_xp_avg: 'XP médio por mob',
+    val_card_hp_est: 'HP médio (estimado)',
+    val_card_box_size: 'tamanho da box (p95)',
+    val_card_exit: 'ponto de saída (p5)',
+    val_card_dmg_avg: 'dano médio (sem prey/crit)',
+    val_card_dmg_cycle: 'ciclo de dano detectado',
+    val_card_charm_rate: 'charm rate observado',
+    val_card_charm_dmg: 'dano médio do charm',
+    val_card_crit_rate: 'crit rate observado',
+    val_card_crit_mult: 'multiplicador de crit',
+    val_card_paladin: 'modo paladino (2x atk)',
+    val_compare_metric: 'métrica',
+    val_compare_real: 'real (do log)',
+    val_compare_sim: 'simulado',
+    val_compare_err: 'erro',
+    val_metric_xph: 'XP/h',
+    val_metric_kills_per_hour: 'mortes/h',
+    val_metric_avg_turns: 'turnos médios por box',
+    val_verdict_ok: '✓ Modelo validado — os números do simulador batem com a hunt real dentro da margem esperada (±15%).',
+    val_verdict_warn: '⚠ Divergência moderada — modelo dentro de ±25%, mas há diferenças que valem investigação (parâmetros estimados podem estar enviesados).',
+    val_verdict_bad: '✗ Divergência grande — erro acima de 25%. Verifique se os parâmetros extraídos refletem a hunt real ou ajuste manualmente.',
+    val_note_animus: 'XP do log inclui bônus do Animus Mastery — esse valor representa XP efetivo recebido (não o XP base do mob).',
 
     log_title: 'Log detalhado de uma sessão',
     log_desc: 'Esta tabela mostra evento por evento o que acontece numa sessão simulada com os parâmetros atuais. Cada linha é um turno: dano sorteado, charm ativado em quais mobs, HP antes e depois. A seed é mostrada acima — qualquer pessoa pode rodar com a mesma seed e obter exatamente os mesmos eventos.',
@@ -847,6 +1007,46 @@ const I18N = {
     btn_share_copied: 'link copied!',
     btn_log: 'view hunt log',
     btn_guide: 'guide',
+    btn_validator: 'validator',
+
+    val_title: 'Validator — compare calculator vs real hunt',
+    val_desc: 'Paste the contents of a real Tibia <strong>server log</strong> from a hunt. The tool automatically extracts parameters (XP/h, damage, charm rate, box size) and compares them against what the calculator predicts with the same parameters. If the numbers match within a reasonable margin, the model is empirically validated.',
+    val_load_file: 'open .txt file',
+    val_paladin: 'paladin (2x atk/turn)',
+    val_analyze: 'analyze log',
+    val_status_ready: 'paste the log below or open a file',
+    val_status_analyzing: 'analyzing log...',
+    val_status_simulating: 'simulating with log parameters...',
+    val_status_no_data: 'invalid log — make sure it\'s a Tibia server log',
+    val_placeholder: 'Paste server log contents here...',
+    val_h_extracted: 'parameters extracted from log',
+    val_h_compare: 'real vs simulated comparison',
+    val_run_compare: 'run simulation with these parameters',
+    val_card_duration: 'hunt duration',
+    val_card_xph: 'real XP/h',
+    val_card_kills: 'kills',
+    val_card_xp_avg: 'avg XP per mob',
+    val_card_hp_est: 'estimated avg HP',
+    val_card_box_size: 'box size (p95)',
+    val_card_exit: 'exit threshold (p5)',
+    val_card_dmg_avg: 'avg damage (no prey/crit)',
+    val_card_dmg_cycle: 'detected damage cycle',
+    val_card_charm_rate: 'observed charm rate',
+    val_card_charm_dmg: 'avg charm damage',
+    val_card_crit_rate: 'observed crit rate',
+    val_card_crit_mult: 'crit multiplier',
+    val_card_paladin: 'paladin mode (2x atk)',
+    val_compare_metric: 'metric',
+    val_compare_real: 'real (from log)',
+    val_compare_sim: 'simulated',
+    val_compare_err: 'error',
+    val_metric_xph: 'XP/h',
+    val_metric_kills_per_hour: 'kills/h',
+    val_metric_avg_turns: 'avg turns per box',
+    val_verdict_ok: '✓ Model validated — simulator numbers match the real hunt within expected margin (±15%).',
+    val_verdict_warn: '⚠ Moderate divergence — model within ±25%, but differences worth investigating (estimated parameters may be biased).',
+    val_verdict_bad: '✗ Large divergence — error above 25%. Check if extracted parameters reflect the real hunt or adjust manually.',
+    val_note_animus: 'XP from log includes Animus Mastery bonus — this value represents effective XP received (not the mob\'s base XP).',
 
     log_title: 'Detailed session log',
     log_desc: 'This table shows event by event what happens in a simulated session with current parameters. Each row is a turn: rolled damage, charm activated on which mobs, HP before and after. The seed is shown above — anyone can run with the same seed and get exactly the same events.',
@@ -2359,6 +2559,418 @@ $('guideModal').addEventListener('click', (e) => {
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && $('guideModal').classList.contains('open')) closeGuide();
+});
+
+// ========== Validador de hunt ==========
+// Parseia server log do Tibia e extrai parâmetros, depois roda a calculadora
+// com esses parâmetros e compara com a realidade observada no log.
+
+let lastValidatorData = null;
+
+function parseServerLog(logText, isPaladin) {
+  const lines = logText.split(/\r?\n/);
+
+  // Padrões — capturar o que importa
+  const tsPattern = /^(\d{2}):(\d{2}):(\d{2})\s+(.+)$/;
+  const attackPattern = /A\s+([\w\s]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+(critical attack|attack)\.?\s*(\([^)]*\))?/;
+  const charmPattern = /A\s+([\w\s]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+attack\.?\s*\(([^)]*charm[^)]*)\)/i;
+  const xpPattern = /You gained\s+(\d+)\s+experience/;
+
+  // Categorias de eventos
+  const events = []; // {ts, type, mob?, dmg?, isCrit?, isPrey?, xp?}
+
+  for (const line of lines) {
+    const m = tsPattern.exec(line);
+    if (!m) continue;
+    const ts = +m[1] * 3600 + +m[2] * 60 + +m[3];
+    const body = m[4];
+
+    // Charm primeiro (tem (xxx charm) no suffix)
+    const c = charmPattern.exec(body);
+    if (c) {
+      events.push({ ts, type: 'charm', mob: c[1].toLowerCase().trim(), dmg: +c[2] });
+      continue;
+    }
+    // Ataque normal ou crit
+    const a = attackPattern.exec(body);
+    if (a) {
+      const isCrit = /critical/.test(a[3]);
+      const suffix = a[4] || '';
+      const isPrey = /prey/i.test(suffix);
+      events.push({
+        ts, type: isCrit ? 'crit' : 'normal',
+        mob: a[1].toLowerCase().trim(), dmg: +a[2], isPrey
+      });
+      continue;
+    }
+    // XP
+    const x = xpPattern.exec(body);
+    if (x) {
+      events.push({ ts, type: 'xp', xp: +x[1] });
+    }
+  }
+
+  if (events.length < 50) {
+    return { error: 'log_too_short', eventCount: events.length };
+  }
+
+  // Stats
+  const attackEvents = events.filter(e => e.type === 'normal' || e.type === 'crit');
+  const charmEvents = events.filter(e => e.type === 'charm');
+  const xpEvents = events.filter(e => e.type === 'xp');
+
+  // Duração total
+  const tsList = events.map(e => e.ts);
+  let duration = Math.max(...tsList) - Math.min(...tsList);
+  if (duration < 0) duration += 86400; // virada de meia-noite
+  duration = Math.max(duration, 1);
+
+  // XP total e por morte
+  const totalXp = xpEvents.reduce((s, e) => s + e.xp, 0);
+  const totalKills = xpEvents.length;
+  const xphReal = totalXp / (duration / 3600);
+  const avgXpPerKill = totalKills > 0 ? totalXp / totalKills : 0;
+
+  // Dano total e médios
+  const dmgTotal = attackEvents.reduce((s, e) => s + e.dmg, 0) +
+                   charmEvents.reduce((s, e) => s + e.dmg, 0);
+
+  // Dano normal SEM prey, SEM charm, SEM crit — pra estimar dano base do ciclo
+  const cleanNormals = attackEvents.filter(e => e.type === 'normal' && !e.isPrey).map(e => e.dmg);
+  const cleanCrits = attackEvents.filter(e => e.type === 'crit' && !e.isPrey).map(e => e.dmg);
+  const allCharms = charmEvents.map(e => e.dmg);
+
+  const avgNormal = cleanNormals.length > 0 ? mean(cleanNormals) : 0;
+  const avgCrit = cleanCrits.length > 0 ? mean(cleanCrits) : 0;
+  const avgCharm = allCharms.length > 0 ? mean(allCharms) : 0;
+
+  // Crit rate observado
+  const totalAttacks = attackEvents.length;
+  const totalCrits = cleanCrits.length + attackEvents.filter(e => e.type === 'crit' && e.isPrey).length;
+  const critRateObserved = totalAttacks > 0 ? totalCrits / totalAttacks : 0;
+  const critMultObserved = avgNormal > 0 && avgCrit > 0 ? avgCrit / avgNormal : 0;
+
+  // Charm rate observado
+  const charmRateObserved = totalAttacks > 0 ? charmEvents.length / totalAttacks : 0;
+
+  // ===== TURNOS =====
+  // Agrupar ataques por turno: eventos com gap <= 1s estão no mesmo "burst"
+  // (corresponde ao mesmo turno do jogo, ou — pra paladino — ao mesmo conjunto de 2 atks)
+  const sortedAttacks = [...attackEvents].sort((a, b) => a.ts - b.ts);
+  const turns = [];
+  let current = [];
+  let lastTs = null;
+  for (const ev of sortedAttacks) {
+    if (lastTs === null || ev.ts - lastTs <= 1) {
+      current.push(ev);
+    } else {
+      if (current.length > 0) turns.push(current);
+      current = [ev];
+    }
+    lastTs = ev.ts;
+  }
+  if (current.length > 0) turns.push(current);
+
+  // Hits por turno (já dividido pela vocação — pra paladino, dividir por 2)
+  const divisor = isPaladin ? 2 : 1;
+  const hitsPerTurn = turns.map(t => Math.max(1, Math.round(t.length / divisor)));
+
+  // Box size = percentil 95 dos hits/turno
+  // Ponto de saída = percentil 5 (mínimo confiável)
+  const boxSizeP95 = percentile(hitsPerTurn, 0.95);
+  const exitP5 = Math.max(1, percentile(hitsPerTurn, 0.05));
+
+  // ===== HP ESTIMADO =====
+  // HP médio = dano total causado / total mortes
+  // (aproximação: ignora dano "perdido" em mobs que escaparam pra próxima box)
+  const hpEstimated = totalKills > 0 ? Math.round(dmgTotal / totalKills) : 0;
+
+  // ===== CICLO DE DANO (3 ataques) =====
+  // Tibia tem cooldown de spells diferentes — o ciclo é A1, A2, A3, A1, ...
+  // Vou tentar identificar 3 picos no histograma dos hits limpos
+  const dmgCycle = estimateDamageCycle(cleanNormals);
+
+  // ===== BOX CHANGE TIME =====
+  // Detectar gaps grandes entre eventos (proxy pra walking time)
+  const sortedTs = [...new Set(events.map(e => e.ts))].sort((a, b) => a - b);
+  const gaps = [];
+  for (let i = 1; i < sortedTs.length; i++) {
+    const g = sortedTs[i] - sortedTs[i - 1];
+    if (g >= 3 && g <= 30) gaps.push(g);
+  }
+  const boxChangeTime = gaps.length > 5 ? Math.round(median(gaps)) : 6;
+
+  return {
+    duration, totalXp, totalKills, xphReal, avgXpPerKill,
+    dmgTotal, avgNormal, avgCrit, avgCharm,
+    critRateObserved, critMultObserved, charmRateObserved,
+    hpEstimated, boxSizeP95, exitP5, hitsPerTurn,
+    dmgCycle, boxChangeTime,
+    isPaladin,
+    eventCount: events.length,
+    nTurns: turns.length,
+    nKills: totalKills
+  };
+}
+
+function mean(arr) {
+  if (arr.length === 0) return 0;
+  return arr.reduce((s, v) => s + v, 0) / arr.length;
+}
+function median(arr) {
+  if (arr.length === 0) return 0;
+  const s = [...arr].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 === 0 ? (s[mid - 1] + s[mid]) / 2 : s[mid];
+}
+function percentile(arr, p) {
+  if (arr.length === 0) return 0;
+  const s = [...arr].sort((a, b) => a - b);
+  const idx = Math.floor((s.length - 1) * p);
+  return s[idx];
+}
+
+function estimateDamageCycle(dmgs) {
+  // Tenta detectar 3 modas no histograma. Como cada ataque tem variação ±20%,
+  // a moda do histograma de cada ataque está perto do dano base.
+  if (dmgs.length < 30) {
+    // Pouca data: usar quartis como aproximação
+    const m = mean(dmgs);
+    return [Math.round(m * 0.85), Math.round(m), Math.round(m * 1.15)];
+  }
+  // Bucket de 25 em 25
+  const buckets = {};
+  for (const d of dmgs) {
+    const b = Math.floor(d / 25) * 25;
+    buckets[b] = (buckets[b] || 0) + 1;
+  }
+  const sorted = Object.entries(buckets)
+    .map(([k, v]) => [+k, v])
+    .sort((a, b) => a[0] - b[0]);
+
+  // Achar picos locais (com janela de 2 buckets pra cada lado)
+  const peaks = [];
+  for (let i = 2; i < sorted.length - 2; i++) {
+    const v = sorted[i][1];
+    if (v >= 15 && v >= sorted[i - 1][1] && v >= sorted[i + 1][1] &&
+        v >= sorted[i - 2][1] && v >= sorted[i + 2][1]) {
+      peaks.push({ bucket: sorted[i][0], count: v });
+    }
+  }
+  // Pegar top 3 picos
+  peaks.sort((a, b) => b.count - a.count);
+  const topPeaks = peaks.slice(0, 3).map(p => p.bucket + 12).sort((a, b) => a - b);
+
+  if (topPeaks.length === 3) return topPeaks;
+
+  // Fallback: aproximar com média ± offsets
+  const m = Math.round(mean(dmgs));
+  return [Math.round(m * 0.85), m, Math.round(m * 1.15)];
+}
+
+// ===== Renderização do validador =====
+
+function renderValidatorExtracted(data) {
+  const fmtNum = n => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' :
+                       n >= 1e3 ? (n / 1e3).toFixed(0) + 'k' :
+                       Math.round(n).toString();
+  const dec = LANG === 'pt' ? ',' : '.';
+  const dur = data.duration;
+  const durStr = dur >= 3600
+    ? Math.floor(dur / 3600) + 'h ' + Math.round((dur % 3600) / 60) + 'min'
+    : Math.floor(dur / 60) + 'min ' + (dur % 60) + 's';
+
+  const cards = [
+    { lbl: t('val_card_duration'), val: durStr, sub: data.eventCount + ' eventos · ' + data.nTurns + ' turnos' },
+    { lbl: t('val_card_xph'), val: fmtNum(data.xphReal) + ' XP/h', sub: fmtNum(data.totalXp) + ' XP em ' + durStr },
+    { lbl: t('val_card_kills'), val: data.totalKills, sub: (data.totalKills / (data.duration / 3600)).toFixed(0) + '/h' },
+    { lbl: t('val_card_xp_avg'), val: fmtNum(data.avgXpPerKill), sub: t('val_note_animus') },
+    { lbl: t('val_card_hp_est'), val: fmtNum(data.hpEstimated), sub: 'dano total ÷ mortes' },
+    { lbl: t('val_card_box_size'), val: data.boxSizeP95, sub: 'percentil 95 dos hits/turno' + (data.isPaladin ? ' (÷2)' : '') },
+    { lbl: t('val_card_exit'), val: data.exitP5, sub: 'percentil 5 dos hits/turno' + (data.isPaladin ? ' (÷2)' : '') },
+    { lbl: t('val_card_dmg_avg'), val: Math.round(data.avgNormal), sub: 'sem prey, sem crit, sem charm' },
+    { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']', sub: 'atk1, atk2, atk3' },
+    { lbl: t('val_card_charm_rate'), val: (data.charmRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: 'modelo usa 10%' },
+    { lbl: t('val_card_charm_dmg'), val: Math.round(data.avgCharm), sub: 'média dos hits de charm' },
+    { lbl: t('val_card_crit_rate'), val: (data.critRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: 'modelo usa 10%' },
+    { lbl: t('val_card_crit_mult'), val: data.critMultObserved.toFixed(2).replace('.', dec) + 'x', sub: 'base 1,72x · com boost 2,16x' },
+    { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? 'hits/turno divididos por 2' : 'sem ajuste' }
+  ];
+
+  let html = '';
+  for (const c of cards) {
+    html += '<div class="val-card">' +
+      '<div class="val-card-label">' + c.lbl + '</div>' +
+      '<div class="val-card-value">' + c.val + '</div>' +
+      '<div class="val-card-sub">' + c.sub + '</div>' +
+      '</div>';
+  }
+  $('valExtracted').innerHTML = html;
+}
+
+function runValidatorComparison(data) {
+  // Aplica os parâmetros do log na calculadora (sem sobrescrever os campos visuais)
+  // e roda a simulação com FLAGS forçadas pra refletir o que o log mostra
+  const flags = {
+    charm: true,    // log tem charms
+    crit: true,     // log tem crits
+    intel: true,    // assumir uso de inteligência (sair com poucos vivos)
+    var: true       // dano variável é mecânica natural do jogo
+  };
+
+  const critMult = CRIT_BASE; // usar base 1.72x (modelo teórico, conforme decisão)
+
+  $('valCompareStatus').textContent = t('val_status_simulating');
+  $('btnRunComparison').disabled = true;
+
+  const t0 = performance.now();
+  const runSeed = (Math.random() * 0xFFFFFFFF) >>> 0;
+
+  // Roda simulação com parâmetros extraídos
+  // OBS: usa o caminho serial inline (mais simples — não precisa criar workers só pra isso)
+  runSimInline({
+    baseDmgs: data.dmgCycle,
+    charmDmg: Math.round(data.avgCharm),
+    critMult,
+    mobHp: data.hpEstimated,
+    mobXp: data.avgXpPerKill,
+    boxSize: data.boxSizeP95,
+    exitThreshold: data.exitP5,
+    boxChangeTime: data.boxChangeTime,
+    flags,
+    runSeed
+  }, () => {}).then(result => {
+    const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
+    $('valCompareStatus').textContent = elapsed + 's';
+    $('btnRunComparison').disabled = false;
+
+    // Pegamos resultado do nível +0 (parâmetros do log já são o "estado real")
+    const sim = result[0];
+    renderValidatorComparison(data, sim);
+  });
+}
+
+function renderValidatorComparison(real, sim) {
+  const fmtN = n => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' :
+                    n >= 1e3 ? (n / 1e3).toFixed(0) + 'k' :
+                    Math.round(n).toString();
+
+  const realKillsPerHour = real.totalKills / (real.duration / 3600);
+  const simKillsPerHour = sim.xph / real.avgXpPerKill;
+
+  // Calcular erros %
+  const calcErr = (r, s) => r === 0 ? 0 : (s - r) / r * 100;
+
+  const rows = [
+    { metric: t('val_metric_xph'), real: real.xphReal, sim: sim.xph, fmt: fmtN, suffix: ' XP/h' },
+    { metric: t('val_metric_kills_per_hour'), real: realKillsPerHour, sim: simKillsPerHour, fmt: n => Math.round(n).toString(), suffix: '/h' }
+  ];
+
+  let html = '<table class="val-compare-table"><thead><tr>' +
+    '<th>' + t('val_compare_metric') + '</th>' +
+    '<th>' + t('val_compare_real') + '</th>' +
+    '<th>' + t('val_compare_sim') + '</th>' +
+    '<th>' + t('val_compare_err') + '</th>' +
+    '</tr></thead><tbody>';
+
+  let maxAbsErr = 0;
+  for (const r of rows) {
+    const err = calcErr(r.real, r.sim);
+    const absErr = Math.abs(err);
+    maxAbsErr = Math.max(maxAbsErr, absErr);
+    const errCls = absErr <= 15 ? 'err-good' : absErr <= 25 ? 'err-warn' : 'err-bad';
+    const errStr = (err >= 0 ? '+' : '') + err.toFixed(1) + '%';
+    html += '<tr>' +
+      '<td>' + r.metric + '</td>' +
+      '<td class="real-col">' + r.fmt(r.real) + r.suffix + '</td>' +
+      '<td class="sim-col">' + r.fmt(r.sim) + r.suffix + '</td>' +
+      '<td class="' + errCls + '">' + errStr + '</td>' +
+      '</tr>';
+  }
+  // Linha bonus: turnos médios por box (só simulado, real é difícil de medir confiável)
+  html += '<tr>' +
+    '<td>' + t('val_metric_avg_turns') + '</td>' +
+    '<td class="real-col" style="opacity:0.5">—</td>' +
+    '<td class="sim-col">' + sim.avgTurns.toFixed(2) + '</td>' +
+    '<td style="opacity:0.5">—</td>' +
+    '</tr>';
+  html += '</tbody></table>';
+
+  // Veredito
+  let verdictCls, verdictMsg;
+  if (maxAbsErr <= 15) {
+    verdictCls = 'ok';
+    verdictMsg = t('val_verdict_ok');
+  } else if (maxAbsErr <= 25) {
+    verdictCls = 'warn';
+    verdictMsg = t('val_verdict_warn');
+  } else {
+    verdictCls = 'bad';
+    verdictMsg = t('val_verdict_bad');
+  }
+  const icons = { ok: '✓', warn: '⚠', bad: '✗' };
+  html += '<div class="val-verdict ' + verdictCls + '">' +
+    '<span class="val-verdict-icon">' + icons[verdictCls] + '</span>' +
+    '<span>' + verdictMsg + '</span>' +
+    '</div>';
+
+  $('valComparison').innerHTML = html;
+}
+
+function openValidator() {
+  $('validatorModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeValidator() {
+  $('validatorModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+$('btnValidator').addEventListener('click', openValidator);
+$('closeValidatorModal').addEventListener('click', closeValidator);
+$('validatorModal').addEventListener('click', (e) => {
+  if (e.target === $('validatorModal')) closeValidator();
+});
+
+$('btnLoadFile').addEventListener('click', () => $('valFileInput').click());
+$('valFileInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    $('valLogInput').value = ev.target.result;
+    $('valStatus').textContent = file.name + ' carregado · ' + ev.target.result.length + ' caracteres';
+  };
+  reader.readAsText(file);
+});
+
+$('btnAnalyzeLog').addEventListener('click', () => {
+  const txt = $('valLogInput').value.trim();
+  if (!txt) {
+    $('valStatus').textContent = t('val_status_no_data');
+    return;
+  }
+  $('valStatus').textContent = t('val_status_analyzing');
+  $('btnAnalyzeLog').disabled = true;
+  setTimeout(() => {
+    const isPaladin = $('cb-paladin').checked;
+    const data = parseServerLog(txt, isPaladin);
+    $('btnAnalyzeLog').disabled = false;
+    if (data.error) {
+      $('valStatus').textContent = t('val_status_no_data') + ' (' + data.eventCount + ' eventos)';
+      $('valResults').style.display = 'none';
+      return;
+    }
+    lastValidatorData = data;
+    renderValidatorExtracted(data);
+    $('valResults').style.display = 'block';
+    $('valComparison').innerHTML = '';
+    $('valStatus').textContent = data.eventCount + ' eventos analisados';
+  }, 30);
+});
+
+$('btnRunComparison').addEventListener('click', () => {
+  if (lastValidatorData) runValidatorComparison(lastValidatorData);
 });
 
 // ===== inicialização =====
