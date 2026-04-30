@@ -886,6 +886,8 @@ const I18N = {
     val_card_crit_rate: 'crit rate observado',
     val_card_crit_mult: 'multiplicador de crit',
     val_card_paladin: 'modo paladino (2x atk)',
+    val_card_box_change: 'tempo entre boxes',
+    val_card_prey: 'prey rate observado',
     val_compare_metric: 'métrica',
     val_compare_real: 'real (do log)',
     val_compare_sim: 'simulado',
@@ -1036,6 +1038,8 @@ const I18N = {
     val_card_crit_rate: 'observed crit rate',
     val_card_crit_mult: 'crit multiplier',
     val_card_paladin: 'paladin mode (2x atk)',
+    val_card_box_change: 'box change time',
+    val_card_prey: 'observed prey rate',
     val_compare_metric: 'metric',
     val_compare_real: 'real (from log)',
     val_compare_sim: 'simulated',
@@ -1225,6 +1229,9 @@ function simSession(seed, dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitT
 
   let spawnStep = 0; // índice do passo de spawn (em múltiplos de TURN_DURATION)
 
+  // Modo paladino: 2 ataques por turno (mesmo tempo de turno, 2x dano efetivo)
+  const attacksPerTurn = flags.paladin ? 2 : 1;
+
   while (timeElapsed < seconds) {
     const aliveTotal = aliveLen + spawnLen;
 
@@ -1281,40 +1288,46 @@ function simSession(seed, dmgs, charmDmg, critMult, mobHp, mobXp, boxSize, exitT
 
     if (aliveLen === 0) { ac++; continue; }
 
-    // Charm: cada mob individualmente pode ativar
-    if (flags.charm) {
+    // Loop dos ataques deste turno (1 normal, 2 se paladino)
+    // Cada ataque tem seu próprio rolar de charm + var + crit + aplicação
+    for (let atkIdx = 0; atkIdx < attacksPerTurn; atkIdx++) {
+      if (aliveLen === 0) { ac++; break; }
+
+      // Charm: cada mob individualmente pode ativar
+      if (flags.charm) {
+        for (let i = 0; i < aliveLen; i++) {
+          if (aliveHp[i] > 0 && rng() < CHARM_RATE) {
+            aliveHp[i] -= charmDmg;
+            if (aliveHp[i] < 0) aliveHp[i] = 0;
+          }
+        }
+      }
+
+      // Dano base do ataque
+      let base = dmgs[ac % 3];
+      if (flags.var) base *= 0.8 + rng() * 0.4;
+      if (rng() < CRIT_RATE) base *= critMult;
+
+      // Aplica em todos + compactação in-place
+      let writeIdx = 0;
       for (let i = 0; i < aliveLen; i++) {
-        if (aliveHp[i] > 0 && rng() < CHARM_RATE) {
-          aliveHp[i] -= charmDmg;
-          if (aliveHp[i] < 0) aliveHp[i] = 0;
-        }
-      }
-    }
-
-    // Dano base do turno
-    let base = dmgs[ac % 3];
-    if (flags.var) base *= 0.8 + rng() * 0.4;
-    if (rng() < CRIT_RATE) base *= critMult;
-
-    // Aplica em todos + compactação in-place
-    let writeIdx = 0;
-    for (let i = 0; i < aliveLen; i++) {
-      let hp = aliveHp[i];
-      if (hp > 0) {
-        hp -= base;
-        if (hp <= 0) {
+        let hp = aliveHp[i];
+        if (hp > 0) {
+          hp -= base;
+          if (hp <= 0) {
+            totalKills++;
+            continue; // morto, não escreve de volta
+          }
+        } else {
+          // já estava morto (charm matou) — conta o kill
           totalKills++;
-          continue; // morto, não escreve de volta
+          continue;
         }
-      } else {
-        // já estava morto (charm matou) — conta o kill
-        totalKills++;
-        continue;
+        aliveHp[writeIdx++] = hp;
       }
-      aliveHp[writeIdx++] = hp;
+      aliveLen = writeIdx;
+      ac++;
     }
-    aliveLen = writeIdx;
-    ac++;
   }
 
   const xph = totalKills * mobXp / (seconds / 3600);
@@ -1474,7 +1487,8 @@ function runSimInline(config, onProgress) {
     let firstN = boxFrac === 0 ? boxFloor : (rng() < boxFrac ? boxFloor + 1 : boxFloor);
     for (let i = 0; i < firstN; i++) aliveHp[aliveLen++] = mobHp;
     let spawnStep = 0;
-    
+    const attacksPerTurn = flags.paladin ? 2 : 1;
+
     while (timeElapsed < seconds) {
       const aliveTotal = aliveLen + spawnLen;
       if (flags.intel && aliveTotal <= exitThreshold && spawnLen === 0) {
@@ -1514,28 +1528,33 @@ function runSimInline(config, onProgress) {
         spawnLen = writeIdx;
       }
       if (aliveLen === 0) { ac++; continue; }
-      if (flags.charm) {
-        for (let i = 0; i < aliveLen; i++) {
-          if (aliveHp[i] > 0 && rng() < CHARM_RATE) {
-            aliveHp[i] -= charmDmg;
-            if (aliveHp[i] < 0) aliveHp[i] = 0;
+
+      // Loop de ataques por turno (1 normal, 2 se paladino)
+      for (let atkIdx = 0; atkIdx < attacksPerTurn; atkIdx++) {
+        if (aliveLen === 0) { ac++; break; }
+        if (flags.charm) {
+          for (let i = 0; i < aliveLen; i++) {
+            if (aliveHp[i] > 0 && rng() < CHARM_RATE) {
+              aliveHp[i] -= charmDmg;
+              if (aliveHp[i] < 0) aliveHp[i] = 0;
+            }
           }
         }
+        let base = dmgs[ac % 3];
+        if (flags.var) base *= 0.8 + rng() * 0.4;
+        if (rng() < CRIT_RATE) base *= critMult;
+        let writeIdx = 0;
+        for (let i = 0; i < aliveLen; i++) {
+          let hp = aliveHp[i];
+          if (hp > 0) {
+            hp -= base;
+            if (hp <= 0) { totalKills++; continue; }
+          } else { totalKills++; continue; }
+          aliveHp[writeIdx++] = hp;
+        }
+        aliveLen = writeIdx;
+        ac++;
       }
-      let base = dmgs[ac % 3];
-      if (flags.var) base *= 0.8 + rng() * 0.4;
-      if (rng() < CRIT_RATE) base *= critMult;
-      let writeIdx = 0;
-      for (let i = 0; i < aliveLen; i++) {
-        let hp = aliveHp[i];
-        if (hp > 0) {
-          hp -= base;
-          if (hp <= 0) { totalKills++; continue; }
-        } else { totalKills++; continue; }
-        aliveHp[writeIdx++] = hp;
-      }
-      aliveLen = writeIdx;
-      ac++;
     }
     const xph = totalKills * mobXp / (seconds / 3600);
     return { xph, turnCounts: turnCountsBuf.subarray(0, turnCountsLen) };
@@ -2571,17 +2590,22 @@ function parseServerLog(logText, isPaladin) {
   const lines = logText.split(/\r?\n/);
 
   // Padrões — capturar o que importa
+  // Aceita "A foo", "An foo", "The foo" + nomes com hífen/apóstrofo
   const tsPattern = /^(\d{2}):(\d{2}):(\d{2})\s+(.+)$/;
-  const attackPattern = /A\s+([\w\s]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+(critical attack|attack)\.?\s*(\([^)]*\))?/;
-  const charmPattern = /A\s+([\w\s]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+attack\.?\s*\(([^)]*charm[^)]*)\)/i;
+  const attackPattern = /(?:A|An|The)\s+([A-Za-z][A-Za-z\s'\-]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+(critical attack|attack)\b\.?\s*(\([^)]*\))?/i;
+  const charmPattern = /(?:A|An|The)\s+([A-Za-z][A-Za-z\s'\-]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+attack\b\.?\s*\(([^)]*charm[^)]*)\)/i;
   const xpPattern = /You gained\s+(\d+)\s+experience/;
 
   // Categorias de eventos
   const events = []; // {ts, type, mob?, dmg?, isCrit?, isPrey?, xp?}
+  let totalLines = 0;
+  let timestampedLines = 0;
 
   for (const line of lines) {
+    totalLines++;
     const m = tsPattern.exec(line);
     if (!m) continue;
+    timestampedLines++;
     const ts = +m[1] * 3600 + +m[2] * 60 + +m[3];
     const body = m[4];
 
@@ -2594,7 +2618,7 @@ function parseServerLog(logText, isPaladin) {
     // Ataque normal ou crit
     const a = attackPattern.exec(body);
     if (a) {
-      const isCrit = /critical/.test(a[3]);
+      const isCrit = /critical/i.test(a[3]);
       const suffix = a[4] || '';
       const isPrey = /prey/i.test(suffix);
       events.push({
@@ -2610,14 +2634,27 @@ function parseServerLog(logText, isPaladin) {
     }
   }
 
-  if (events.length < 50) {
-    return { error: 'log_too_short', eventCount: events.length };
+  const attackEventsAll = events.filter(e => e.type === 'normal' || e.type === 'crit');
+  const charmEventsAll = events.filter(e => e.type === 'charm');
+  const xpEventsAll = events.filter(e => e.type === 'xp');
+
+  // Validação: precisa ter ataques E mortes pra simular
+  if (attackEventsAll.length < 20 || xpEventsAll.length < 5) {
+    return {
+      error: 'log_too_short',
+      eventCount: events.length,
+      totalLines,
+      timestampedLines,
+      attackCount: attackEventsAll.length,
+      charmCount: charmEventsAll.length,
+      xpCount: xpEventsAll.length
+    };
   }
 
   // Stats
-  const attackEvents = events.filter(e => e.type === 'normal' || e.type === 'crit');
-  const charmEvents = events.filter(e => e.type === 'charm');
-  const xpEvents = events.filter(e => e.type === 'xp');
+  const attackEvents = attackEventsAll;
+  const charmEvents = charmEventsAll;
+  const xpEvents = xpEventsAll;
 
   // Duração total
   const tsList = events.map(e => e.ts);
@@ -2640,9 +2677,22 @@ function parseServerLog(logText, isPaladin) {
   const cleanCrits = attackEvents.filter(e => e.type === 'crit' && !e.isPrey).map(e => e.dmg);
   const allCharms = charmEvents.map(e => e.dmg);
 
+  // Hits COM prey (pra calcular o multiplicador efetivo)
+  const preyNormals = attackEvents.filter(e => e.type === 'normal' && e.isPrey).map(e => e.dmg);
+
   const avgNormal = cleanNormals.length > 0 ? mean(cleanNormals) : 0;
   const avgCrit = cleanCrits.length > 0 ? mean(cleanCrits) : 0;
   const avgCharm = allCharms.length > 0 ? mean(allCharms) : 0;
+  const avgPreyNormal = preyNormals.length > 0 ? mean(preyNormals) : 0;
+
+  // Calcular multiplicador efetivo do prey:
+  // - Em quantos % dos ataques normais o prey estava ativo?
+  // - Qual o multiplicador médio quando ativo? (avgPreyNormal / avgNormal)
+  // - Fator efetivo = 1 + preyRate × (preyMult - 1)
+  const totalNormalLikeHits = cleanNormals.length + preyNormals.length;
+  const preyRate = totalNormalLikeHits > 0 ? preyNormals.length / totalNormalLikeHits : 0;
+  const preyMult = avgNormal > 0 && avgPreyNormal > 0 ? avgPreyNormal / avgNormal : 1;
+  const preyEffectiveFactor = preyRate > 0 ? 1 + preyRate * (preyMult - 1) : 1;
 
   // Crit rate observado
   const totalAttacks = attackEvents.length;
@@ -2688,24 +2738,33 @@ function parseServerLog(logText, isPaladin) {
   // ===== CICLO DE DANO (3 ataques) =====
   // Tibia tem cooldown de spells diferentes — o ciclo é A1, A2, A3, A1, ...
   // Vou tentar identificar 3 picos no histograma dos hits limpos
-  const dmgCycle = estimateDamageCycle(cleanNormals);
+  const dmgCycleRaw = estimateDamageCycle(cleanNormals);
+  // Aplicar fator efetivo do prey (média ponderada do dano com prey)
+  const dmgCycle = dmgCycleRaw.map(d => Math.round(d * preyEffectiveFactor));
 
   // ===== BOX CHANGE TIME =====
-  // Detectar gaps grandes entre eventos (proxy pra walking time)
+  // Detectar gaps grandes entre eventos (proxy pra walking time).
+  // CUIDADO: gaps de 3-4s podem ser apenas pequenas pausas dentro da box (cooldown
+  // de spell, mob fugindo). Box change real costuma ser ≥5s. Usar janela 5-30s.
+  // Threshold de >=10 ocorrências pra ter confiança estatística.
+  // IMPORTANTE: o server log do Tibia NÃO captura caminhada entre boxes — apenas
+  // ataques. Logs curtos sem trocas de box vão sempre cair no fallback.
   const sortedTs = [...new Set(events.map(e => e.ts))].sort((a, b) => a - b);
   const gaps = [];
   for (let i = 1; i < sortedTs.length; i++) {
     const g = sortedTs[i] - sortedTs[i - 1];
-    if (g >= 3 && g <= 30) gaps.push(g);
+    if (g >= 5 && g <= 30) gaps.push(g);
   }
-  const boxChangeTime = gaps.length > 5 ? Math.round(median(gaps)) : 6;
+  const boxChangeTimeEstimated = gaps.length >= 10;
+  const boxChangeTime = boxChangeTimeEstimated ? Math.round(median(gaps)) : 6;
 
   return {
     duration, totalXp, totalKills, xphReal, avgXpPerKill,
     dmgTotal, avgNormal, avgCrit, avgCharm,
     critRateObserved, critMultObserved, charmRateObserved,
     hpEstimated, boxSizeP95, exitP5, hitsPerTurn,
-    dmgCycle, boxChangeTime,
+    dmgCycle, dmgCycleRaw, boxChangeTime, boxChangeTimeEstimated,
+    preyRate, preyMult, preyEffectiveFactor,
     isPaladin,
     eventCount: events.length,
     nTurns: turns.length,
@@ -2780,6 +2839,16 @@ function renderValidatorExtracted(data) {
     ? Math.floor(dur / 3600) + 'h ' + Math.round((dur % 3600) / 60) + 'min'
     : Math.floor(dur / 60) + 'min ' + (dur % 60) + 's';
 
+  // Card especial: boxChangeTime editável quando não foi estimado do log
+  // (logs curtos sem trocas de box não capturam o walking time)
+  const bctVal = data.boxChangeTimeEstimated
+    ? data.boxChangeTime + 's'
+    : '<input type="number" id="valBoxChangeInput" value="' + data.boxChangeTime +
+      '" min="1" max="120" step="1" style="width:70px;font-size:18px;padding:2px 6px;background:var(--bg);border:0.5px solid var(--accent);color:var(--text);border-radius:4px;font-family:inherit;font-weight:500">s';
+  const bctSub = data.boxChangeTimeEstimated
+    ? 'mediana dos gaps de 5-30s entre eventos'
+    : '<span style="color:var(--amber)">⚠ não foi possível estimar do log — ajuste pela sua experiência</span>';
+
   const cards = [
     { lbl: t('val_card_duration'), val: durStr, sub: data.eventCount + ' eventos · ' + data.nTurns + ' turnos' },
     { lbl: t('val_card_xph'), val: fmtNum(data.xphReal) + ' XP/h', sub: fmtNum(data.totalXp) + ' XP em ' + durStr },
@@ -2788,13 +2857,15 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_hp_est'), val: fmtNum(data.hpEstimated), sub: 'dano total ÷ mortes' },
     { lbl: t('val_card_box_size'), val: data.boxSizeP95, sub: 'percentil 95 dos hits/turno' + (data.isPaladin ? ' (÷2)' : '') },
     { lbl: t('val_card_exit'), val: data.exitP5, sub: 'percentil 5 dos hits/turno' + (data.isPaladin ? ' (÷2)' : '') },
+    { lbl: t('val_card_box_change'), val: bctVal, sub: bctSub, raw: true },
     { lbl: t('val_card_dmg_avg'), val: Math.round(data.avgNormal), sub: 'sem prey, sem crit, sem charm' },
-    { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']', sub: 'atk1, atk2, atk3' },
+    { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']', sub: 'atk1, atk2, atk3 (×' + data.preyEffectiveFactor.toFixed(3).replace('.', dec) + ' do raw)' },
+    { lbl: t('val_card_prey'), val: (data.preyRate * 100).toFixed(1).replace('.', dec) + '%', sub: 'mult ' + data.preyMult.toFixed(2).replace('.', dec) + 'x · raw [' + data.dmgCycleRaw.join(', ') + ']' },
     { lbl: t('val_card_charm_rate'), val: (data.charmRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: 'modelo usa 10%' },
     { lbl: t('val_card_charm_dmg'), val: Math.round(data.avgCharm), sub: 'média dos hits de charm' },
     { lbl: t('val_card_crit_rate'), val: (data.critRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: 'modelo usa 10%' },
     { lbl: t('val_card_crit_mult'), val: data.critMultObserved.toFixed(2).replace('.', dec) + 'x', sub: 'base 1,72x · com boost 2,16x' },
-    { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? 'hits/turno divididos por 2' : 'sem ajuste' }
+    { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? '2 atk/turno + box ÷2' : 'sem ajuste' }
   ];
 
   let html = '';
@@ -2806,6 +2877,22 @@ function renderValidatorExtracted(data) {
       '</div>';
   }
   $('valExtracted').innerHTML = html;
+
+  // Listener pro input editável de boxChangeTime — atualiza o data e re-roda a comparação
+  // automaticamente se já tiver sido feita
+  if (!data.boxChangeTimeEstimated) {
+    const inp = $('valBoxChangeInput');
+    if (inp) {
+      inp.addEventListener('change', () => {
+        const v = Math.max(1, Math.min(120, +inp.value || 6));
+        data.boxChangeTime = v;
+        // Se já tinha rodado comparação, re-roda automaticamente
+        if ($('valComparison').innerHTML.trim() !== '') {
+          runValidatorComparison(data);
+        }
+      });
+    }
+  }
 }
 
 function runValidatorComparison(data) {
@@ -2815,7 +2902,8 @@ function runValidatorComparison(data) {
     charm: true,    // log tem charms
     crit: true,     // log tem crits
     intel: true,    // assumir uso de inteligência (sair com poucos vivos)
-    var: true       // dano variável é mecânica natural do jogo
+    var: true,      // dano variável é mecânica natural do jogo
+    paladin: data.isPaladin // 2x atk/turno se paladino
   };
 
   const critMult = CRIT_BASE; // usar base 1.72x (modelo teórico, conforme decisão)
