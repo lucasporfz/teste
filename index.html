@@ -424,7 +424,6 @@ input[type="range"] { accent-color: var(--accent); }
   background: rgba(245, 158, 11, 0.1);
   border-bottom: 1px solid var(--amber);
 }
-.log-table tr.box-end td:first-child::after { content: " · fim da box"; color: var(--amber); font-size: 9px; }
 .log-table .col-crit { color: var(--amber); font-weight: 500; }
 .log-table .col-charm { color: var(--accent); }
 .log-table .col-kills { color: #EF4444; font-weight: 500; }
@@ -733,6 +732,7 @@ input[type="range"] { accent-color: var(--accent); }
     <label class="cb-wrap" id="wrap-crit"><input type="checkbox" id="cb-crit"> <span data-i18n="cb_crit">crítico aumentado</span></label>
     <label class="cb-wrap" id="wrap-int"><input type="checkbox" id="cb-int"> <span data-i18n="cb_int">inteligência</span></label>
     <label class="cb-wrap" id="wrap-var"><input type="checkbox" id="cb-var"> <span data-i18n="cb_var">dano variável (±20%)</span></label>
+    <label class="cb-wrap" id="wrap-paladin"><input type="checkbox" id="cb-paladin-main"> <span data-i18n="cb_paladin">paladino (2x atk/turno)</span></label>
   </div>
   <span class="cfg-badge" id="cfgLabel">Baseline</span>
   <button id="btnRun" data-i18n="btn_run">recalcular</button>
@@ -851,6 +851,7 @@ const I18N = {
     cb_crit: 'crítico aumentado',
     cb_int: 'inteligência',
     cb_var: 'dano variável (±20%)',
+    cb_paladin: 'paladino (2x atk/turno)',
 
     btn_run: 'recalcular',
     btn_share: 'copiar link',
@@ -888,6 +889,28 @@ const I18N = {
     val_card_paladin: 'modo paladino (2x atk)',
     val_card_box_change: 'tempo entre boxes',
     val_card_prey: 'prey rate observado',
+
+    // Subtítulos dos cards do validador
+    val_sub_events_turns: '{n} eventos · {t} turnos',
+    val_sub_xp_in: '{xp} XP em {dur}',
+    val_sub_kills_per_h: '{n}/h',
+    val_sub_dmg_div_kills: 'dano total ÷ mortes',
+    val_sub_p95_hits: 'percentil 95 dos hits/turno',
+    val_sub_p5_hits: 'percentil 5 dos hits/turno',
+    val_sub_pal_div2: ' (÷2)',
+    val_sub_gaps_median: 'mediana dos gaps de 5-30s entre eventos',
+    val_sub_no_estimate: '⚠ não foi possível estimar do log — ajuste pela sua experiência',
+    val_sub_clean_hits: 'sem prey, sem crit, sem charm',
+    val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} do raw)',
+    val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
+    val_sub_model_10: 'modelo usa 10%',
+    val_sub_charm_avg: 'média dos hits de charm',
+    val_sub_crit_base: 'base 1,72x · com boost 2,16x',
+    val_sub_pal_on: '2 atk/turno + box ÷2',
+    val_sub_pal_off: 'sem ajuste',
+    val_status_loaded: '{file} carregado · {n} caracteres',
+    val_status_analyzed: '{n} eventos analisados',
+    val_applied_to_main: 'parâmetros aplicados na calculadora · feche o validador para ver gráficos',
     val_compare_metric: 'métrica',
     val_compare_real: 'real (do log)',
     val_compare_sim: 'simulado',
@@ -1003,6 +1026,7 @@ const I18N = {
     cb_crit: 'boosted crit',
     cb_int: 'intelligence',
     cb_var: 'damage variance (±20%)',
+    cb_paladin: 'paladin (2x atk/turn)',
 
     btn_run: 'recalculate',
     btn_share: 'copy link',
@@ -1040,6 +1064,28 @@ const I18N = {
     val_card_paladin: 'paladin mode (2x atk)',
     val_card_box_change: 'box change time',
     val_card_prey: 'observed prey rate',
+
+    // Subtitles for validator cards
+    val_sub_events_turns: '{n} events · {t} turns',
+    val_sub_xp_in: '{xp} XP in {dur}',
+    val_sub_kills_per_h: '{n}/h',
+    val_sub_dmg_div_kills: 'total damage ÷ kills',
+    val_sub_p95_hits: '95th percentile of hits/turn',
+    val_sub_p5_hits: '5th percentile of hits/turn',
+    val_sub_pal_div2: ' (÷2)',
+    val_sub_gaps_median: 'median of 5-30s gaps between events',
+    val_sub_no_estimate: '⚠ could not estimate from log — adjust based on your experience',
+    val_sub_clean_hits: 'no prey, no crit, no charm',
+    val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} of raw)',
+    val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
+    val_sub_model_10: 'model uses 10%',
+    val_sub_charm_avg: 'average of charm hits',
+    val_sub_crit_base: 'base 1.72x · with boost 2.16x',
+    val_sub_pal_on: '2 atk/turn + box ÷2',
+    val_sub_pal_off: 'no adjustment',
+    val_status_loaded: '{file} loaded · {n} characters',
+    val_status_analyzed: '{n} events analyzed',
+    val_applied_to_main: 'parameters applied to calculator · close validator to see charts',
     val_compare_metric: 'metric',
     val_compare_real: 'real (from log)',
     val_compare_sim: 'simulated',
@@ -1132,6 +1178,10 @@ function applyI18n() {
     const key = el.getAttribute('data-i18n');
     el.textContent = t(key);
   });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    el.placeholder = t(key);
+  });
   document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : 'en';
   document.title = t('title');
   document.getElementById('langPt').classList.toggle('active', LANG === 'pt');
@@ -1151,6 +1201,11 @@ function applyI18n() {
   const modal = document.getElementById('guideModal');
   if (modal && modal.classList.contains('open')) {
     document.getElementById('guideContent').innerHTML = GUIDE[LANG];
+  }
+  // Re-renderizar cards do validador se modal estiver aberto e tiver dados
+  const valModal = document.getElementById('validatorModal');
+  if (valModal && valModal.classList.contains('open') && typeof lastValidatorData !== 'undefined' && lastValidatorData) {
+    if (typeof renderValidatorExtracted === 'function') renderValidatorExtracted(lastValidatorData);
   }
 }
 
@@ -1617,6 +1672,7 @@ const LEVEL_COLORS = Array.from({length: N_LEVELS}, (_, i) => {
 
 const $ = id => document.getElementById(id);
 const cbCharm = $('cb-charm'), cbCrit = $('cb-crit'), cbInt = $('cb-int'), cbVar = $('cb-var');
+const cbPaladin = $('cb-paladin-main');
 const slider = $('sliderDmg'), sliderA = $('sliderA'), sliderB = $('sliderB');
 const lblDmg = $('lblDmg'), lblA = $('lblA'), lblB = $('lblB');
 const cfgLbl = $('cfgLabel'), status = $('simStatus');
@@ -1629,11 +1685,12 @@ const container = document.querySelector('.container');
 let lastElapsed = null;
 
 function getFlags() {
-  return { charm: cbCharm.checked, crit: cbCrit.checked, intel: cbInt.checked, var: cbVar.checked };
+  return { charm: cbCharm.checked, crit: cbCrit.checked, intel: cbInt.checked, var: cbVar.checked, paladin: cbPaladin.checked };
 }
 function getCfgName(f) {
   const k = (f.charm?'1':'0') + (f.crit?'1':'0') + (f.intel?'1':'0') + (f.var?'1':'0');
-  return (I18N[LANG].cfg && I18N[LANG].cfg[k]) || k;
+  const baseName = (I18N[LANG].cfg && I18N[LANG].cfg[k]) || k;
+  return f.paladin ? baseName + ' (Paladin 2x)' : baseName;
 }
 function getInputs() {
   return {
@@ -1986,8 +2043,11 @@ function drawAll() {
 function updateUI() {
   const f = getFlags();
   cfgLbl.textContent = getCfgName(f);
-  ['charm', 'crit', 'int', 'var'].forEach(id => {
-    $('wrap-' + id).classList.toggle('active', $('cb-' + id).checked);
+  ['charm', 'crit', 'int', 'var', 'paladin'].forEach(id => {
+    const cbId = id === 'paladin' ? 'cb-paladin-main' : 'cb-' + id;
+    const wrapId = id === 'paladin' ? 'wrap-paladin' : 'wrap-' + id;
+    const cb = $(cbId);
+    if (cb) $(wrapId).classList.toggle('active', cb.checked);
   });
   lblDmg.textContent = '+' + slider.value;
 }
@@ -2000,8 +2060,8 @@ function debouncedRun() {
   inputDebounceTimer = setTimeout(runSim, 250);
 }
 
-[cbCharm, cbCrit, cbInt, cbVar].forEach(cb => {
-  cb.addEventListener('change', () => { updateUI(); runSim(); });
+[cbCharm, cbCrit, cbInt, cbVar, cbPaladin].forEach(cb => {
+  if (cb) cb.addEventListener('change', () => { updateUI(); runSim(); });
 });
 ['dmg1', 'dmg2', 'dmg3', 'charmDmg', 'critBoost', 'mobHp', 'mobXp', 'boxSize', 'exitThreshold', 'boxTime'].forEach(id => {
   $(id).addEventListener('change', debouncedRun);
@@ -2031,6 +2091,7 @@ function serializeState() {
   flags += cbCrit.checked ? '1' : '0';
   flags += cbInt.checked ? '1' : '0';
   flags += cbVar.checked ? '1' : '0';
+  flags += cbPaladin.checked ? '1' : '0';
   params.set('f', flags);
   params.set('l', LANG);
   return params.toString();
@@ -2051,6 +2112,7 @@ function deserializeState() {
     cbCrit.checked = flags[1] === '1';
     cbInt.checked = flags[2] === '1';
     cbVar.checked = flags[3] === '1';
+    if (flags.length >= 5) cbPaladin.checked = flags[4] === '1';
   }
   if (params.has('l')) {
     const lang = params.get('l');
@@ -2846,26 +2908,33 @@ function renderValidatorExtracted(data) {
     : '<input type="number" id="valBoxChangeInput" value="' + data.boxChangeTime +
       '" min="1" max="120" step="1" style="width:70px;font-size:18px;padding:2px 6px;background:var(--bg);border:0.5px solid var(--accent);color:var(--text);border-radius:4px;font-family:inherit;font-weight:500">s';
   const bctSub = data.boxChangeTimeEstimated
-    ? 'mediana dos gaps de 5-30s entre eventos'
-    : '<span style="color:var(--amber)">⚠ não foi possível estimar do log — ajuste pela sua experiência</span>';
+    ? t('val_sub_gaps_median')
+    : '<span style="color:var(--amber)">' + t('val_sub_no_estimate') + '</span>';
+
+  const palDiv2Suffix = data.isPaladin ? t('val_sub_pal_div2') : '';
 
   const cards = [
-    { lbl: t('val_card_duration'), val: durStr, sub: data.eventCount + ' eventos · ' + data.nTurns + ' turnos' },
-    { lbl: t('val_card_xph'), val: fmtNum(data.xphReal) + ' XP/h', sub: fmtNum(data.totalXp) + ' XP em ' + durStr },
-    { lbl: t('val_card_kills'), val: data.totalKills, sub: (data.totalKills / (data.duration / 3600)).toFixed(0) + '/h' },
+    { lbl: t('val_card_duration'), val: durStr,
+      sub: t('val_sub_events_turns').replace('{n}', data.eventCount).replace('{t}', data.nTurns) },
+    { lbl: t('val_card_xph'), val: fmtNum(data.xphReal) + ' XP/h',
+      sub: t('val_sub_xp_in').replace('{xp}', fmtNum(data.totalXp)).replace('{dur}', durStr) },
+    { lbl: t('val_card_kills'), val: data.totalKills,
+      sub: t('val_sub_kills_per_h').replace('{n}', (data.totalKills / (data.duration / 3600)).toFixed(0)) },
     { lbl: t('val_card_xp_avg'), val: fmtNum(data.avgXpPerKill), sub: t('val_note_animus') },
-    { lbl: t('val_card_hp_est'), val: fmtNum(data.hpEstimated), sub: 'dano total ÷ mortes' },
-    { lbl: t('val_card_box_size'), val: data.boxSizeP95, sub: 'percentil 95 dos hits/turno' + (data.isPaladin ? ' (÷2)' : '') },
-    { lbl: t('val_card_exit'), val: data.exitP5, sub: 'percentil 5 dos hits/turno' + (data.isPaladin ? ' (÷2)' : '') },
+    { lbl: t('val_card_hp_est'), val: fmtNum(data.hpEstimated), sub: t('val_sub_dmg_div_kills') },
+    { lbl: t('val_card_box_size'), val: data.boxSizeP95, sub: t('val_sub_p95_hits') + palDiv2Suffix },
+    { lbl: t('val_card_exit'), val: data.exitP5, sub: t('val_sub_p5_hits') + palDiv2Suffix },
     { lbl: t('val_card_box_change'), val: bctVal, sub: bctSub, raw: true },
-    { lbl: t('val_card_dmg_avg'), val: Math.round(data.avgNormal), sub: 'sem prey, sem crit, sem charm' },
-    { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']', sub: 'atk1, atk2, atk3 (×' + data.preyEffectiveFactor.toFixed(3).replace('.', dec) + ' do raw)' },
-    { lbl: t('val_card_prey'), val: (data.preyRate * 100).toFixed(1).replace('.', dec) + '%', sub: 'mult ' + data.preyMult.toFixed(2).replace('.', dec) + 'x · raw [' + data.dmgCycleRaw.join(', ') + ']' },
-    { lbl: t('val_card_charm_rate'), val: (data.charmRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: 'modelo usa 10%' },
-    { lbl: t('val_card_charm_dmg'), val: Math.round(data.avgCharm), sub: 'média dos hits de charm' },
-    { lbl: t('val_card_crit_rate'), val: (data.critRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: 'modelo usa 10%' },
-    { lbl: t('val_card_crit_mult'), val: data.critMultObserved.toFixed(2).replace('.', dec) + 'x', sub: 'base 1,72x · com boost 2,16x' },
-    { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? '2 atk/turno + box ÷2' : 'sem ajuste' }
+    { lbl: t('val_card_dmg_avg'), val: Math.round(data.avgNormal), sub: t('val_sub_clean_hits') },
+    { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']',
+      sub: t('val_sub_atk_cycle').replace('{f}', data.preyEffectiveFactor.toFixed(3).replace('.', dec)) },
+    { lbl: t('val_card_prey'), val: (data.preyRate * 100).toFixed(1).replace('.', dec) + '%',
+      sub: t('val_sub_prey_mult').replace('{m}', data.preyMult.toFixed(2).replace('.', dec)).replace('{raw}', data.dmgCycleRaw.join(', ')) },
+    { lbl: t('val_card_charm_rate'), val: (data.charmRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: t('val_sub_model_10') },
+    { lbl: t('val_card_charm_dmg'), val: Math.round(data.avgCharm), sub: t('val_sub_charm_avg') },
+    { lbl: t('val_card_crit_rate'), val: (data.critRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: t('val_sub_model_10') },
+    { lbl: t('val_card_crit_mult'), val: data.critMultObserved.toFixed(2).replace('.', dec) + 'x', sub: t('val_sub_crit_base') },
+    { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? t('val_sub_pal_on') : t('val_sub_pal_off') }
   ];
 
   let html = '';
@@ -2908,14 +2977,43 @@ function runValidatorComparison(data) {
 
   const critMult = CRIT_BASE; // usar base 1.72x (modelo teórico, conforme decisão)
 
+  // ===== APLICAR PARÂMETROS NA CALCULADORA PRINCIPAL =====
+  // Atualiza os inputs visíveis na UI principal pra que o usuário possa fechar
+  // o validador e ver os gráficos/tabelas com os mesmos parâmetros do log.
+  // Também marca os checkboxes correspondentes (charm/crit/int/var = ON).
+  $('dmg1').value = data.dmgCycle[0];
+  $('dmg2').value = data.dmgCycle[1];
+  $('dmg3').value = data.dmgCycle[2];
+  $('charmDmg').value = Math.round(data.avgCharm);
+  $('mobHp').value = data.hpEstimated;
+  $('mobXp').value = Math.round(data.avgXpPerKill);
+  $('boxSize').value = data.boxSizeP95;
+  $('exitThreshold').value = data.exitP5;
+  $('boxTime').value = data.boxChangeTime;
+  // Crit boost = 0% (modelo usa base 1,72x)
+  $('critBoost').value = 0;
+  // Marca checkboxes
+  cbCharm.checked = true;
+  cbCrit.checked = true;
+  cbInt.checked = true;
+  cbVar.checked = true;
+  cbPaladin.checked = data.isPaladin;
+  // Atualiza UI dos checkboxes
+  updateUI();
+
+  // Dispara recálculo da calculadora principal em paralelo
+  // (o usuário pode fechar o validador e ver os gráficos atualizados)
+  runSim();
+
+  $('valStatus').textContent = t('val_applied_to_main');
   $('valCompareStatus').textContent = t('val_status_simulating');
   $('btnRunComparison').disabled = true;
 
   const t0 = performance.now();
   const runSeed = (Math.random() * 0xFFFFFFFF) >>> 0;
 
-  // Roda simulação com parâmetros extraídos
-  // OBS: usa o caminho serial inline (mais simples — não precisa criar workers só pra isso)
+  // Roda simulação SÓ pra comparação (nível 0, single run rápido)
+  // Usa o caminho serial inline (mais simples — não precisa criar workers só pra isso)
   runSimInline({
     baseDmgs: data.dmgCycle,
     charmDmg: Math.round(data.avgCharm),
@@ -3027,7 +3125,9 @@ $('valFileInput').addEventListener('change', (e) => {
   const reader = new FileReader();
   reader.onload = (ev) => {
     $('valLogInput').value = ev.target.result;
-    $('valStatus').textContent = file.name + ' carregado · ' + ev.target.result.length + ' caracteres';
+    $('valStatus').textContent = t('val_status_loaded')
+      .replace('{file}', file.name)
+      .replace('{n}', ev.target.result.length);
   };
   reader.readAsText(file);
 });
@@ -3053,7 +3153,7 @@ $('btnAnalyzeLog').addEventListener('click', () => {
     renderValidatorExtracted(data);
     $('valResults').style.display = 'block';
     $('valComparison').innerHTML = '';
-    $('valStatus').textContent = data.eventCount + ' eventos analisados';
+    $('valStatus').textContent = t('val_status_analyzed').replace('{n}', data.eventCount);
   }, 30);
 });
 
