@@ -914,8 +914,9 @@ const I18N = {
     val_sub_p95_hits: 'percentil 95 dos hits/turno',
     val_sub_p5_hits: 'percentil 5 dos hits/turno',
     val_sub_pal_div2: ' (÷2)',
-    val_sub_gaps_median: 'mediana dos gaps de 5-30s entre eventos',
+    val_sub_gaps_median: 'mediana das pausas de 3-15s entre ataques',
     val_sub_no_estimate: '⚠ não foi possível estimar do log — ajuste pela sua experiência',
+    val_sub_weak_estimate: '⚠ estimativa fraca ({n}s detectados de poucas amostras) — ajuste se tiver experiência da hunt',
     val_sub_clean_hits: 'sem prey, sem crit, sem charm',
     val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} do raw)',
     val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
@@ -1096,8 +1097,9 @@ const I18N = {
     val_sub_p95_hits: '95th percentile of hits/turn',
     val_sub_p5_hits: '5th percentile of hits/turn',
     val_sub_pal_div2: ' (÷2)',
-    val_sub_gaps_median: 'median of 5-30s gaps between events',
+    val_sub_gaps_median: 'median of 3-15s pauses between attacks',
     val_sub_no_estimate: '⚠ could not estimate from log — adjust based on your experience',
+    val_sub_weak_estimate: '⚠ weak estimate ({n}s from few samples) — adjust if you know the hunt',
     val_sub_clean_hits: 'no prey, no crit, no charm',
     val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} of raw)',
     val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
@@ -2679,8 +2681,12 @@ function parseServerLog(logText, isPaladin) {
   // Aceita "A foo", "An foo", "The foo" + nomes com hífen/apóstrofo
   const tsPattern = /^(\d{2}):(\d{2}):(\d{2})\s+(.+)$/;
   const attackPattern = /(?:A|An|The)\s+([A-Za-z][A-Za-z\s'\-]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+(critical attack|attack)\b\.?\s*(\([^)]*\))?/i;
-  const charmPattern = /(?:A|An|The)\s+([A-Za-z][A-Za-z\s'\-]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+attack\b\.?\s*\(([^)]*charm[^)]*)\)/i;
   const xpPattern = /You gained\s+(\d+)\s+experience/;
+
+  // Crit-charms (Tibia Winter Update 2024): aumentam o dano de crítico em AOE.
+  // Entram na média PONDERADA com crits puros pra calcular o multiplicador efetivo.
+  // Não contam como charm individual — sempre vêm com "critical attack" no log.
+  const CRIT_CHARM_RE = /low blow|savage blow/i;
 
   // Categorias de eventos
   const events = []; // {ts, type, mob?, dmg?, isCrit?, isPrey?, xp?}
@@ -2695,29 +2701,52 @@ function parseServerLog(logText, isPaladin) {
     const ts = +m[1] * 3600 + +m[2] * 60 + +m[3];
     const body = m[4];
 
-    // Charm primeiro (tem (xxx charm) no suffix)
-    const c = charmPattern.exec(body);
-    if (c) {
-      events.push({ ts, type: 'charm', mob: c[1].toLowerCase().trim(), dmg: +c[2] });
+    // Tentar match de ataque (cobre 100% dos hits, com ou sem suffix)
+    const a = attackPattern.exec(body);
+    if (!a) {
+      const x = xpPattern.exec(body);
+      if (x) events.push({ ts, type: 'xp', xp: +x[1] });
       continue;
     }
-    // Ataque normal ou crit
-    const a = attackPattern.exec(body);
-    if (a) {
-      const isCrit = /critical/i.test(a[3]);
-      const suffix = a[4] || '';
-      const isPrey = /prey/i.test(suffix);
+
+    const isCrit = /critical/i.test(a[3]);
+    const suffix = a[4] || '';
+    const isPrey = /prey/i.test(suffix);
+    const isReflection = /damage reflection/i.test(suffix);
+    const hasCharm = /charm/i.test(suffix);
+    const hasCritCharm = CRIT_CHARM_RE.test(suffix);
+    const mob = a[1].toLowerCase().trim();
+    const dmg = +a[2];
+
+    // Reflection puro (sem charm útil): hit passivo do escudo do jogador.
+    // Ignorar completamente — não é ataque ativo. Mas se vem com parry charm,
+    // o dano do parry conta como charm individual (cai no else abaixo).
+    if (isReflection && !hasCharm) continue;
+
+    // Crit-charms (low blow, savage blow): tratar como crit normal.
+    // Já é capturado pelo isCrit do regex; entra na média ponderada de crit.
+    if (hasCritCharm) {
+      events.push({ ts, type: 'crit', mob, dmg, isPrey });
+      continue;
+    }
+
+    // Qualquer outro charm (overpower, overflux, parry, curse, poison, wound,
+    // freeze, zap, enflame, divine wrath, carnage...): hit individual em 1 mob.
+    // Conta pro charm rate e dano médio do charm. Marcamos isPassive=true pro
+    // parry (vem com damage reflection) pra distinguir, embora ambos contem.
+    if (hasCharm) {
       events.push({
-        ts, type: isCrit ? 'crit' : 'normal',
-        mob: a[1].toLowerCase().trim(), dmg: +a[2], isPrey
+        ts, type: 'charm', mob, dmg,
+        isPassive: isReflection
       });
       continue;
     }
-    // XP
-    const x = xpPattern.exec(body);
-    if (x) {
-      events.push({ ts, type: 'xp', xp: +x[1] });
-    }
+
+    // Ataque normal ou crit puro (sem charm)
+    events.push({
+      ts, type: isCrit ? 'crit' : 'normal',
+      mob, dmg, isPrey
+    });
   }
 
   const attackEventsAll = events.filter(e => e.type === 'normal' || e.type === 'crit');
@@ -2790,22 +2819,26 @@ function parseServerLog(logText, isPaladin) {
   const charmRateObserved = totalAttacks > 0 ? charmEvents.length / totalAttacks : 0;
 
   // ===== TURNOS =====
-  // Agrupar ataques por turno: eventos com gap <= 1s estão no mesmo "burst"
-  // (corresponde ao mesmo turno do jogo, ou — pra paladino — ao mesmo conjunto de 2 atks)
+  // Agrupar ataques em turnos do jogo usando janelas FIXAS de 2s.
+  // No Tibia o cooldown mínimo de ataque é 2s — qualquer hit em janelas adjacentes
+  // representa turnos diferentes. Janelas fixas funcionam pra qualquer vocação:
+  // - Paladino: bursts de Exori San caem na mesma janela
+  // - EK: hits melee continuos são agrupados corretamente em janelas de 2s
+  // - Mago: spells em sequência também
+  // (a calculadora usa 2.25s na simulação pra modelar reação humana imperfeita,
+  //  mas o parser do log usa o valor mecânico real do jogo)
+  const TURN_DURATION_SEC = 2.0;
   const sortedAttacks = [...attackEvents].sort((a, b) => a.ts - b.ts);
-  const turns = [];
-  let current = [];
-  let lastTs = null;
-  for (const ev of sortedAttacks) {
-    if (lastTs === null || ev.ts - lastTs <= 1) {
-      current.push(ev);
-    } else {
-      if (current.length > 0) turns.push(current);
-      current = [ev];
+  let turns = [];
+  if (sortedAttacks.length > 0) {
+    const turnsMap = {};
+    const t0 = sortedAttacks[0].ts;
+    for (const ev of sortedAttacks) {
+      const bucket = Math.floor((ev.ts - t0) / TURN_DURATION_SEC);
+      (turnsMap[bucket] = turnsMap[bucket] || []).push(ev);
     }
-    lastTs = ev.ts;
+    turns = Object.values(turnsMap);
   }
-  if (current.length > 0) turns.push(current);
 
   // Hits por turno (já dividido pela vocação — pra paladino, dividir por 2)
   const divisor = isPaladin ? 2 : 1;
@@ -2829,27 +2862,38 @@ function parseServerLog(logText, isPaladin) {
   const dmgCycle = dmgCycleRaw.map(d => Math.round(d * preyEffectiveFactor));
 
   // ===== BOX CHANGE TIME =====
-  // Detectar gaps grandes entre eventos (proxy pra walking time).
-  // CUIDADO: gaps de 3-4s podem ser apenas pequenas pausas dentro da box (cooldown
-  // de spell, mob fugindo). Box change real costuma ser ≥5s. Usar janela 5-30s.
-  // Threshold de >=10 ocorrências pra ter confiança estatística.
-  // IMPORTANTE: o server log do Tibia NÃO captura caminhada entre boxes — apenas
-  // ataques. Logs curtos sem trocas de box vão sempre cair no fallback.
-  const sortedTs = [...new Set(events.map(e => e.ts))].sort((a, b) => a - b);
-  const gaps = [];
-  for (let i = 1; i < sortedTs.length; i++) {
-    const g = sortedTs[i] - sortedTs[i - 1];
-    if (g >= 5 && g <= 30) gaps.push(g);
+  // Detectar pausas reais entre ataques que indicam troca de box.
+  // Gaps entre ATAQUES de 3-15s capturam: tempo de caminhar pra próxima box +
+  // chegar em alcance + cooldown do primeiro hit. <3s é micro-pausa dentro da box,
+  // >15s é provavelmente AFK (banheiro, comer fora) e não conta como walking.
+  // Confiança: forte (≥10 amostras), fraca (3-9), nenhuma (<3 → fallback 6s).
+  // Em logs de 3-4min é raro ter ≥10 trocas, então a maior parte cai em "fraca".
+  const sortedAttackTs = sortedAttacks.map(a => a.ts);
+  const attackGaps = [];
+  for (let i = 1; i < sortedAttackTs.length; i++) {
+    const g = sortedAttackTs[i] - sortedAttackTs[i - 1];
+    if (g >= 3 && g <= 15) attackGaps.push(g);
   }
-  const boxChangeTimeEstimated = gaps.length >= 10;
-  const boxChangeTime = boxChangeTimeEstimated ? Math.round(median(gaps)) : 6;
+  let boxChangeTime, boxChangeTimeConfidence;
+  if (attackGaps.length >= 10) {
+    boxChangeTime = Math.round(median(attackGaps));
+    boxChangeTimeConfidence = 'strong';
+  } else if (attackGaps.length >= 3) {
+    boxChangeTime = Math.round(median(attackGaps));
+    boxChangeTimeConfidence = 'weak';
+  } else {
+    boxChangeTime = 6;
+    boxChangeTimeConfidence = 'none';
+  }
+  // Manter campo legado pra compatibilidade
+  const boxChangeTimeEstimated = boxChangeTimeConfidence !== 'none';
 
   return {
     duration, totalXp, totalKills, xphReal, avgXpPerKill,
     dmgTotal, avgNormal, avgCrit, avgCharm,
     critRateObserved, critMultObserved, charmRateObserved,
     hpEstimated, boxSizeP95, exitP5, hitsPerTurn,
-    dmgCycle, dmgCycleRaw, boxChangeTime, boxChangeTimeEstimated,
+    dmgCycle, dmgCycleRaw, boxChangeTime, boxChangeTimeEstimated, boxChangeTimeConfidence,
     preyRate, preyMult, preyEffectiveFactor,
     isPaladin,
     eventCount: events.length,
@@ -2925,15 +2969,24 @@ function renderValidatorExtracted(data) {
     ? Math.floor(dur / 3600) + 'h ' + Math.round((dur % 3600) / 60) + 'min'
     : Math.floor(dur / 60) + 'min ' + (dur % 60) + 's';
 
-  // Card especial: boxChangeTime editável quando não foi estimado do log
-  // (logs curtos sem trocas de box não capturam o walking time)
-  const bctVal = data.boxChangeTimeEstimated
-    ? data.boxChangeTime + 's'
-    : '<input type="number" id="valBoxChangeInput" value="' + data.boxChangeTime +
-      '" min="1" max="120" step="1" style="width:70px;font-size:18px;padding:2px 6px;background:var(--bg);border:0.5px solid var(--accent);color:var(--text);border-radius:4px;font-family:inherit;font-weight:500">s';
-  const bctSub = data.boxChangeTimeEstimated
-    ? t('val_sub_gaps_median')
-    : '<span style="color:var(--amber)">' + t('val_sub_no_estimate') + '</span>';
+  // Card especial: boxChangeTime tem 3 estados de confiança:
+  // - 'strong' (≥10 amostras): valor fixo, mediana confiável
+  // - 'weak' (3-9 amostras): editável com aviso "estimativa fraca"
+  // - 'none' (<3 amostras): editável com aviso "não foi possível estimar"
+  const bctConf = data.boxChangeTimeConfidence || (data.boxChangeTimeEstimated ? 'strong' : 'none');
+  const bctEditable = bctConf !== 'strong';
+  const bctVal = bctEditable
+    ? '<input type="number" id="valBoxChangeInput" value="' + data.boxChangeTime +
+      '" min="1" max="120" step="1" style="width:70px;font-size:18px;padding:2px 6px;background:var(--bg);border:0.5px solid var(--accent);color:var(--text);border-radius:4px;font-family:inherit;font-weight:500">s'
+    : data.boxChangeTime + 's';
+  let bctSub;
+  if (bctConf === 'strong') {
+    bctSub = t('val_sub_gaps_median');
+  } else if (bctConf === 'weak') {
+    bctSub = '<span style="color:var(--amber)">' + t('val_sub_weak_estimate').replace('{n}', data.boxChangeTime) + '</span>';
+  } else {
+    bctSub = '<span style="color:var(--amber)">' + t('val_sub_no_estimate') + '</span>';
+  }
 
   const palDiv2Suffix = data.isPaladin ? t('val_sub_pal_div2') : '';
 
@@ -2972,14 +3025,13 @@ function renderValidatorExtracted(data) {
   $('valExtracted').innerHTML = html;
 
   // Listener pro input editável de boxChangeTime — atualiza o data e re-roda a comparação
-  // automaticamente se já tiver sido feita
-  if (!data.boxChangeTimeEstimated) {
+  // automaticamente se já tiver sido feita. Aplica em weak e none (qualquer estado editável).
+  if (bctEditable) {
     const inp = $('valBoxChangeInput');
     if (inp) {
       inp.addEventListener('change', () => {
         const v = Math.max(1, Math.min(120, +inp.value || 6));
         data.boxChangeTime = v;
-        // Se já tinha rodado comparação, re-roda automaticamente
         if ($('valComparison').innerHTML.trim() !== '') {
           runValidatorComparison(data);
         }
