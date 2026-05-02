@@ -903,6 +903,10 @@ const I18N = {
     val_card_crit_rate: 'crit rate observado',
     val_card_crit_mult: 'multiplicador de crit',
     val_card_paladin: 'modo paladino (2x atk)',
+    val_card_intel: 'inteligência detectada',
+    val_sub_intel_on: '✓ fluxo contínuo no log ({p}% turnos vazios) → puxa novos mobs antes do anterior morrer',
+    val_sub_intel_off: '✗ pausas detectadas no log ({p}% turnos vazios) → termina box atual antes de mover',
+    val_sub_intel_unknown: 'log curto demais para inferir — assumindo ON',
     val_card_box_change: 'tempo entre boxes',
     val_card_prey: 'prey rate observado',
 
@@ -1086,6 +1090,10 @@ const I18N = {
     val_card_crit_rate: 'observed crit rate',
     val_card_crit_mult: 'crit multiplier',
     val_card_paladin: 'paladin mode (2x atk)',
+    val_card_intel: 'detected intelligence',
+    val_sub_intel_on: '✓ continuous flow in log ({p}% empty turns) → pulls new mobs before previous dies',
+    val_sub_intel_off: '✗ pauses detected in log ({p}% empty turns) → finishes current box before moving',
+    val_sub_intel_unknown: 'log too short to infer — defaulting to ON',
     val_card_box_change: 'box change time',
     val_card_prey: 'observed prey rate',
 
@@ -2888,12 +2896,33 @@ function parseServerLog(logText, isPaladin) {
   // Manter campo legado pra compatibilidade
   const boxChangeTimeEstimated = boxChangeTimeConfidence !== 'none';
 
+  // ===== DETECÇÃO DE INTELIGÊNCIA =====
+  // Heurística operacional: "inteligência ON" = jogador puxa novos mobs antes
+  // do anterior morrer, então nunca para de atacar. No log isso se traduz em
+  // fluxo contínuo de ataques (turnos vazios ~0%).
+  // "Inteligência OFF" = jogador termina a box atual, depois caminha. Resultado:
+  // turnos vazios acumulam (>3% típico).
+  //
+  // Calculamos: dos turnos esperados na duração total, quantos têm 0 ataques?
+  // Threshold de 3% empírico baseado em logs reais (paladino com intel ~0.6%,
+  // EK sem intel ~5.8%). Só inferimos se temos ao menos 30 turnos detectados
+  // (amostra pequena demais → não inferir, deixar usuário escolher).
+  let intelDetected = null; // null = não inferido, true = ON, false = OFF
+  let emptyTurnPct = 0;
+  if (turns.length >= 30 && duration > 0) {
+    const expectedTurns = Math.floor(duration / TURN_DURATION_SEC);
+    const turnsWithHits = turns.length;
+    emptyTurnPct = Math.max(0, 100 * (1 - turnsWithHits / expectedTurns));
+    intelDetected = emptyTurnPct < 3;
+  }
+
   return {
     duration, totalXp, totalKills, xphReal, avgXpPerKill,
     dmgTotal, avgNormal, avgCrit, avgCharm,
     critRateObserved, critMultObserved, charmRateObserved,
     hpEstimated, boxSizeP95, exitP5, hitsPerTurn,
     dmgCycle, dmgCycleRaw, boxChangeTime, boxChangeTimeEstimated, boxChangeTimeConfidence,
+    intelDetected, emptyTurnPct,
     preyRate, preyMult, preyEffectiveFactor,
     isPaladin,
     eventCount: events.length,
@@ -3011,6 +3040,13 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_charm_dmg'), val: Math.round(data.avgCharm), sub: t('val_sub_charm_avg') },
     { lbl: t('val_card_crit_rate'), val: (data.critRateObserved * 100).toFixed(1).replace('.', dec) + '%', sub: t('val_sub_model_10') },
     { lbl: t('val_card_crit_mult'), val: data.critMultObserved.toFixed(2).replace('.', dec) + 'x', sub: t('val_sub_crit_base') },
+    { lbl: t('val_card_intel'),
+      val: data.intelDetected === null ? '—' : (data.intelDetected ? '✓ ON' : '✗ OFF'),
+      sub: data.intelDetected === null
+        ? t('val_sub_intel_unknown')
+        : (data.intelDetected
+            ? t('val_sub_intel_on').replace('{p}', data.emptyTurnPct.toFixed(1).replace('.', dec))
+            : t('val_sub_intel_off').replace('{p}', data.emptyTurnPct.toFixed(1).replace('.', dec))) },
     { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? t('val_sub_pal_on') : t('val_sub_pal_off') }
   ];
 
@@ -3146,11 +3182,14 @@ function renderValidatorHistogram(data) {
 
 function runValidatorComparison(data) {
   // Aplica os parâmetros do log na calculadora (sem sobrescrever os campos visuais)
-  // e roda a simulação com FLAGS forçadas pra refletir o que o log mostra
+  // e roda a simulação com FLAGS forçadas pra refletir o que o log mostra.
+  // Inteligência: usar o que foi detectado pelo log; se não foi possível inferir
+  // (log curto), assumir ON como default.
+  const intelOn = data.intelDetected !== null ? data.intelDetected : true;
   const flags = {
     charm: true,    // log tem charms
     crit: true,     // log tem crits
-    intel: true,    // assumir uso de inteligência (sair com poucos vivos)
+    intel: intelOn, // detectado a partir de % de turnos vazios no log
     var: true,      // dano variável é mecânica natural do jogo
     paladin: data.isPaladin // 2x atk/turno se paladino
   };
@@ -3175,7 +3214,7 @@ function runValidatorComparison(data) {
   // Marca checkboxes
   cbCharm.checked = true;
   cbCrit.checked = true;
-  cbInt.checked = true;
+  cbInt.checked = intelOn; // detectado do log
   cbVar.checked = true;
   cbPaladin.checked = data.isPaladin;
   // Atualiza UI dos checkboxes
