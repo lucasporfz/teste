@@ -892,6 +892,7 @@ const I18N = {
     val_card_duration: 'duração da hunt',
     val_card_xph: 'XP/h real',
     val_card_kills: 'mortes',
+    val_card_turns_per_h: 'turnos efetivos/h',
     val_card_xp_avg: 'XP médio por mob',
     val_card_hp_est: 'HP médio (estimado)',
     val_card_box_size: 'tamanho da box (p95)',
@@ -914,6 +915,7 @@ const I18N = {
     val_sub_events_turns: '{n} eventos · {t} turnos',
     val_sub_xp_in: '{xp} XP em {dur}',
     val_sub_kills_per_h: '{n}/h',
+    val_sub_turns_per_h: '{n} turnos com hits em {d}',
     val_sub_dmg_div_kills: 'dano total ÷ mortes',
     val_sub_p95_hits: 'percentil 95 dos hits/turno',
     val_sub_p5_hits: 'percentil 5 dos hits/turno',
@@ -1081,6 +1083,7 @@ const I18N = {
     val_card_duration: 'hunt duration',
     val_card_xph: 'real XP/h',
     val_card_kills: 'kills',
+    val_card_turns_per_h: 'effective turns/h',
     val_card_xp_avg: 'avg XP per mob',
     val_card_hp_est: 'estimated avg HP',
     val_card_box_size: 'box size (p95)',
@@ -1103,6 +1106,7 @@ const I18N = {
     val_sub_events_turns: '{n} events · {t} turns',
     val_sub_xp_in: '{xp} XP in {dur}',
     val_sub_kills_per_h: '{n}/h',
+    val_sub_turns_per_h: '{n} turns with hits in {d}',
     val_sub_dmg_div_kills: 'total damage ÷ kills',
     val_sub_p95_hits: '95th percentile of hits/turn',
     val_sub_p5_hits: '5th percentile of hits/turn',
@@ -2852,6 +2856,22 @@ function parseServerLog(logText, isPaladin) {
     turns = Object.values(turnsMap);
   }
 
+  // Contagem alternativa de turnos efetivos pra exibição (turnos/h).
+  // Usa CLUSTERING por gap mecânico do jogo (gap ≥ 2s = novo turno) em vez de
+  // janelas fixas. Janelas fixas alinhadas ao tempo zero quebram artificialmente
+  // turnos que cruzam a borda da janela, inflando a contagem. Clustering é fiel
+  // ao turno mecânico real do Tibia: ações dentro de 2s pertencem ao mesmo turno.
+  // Isso produz turnos/h ≤ 1800 (teto teórico de 3600s ÷ 2s) e bate com a
+  // percepção do jogador (ex: paladino com intel ON ~1640/h, EK com intel OFF
+  // ~1420/h refletindo perda real de turnos por troca de box).
+  let effectiveTurnsCount = 0;
+  if (sortedAttacks.length > 0) {
+    effectiveTurnsCount = 1;
+    for (let i = 1; i < sortedAttacks.length; i++) {
+      if (sortedAttacks[i].ts - sortedAttacks[i - 1].ts >= 2) effectiveTurnsCount++;
+    }
+  }
+
   // Hits por turno (já dividido pela vocação — pra paladino, dividir por 2)
   const divisor = isPaladin ? 2 : 1;
   const hitsPerTurn = turns.map(t => Math.max(1, Math.round(t.length / divisor)));
@@ -2994,6 +3014,7 @@ function parseServerLog(logText, isPaladin) {
     isPaladin,
     eventCount: events.length,
     nTurns: turns.length,
+    effectiveTurnsCount,
     nKills: totalKills
   };
 }
@@ -3094,6 +3115,9 @@ function renderValidatorExtracted(data) {
       sub: t('val_sub_xp_in').replace('{xp}', fmtNum(data.totalXp)).replace('{dur}', durStr) },
     { lbl: t('val_card_kills'), val: data.totalKills,
       sub: t('val_sub_kills_per_h').replace('{n}', (data.totalKills / (data.duration / 3600)).toFixed(0)) },
+    { lbl: t('val_card_turns_per_h'),
+      val: Math.round(data.effectiveTurnsCount / (data.duration / 3600)).toLocaleString(LANG === 'pt' ? 'pt-BR' : 'en-US'),
+      sub: t('val_sub_turns_per_h').replace('{n}', data.effectiveTurnsCount).replace('{d}', durStr) },
     { lbl: t('val_card_xp_avg'), val: fmtNum(data.avgXpPerKill), sub: t('val_note_animus') },
     { lbl: t('val_card_hp_est'), val: fmtNum(data.hpEstimated), sub: t('val_sub_dmg_div_kills') },
     { lbl: t('val_card_box_size'), val: data.boxSizeP95, sub: t('val_sub_p95_hits') + palDiv2Suffix },
