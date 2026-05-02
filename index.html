@@ -919,8 +919,10 @@ const I18N = {
     val_sub_p5_hits: 'percentil 5 dos hits/turno',
     val_sub_pal_div2: ' (÷2)',
     val_sub_gaps_median: 'mediana das pausas de 3-15s entre ataques',
+    val_sub_transition_median: 'mediana do tempo entre saída (p5) e próxima box (p95)',
     val_sub_no_estimate: '⚠ não foi possível estimar do log — ajuste pela sua experiência',
     val_sub_weak_estimate: '⚠ estimativa fraca ({n}s detectados de poucas amostras) — ajuste se tiver experiência da hunt',
+    val_sub_weak_transition: '⚠ estimativa fraca ({n}s detectados via transição saída→box) — ajuste se tiver experiência da hunt',
     val_sub_clean_hits: 'sem prey, sem crit, sem charm',
     val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} do raw)',
     val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
@@ -1106,8 +1108,10 @@ const I18N = {
     val_sub_p5_hits: '5th percentile of hits/turn',
     val_sub_pal_div2: ' (÷2)',
     val_sub_gaps_median: 'median of 3-15s pauses between attacks',
+    val_sub_transition_median: 'median time from exit (p5) to next box (p95)',
     val_sub_no_estimate: '⚠ could not estimate from log — adjust based on your experience',
     val_sub_weak_estimate: '⚠ weak estimate ({n}s from few samples) — adjust if you know the hunt',
+    val_sub_weak_transition: '⚠ weak estimate ({n}s via exit→box transition method) — adjust if you know the hunt',
     val_sub_clean_hits: 'no prey, no crit, no charm',
     val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} of raw)',
     val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
@@ -2838,8 +2842,8 @@ function parseServerLog(logText, isPaladin) {
   const TURN_DURATION_SEC = 2.0;
   const sortedAttacks = [...attackEvents].sort((a, b) => a.ts - b.ts);
   let turns = [];
+  const turnsMap = {};
   if (sortedAttacks.length > 0) {
-    const turnsMap = {};
     const t0 = sortedAttacks[0].ts;
     for (const ev of sortedAttacks) {
       const bucket = Math.floor((ev.ts - t0) / TURN_DURATION_SEC);
@@ -2869,33 +2873,6 @@ function parseServerLog(logText, isPaladin) {
   // Aplicar fator efetivo do prey (média ponderada do dano com prey)
   const dmgCycle = dmgCycleRaw.map(d => Math.round(d * preyEffectiveFactor));
 
-  // ===== BOX CHANGE TIME =====
-  // Detectar pausas reais entre ataques que indicam troca de box.
-  // Gaps entre ATAQUES de 3-15s capturam: tempo de caminhar pra próxima box +
-  // chegar em alcance + cooldown do primeiro hit. <3s é micro-pausa dentro da box,
-  // >15s é provavelmente AFK (banheiro, comer fora) e não conta como walking.
-  // Confiança: forte (≥10 amostras), fraca (3-9), nenhuma (<3 → fallback 6s).
-  // Em logs de 3-4min é raro ter ≥10 trocas, então a maior parte cai em "fraca".
-  const sortedAttackTs = sortedAttacks.map(a => a.ts);
-  const attackGaps = [];
-  for (let i = 1; i < sortedAttackTs.length; i++) {
-    const g = sortedAttackTs[i] - sortedAttackTs[i - 1];
-    if (g >= 3 && g <= 15) attackGaps.push(g);
-  }
-  let boxChangeTime, boxChangeTimeConfidence;
-  if (attackGaps.length >= 10) {
-    boxChangeTime = Math.round(median(attackGaps));
-    boxChangeTimeConfidence = 'strong';
-  } else if (attackGaps.length >= 3) {
-    boxChangeTime = Math.round(median(attackGaps));
-    boxChangeTimeConfidence = 'weak';
-  } else {
-    boxChangeTime = 6;
-    boxChangeTimeConfidence = 'none';
-  }
-  // Manter campo legado pra compatibilidade
-  const boxChangeTimeEstimated = boxChangeTimeConfidence !== 'none';
-
   // ===== DETECÇÃO DE INTELIGÊNCIA =====
   // Heurística operacional: "inteligência ON" = jogador puxa novos mobs antes
   // do anterior morrer, então nunca para de atacar. No log isso se traduz em
@@ -2916,12 +2893,102 @@ function parseServerLog(logText, isPaladin) {
     intelDetected = emptyTurnPct < 3;
   }
 
+  // ===== BOX CHANGE TIME =====
+  // Estratégia depende da inteligência detectada:
+  //
+  // INTEL OFF (jogador faz box completa antes de andar): há pausas REAIS no log
+  // entre o último hit da box anterior e o primeiro da próxima. Usar gaps
+  // entre ataques de 3-15s (mediana = walking time).
+  //
+  // INTEL ON (jogador puxa novos mobs antes do anterior morrer): NÃO há pausas
+  // visíveis — o ataque é contínuo. Mas há uma assinatura temporal: o jogador
+  // sai de turnos com poucos hits (saída p5 = mobs sobrando) e chega em turnos
+  // com muitos hits (box p95 = chegou na próxima box). O tempo dessa transição
+  // é o walking time efetivo. Procuramos pares (turno baixo → próximo turno alto)
+  // sem sobreposição (uma vez que casa, pula pra depois do high).
+  //
+  // Confiança: forte (≥10 amostras), fraca (3-9), nenhuma (<3 → fallback 6s).
+  let boxChangeTime, boxChangeTimeConfidence;
+  let bctSource = 'fallback'; // 'gap_method', 'transition_method', 'fallback'
+
+  if (intelDetected === false) {
+    // Intel OFF: usar gaps entre ataques (heurística clássica)
+    const sortedAttackTs = sortedAttacks.map(a => a.ts);
+    const attackGaps = [];
+    for (let i = 1; i < sortedAttackTs.length; i++) {
+      const g = sortedAttackTs[i] - sortedAttackTs[i - 1];
+      if (g >= 3 && g <= 15) attackGaps.push(g);
+    }
+    if (attackGaps.length >= 10) {
+      boxChangeTime = Math.round(median(attackGaps));
+      boxChangeTimeConfidence = 'strong';
+      bctSource = 'gap_method';
+    } else if (attackGaps.length >= 3) {
+      boxChangeTime = Math.round(median(attackGaps));
+      boxChangeTimeConfidence = 'weak';
+      bctSource = 'gap_method';
+    } else {
+      boxChangeTime = 6;
+      boxChangeTimeConfidence = 'none';
+    }
+  } else {
+    // Intel ON ou desconhecida: usar método de transições (p5 → próximo p95).
+    // Algoritmo:
+    //   1. Encontrar próximo turno com hits ≤ p5 (saída — poucos vivos)
+    //   2. Procurar próximo turno depois desse com hits ≥ p95 (chegou na próxima box)
+    //   3. Diferença de tempo = walking time (com cooldown de chegar em alcance)
+    //   4. Pular pra depois do p95 e buscar próximo p5
+    //   5. Filtrar transições >60s (AFK, banheiro, comer fora — não é walking real)
+    const sortedBuckets = Object.keys(turnsMap).map(Number).sort((a, b) => a - b);
+    const turnInfo = sortedBuckets.map(b => ({
+      ts: b * TURN_DURATION_SEC,
+      hits: Math.floor(turnsMap[b].length / (isPaladin ? 2 : 1))
+    }));
+
+    const transitions = [];
+    let i = 0;
+    while (i < turnInfo.length) {
+      // 1. Encontrar próximo p5
+      while (i < turnInfo.length && turnInfo[i].hits > exitP5) i++;
+      if (i >= turnInfo.length) break;
+      const p5Idx = i;
+      i++;
+
+      // 2. Encontrar próximo p95 depois desse p5 (sem afastamento mínimo —
+      //    o algoritmo natural do "próximo da sequência" já garante ordem)
+      while (i < turnInfo.length && turnInfo[i].hits < boxSizeP95) i++;
+      if (i >= turnInfo.length) break;
+
+      // 3. Calcular gap; filtrar AFK (>60s não é walking real)
+      const gap = turnInfo[i].ts - turnInfo[p5Idx].ts;
+      if (gap > 0 && gap <= 60) transitions.push(gap);
+
+      // 4. Pular pra depois do p95
+      i++;
+    }
+
+    if (transitions.length >= 10) {
+      boxChangeTime = Math.round(median(transitions));
+      boxChangeTimeConfidence = 'strong';
+      bctSource = 'transition_method';
+    } else if (transitions.length >= 3) {
+      boxChangeTime = Math.round(median(transitions));
+      boxChangeTimeConfidence = 'weak';
+      bctSource = 'transition_method';
+    } else {
+      boxChangeTime = 6;
+      boxChangeTimeConfidence = 'none';
+    }
+  }
+  // Manter campo legado pra compatibilidade
+  const boxChangeTimeEstimated = boxChangeTimeConfidence !== 'none';
+
   return {
     duration, totalXp, totalKills, xphReal, avgXpPerKill,
     dmgTotal, avgNormal, avgCrit, avgCharm,
     critRateObserved, critMultObserved, charmRateObserved,
     hpEstimated, boxSizeP95, exitP5, hitsPerTurn,
-    dmgCycle, dmgCycleRaw, boxChangeTime, boxChangeTimeEstimated, boxChangeTimeConfidence,
+    dmgCycle, dmgCycleRaw, boxChangeTime, boxChangeTimeEstimated, boxChangeTimeConfidence, bctSource,
     intelDetected, emptyTurnPct,
     preyRate, preyMult, preyEffectiveFactor,
     isPaladin,
@@ -3010,9 +3077,10 @@ function renderValidatorExtracted(data) {
     : data.boxChangeTime + 's';
   let bctSub;
   if (bctConf === 'strong') {
-    bctSub = t('val_sub_gaps_median');
+    bctSub = data.bctSource === 'transition_method' ? t('val_sub_transition_median') : t('val_sub_gaps_median');
   } else if (bctConf === 'weak') {
-    bctSub = '<span style="color:var(--amber)">' + t('val_sub_weak_estimate').replace('{n}', data.boxChangeTime) + '</span>';
+    const subKey = data.bctSource === 'transition_method' ? 'val_sub_weak_transition' : 'val_sub_weak_estimate';
+    bctSub = '<span style="color:var(--amber)">' + t(subKey).replace('{n}', data.boxChangeTime) + '</span>';
   } else {
     bctSub = '<span style="color:var(--amber)">' + t('val_sub_no_estimate') + '</span>';
   }
