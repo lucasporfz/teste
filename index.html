@@ -679,8 +679,8 @@ input[type="range"] { accent-color: var(--accent); }
 
       <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_histogram">distribuição de hits por turno no log</h3>
       <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5" data-i18n="val_histogram_desc">
-        Histograma dos hits por turno detectados no log. As linhas verticais marcam o ponto de saída (vermelho, p5)
-        e o tamanho da box (verde, p95) — onde a calculadora estima que estão os limites da box.
+        Histograma dos hits por turno detectados no log. As linhas verticais marcam o ponto de saída (vermelho, p10)
+        e o tamanho da box (verde, p90) — onde a calculadora estima que estão os limites da box.
       </p>
       <div class="chart-container">
         <div style="position:relative;height:240px"><canvas id="valHistogram"></canvas></div>
@@ -881,12 +881,12 @@ const I18N = {
     val_placeholder: 'Cole aqui o conteúdo do server log...',
     val_h_extracted: 'parâmetros extraídos do log',
     val_h_histogram: 'distribuição de hits por turno no log',
-    val_histogram_desc: 'Histograma dos hits por turno detectados no log. As linhas verticais marcam o ponto de saída (vermelho, p5) e o tamanho da box (verde, p95) — onde a calculadora estima que estão os limites da box.',
+    val_histogram_desc: 'Histograma dos hits por turno detectados no log. As linhas verticais marcam o ponto de saída (vermelho, p10) e o tamanho da box (verde, p90) — onde a calculadora estima que estão os limites da box.',
     val_histogram_label: 'turnos observados',
     val_histogram_x: 'hits por turno (÷2 se paladino)',
     val_histogram_y: 'frequência (qtd de turnos)',
-    val_histogram_exit: 'saída (p5)',
-    val_histogram_box: 'box (p95)',
+    val_histogram_exit: 'saída (p10)',
+    val_histogram_box: 'box (p90)',
     val_h_compare: 'comparação real vs simulado',
     val_run_compare: 'rodar simulação com esses parâmetros',
     val_card_duration: 'duração da hunt',
@@ -895,8 +895,8 @@ const I18N = {
     val_card_turns_per_h: 'turnos efetivos/h',
     val_card_xp_avg: 'XP médio por mob',
     val_card_hp_est: 'HP médio (estimado)',
-    val_card_box_size: 'tamanho da box (p95)',
-    val_card_exit: 'ponto de saída (p5)',
+    val_card_box_size: 'tamanho da box (p90)',
+    val_card_exit: 'ponto de saída (p10)',
     val_card_dmg_avg: 'dano médio (sem prey/crit)',
     val_card_dmg_cycle: 'ciclo de dano detectado',
     val_card_charm_rate: 'charm rate observado',
@@ -919,11 +919,11 @@ const I18N = {
     val_sub_dmg_div_kills: 'dano total ÷ mortes',
     val_sub_hp_table: 'HP ponderado de {n} bichos (tabela)',
     val_sub_hp_estimate_unknown: '⚠ estimado (dano÷mortes) — bichos não na tabela: {m}',
-    val_sub_p95_hits: 'percentil 95 dos hits/turno',
-    val_sub_p5_hits: 'percentil 5 dos hits/turno',
+    val_sub_p95_hits: 'percentil 90 dos hits/turno',
+    val_sub_p5_hits: 'percentil 10 dos hits/turno',
     val_sub_pal_div2: ' (÷2)',
     val_sub_gaps_median: 'mediana das pausas de 3-15s entre ataques',
-    val_sub_transition_median: 'mediana do tempo entre saída (p5) e próxima box (p95)',
+    val_sub_transition_median: 'mediana do tempo entre saída (p10) e próxima box (p90)',
     val_sub_no_estimate: '⚠ não foi possível estimar do log — ajuste pela sua experiência',
     val_sub_weak_estimate: '⚠ estimativa fraca ({n}s detectados de poucas amostras) — ajuste se tiver experiência da hunt',
     val_sub_weak_transition: '⚠ estimativa fraca ({n}s detectados via transição saída→box) — ajuste se tiver experiência da hunt',
@@ -1077,12 +1077,12 @@ const I18N = {
     val_placeholder: 'Paste server log contents here...',
     val_h_extracted: 'parameters extracted from log',
     val_h_histogram: 'distribution of hits per turn in log',
-    val_histogram_desc: 'Histogram of hits per turn detected in the log. Vertical lines mark the exit threshold (red, p5) and the box size (green, p95) — where the calculator estimates the box boundaries are.',
+    val_histogram_desc: 'Histogram of hits per turn detected in the log. Vertical lines mark the exit threshold (red, p10) and the box size (green, p90) — where the calculator estimates the box boundaries are.',
     val_histogram_label: 'observed turns',
     val_histogram_x: 'hits per turn (÷2 if paladin)',
     val_histogram_y: 'frequency (turn count)',
-    val_histogram_exit: 'exit (p5)',
-    val_histogram_box: 'box (p95)',
+    val_histogram_exit: 'exit (p10)',
+    val_histogram_box: 'box (p90)',
     val_h_compare: 'real vs simulated comparison',
     val_run_compare: 'run simulation with these parameters',
     val_card_duration: 'hunt duration',
@@ -1091,8 +1091,8 @@ const I18N = {
     val_card_turns_per_h: 'effective turns/h',
     val_card_xp_avg: 'avg XP per mob',
     val_card_hp_est: 'estimated avg HP',
-    val_card_box_size: 'box size (p95)',
-    val_card_exit: 'exit threshold (p5)',
+    val_card_box_size: 'box size (p90)',
+    val_card_exit: 'exit threshold (p10)',
     val_card_dmg_avg: 'avg damage (no prey/crit)',
     val_card_dmg_cycle: 'detected damage cycle',
     val_card_charm_rate: 'observed charm rate',
@@ -1115,11 +1115,11 @@ const I18N = {
     val_sub_dmg_div_kills: 'total damage ÷ kills',
     val_sub_hp_table: 'weighted HP from {n} mobs (table)',
     val_sub_hp_estimate_unknown: '⚠ estimated (damage÷kills) — mobs not in table: {m}',
-    val_sub_p95_hits: '95th percentile of hits/turn',
-    val_sub_p5_hits: '5th percentile of hits/turn',
+    val_sub_p95_hits: '90th percentile of hits/turn',
+    val_sub_p5_hits: '10th percentile of hits/turn',
     val_sub_pal_div2: ' (÷2)',
     val_sub_gaps_median: 'median of 3-15s pauses between attacks',
-    val_sub_transition_median: 'median time from exit (p5) to next box (p95)',
+    val_sub_transition_median: 'median time from exit (p10) to next box (p90)',
     val_sub_no_estimate: '⚠ could not estimate from log — adjust based on your experience',
     val_sub_weak_estimate: '⚠ weak estimate ({n}s from few samples) — adjust if you know the hunt',
     val_sub_weak_transition: '⚠ weak estimate ({n}s via exit→box transition method) — adjust if you know the hunt',
@@ -2951,10 +2951,10 @@ function parseServerLog(logText, isPaladin) {
   const divisor = isPaladin ? 2 : 1;
   const hitsPerTurn = turns.map(t => Math.max(1, Math.round(t.length / divisor)));
 
-  // Box size = percentil 95 dos hits/turno
+  // Box size = percentil 90 dos hits/turno
   // Ponto de saída = percentil 5 (mínimo confiável)
-  const boxSizeP95 = percentile(hitsPerTurn, 0.95);
-  const exitP5 = Math.max(1, percentile(hitsPerTurn, 0.05));
+  const boxSizeP95 = percentile(hitsPerTurn, 0.90);
+  const exitP5 = Math.max(1, percentile(hitsPerTurn, 0.10));
 
   // ===== HP ESTIMADO =====
   // Estratégia híbrida:
