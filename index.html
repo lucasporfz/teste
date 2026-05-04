@@ -731,7 +731,7 @@ input[type="range"] { accent-color: var(--accent); }
   <div class="input-card"><label data-i18n="label_dmg2">dano ataque 2</label><input type="number" id="dmg2" value="600" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_dmg2">turno 2 do ciclo</div></div>
   <div class="input-card"><label data-i18n="label_dmg3">dano ataque 3</label><input type="number" id="dmg3" value="1000" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_dmg3">turno 3 do ciclo</div></div>
   <div class="input-card"><label data-i18n="label_charmDmg">dano do charm</label><input type="number" id="charmDmg" value="500" min="1" max="9999" step="1"><div class="hint" data-i18n="hint_charmDmg">dano por ativação</div></div>
-  <div class="input-card"><label data-i18n="label_critBoost">aumento crítico (%)</label><input type="number" id="critBoost" value="44" min="0" max="500" step="1"><div class="hint"><span data-i18n="hint_critFinal_prefix">final: 1,72 +</span> <span id="critBoostHint">0,44</span> = <span id="critFinal">2,16</span>x</div></div>
+  <div class="input-card"><label data-i18n="label_critBoost">aumento crítico (%)</label><input type="number" id="critBoost" value="44" min="-100" max="500" step="1"><div class="hint"><span data-i18n="hint_critFinal_prefix">final: 1,72 +</span> <span id="critBoostHint">0,44</span> = <span id="critFinal">2,16</span>x</div></div>
 </div>
 
 <h4 data-i18n="section_config">configuração ativa</h4>
@@ -3441,8 +3441,12 @@ function runValidatorComparison(data) {
   $('boxSize').value = data.boxSizeP95;
   $('exitThreshold').value = data.exitP5;
   $('boxTime').value = data.boxChangeTime;
-  // Crit boost = 0% (modelo usa base 1,72x)
-  $('critBoost').value = 0;
+  // Crit boost = (critMultObserved - 1.72) × 100, arredondado
+  // Aplicado sempre, mesmo com valores estranhos (-20%, +99%, etc).
+  // Em logs curtos pode ficar inflado por procs como Transcendence ou viés
+  // de amostra pequena. Usuário pode ajustar manualmente se necessário.
+  const CRIT_BASE = 1.72;
+  $('critBoost').value = Math.round((data.critMultObserved - CRIT_BASE) * 100);
   // Marca checkboxes
   cbCharm.checked = true;
   cbCrit.checked = true;
