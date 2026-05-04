@@ -3445,7 +3445,6 @@ function runValidatorComparison(data) {
   // Aplicado sempre, mesmo com valores estranhos (-20%, +99%, etc).
   // Em logs curtos pode ficar inflado por procs como Transcendence ou viés
   // de amostra pequena. Usuário pode ajustar manualmente se necessário.
-  const CRIT_BASE = 1.72;
   $('critBoost').value = Math.round((data.critMultObserved - CRIT_BASE) * 100);
   // Marca checkboxes
   cbCharm.checked = true;
