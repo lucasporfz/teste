@@ -657,6 +657,7 @@ input[type="range"] { accent-color: var(--accent); cursor: pointer; }
     <label class="cb-wrap" id="wrap-crit" title="multiplica crítico de 1,72x para 1,72x + aumento%"><input type="checkbox" id="cb-crit"> <span data-i18n="cb_crit">crítico aumentado</span></label>
     <label class="cb-wrap" id="wrap-int" title="sai da box com ≤ N mobs vivos (ponto de saída)"><input type="checkbox" id="cb-int"> <span data-i18n="cb_int">inteligência</span></label>
     <label class="cb-wrap" id="wrap-var" title="variação aleatória de ±20% no dano de cada ataque"><input type="checkbox" id="cb-var"> <span data-i18n="cb_var">dano variável (±20%)</span></label>
+    <label class="cb-wrap" id="wrap-special" title="para RP/Mage, usa o dano 3 como granada/UE em vez de spell comum"><input type="checkbox" id="cb-special" checked> <span data-i18n="cb_special">dano 3 especial</span></label>
     <label style="display:flex;gap:6px;align-items:center;font-size:12px;color:var(--text-muted)">
       <span data-i18n="cb_vocation">vocação</span>
       <select id="vocation-main" style="background:var(--bg-surface);border:0.5px solid var(--border);border-radius:6px;color:var(--text);padding:7px 9px;font-size:12px">
@@ -783,6 +784,7 @@ const I18N = {
     cb_crit: 'crítico aumentado',
     cb_int: 'inteligência',
     cb_var: 'dano variável (±20%)',
+    cb_special: 'dano 3 especial',
     cb_paladin: 'paladino (2x atk/turno)',
     cb_vocation: 'vocação',
     val_vocation: 'vocação',
@@ -854,6 +856,8 @@ const I18N = {
     val_model_help_mage_note: 'Mage usa UE como parte natural da vocacao; o seletor compara geometria/cobertura, nao liga ou desliga UE.',
     val_open_hunt_log: 'ver log de hunt deste modelo',
     val_metric_model: 'modelo escolhido',
+    val_metric_seed: 'seed da rodada',
+    val_seed_note: 'cada clique usa uma nova seed; medias podem ficar parecidas por causa do numero de sessoes',
     val_metric_hist_dist: 'distância do histograma',
     val_metric_coverage_used: 'cobertura usada',
     val_metric_box_mean: 'box média',
@@ -911,10 +915,21 @@ const I18N = {
     val_card_paladin: 'modo paladino (2x atk)',
     val_card_vocation: 'vocação',
     val_card_rp_grenade: 'granada RP',
+    val_card_rp_grenade_dmg: 'dano da granada',
     val_card_mage_ue: 'UE mage',
     val_card_ue_cooldown: 'cooldown UE',
     val_card_special_timing: 'timing especial',
     val_card_special_threshold: 'threshold especial',
+    val_card_mob_distribution: 'distribuicao HP/XP',
+    val_sub_mob_distribution_available: 'diagnostico disponivel; simulacao ainda usa HP/XP medio com guardrail',
+    val_sub_mob_distribution_average: 'amostra fraca ou um unico tipo; usando HP/XP medio',
+    val_types_suffix: 'tipos',
+    val_average_short: 'media',
+    val_group_log_data: 'dados do log',
+    val_group_model_data: 'modelo escolhido',
+    val_special_timing_peak: 'pico viavel da box',
+    val_special_timing_sub: 'cooldown pronto espera box cheia; se nao encher, usa no maior ponto disponivel',
+    val_special_threshold_sub: 'mobs em alcance para castar sem segurar',
     val_card_intel: 'inteligência detectada',
     val_sub_intel_on: '✓ fluxo contínuo no log ({p}% turnos vazios) → puxa novos mobs antes do anterior morrer',
     val_sub_intel_off: '✗ pausas detectadas no log ({p}% turnos vazios) → termina box atual antes de mover',
@@ -1122,6 +1137,7 @@ const I18N = {
     cb_crit: 'boosted crit',
     cb_int: 'intelligence',
     cb_var: 'damage variance (±20%)',
+    cb_special: 'damage 3 special',
     cb_paladin: 'paladin (2x atk/turn)',
     cb_vocation: 'vocation',
     val_vocation: 'vocation',
@@ -1193,6 +1209,8 @@ const I18N = {
     val_model_help_mage_note: 'Mage uses UE as a natural vocation spell; the selector compares geometry/coverage, not UE on/off.',
     val_open_hunt_log: 'view hunt log for this model',
     val_metric_model: 'chosen model',
+    val_metric_seed: 'run seed',
+    val_seed_note: 'each click uses a new seed; averages may look similar because many sessions are simulated',
     val_metric_hist_dist: 'histogram distance',
     val_metric_coverage_used: 'coverage used',
     val_metric_box_mean: 'avg box',
@@ -1250,10 +1268,21 @@ const I18N = {
     val_card_paladin: 'paladin mode (2x atk)',
     val_card_vocation: 'vocation',
     val_card_rp_grenade: 'RP grenade',
+    val_card_rp_grenade_dmg: 'grenade damage',
     val_card_mage_ue: 'mage UE',
     val_card_ue_cooldown: 'UE cooldown',
     val_card_special_timing: 'special timing',
     val_card_special_threshold: 'special threshold',
+    val_card_mob_distribution: 'HP/XP distribution',
+    val_sub_mob_distribution_available: 'diagnostic available; simulation still uses average HP/XP with guardrail',
+    val_sub_mob_distribution_average: 'weak sample or single type; using average HP/XP',
+    val_types_suffix: 'types',
+    val_average_short: 'average',
+    val_group_log_data: 'log data',
+    val_group_model_data: 'chosen model',
+    val_special_timing_peak: 'best available box peak',
+    val_special_timing_sub: 'ready cooldown waits for full box; if it never fills, casts at the best available point',
+    val_special_threshold_sub: 'reachable mobs needed to cast without holding',
     val_card_intel: 'detected intelligence',
     val_sub_intel_on: '✓ continuous flow in log ({p}% empty turns) → pulls new mobs before previous dies',
     val_sub_intel_off: '✗ pauses detected in log ({p}% empty turns) → finishes current box before moving',
@@ -1600,8 +1629,8 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mo
   const ueInterval = Math.max(40, Math.min(60, mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS));
   const ueBaseDmg = mageUeDmg || Math.max(...dmgs);
   const ueLockout = Math.max(0, mageUeLockoutSeconds || UE_COOLDOWN_SECONDS);
-  const rpSpecialEnabled = flags.paladin && paladinArrowDmg > 0;
-  const mageSpecialEnabled = flags.mage;
+  const rpSpecialEnabled = flags.paladin && !!flags.rpGrenadeMode && paladinArrowDmg > 0;
+  const mageSpecialEnabled = flags.mage && !!flags.mageUeMode;
   let nextGrenadeAt = rpSpecialEnabled ? rng() * grenadeInterval : Infinity;
   let nextUeAt = mageSpecialEnabled ? rng() * ueInterval : Infinity;
   const specialCastThreshold = Math.max(1, Math.round(aoeBoxP90 || boxSize));
@@ -1683,7 +1712,8 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mo
       continue;
     }
     const mageUeReady = mageSpecialEnabled && timeElapsed >= nextUeAt;
-    const isMageUeTurn = mageUeReady && aliveLen >= specialCastThreshold;
+    const shouldUseSpecialNow = ready => ready && (aliveLen >= specialCastThreshold || spawnLen === 0);
+    const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
 
     if (!flags.paladin && autoDmg > 0) {
       const target = Math.floor(rng() * aliveLen);
@@ -1733,8 +1763,8 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mo
       }
 
       // Dano base do ataque
-      const grenadeReady = splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
-      const shouldCastGrenade = grenadeReady && aliveLen >= specialCastThreshold;
+      const grenadeReady = rpSpecialEnabled && splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
+      const shouldCastGrenade = shouldUseSpecialNow(grenadeReady);
       let base = splitPaladinDamage
         ? (atkIdx === 0 ? paladinArrowDmg : dmgs[ac % 3])
         : (isMageUeTurn ? ueBaseDmg : dmgs[ac % 3]);
@@ -2039,8 +2069,8 @@ function runSimInline(config, onProgress) {
     const ueInterval = Math.max(40, Math.min(60, mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS));
     const ueBaseDmg = mageUeDmg ? mageUeDmg + levelDelta : Math.max(...dmgs);
     const ueLockout = Math.max(0, mageUeLockoutSeconds || UE_COOLDOWN_SECONDS);
-    const rpSpecialEnabled = flags.paladin && paladinArrowDmg > 0;
-    const mageSpecialEnabled = flags.mage;
+    const rpSpecialEnabled = flags.paladin && !!flags.rpGrenadeMode && paladinArrowDmg > 0;
+    const mageSpecialEnabled = flags.mage && !!flags.mageUeMode;
     let nextGrenadeAt = rpSpecialEnabled ? rng() * grenadeInterval : Infinity;
     let nextUeAt = mageSpecialEnabled ? rng() * ueInterval : Infinity;
     const specialCastThreshold = Math.max(1, Math.round(aoeBoxP90 || boxSize));
@@ -2104,7 +2134,8 @@ function runSimInline(config, onProgress) {
         continue;
       }
       const mageUeReady = mageSpecialEnabled && timeElapsed >= nextUeAt;
-      const isMageUeTurn = mageUeReady && aliveLen >= specialCastThreshold;
+      const shouldUseSpecialNow = ready => ready && (aliveLen >= specialCastThreshold || spawnLen === 0);
+      const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
 
       if (!flags.paladin && autoDmg > 0) {
         const target = Math.floor(rng() * aliveLen);
@@ -2149,8 +2180,8 @@ function runSimInline(config, onProgress) {
             }
           }
         }
-        const grenadeReady = splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
-        const shouldCastGrenade = grenadeReady && aliveLen >= specialCastThreshold;
+        const grenadeReady = rpSpecialEnabled && splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
+        const shouldCastGrenade = shouldUseSpecialNow(grenadeReady);
         let base = splitPaladinDamage
           ? (atkIdx === 0 ? paladinArrowDmg : dmgs[ac % 3])
           : (isMageUeTurn ? ueBaseDmg : dmgs[ac % 3]);
@@ -2289,7 +2320,7 @@ const LEVEL_COLORS = Array.from({length: N_LEVELS}, (_, i) => {
 });
 
 const $ = id => document.getElementById(id);
-const cbCharm = $('cb-charm'), cbCrit = $('cb-crit'), cbInt = $('cb-int'), cbVar = $('cb-var');
+const cbCharm = $('cb-charm'), cbCrit = $('cb-crit'), cbInt = $('cb-int'), cbVar = $('cb-var'), cbSpecial = $('cb-special');
 const cbPaladin = $('cb-paladin-main');
 const vocationMain = $('vocation-main');
 const slider = $('sliderDmg'), sliderA = $('sliderA'), sliderB = $('sliderB');
@@ -2331,27 +2362,22 @@ function normalizeProfile(profile, paladinFallback) {
 function getFlags() {
   const profile = normalizeProfile(vocationMain ? vocationMain.value : null, cbPaladin && cbPaladin.checked);
   if (cbPaladin) cbPaladin.checked = profile === 'rp';
-  return { charm: cbCharm.checked, crit: cbCrit.checked, intel: cbInt.checked, var: cbVar.checked, paladin: profile === 'rp', mage: profile === 'mage', profile };
+  const specialAsThird = !!(cbSpecial && cbSpecial.checked && (profile === 'rp' || profile === 'mage'));
+  return { charm: cbCharm.checked, crit: cbCrit.checked, intel: cbInt.checked, var: cbVar.checked, paladin: profile === 'rp', mage: profile === 'mage', profile, specialAsThird };
 }
 function getCfgName(f) {
   const k = (f.charm?'1':'0') + (f.crit?'1':'0') + (f.intel?'1':'0') + (f.var?'1':'0');
   const baseName = (I18N[LANG].cfg && I18N[LANG].cfg[k]) || k;
-  return baseName + (f.mage ? ' (Mage UE)' : (f.paladin ? ' (RP)' : ''));
+  return baseName + (f.mage ? (f.specialAsThird ? ' (Mage UE)' : ' (Mage)') : (f.paladin ? (f.specialAsThird ? ' (RP granada)' : ' (RP)') : ''));
 }
 function getInputs() {
   const rawBaseDmgs = [+$('dmg1').value || 500, +$('dmg2').value || 600, +$('dmg3').value || 1000];
-  const specialDmgFromInputs = Math.max(...rawBaseDmgs);
-  const replaceMaxWithMedian = arr => {
-    const maxVal = Math.max(...arr);
-    const rest = arr.filter(v => v !== maxVal);
-    const replacement = rest.length ? Math.round(rest.reduce((s, v) => s + v, 0) / rest.length) : maxVal;
-    return arr.map(v => v === maxVal ? replacement : v);
-  };
+  const specialDmgFromInputs = rawBaseDmgs[2];
   const profile = normalizeProfile(vocationMain ? vocationMain.value : null, cbPaladin && cbPaladin.checked);
   const rpMode = profile === 'rp';
   const mageMode = profile === 'mage';
-  const shouldExtractSpecial = (rpMode && !validatorRpGrenadeDmg) || (mageMode && !validatorMageUeDmg);
-  const baseDmgs = shouldExtractSpecial ? replaceMaxWithMedian(rawBaseDmgs) : rawBaseDmgs;
+  const specialAsThird = !!(cbSpecial && cbSpecial.checked && (rpMode || mageMode));
+  const baseDmgs = specialAsThird ? [rawBaseDmgs[0], rawBaseDmgs[1], rawBaseDmgs[0]] : rawBaseDmgs;
   return {
     baseDmgs,
     charmDmg: +$('charmDmg').value || 500,
@@ -2364,8 +2390,8 @@ function getInputs() {
     boxVariance: validatorBoxVariance,
     paladinArrowCoverage: validatorPaladinArrowCoverage,
     paladinSpellCoverage: validatorPaladinSpellCoverage,
-    rpGrenadeMode: rpMode,
-    mageUeMode: mageMode,
+    rpGrenadeMode: rpMode && specialAsThird,
+    mageUeMode: mageMode && specialAsThird,
     rpGrenadeDmg: validatorRpGrenadeDmg || (rpMode ? specialDmgFromInputs : 0),
     rpGrenadeDelaySeconds: 3,
     rpGrenadeIntervalSeconds: validatorRpGrenadeIntervalSeconds,
@@ -2756,12 +2782,13 @@ function drawAll() {
 function updateUI() {
   const f = getFlags();
   cfgLbl.textContent = getCfgName(f);
-  ['charm', 'crit', 'int', 'var'].forEach(id => {
+  ['charm', 'crit', 'int', 'var', 'special'].forEach(id => {
     const cbId = id === 'paladin' ? 'cb-paladin-main' : 'cb-' + id;
     const wrapId = id === 'paladin' ? 'wrap-paladin' : 'wrap-' + id;
     const cb = $(cbId);
-    if (cb) $(wrapId).classList.toggle('active', cb.checked);
+    if (cb && $(wrapId)) $(wrapId).classList.toggle('active', cb.checked);
   });
+  if ($('wrap-special')) $('wrap-special').style.display = (f.paladin || f.mage) ? 'flex' : 'none';
   lblDmg.textContent = '+' + slider.value;
 }
 
@@ -2773,7 +2800,7 @@ function debouncedRun() {
   inputDebounceTimer = setTimeout(runSim, 250);
 }
 
-[cbCharm, cbCrit, cbInt, cbVar, cbPaladin].forEach(cb => {
+[cbCharm, cbCrit, cbInt, cbVar, cbSpecial, cbPaladin].forEach(cb => {
   if (cb) cb.addEventListener('change', () => { updateUI(); runSim(); });
 });
 if (vocationMain) vocationMain.addEventListener('change', () => { updateUI(); runSim(); });
@@ -2806,6 +2833,7 @@ function serializeState() {
   flags += cbInt.checked ? '1' : '0';
   flags += cbVar.checked ? '1' : '0';
   flags += cbPaladin.checked ? '1' : '0';
+  flags += cbSpecial && cbSpecial.checked ? '1' : '0';
   params.set('f', flags);
   params.set('voc', vocationMain ? vocationMain.value : (cbPaladin.checked ? 'rp' : 'ek'));
   params.set('l', LANG);
@@ -2828,6 +2856,7 @@ function deserializeState() {
     cbInt.checked = flags[2] === '1';
     cbVar.checked = flags[3] === '1';
     if (flags.length >= 5) cbPaladin.checked = flags[4] === '1';
+    if (cbSpecial) cbSpecial.checked = flags.length >= 6 ? flags[5] === '1' : true;
   }
   if (params.has('voc') && vocationMain) {
     vocationMain.value = normalizeProfile(params.get('voc'), cbPaladin.checked);
@@ -3088,8 +3117,8 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
   const ueInterval = Math.max(40, Math.min(60, inp.mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS));
   const ueBaseDmg = inp.mageUeDmg ? inp.mageUeDmg + level : Math.max(...dmgs);
   const ueLockout = Math.max(0, inp.mageUeLockoutSeconds || UE_COOLDOWN_SECONDS);
-  const rpSpecialEnabled = flags.paladin && inp.paladinArrowDmg > 0;
-  const mageSpecialEnabled = flags.mage;
+  const rpSpecialEnabled = flags.paladin && !!flags.rpGrenadeMode && inp.paladinArrowDmg > 0;
+  const mageSpecialEnabled = flags.mage && !!flags.mageUeMode;
   let nextGrenadeAt = rpSpecialEnabled ? rng() * grenadeInterval : Infinity;
   let nextUeAt = mageSpecialEnabled ? rng() * ueInterval : Infinity;
   const specialCastThreshold = Math.max(1, Math.round(inp.aoeBoxP90 || inp.boxSize));
@@ -3226,7 +3255,8 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
       continue;
     }
     const mageUeReady = mageSpecialEnabled && timeElapsed >= nextUeAt;
-    const isMageUeTurn = mageUeReady && mobHps.length >= specialCastThreshold;
+    const shouldUseSpecialNow = ready => ready && (mobHps.length >= specialCastThreshold || spawning.length === 0);
+    const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
 
     const charmHits = [];
     let charmKills = 0;
@@ -3246,8 +3276,8 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
       components.push(rollAttack('arrow', inp.paladinArrowDmg, true));
     }
     if (mobHps.length > 0) {
-      const grenadeReady = splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
-      const shouldCastGrenade = grenadeReady && mobHps.length >= specialCastThreshold;
+      const grenadeReady = rpSpecialEnabled && splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
+      const shouldCastGrenade = shouldUseSpecialNow(grenadeReady);
       if (shouldCastGrenade) {
         pendingGrenade = grenadeBaseDmg;
         pendingGrenadeTurns = 2;
@@ -4547,6 +4577,21 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_paladin'), val: data.isPaladin ? '✓' : '—', sub: data.isPaladin ? t('val_sub_pal_on') : t('val_sub_pal_off') }
   ];
 
+  if (data.isPaladin) {
+    cards.push({
+      lbl: t('val_card_rp_grenade_dmg'),
+      val: Math.round(data.rpGrenadeDmg || 0),
+      sub: t('val_sub_rp_grenade') + ' · ~' + (data.rpGrenadeIntervalSeconds || 24) + 's'
+    });
+  }
+  cards.push({
+    lbl: t('val_card_mob_distribution'),
+    val: data.hpMobBreakdown && data.hpMobBreakdown.length ? data.hpMobBreakdown.length + ' ' + t('val_types_suffix') : t('val_average_short'),
+    sub: data.hpMobBreakdown && data.hpMobBreakdown.length > 1
+      ? t('val_sub_mob_distribution_available')
+      : t('val_sub_mob_distribution_average')
+  });
+
   let html = '';
   // Banner de aviso quando log é curto (< 30 turnos efetivos): estatísticas
   // podem ser pouco confiáveis. Crit rate, charm rate, dmgCycle, p5/p95 todos
@@ -4557,13 +4602,39 @@ function renderValidatorExtracted(data) {
       t('val_warn_short_log_msg').replace('{n}', data.effectiveTurnsCount) +
       '</div>';
   }
-  for (const c of cards) {
-    html += '<div class="val-card">' +
-      '<div class="val-card-label">' + c.lbl + '</div>' +
-      '<div class="val-card-value">' + c.val + '</div>' +
-      '<div class="val-card-sub">' + c.sub + '</div>' +
-      '</div>';
-  }
+  const modelLabels = new Set([
+    t('val_card_box_effective'), t('val_card_box_mean'), t('val_card_box_variance'), t('val_card_box_range'),
+    t('val_card_box_meaning'), t('val_card_spawn_curve'), t('val_card_coverage_strength'), t('val_card_coverage_mode'),
+    t('val_card_screen_mobs'), t('val_card_screen_coverage'), t('val_card_screen_hits'), t('val_card_model_box_time'),
+    t('val_card_post_walk_spawn'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
+    t('val_card_special_timing'), t('val_card_special_threshold')
+  ]);
+  const isRelevant = c => {
+    if (!data.isPaladin && !data.isMage && [
+      t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_arrow_hits'),
+      t('val_card_spell_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'), t('val_card_rp_grenade'),
+      t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_paladin')
+    ].includes(c.lbl)) return false;
+    if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_post_walk_spawn'), t('val_card_paladin')].includes(c.lbl)) return false;
+    if (data.isMage && [
+      t('val_card_auto_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'),
+      t('val_card_arrow_hits'), t('val_card_spell_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
+      t('val_card_rp_grenade'), t('val_card_post_walk_spawn'), t('val_card_paladin')
+    ].includes(c.lbl)) return false;
+    return true;
+  };
+  const renderCard = c => '<div class="val-card">' +
+    '<div class="val-card-label">' + c.lbl + '</div>' +
+    '<div class="val-card-value">' + c.val + '</div>' +
+    '<div class="val-card-sub">' + c.sub + '</div>' +
+    '</div>';
+  const visibleCards = cards.filter(isRelevant);
+  const logCards = visibleCards.filter(c => !modelLabels.has(c.lbl));
+  const modelCards = visibleCards.filter(c => modelLabels.has(c.lbl));
+  html += '<div style="grid-column:1/-1;margin:4px 0 0;color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">' + t('val_group_log_data') + '</div>';
+  for (const c of logCards) html += renderCard(c);
+  html += '<div style="grid-column:1/-1;margin:10px 0 0;color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">' + t('val_group_model_data') + '</div>';
+  for (const c of modelCards) html += renderCard(c);
   $('valExtracted').innerHTML = html;
 
   // Listener pro input editável de boxChangeTime — atualiza o data e re-roda a comparação
@@ -4776,8 +4847,8 @@ function collectSimHitDistribution(config, nSessions) {
     const ueInterval = Math.max(40, Math.min(60, mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS));
     const ueBaseDmg = mageUeDmg || Math.max(...dmgs);
     const ueLockout = Math.max(0, mageUeLockoutSeconds || UE_COOLDOWN_SECONDS);
-    const rpSpecialEnabled = flags.paladin && paladinArrowDmg > 0;
-    const mageSpecialEnabled = flags.mage;
+    const rpSpecialEnabled = flags.paladin && !!flags.rpGrenadeMode && paladinArrowDmg > 0;
+    const mageSpecialEnabled = flags.mage && !!flags.mageUeMode;
     let nextGrenadeAt = rpSpecialEnabled ? rng() * grenadeInterval : Infinity;
     let nextUeAt = mageSpecialEnabled ? rng() * ueInterval : Infinity;
     const specialCastThreshold = Math.max(1, Math.round(aoeBoxP90 || boxSize));
@@ -4840,7 +4911,8 @@ function collectSimHitDistribution(config, nSessions) {
         continue;
       }
       const mageUeReady = mageSpecialEnabled && timeElapsed >= nextUeAt;
-      const isMageUeTurn = mageUeReady && aliveLen >= specialCastThreshold;
+      const shouldUseSpecialNow = ready => ready && (aliveLen >= specialCastThreshold || spawnLen === 0);
+      const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
 
       if (!flags.paladin && autoDmg > 0) {
         const target = Math.floor(rng() * aliveLen);
@@ -4886,8 +4958,8 @@ function collectSimHitDistribution(config, nSessions) {
             }
           }
         }
-        const grenadeReady = splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
-        const shouldCastGrenade = grenadeReady && aliveLen >= specialCastThreshold;
+        const grenadeReady = rpSpecialEnabled && splitPaladinDamage && timeElapsed >= nextGrenadeAt && pendingGrenadeTurns <= 0 && pendingGrenade <= 0;
+        const shouldCastGrenade = shouldUseSpecialNow(grenadeReady);
         let base = splitPaladinDamage
           ? (atkIdx === 0 ? paladinArrowDmg : dmgs[ac % 3])
           : (isMageUeTurn ? ueBaseDmg : dmgs[ac % 3]);
@@ -5305,6 +5377,7 @@ function runValidatorComparison(data) {
   cbCrit.checked = true;
   cbInt.checked = intelOn; // detectado do log
   cbVar.checked = true;
+  if (cbSpecial) cbSpecial.checked = data.isPaladin || data.isMage;
   cbPaladin.checked = data.isPaladin;
   if (vocationMain) vocationMain.value = flags.profile;
   // Atualiza UI dos checkboxes
@@ -5561,6 +5634,7 @@ function runValidatorComparison(data) {
     sim.charmRateUsed = flags.charm ? 0.1 : 0;
     sim.charmDmgUsed = chosen.cfg.charmDmg || 0;
     sim.spawnCurveUsed = chosen.cfg.spawnCurve || 2.0;
+    sim.runSeedUsed = chosen.cfg.runSeed || runSeed;
     sim.aoeCoverageUsed = chosen.cfg.aoeCoverage || 1;
     sim.boxVarianceUsed = chosen.cfg.boxVariance || 0;
     sim.paladinArrowCoverageUsed = chosen.cfg.paladinArrowCoverage || 1;
@@ -5644,6 +5718,7 @@ function renderValidatorComparison(real, sim) {
   const diagRows = [
     { metric: t('val_card_vocation'), sim: real.isMage ? t('voc_mage') : (real.isPaladin ? t('voc_rp') : t('voc_ek')) },
     { metric: t('val_metric_model'), sim: sim.coverageModeLabel || 'auto' },
+    { metric: t('val_metric_seed'), sim: String(sim.runSeedUsed || 'â€”') },
     { metric: t('val_metric_hist_dist'), sim: (sim.histDist || 0).toFixed(1) },
     { metric: t('val_metric_coverage_used'), sim: coverageUsed },
     { metric: t('val_metric_box_mean'), sim: boxMeanUsed.toFixed(2) },
@@ -5683,6 +5758,8 @@ function renderValidatorComparison(real, sim) {
 
   if (sim.coverageModeLabel) {
     html += '<div class="val-note" style="margin-top:10px">' +
+      '<strong>' + t('val_metric_seed') + ':</strong> ' + (sim.runSeedUsed || 'â€”') +
+      ' Â· ' + t('val_seed_note') + '<br>' +
       '<strong>' + t('val_card_coverage_mode') + ':</strong> ' + sim.coverageModeLabel +
       ' · <strong>' + t('val_card_coverage_strength') + ':</strong> ' + (sim.coverageDamageStrength || 0) + '%' +
       '<br><strong>' + t('val_metric_hist_dist') + ':</strong> ' + (sim.histDist || 0).toFixed(1) +
