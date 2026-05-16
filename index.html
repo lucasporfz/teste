@@ -600,6 +600,27 @@ input[type="range"] { accent-color: var(--accent); cursor: pointer; }
         <div style="position:relative;height:240px"><canvas id="valHistogram"></canvas></div>
       </div>
 
+      <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_timeline">análise temporal do log</h3>
+      <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5" data-i18n="val_timeline_desc">
+        Veja a hunt como sequência: mobs acertados, mortes, XP acumulada e componentes por turno ao longo do tempo.
+      </p>
+      <div class="chart-container">
+        <div style="position:relative;height:240px"><canvas id="valTimelineHits"></canvas></div>
+      </div>
+      <div class="chart-container">
+        <div style="position:relative;height:220px"><canvas id="valTimelineKills"></canvas></div>
+      </div>
+      <div class="chart-container">
+        <div style="position:relative;height:220px"><canvas id="valTimelineXp"></canvas></div>
+      </div>
+      <div class="chart-container">
+        <div style="position:relative;height:220px"><canvas id="valTimelineComponents"></canvas></div>
+      </div>
+      <div class="chart-container">
+        <div style="position:relative;height:230px"><canvas id="valImpactAnalyser"></canvas></div>
+      </div>
+      <div id="valTemporalSummary" class="val-model-help" style="display:none"></div>
+
       <div style="display:flex;gap:10px;align-items:center;margin:18px 0 10px;flex-wrap:wrap">
         <h3 style="font-size:14px;font-weight:500;margin:0;color:var(--accent)" data-i18n="val_h_compare">comparação real vs simulado</h3>
         <select id="valModelSelect" style="background:var(--bg-surface);border:0.5px solid var(--border);border-radius:6px;color:var(--text);padding:8px 10px;font-size:12px;min-width:220px"></select>
@@ -608,6 +629,18 @@ input[type="range"] { accent-color: var(--accent); cursor: pointer; }
       </div>
       <div id="valModelHelp" class="val-model-help" style="display:none"></div>
       <div id="valComparison"></div>
+
+      <h3 style="font-size:14px;font-weight:500;margin:22px 0 10px;color:var(--accent)" data-i18n="bench_title">bancada de validação</h3>
+      <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5" data-i18n="bench_desc">
+        Rode vários logs de referência contra o validador atual para comparar XP/h, mortes/h, histograma, box e componentes sem mudar os modelos.
+      </p>
+      <div class="val-controls" style="margin-bottom:10px">
+        <input type="file" id="benchFileInput" accept=".txt,.log" multiple style="display:none">
+        <button id="btnBenchFiles" style="background:var(--blue);color:#fff" data-i18n="bench_load_files">carregar logs da bancada</button>
+        <button id="btnRunBench" style="background:var(--accent)" data-i18n="bench_run" disabled>rodar bancada</button>
+        <span id="benchStatus" class="sim-status" data-i18n="bench_empty">nenhum log carregado</span>
+      </div>
+      <div id="benchResults"></div>
     </div>
   </div>
 </div>
@@ -806,12 +839,42 @@ const I18N = {
     val_analyze: 'analisar log',
     val_status_ready: 'cole o log abaixo ou abra um arquivo',
     val_status_analyzing: 'analisando log...',
+    val_status_reading: 'lendo log...',
+    val_status_cards: 'montando cards...',
+    val_status_histogram: 'montando histograma...',
+    val_status_temporal: 'montando gráficos temporais...',
+    val_status_render_error: 'erro ao renderizar análise',
+    val_temporal_render_error: 'não consegui montar os gráficos temporais desta rodada',
     val_status_simulating: 'simulando com parâmetros do log...',
     val_status_no_data: 'log inválido — verifique se é um server log do Tibia',
     val_placeholder: 'Cole aqui o conteúdo do server log...',
     val_h_extracted: 'parâmetros extraídos do log',
     val_h_histogram: 'distribuição de mobs acertados por turno no log',
     val_histogram_desc: 'Histograma dos mobs acertados pela rotação principal no log. Charms não entram nessa curva; para não-paladino, o auto attack single target é removido. As linhas verticais marcam o ponto de saída (vermelho, p10) e o tamanho da box (verde, p90).',
+    val_h_timeline: 'análise temporal do log',
+    val_timeline_desc: 'Veja a hunt como sequência: mobs acertados, mortes, XP acumulada e componentes por turno ao longo do tempo.',
+    val_timeline_hits: 'mobs acertados por turno',
+    val_timeline_kills: 'mortes por tempo',
+    val_timeline_xp: 'XP acumulada',
+    val_timeline_components: 'componentes por turno',
+    val_axis_turn: 'turno',
+    val_impact_analyser: 'Impact Analyser · dano médio últimos 30s',
+    val_impact_avg: 'impact médio',
+    val_impact_drop: 'queda máxima 30s',
+    val_impact_stability: 'estabilidade',
+    val_impact_stable: 'estável',
+    val_impact_oscillating: 'oscilante',
+    val_impact_drop_hard: 'queda forte',
+    val_temporal_sim_loaded: 'simulação temporal carregada',
+    val_temporal_sim_missing: 'rode a comparação para ver a simulação temporal',
+    val_timeline_real: 'log real',
+    val_timeline_sim: 'simulação',
+    val_timeline_grenade_cast: 'granada cast',
+    val_timeline_grenade_explode: 'granada explode',
+    val_temporal_cycle: 'ciclo temporal',
+    val_temporal_dead_time: 'tempo morto médio',
+    val_temporal_specials: 'especiais detectados',
+    val_temporal_shape: 'formato da curva',
     val_histogram_label: 'log real',
     val_histogram_label_sim: 'simulação',
     val_histogram_x: 'mobs acertados por turno',
@@ -855,6 +918,28 @@ const I18N = {
     val_model_help_ek_post_walk_note: 'Especifico para EK/Outro com inteligencia OFF.',
     val_model_help_mage_note: 'Mage usa UE como parte natural da vocacao; o seletor compara geometria/cobertura, nao liga ou desliga UE.',
     val_open_hunt_log: 'ver log de hunt deste modelo',
+    bench_title: 'bancada de validação',
+    bench_desc: 'Rode vários logs de referência contra o validador atual para comparar XP/h, mortes/h, histograma, box e componentes sem mudar os modelos.',
+    bench_load_files: 'carregar logs da bancada',
+    bench_run: 'rodar bancada',
+    bench_empty: 'nenhum log carregado',
+    bench_loaded: '{n} logs carregados',
+    bench_running: 'rodando {i}/{n}: {file}',
+    bench_done: 'bancada concluída · {n} logs',
+    bench_error: 'erro',
+    bench_log: 'log',
+    bench_vocation: 'vocação',
+    bench_model: 'modelo',
+    bench_xph_real: 'XP/h real',
+    bench_xph_sim: 'XP/h sim',
+    bench_xph_err: 'erro XP',
+    bench_kills_err: 'erro mortes',
+    bench_hist: 'dist. hist',
+    bench_box: 'box',
+    bench_hits: 'moda / média / p90',
+    bench_components: 'componentes',
+    bench_candidates: 'modelos testados',
+    bench_notes: 'leitura rápida',
     val_metric_model: 'modelo escolhido',
     val_metric_seed: 'seed da rodada',
     val_seed_note: 'cada clique usa uma nova seed; medias podem ficar parecidas por causa do numero de sessoes',
@@ -885,6 +970,7 @@ const I18N = {
     val_card_dmg_avg: 'dano médio (sem prey/crit)',
     val_card_dmg_cycle: 'ciclo de dano detectado',
     val_card_auto_dmg: 'auto attack médio',
+    val_card_reflect_dmg: 'damage reflection',
     val_card_aoe_coverage: 'cobertura AoE média',
     val_card_box_effective: 'box efetiva calibrada',
     val_card_spawn_curve: 'spawn curve estimado',
@@ -967,6 +1053,7 @@ const I18N = {
     val_sub_clean_hits: 'sem prey, sem crit, sem charm',
     val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} do raw)',
     val_sub_auto_dmg: 'primeira linha ofensiva de cada turno não-paladino',
+    val_sub_reflect_dmg: 'mediana do reflect puro; aplicado em todos os mobs em alcance no EK',
     val_sub_aoe_coverage: 'média dos mobs acertados ÷ p90 da box',
     val_sub_box_effective: 'box decimal derivada da curva, com p90 como teto',
     val_sub_spawn_curve: 'menor = chegada menos front-loaded',
@@ -1014,6 +1101,7 @@ const I18N = {
     val_metric_crit_mult: 'crit multiplier',
     val_metric_charm_rate: 'charm rate',
     val_metric_charm_dmg: 'dano de charm',
+    val_metric_reflect_dmg: 'damage reflection',
     val_metric_spawn_curve: 'spawn curve',
     val_metric_box_time_used: 'tempo entre boxes usado',
     val_verdict_ok: '✓ Modelo validado — os números do simulador batem com a hunt real dentro da margem esperada (±15%).',
@@ -1159,12 +1247,42 @@ const I18N = {
     val_analyze: 'analyze log',
     val_status_ready: 'paste the log below or open a file',
     val_status_analyzing: 'analyzing log...',
+    val_status_reading: 'reading log...',
+    val_status_cards: 'building cards...',
+    val_status_histogram: 'building histogram...',
+    val_status_temporal: 'building temporal charts...',
+    val_status_render_error: 'error rendering analysis',
+    val_temporal_render_error: 'could not build temporal charts for this run',
     val_status_simulating: 'simulating with log parameters...',
     val_status_no_data: 'invalid log — make sure it\'s a Tibia server log',
     val_placeholder: 'Paste server log contents here...',
     val_h_extracted: 'parameters extracted from log',
     val_h_histogram: 'distribution of mobs hit per turn in log',
     val_histogram_desc: 'Histogram of mobs hit by the main rotation in the log. Charms are excluded from this curve; for non-paladin logs, the single-target auto attack is removed. Vertical lines mark the exit threshold (red, p10) and box size (green, p90).',
+    val_h_timeline: 'temporal log analysis',
+    val_timeline_desc: 'See the hunt as a sequence: mobs hit, kills, cumulative XP, and turn components over time.',
+    val_timeline_hits: 'mobs hit per turn',
+    val_timeline_kills: 'kills over time',
+    val_timeline_xp: 'cumulative XP',
+    val_timeline_components: 'turn components',
+    val_axis_turn: 'turn',
+    val_impact_analyser: 'Impact Analyser · avg damage last 30s',
+    val_impact_avg: 'avg impact',
+    val_impact_drop: 'max 30s drop',
+    val_impact_stability: 'stability',
+    val_impact_stable: 'stable',
+    val_impact_oscillating: 'oscillating',
+    val_impact_drop_hard: 'hard drop',
+    val_temporal_sim_loaded: 'temporal simulation loaded',
+    val_temporal_sim_missing: 'run comparison to see temporal simulation',
+    val_timeline_real: 'real log',
+    val_timeline_sim: 'simulation',
+    val_timeline_grenade_cast: 'grenade cast',
+    val_timeline_grenade_explode: 'grenade explode',
+    val_temporal_cycle: 'temporal cycle',
+    val_temporal_dead_time: 'avg dead time',
+    val_temporal_specials: 'detected specials',
+    val_temporal_shape: 'curve shape',
     val_histogram_label: 'real log',
     val_histogram_label_sim: 'simulation',
     val_histogram_x: 'mobs hit per turn',
@@ -1208,6 +1326,28 @@ const I18N = {
     val_model_help_ek_post_walk_note: 'Specific to EK/Other with intelligence OFF.',
     val_model_help_mage_note: 'Mage uses UE as a natural vocation spell; the selector compares geometry/coverage, not UE on/off.',
     val_open_hunt_log: 'view hunt log for this model',
+    bench_title: 'validation bench',
+    bench_desc: 'Run several reference logs against the current validator to compare XP/h, kills/h, histogram, box, and components without changing models.',
+    bench_load_files: 'load bench logs',
+    bench_run: 'run bench',
+    bench_empty: 'no logs loaded',
+    bench_loaded: '{n} logs loaded',
+    bench_running: 'running {i}/{n}: {file}',
+    bench_done: 'bench complete · {n} logs',
+    bench_error: 'error',
+    bench_log: 'log',
+    bench_vocation: 'vocation',
+    bench_model: 'model',
+    bench_xph_real: 'real XP/h',
+    bench_xph_sim: 'sim XP/h',
+    bench_xph_err: 'XP error',
+    bench_kills_err: 'kills error',
+    bench_hist: 'hist. dist',
+    bench_box: 'box',
+    bench_hits: 'mode / mean / p90',
+    bench_components: 'components',
+    bench_candidates: 'tested models',
+    bench_notes: 'quick read',
     val_metric_model: 'chosen model',
     val_metric_seed: 'run seed',
     val_seed_note: 'each click uses a new seed; averages may look similar because many sessions are simulated',
@@ -1238,6 +1378,7 @@ const I18N = {
     val_card_dmg_avg: 'avg damage (no prey/crit)',
     val_card_dmg_cycle: 'detected damage cycle',
     val_card_auto_dmg: 'avg auto attack',
+    val_card_reflect_dmg: 'damage reflection',
     val_card_aoe_coverage: 'avg AoE coverage',
     val_card_box_effective: 'calibrated effective box',
     val_card_spawn_curve: 'estimated spawn curve',
@@ -1320,6 +1461,7 @@ const I18N = {
     val_sub_clean_hits: 'no prey, no crit, no charm',
     val_sub_atk_cycle: 'atk1, atk2, atk3 (×{f} of raw)',
     val_sub_auto_dmg: 'first offensive line of each non-paladin turn',
+    val_sub_reflect_dmg: 'median pure reflect; applied to every reachable mob on EK',
     val_sub_aoe_coverage: 'average mobs hit ÷ box p90',
     val_sub_box_effective: 'decimal box derived from curve, capped by p90',
     val_sub_spawn_curve: 'lower = less front-loaded arrival',
@@ -1367,6 +1509,7 @@ const I18N = {
     val_metric_crit_mult: 'crit multiplier',
     val_metric_charm_rate: 'charm rate',
     val_metric_charm_dmg: 'charm damage',
+    val_metric_reflect_dmg: 'damage reflection',
     val_metric_spawn_curve: 'spawn curve',
     val_metric_box_time_used: 'box change time used',
     val_verdict_ok: '✓ Model validated — simulator numbers match the real hunt within expected margin (±15%).',
@@ -1594,7 +1737,7 @@ function shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng) {
   }
 }
 
-function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
+function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
   const rng = makeRng(seed);
 
   const boxFloor = Math.floor(boxSize);
@@ -1648,6 +1791,7 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mo
   // Modo paladino: 2 ataques por turno (mesmo tempo de turno, 2x dano efetivo)
   const attacksPerTurn = flags.paladin ? 2 : 1;
   const splitPaladinDamage = flags.paladin && paladinArrowDmg > 0;
+  const reflectActive = !flags.paladin && !flags.mage && reflectDmg > 0;
 
   while (timeElapsed < seconds) {
     const aliveTotal = aliveLen + spawnLen;
@@ -1714,6 +1858,20 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mo
     const mageUeReady = mageSpecialEnabled && timeElapsed >= nextUeAt;
     const shouldUseSpecialNow = ready => ready && (aliveLen >= specialCastThreshold || spawnLen === 0);
     const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
+
+    if (reflectActive) {
+      let writeIdx = 0;
+      for (let i = 0; i < aliveLen; i++) {
+        const hp = aliveHp[i] - reflectDmg;
+        if (hp <= 0) {
+          totalKills++;
+        } else {
+          aliveHp[writeIdx++] = hp;
+        }
+      }
+      aliveLen = writeIdx;
+      if (aliveLen === 0) { continue; }
+    }
 
     if (!flags.paladin && autoDmg > 0) {
       const target = Math.floor(rng() * aliveLen);
@@ -1853,7 +2011,7 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mo
   return { xph, turnCounts: turnCountsBuf.subarray(0, turnCountsLen) };
 }
 
-function simulateLevel(dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
+function simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
   const counter = Object.create(null);
   let totalXph = 0;
   let totalBoxes = 0;
@@ -1861,7 +2019,7 @@ function simulateLevel(dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp
 
   for (let s = 0; s < nSessions; s++) {
     const sessionSeed = (Math.imul(levelSeed, 104729) + s * 7919) >>> 0;
-    const res = simSession(sessionSeed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds);
+    const res = simSession(sessionSeed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds);
     totalXph += res.xph;
     const tc = res.turnCounts;
     totalBoxes += tc.length;
@@ -1890,7 +2048,7 @@ function simulateLevel(dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp
 self.onmessage = function(e) {
   const cfg = e.data;
   const {
-    baseDmgs, charmDmg, critMult, autoDmg = 0, paladinArrowDmg = 0, mobHp, mobXp,
+    baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp,
     boxSize, exitThreshold, boxChangeTime, flags, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = SPAWN_CURVE, rpGrenadeMode = false, mageUeMode = false,
     rpGrenadeDmg = 0, rpGrenadeDelaySeconds = RP_GRENADE_DELAY_SECONDS, rpGrenadeIntervalSeconds = RP_GRENADE_DEFAULT_INTERVAL_SECONDS,
     mageUeDmg = 0, mageUeIntervalSeconds = MAGE_UE_DEFAULT_INTERVAL_SECONDS, mageUeLockoutSeconds = UE_COOLDOWN_SECONDS,
@@ -1909,7 +2067,7 @@ self.onmessage = function(e) {
     const levelSeed = (runSeed ^ (inc * 31337)) >>> 0;
     const levelGrenadeDmg = rpGrenadeDmg ? rpGrenadeDmg + inc : 0;
     const levelUeDmg = mageUeDmg ? mageUeDmg + inc : 0;
-    result[inc] = simulateLevel(dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, levelGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, levelUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds);
+    result[inc] = simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, levelGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, levelUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds);
     self.postMessage({ type: 'progress', level: inc });
   }
   self.postMessage({ type: 'done', result });
@@ -1972,7 +2130,7 @@ function partitionLevels(nLevels, nWorkers) {
 // ========== Fallback: simulação inline (sem workers) ==========
 // Cópia da lógica do worker, rodando na main thread com yields pra não travar UI
 function runSimInline(config, onProgress) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4 } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4 } = config;
   flags.rpGrenadeMode = !!rpGrenadeMode;
   flags.mageUeMode = !!mageUeMode;
   
@@ -2082,6 +2240,7 @@ function runSimInline(config, onProgress) {
     let spawnStep = 0;
     const attacksPerTurn = flags.paladin ? 2 : 1;
     const splitPaladinDamage = flags.paladin && paladinArrowDmg > 0;
+    const reflectActive = !flags.paladin && !flags.mage && reflectDmg > 0;
 
     while (timeElapsed < seconds) {
       const aliveTotal = aliveLen + spawnLen;
@@ -2136,6 +2295,17 @@ function runSimInline(config, onProgress) {
       const mageUeReady = mageSpecialEnabled && timeElapsed >= nextUeAt;
       const shouldUseSpecialNow = ready => ready && (aliveLen >= specialCastThreshold || spawnLen === 0);
       const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
+
+      if (reflectActive) {
+        let writeIdx = 0;
+        for (let i = 0; i < aliveLen; i++) {
+          const hp = aliveHp[i] - reflectDmg;
+          if (hp <= 0) totalKills++;
+          else aliveHp[writeIdx++] = hp;
+        }
+        aliveLen = writeIdx;
+        if (aliveLen === 0) { continue; }
+      }
 
       if (!flags.paladin && autoDmg > 0) {
         const target = Math.floor(rng() * aliveLen);
@@ -2334,6 +2504,7 @@ const container = document.querySelector('.container');
 
 let lastElapsed = null;
 let validatorAutoDmg = 0;
+let validatorReflectDmg = 0;
 let validatorPaladinArrowDmg = 0;
 let validatorAoeHitSamples = [];
 let validatorSpawnCurve = 2.0;
@@ -2382,6 +2553,7 @@ function getInputs() {
     baseDmgs,
     charmDmg: +$('charmDmg').value || 500,
     autoDmg: validatorAutoDmg,
+    reflectDmg: validatorReflectDmg,
     paladinArrowDmg: validatorPaladinArrowDmg,
     aoeHitSamples: validatorAoeHitSamples,
     coverageMode: validatorCoverageMode,
@@ -2465,6 +2637,7 @@ function runSim() {
       baseDmgs: inp.baseDmgs,
       charmDmg: inp.charmDmg,
       autoDmg: inp.autoDmg,
+      reflectDmg: inp.reflectDmg,
       paladinArrowDmg: inp.paladinArrowDmg,
       aoeHitSamples: inp.aoeHitSamples,
       coverageMode: inp.coverageMode,
@@ -2567,6 +2740,7 @@ function runSim() {
       baseDmgs: inp.baseDmgs,
       charmDmg: inp.charmDmg,
       autoDmg: inp.autoDmg,
+      reflectDmg: inp.reflectDmg,
       paladinArrowDmg: inp.paladinArrowDmg,
       aoeHitSamples: inp.aoeHitSamples,
       coverageMode: inp.coverageMode,
@@ -2922,6 +3096,7 @@ function buildLogInputFromConfig(config) {
     baseDmgs: cfg.baseDmgs || [+$('dmg1').value || 500, +$('dmg2').value || 600, +$('dmg3').value || 1000],
     charmDmg: cfg.charmDmg || (+$('charmDmg').value || 500),
     autoDmg: cfg.autoDmg || 0,
+    reflectDmg: cfg.reflectDmg || 0,
     paladinArrowDmg: cfg.paladinArrowDmg || 0,
     aoeHitSamples: cfg.aoeHitSamples || [],
     coverageMode: cfg.coverageMode || 'none',
@@ -3041,6 +3216,18 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
     }
     mobHps = next;
     return kills;
+  }
+
+  function rollReflectDamage() {
+    if (!inp.reflectDmg || mobHps.length === 0 || flags.paladin || flags.mage) {
+      return null;
+    }
+    const hits = mobHps.length;
+    for (let i = 0; i < mobHps.length; i++) {
+      if (mobHps[i] > 0) mobHps[i] -= inp.reflectDmg;
+    }
+    const kills = compactDead();
+    return { label: 'reflect', baseDmg: inp.reflectDmg, varMul: 1, isCrit: false, finalDmg: inp.reflectDmg, hits, kills };
   }
 
   function rollAttack(label, baseDmg, aoe, rolled = true) {
@@ -3261,6 +3448,8 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
     const charmHits = [];
     let charmKills = 0;
     const components = [];
+    const reflect = rollReflectDamage();
+    if (reflect) components.push(reflect);
     if (!flags.paladin && inp.autoDmg > 0 && mobHps.length > 0) {
       const auto = rollAutoAttack();
       charmHits.push(...auto.charm.hits);
@@ -3747,7 +3936,10 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     // Reflection puro (sem charm útil): hit passivo do escudo do jogador.
     // Ignorar completamente — não é ataque ativo. Mas se vem com parry charm,
     // o dano do parry conta como charm individual (cai no else abaixo).
-    if (isReflection && !hasCharm) continue;
+    if (isReflection && !hasCharm) {
+      events.push({ ts, type: 'reflect', mob, dmg });
+      continue;
+    }
 
     // Bounty Talisman conta como prey (modificador de dano em mobs específicos).
     // Marca isPrey=true seja qual for a classificação final do hit.
@@ -3784,6 +3976,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
 
   const attackEventsAll = events.filter(e => e.type === 'normal' || e.type === 'crit');
   const charmEventsAll = events.filter(e => e.type === 'charm');
+  const reflectEventsAll = events.filter(e => e.type === 'reflect');
   const xpEventsAll = events.filter(e => e.type === 'xp');
 
   // Validação: precisa ter ataques E mortes pra simular
@@ -3795,6 +3988,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
       timestampedLines,
       attackCount: attackEventsAll.length,
       charmCount: charmEventsAll.length,
+      reflectCount: reflectEventsAll.length,
       xpCount: xpEventsAll.length
     };
   }
@@ -3802,6 +3996,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   // Stats
   const attackEvents = attackEventsAll;
   const charmEvents = charmEventsAll;
+  const reflectEvents = reflectEventsAll;
   const xpEvents = xpEventsAll;
 
   // Duração total
@@ -3818,7 +4013,8 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
 
   // Dano total e médios
   const dmgTotal = attackEvents.reduce((s, e) => s + e.dmg, 0) +
-                   charmEvents.reduce((s, e) => s + e.dmg, 0);
+                   charmEvents.reduce((s, e) => s + e.dmg, 0) +
+                   reflectEvents.reduce((s, e) => s + e.dmg, 0);
 
   // Dano normal SEM prey, SEM charm, SEM crit — pra estimar dano base do ciclo
   const cleanNormals = attackEvents.filter(e => e.type === 'normal' && !e.isPrey).map(e => e.dmg);
@@ -3831,6 +4027,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const avgNormal = cleanNormals.length > 0 ? mean(cleanNormals) : 0;
   const avgCrit = cleanCrits.length > 0 ? mean(cleanCrits) : 0;
   const avgCharm = allCharms.length > 0 ? mean(allCharms) : 0;
+  const reflectDmgObserved = reflectEvents.length > 0 ? Math.round(median(reflectEvents.map(e => e.dmg))) : 0;
   const avgPreyNormal = preyNormals.length > 0 ? mean(preyNormals) : 0;
 
   // Calcular multiplicador efetivo do prey:
@@ -3955,6 +4152,22 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     }
   }
   const rpGrenadePairCount = rpGrenadeMarks.filter(v => v === 'cast').length;
+  const firstTurnTs = turns.length ? turns[0][0].ts : 0;
+  const groupEventsByTurn = (srcEvents) => {
+    const grouped = turns.map(() => []);
+    let idx = 0;
+    const sorted = srcEvents.slice().sort((a, b) => a.ts - b.ts);
+    for (const ev of sorted) {
+      while (idx < turns.length && ev.ts >= turns[idx][0].ts + 2) idx++;
+      if (idx < turns.length && ev.ts >= turns[idx][0].ts && ev.ts < turns[idx][0].ts + 2) {
+        grouped[idx].push(ev);
+      }
+    }
+    return grouped;
+  };
+  const xpByTurn = groupEventsByTurn(xpEvents);
+  const charmByTurn = groupEventsByTurn(charmEvents);
+  const reflectByTurn = groupEventsByTurn(reflectEvents);
   const turnStats = turns.map((t, idx) => {
     const rawAttackHits = rawTurnHits[idx];
     let mobsHit;
@@ -3967,7 +4180,41 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     } else {
       mobsHit = Math.max(0, rawAttackHits - 1);
     }
-    return { ts: t[0].ts, rawAttackHits, mobsHit, rpGrenade: rpGrenadeMarks[idx] };
+    const turnXpEvents = xpByTurn[idx] || [];
+    const turnCharmEvents = charmByTurn[idx] || [];
+    const turnReflectEvents = reflectByTurn[idx] || [];
+    const damageTotal = t.reduce((s, e) => s + (e.dmg || 0), 0) +
+      turnCharmEvents.reduce((s, e) => s + (e.dmg || 0), 0) +
+      turnReflectEvents.reduce((s, e) => s + (e.dmg || 0), 0);
+    const componentHits = isPaladin
+      ? {
+          arrow: rpGrenadeMarks[idx] === 'explode' ? Math.max(0, Math.round(rawAttackHits / 3)) : mobsHit,
+          spell: rpGrenadeMarks[idx] === 'cast' ? 0 : mobsHit,
+          grenade: rpGrenadeMarks[idx] === 'explode' ? mobsHit : 0
+        }
+      : isMage
+      ? {
+          spell: mobsHit,
+          ue: 0
+        }
+      : {
+          auto: rawAttackHits > 0 ? 1 : 0,
+          spell: mobsHit,
+          reflect: 0
+        };
+    return {
+      ts: t[0].ts,
+      relTime: Math.max(0, t[0].ts - firstTurnTs),
+      rawAttackHits,
+      mobsHit,
+      rpGrenade: rpGrenadeMarks[idx],
+      xp: turnXpEvents.reduce((s, e) => s + e.xp, 0),
+      kills: turnXpEvents.length,
+      damage: damageTotal,
+      normalHits: t.filter(e => e.type === 'normal').length,
+      critHits: t.filter(e => e.type === 'crit').length,
+      components: componentHits
+    };
   });
   const rpGrenadeShare = turnStats.length ? turnStats.filter(t => t.rpGrenade).length / turnStats.length : 0;
   const rpGrenadeConfidence = rpGrenadePairCount >= 6 ? 'strong' : (rpGrenadePairCount >= 2 ? 'weak' : 'none');
@@ -4014,6 +4261,11 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     : autoCritSamples.map(d => critMultObserved > 0 ? d / critMultObserved : d);
   const autoDmg = isPaladin || autoDmgSamples.length === 0 ? 0 : mean(autoDmgSamples);
   const mobsHitPerTurn = turnStats.map(t => t.mobsHit);
+  let xpAccumTimeline = 0;
+  const temporalSeries = turnStats.map(t => {
+    xpAccumTimeline += t.xp || 0;
+    return { ...t, xpAccum: xpAccumTimeline };
+  });
   const hitsPerTurn = mobsHitPerTurn; // campo legado usado pelo render do histograma
 
   // Box size = percentil 90 dos mobs acertados/turno
@@ -4282,7 +4534,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     hpEstimated, hpSource, mobsUnrecognized, hpMobBreakdown,
     boxSizeP95, boxSizeStrictP90, mobsHitMode, mobsHitMean, mobsHitP50, p90Share, p90IsMode,
     boxVariance, boxRangeMin, boxRangeMax,
-    exitP5, hitsPerTurn, mobsHitPerTurn, autoDmg, paladinArrowDmg,
+    exitP5, hitsPerTurn, mobsHitPerTurn, temporalSeries, autoDmg, reflectDmg: isPaladin || isMage ? 0 : reflectDmgObserved, reflectHitCount: reflectEvents.length, paladinArrowDmg,
     specialCastThreshold: Math.max(1, Math.round(boxSizeP95 || boxSizeEffective || 1)),
     aoeHitSamples, aoeCoverageMean, boxSizeEffective, spawnCurve,
     arrowHitsMean, spellHitsMean, paladinArrowCoverage, paladinSpellCoverage,
@@ -4536,6 +4788,7 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_pal_spell'), val: data.isPaladin ? '[' + data.dmgCycle.join(', ') + ']' : '—', sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_spell')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_split_method'), val: data.isPaladin ? ((data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : '—', sub: data.isPaladin ? (data.paladinSplitMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster de dano') : t('val_sub_pal_off') },
     { lbl: t('val_card_auto_dmg'), val: Math.round(data.autoDmg || 0), sub: data.isPaladin ? t('val_sub_pal_off') : t('val_sub_auto_dmg') },
+    { lbl: t('val_card_reflect_dmg'), val: data.reflectDmg ? Math.round(data.reflectDmg) : '—', sub: data.reflectDmg ? t('val_sub_reflect_dmg') + ' · ' + (data.reflectHitCount || 0) + ' hits' : t('val_sub_pal_off') },
     { lbl: t('val_card_aoe_coverage'), val: ((data.aoeCoverageMean || 0) * 100).toFixed(1).replace('.', dec) + '%', sub: t('val_sub_aoe_coverage') },
     { lbl: t('val_card_box_effective'), val: (data.boxSizeEffective || data.boxSizeP95).toFixed(2).replace('.', dec), sub: t('val_sub_box_effective') },
     { lbl: t('val_card_box_mean'), val: (data.boxSizeEffective || data.boxSizeP95).toFixed(2).replace('.', dec), sub: t('val_sub_box_mean') },
@@ -4610,14 +4863,15 @@ function renderValidatorExtracted(data) {
     t('val_card_special_timing'), t('val_card_special_threshold')
   ]);
   const isRelevant = c => {
+    if (c.lbl === t('val_card_reflect_dmg') && !data.reflectDmg) return false;
     if (!data.isPaladin && !data.isMage && [
       t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_arrow_hits'),
       t('val_card_spell_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'), t('val_card_rp_grenade'),
       t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
-    if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_post_walk_spawn'), t('val_card_paladin')].includes(c.lbl)) return false;
+    if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_reflect_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_post_walk_spawn'), t('val_card_paladin')].includes(c.lbl)) return false;
     if (data.isMage && [
-      t('val_card_auto_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'),
+      t('val_card_auto_dmg'), t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'),
       t('val_card_arrow_hits'), t('val_card_spell_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
       t('val_card_rp_grenade'), t('val_card_post_walk_spawn'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
@@ -4755,18 +5009,26 @@ function populateValidatorModelSelect(data) {
 // Histograma dos mobs acertados/turno com linhas verticais marcando p10 (exit) e p90 (box size)
 let valFunnelChart = null;
 let valHistogramChart = null;
+let valTimelineHitsChart = null;
+let valTimelineKillsChart = null;
+let valTimelineXpChart = null;
+let valTimelineComponentsChart = null;
+let valImpactAnalyserChart = null;
 let lastSimHitsHist = null;
+let lastSimTemporalSeries = null;
+const VALIDATOR_TURN_DURATION = 2.25;
 
 // Roda N sessões de simulação (inline, sem worker) e coleta a distribuição de
 // mobs acertados por turno — usado para sobrepor o histograma simulado ao do log real.
 function collectSimHitDistribution(config, nSessions) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4 } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4 } = config;
   const CHARM_R = 0.1, CRIT_R = 0.1, TD = 2.25;
   const POST_WALK_WAVE_PCTS = [0, 0.30, 0.65, 1.00], UE_COOLDOWN_SECONDS = 4;
   const RP_GRENADE_DELAY_SECONDS = 3, RP_GRENADE_DEFAULT_INTERVAL_SECONDS = 24, MAGE_UE_DEFAULT_INTERVAL_SECONDS = 50;
   const SESSION_SECONDS = 3600;
   const attacksPerTurn = flags.paladin ? 2 : 1; // só pra mecânica de dano, não pro histograma
   const splitPaladinDamage = flags.paladin && paladinArrowDmg > 0;
+  const reflectActive = !flags.paladin && !flags.mage && reflectDmg > 0;
 
   function makeRng(seed) {
     let s = (seed >>> 0) || 1;
@@ -4914,6 +5176,16 @@ function collectSimHitDistribution(config, nSessions) {
       const shouldUseSpecialNow = ready => ready && (aliveLen >= specialCastThreshold || spawnLen === 0);
       const isMageUeTurn = shouldUseSpecialNow(mageUeReady);
 
+      if (reflectActive) {
+        let wi = 0;
+        for (let i = 0; i < aliveLen; i++) {
+          const hp = aliveHp[i] - reflectDmg;
+          if (hp > 0) aliveHp[wi++] = hp;
+        }
+        aliveLen = wi;
+        if (aliveLen === 0) { continue; }
+      }
+
       if (!flags.paladin && autoDmg > 0) {
         const target = Math.floor(rng() * aliveLen);
         let skipAuto = false;
@@ -5040,6 +5312,235 @@ function collectSimHitDistribution(config, nSessions) {
     }
   }
   return hitsHist; // { [hitsValue]: count }
+}
+
+function collectSimTemporalSeries(config, maxTurns = 220) {
+  const seed = (config.runSeed || 0x12345678) >>> 0;
+  const log = generateHuntLog(0, maxTurns, seed, config);
+  let time = 0;
+  let xpAccum = 0;
+  return (log.events || [])
+    .filter(ev => ev.type === 'attack' || ev.type === 'cooldown')
+    .map(ev => {
+      time += VALIDATOR_TURN_DURATION;
+      const kills = ev.kills || 0;
+      xpAccum += kills * (config.mobXp || 0);
+      const components = ev.components || [];
+      const componentDamage = components.reduce((sum, c) => sum + (c.finalDmg || 0) * (c.hits || 0), 0);
+      const charmDamage = (ev.charmHits || []).reduce((sum, c) => sum + (c.dmg || 0), 0);
+      const componentHits = {
+        auto: components.filter(c => c.label === 'auto').reduce((s, c) => s + (c.hits || 0), 0),
+        reflect: components.filter(c => c.label === 'reflect').reduce((s, c) => s + (c.hits || 0), 0),
+        arrow: components.filter(c => c.label === 'arrow').reduce((s, c) => s + (c.hits || 0), 0),
+        spell: components.filter(c => c.label === 'spell' || c.label === 'spell AoE').reduce((s, c) => s + (c.hits || 0), 0),
+        grenade: components.filter(c => c.label === 'grenade').reduce((s, c) => s + (c.hits || 0), 0),
+        ue: components.filter(c => c.label === 'UE').reduce((s, c) => s + (c.hits || 0), 0)
+      };
+      return {
+        relTime: time,
+        mobsHit: ev.mobsHitVisual == null ? 0 : ev.mobsHitVisual,
+        kills,
+        damage: componentDamage + charmDamage,
+        xpAccum,
+        components: componentHits,
+        special: components.some(c => c.label === 'grenade cast') ? 'cast'
+          : components.some(c => c.label === 'grenade') ? 'explode'
+          : components.some(c => c.label === 'UE') ? 'ue'
+          : null
+      };
+    });
+}
+
+function computeTemporalSummary(data) {
+  const series = data.temporalSeries || [];
+  if (!series.length) return null;
+  const p90 = data.boxSizeP95 || data.boxSizeStrictP90 || 0;
+  const peakRows = series.filter(p => p90 > 0 && p.mobsHit >= p90);
+  const peakGaps = [];
+  for (let i = 1; i < peakRows.length; i++) {
+    const gap = peakRows[i].relTime - peakRows[i - 1].relTime;
+    if (gap > 2) peakGaps.push(gap);
+  }
+  const gaps = [];
+  for (let i = 1; i < series.length; i++) {
+    const gap = series[i].relTime - series[i - 1].relTime;
+    if (gap > 3) gaps.push(gap);
+  }
+  const vals = series.map(p => p.mobsHit);
+  const spread = Math.max(...vals) - Math.min(...vals);
+  const shape = spread <= 2 ? (LANG === 'pt' ? 'estável' : 'stable')
+    : peakGaps.length >= 3 ? (LANG === 'pt' ? 'cíclica' : 'cyclic')
+    : (LANG === 'pt' ? 'fragmentada' : 'fragmented');
+  const specials = series.filter(p => p.rpGrenade || p.special).length;
+  return {
+    shape,
+    avgPeakGap: peakGaps.length ? mean(peakGaps) : 0,
+    avgDeadGap: gaps.length ? mean(gaps) : 0,
+    specials
+  };
+}
+
+function movingImpact(series, windowSeconds = 30) {
+  return series.map((cur, idx) => {
+    const startTime = Math.max(0, (cur.relTime || 0) - windowSeconds);
+    let dmg = 0;
+    let firstTs = cur.relTime || 0;
+    for (let i = idx; i >= 0; i--) {
+      const p = series[i];
+      if ((p.relTime || 0) < startTime) break;
+      dmg += p.damage || 0;
+      firstTs = p.relTime || 0;
+    }
+    const prevTime = idx > 0 ? (series[idx - 1].relTime || 0) : null;
+    const step = prevTime == null ? VALIDATOR_TURN_DURATION : Math.max(0.1, (cur.relTime || 0) - prevTime);
+    const span = Math.max(1, Math.min(windowSeconds, (cur.relTime || 0) - firstTs + step));
+    return dmg / span;
+  });
+}
+
+function computeImpactSummary(impact) {
+  const vals = impact.filter(v => Number.isFinite(v) && v > 0);
+  if (!vals.length) return { avg: 0, maxDrop: 0, stability: t('val_impact_stable') };
+  const avg = mean(vals);
+  let maxDrop = 0;
+  for (let i = 1; i < vals.length; i++) maxDrop = Math.max(maxDrop, vals[i - 1] - vals[i]);
+  const dropPct = avg > 0 ? maxDrop / avg * 100 : 0;
+  const stability = dropPct > 35 ? t('val_impact_drop_hard') : dropPct > 18 ? t('val_impact_oscillating') : t('val_impact_stable');
+  return { avg, maxDrop: dropPct, stability };
+}
+
+function renderTemporalSummary(data, simSeries) {
+  const el = $('valTemporalSummary');
+  if (!el || !data) return;
+  const s = computeTemporalSummary(data);
+  if (!s) {
+    el.style.display = 'none';
+    return;
+  }
+  const dec = LANG === 'pt' ? ',' : '.';
+  const impact = computeImpactSummary(movingImpact(data.temporalSeries || []));
+  const simText = simSeries && simSeries.length
+    ? t('val_temporal_sim_loaded') + ' (' + simSeries.length + ')'
+    : t('val_temporal_sim_missing');
+  el.style.display = 'block';
+  el.innerHTML =
+    '<strong>' + t('val_temporal_shape') + ':</strong> ' + s.shape +
+    ' &middot; <strong>' + t('val_temporal_cycle') + ':</strong> ' + (s.avgPeakGap ? s.avgPeakGap.toFixed(1).replace('.', dec) + 's' : '&mdash;') +
+    ' &middot; <strong>' + t('val_temporal_dead_time') + ':</strong> ' + (s.avgDeadGap ? s.avgDeadGap.toFixed(1).replace('.', dec) + 's' : '&mdash;') +
+    ' &middot; <strong>' + t('val_temporal_specials') + ':</strong> ' + s.specials +
+    ' &middot; <strong>' + t('val_impact_avg') + ':</strong> ' + Math.round(impact.avg).toLocaleString(LANG === 'pt' ? 'pt-BR' : 'en-US') + '/s' +
+    ' &middot; <strong>' + t('val_impact_drop') + ':</strong> ' + impact.maxDrop.toFixed(1).replace('.', dec) + '%' +
+    ' &middot; <strong>' + t('val_impact_stability') + ':</strong> ' + impact.stability +
+    ' &middot; ' + simText;
+}
+
+function renderValidatorTemporal(data, simSeries) {
+  if (!data || !data.temporalSeries || !data.temporalSeries.length) return;
+  const real = data.temporalSeries.slice(0, 260);
+  const simSource = simSeries || lastSimTemporalSeries || [];
+  const sim = simSource.slice(0, real.length);
+  const labels = real.map((_, idx) => idx + 1);
+  const gridColor = 'rgba(139,164,194,0.1)';
+  const makeTemporalScales = () => ({
+    x: { grid: { color: gridColor }, ticks: { color: '#8BA4C2', font: { size: 10 }, maxTicksLimit: 12 }, title: { display: true, text: t('val_axis_turn'), color: '#8BA4C2' } },
+    y: { grid: { color: gridColor }, ticks: { color: '#8BA4C2', font: { size: 11 } }, beginAtZero: true }
+  });
+  const destroy = chart => { try { if (chart && typeof chart.destroy === 'function') chart.destroy(); } catch (err) { console.warn('[validator temporal] chart destroy failed', err); } };
+  const drawChart = (canvasId, assign, config) => {
+    const canvas = $(canvasId);
+    if (!canvas || typeof Chart === 'undefined') return;
+    try {
+      assign(new Chart(canvas, config));
+    } catch (err) {
+      console.error('[validator temporal] chart failed:', canvasId, err);
+    }
+  };
+  destroy(valTimelineHitsChart);
+  destroy(valTimelineKillsChart);
+  destroy(valTimelineXpChart);
+  destroy(valTimelineComponentsChart);
+  destroy(valImpactAnalyserChart);
+
+  const specialPoints = real.map(p => p.rpGrenade || p.special ? p.mobsHit : null);
+  drawChart('valTimelineHits', chart => { valTimelineHitsChart = chart; }, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: t('val_timeline_real'), data: real.map(p => p.mobsHit), borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,.12)', borderWidth: 1.5, pointRadius: 0, tension: .25 },
+        ...(sim.length ? [{ label: t('val_timeline_sim'), data: sim.map(p => p.mobsHit), borderColor: '#00C49A', backgroundColor: 'rgba(0,196,154,.1)', borderWidth: 1.5, pointRadius: 0, tension: .25 }] : []),
+        { label: t('val_timeline_grenade_explode'), data: specialPoints, showLine: false, pointRadius: 4, pointBackgroundColor: '#F59E0B', pointBorderColor: '#F59E0B' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_hits'), color: '#DDE6F3' } }, scales: makeTemporalScales() }
+  });
+
+  drawChart('valTimelineKills', chart => { valTimelineKillsChart = chart; }, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: t('val_timeline_real'), data: real.map(p => p.kills || 0), backgroundColor: 'rgba(59,130,246,.45)', borderColor: '#3B82F6', borderWidth: 1 },
+        ...(sim.length ? [{ label: t('val_timeline_sim'), data: sim.map(p => p.kills || 0), backgroundColor: 'rgba(0,196,154,.45)', borderColor: '#00C49A', borderWidth: 1 }] : [])
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_kills'), color: '#DDE6F3' } }, scales: makeTemporalScales() }
+  });
+
+  drawChart('valTimelineXp', chart => { valTimelineXpChart = chart; }, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: t('val_timeline_real'), data: real.map(p => p.xpAccum || 0), borderColor: '#3B82F6', borderWidth: 1.5, pointRadius: 0 },
+        ...(sim.length ? [{ label: t('val_timeline_sim'), data: sim.map(p => p.xpAccum || 0), borderColor: '#00C49A', borderWidth: 1.5, pointRadius: 0 }] : [])
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_xp'), color: '#DDE6F3' } }, scales: makeTemporalScales() }
+  });
+
+  const compLabels = data.isPaladin ? ['arrow', 'spell', 'grenade'] : (data.isMage ? ['spell', 'ue'] : ['auto', 'reflect', 'spell']);
+  const compColors = ['#F59E0B', '#00C49A', '#EF4444', '#8BA4C2'];
+  drawChart('valTimelineComponents', chart => { valTimelineComponentsChart = chart; }, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: compLabels.map((key, idx) => ({
+        label: key,
+        data: real.map(p => p.components && p.components[key] ? p.components[key] : 0),
+        borderColor: compColors[idx],
+        backgroundColor: compColors[idx],
+        borderWidth: 1,
+        pointRadius: 0,
+        tension: .2
+      }))
+    },
+    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_components'), color: '#DDE6F3' } }, scales: makeTemporalScales() }
+  });
+
+  const realImpact = movingImpact(real);
+  const simImpact = sim.length ? movingImpact(sim) : [];
+  drawChart('valImpactAnalyser', chart => { valImpactAnalyserChart = chart; }, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: t('val_timeline_real'), data: realImpact, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,.1)', borderWidth: 1.7, pointRadius: 0, tension: .25 },
+        ...(simImpact.length ? [{ label: t('val_timeline_sim'), data: simImpact, borderColor: '#00C49A', backgroundColor: 'rgba(0,196,154,.1)', borderWidth: 1.7, pointRadius: 0, tension: .25 }] : [])
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { labels: { color: '#8BA4C2', font: { size: 11 } } },
+        title: { display: true, text: t('val_impact_analyser'), color: '#DDE6F3' }
+      },
+      scales: makeTemporalScales()
+    }
+  });
+  renderTemporalSummary(data, sim);
 }
 
 function buildBoxMeaningDiagnostics(data, sim) {
@@ -5348,6 +5849,7 @@ function runValidatorComparison(data) {
   $('dmg2').value = data.dmgCycle[1];
   $('dmg3').value = data.dmgCycle[2];
   validatorAutoDmg = data.autoDmg || 0;
+  validatorReflectDmg = data.reflectDmg || 0;
   validatorPaladinArrowDmg = data.paladinArrowDmg || 0;
   validatorAoeHitSamples = [];
   validatorCoverageMode = 'none';
@@ -5396,6 +5898,7 @@ function runValidatorComparison(data) {
     baseDmgs: data.dmgCycle,
     charmDmg: Math.round(data.avgCharm),
     autoDmg: data.autoDmg || 0,
+    reflectDmg: data.reflectDmg || 0,
     paladinArrowDmg: data.paladinArrowDmg || 0,
     critMult,
     mobHp: data.hpEstimated,
@@ -5486,7 +5989,7 @@ function runValidatorComparison(data) {
   };
   const simJobs = [baselineConfig, visualConfig, hybridConfig, simConfig, ...screenConfigs, ...rpDistributionConfigs, rpSplitConfig];
 
-  Promise.all(simJobs.map(cfg => runSimInline(cfg, () => {}))).then(results => {
+  return Promise.all(simJobs.map(cfg => runSimInline(cfg, () => {}))).then(results => {
     const baselineResult = results[0];
     const visualResult = results[1];
     const hybridResult = results[2];
@@ -5496,7 +5999,6 @@ function runValidatorComparison(data) {
     const rpSplitResult = results[4 + screenConfigs.length + rpDistributionConfigs.length];
     const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
     $('valCompareStatus').textContent = elapsed + 's';
-    $('btnRunComparison').disabled = false;
 
     let candidates = [
       { key: 'none', label: t('val_coverage_none'), cfg: baselineConfig, sim: baselineResult[0], pref: 0, strength: 0 },
@@ -5580,6 +6082,7 @@ function runValidatorComparison(data) {
       .sort((a, b) => a.histDist - b.histDist)[0] || null;
 
     validatorAoeHitSamples = chosen.cfg.aoeHitSamples || [];
+    validatorReflectDmg = chosen.cfg.reflectDmg || 0;
     validatorPaladinArrowDmg = chosen.cfg.paladinArrowDmg || 0;
     validatorCoverageMode = chosen.cfg.coverageMode || 'none';
     validatorAoeBoxP90 = data.boxSizeP95 || 0;
@@ -5614,9 +6117,15 @@ function runValidatorComparison(data) {
     renderValidatorFunnel(data);
     runSim();
 
-    // Coleta distribuição de mobs acertados/turno da simulação escolhida (50 sessões de 1h = ~35k turnos)
-    lastSimHitsHist = collectSimHitDistribution(chosen.cfg, 50);
-    renderValidatorHistogram(data, lastSimHitsHist);
+    // Coleta distribuição de mobs acertados/turno da simulação escolhida (50 sessões de 1h = ~35k turnos).
+    // Falha nessa sobreposição não pode impedir a tabela principal de comparação.
+    try {
+      lastSimHitsHist = collectSimHitDistribution(chosen.cfg, 50);
+      renderValidatorHistogram(data, lastSimHitsHist);
+    } catch (err) {
+      console.error('[validator] simulated histogram failed', err);
+      lastSimHitsHist = null;
+    }
 
     // Pegamos resultado do nível +0 (parâmetros do log já são o "estado real")
     const sim = chosen.sim;
@@ -5633,6 +6142,7 @@ function runValidatorComparison(data) {
     sim.critMultUsed = chosen.cfg.critMult || critMult;
     sim.charmRateUsed = flags.charm ? 0.1 : 0;
     sim.charmDmgUsed = chosen.cfg.charmDmg || 0;
+    sim.reflectDmgUsed = chosen.cfg.reflectDmg || 0;
     sim.spawnCurveUsed = chosen.cfg.spawnCurve || 2.0;
     sim.runSeedUsed = chosen.cfg.runSeed || runSeed;
     sim.aoeCoverageUsed = chosen.cfg.aoeCoverage || 1;
@@ -5650,8 +6160,38 @@ function runValidatorComparison(data) {
     sim.manualModelWorsenedXp = manualMode && chosen.err > baselineErr + 2;
     sim.coverageWeakenedForXp = ['none', 'visual', 'rp_old', 'rp_spawn'].includes(chosen.key) && candidates.some(c => c !== candidates[0] && c.err > baselineErr + 2);
     sim.bestRejectedCoverageLabel = bestCurveRejected ? bestCurveRejected.label : '';
-    renderValidatorFunnel(data, sim);
+    try {
+      renderValidatorFunnel(data, sim);
+    } catch (err) {
+      console.error('[validator] funnel failed', err);
+    }
     renderValidatorComparison(data, sim);
+    try {
+      lastSimTemporalSeries = collectSimTemporalSeries(chosen.cfg, Math.min(260, Math.max(80, (data.temporalSeries || []).length)));
+      renderValidatorTemporal(data, lastSimTemporalSeries);
+    } catch (err) {
+      console.error('[validator] simulated temporal failed', err);
+      lastSimTemporalSeries = null;
+      const el = $('valTemporalSummary');
+      if (el) {
+        el.style.display = 'block';
+        el.innerHTML = '<strong>' + t('val_temporal_render_error') + ':</strong> ' + (err && err.message ? err.message : err);
+      }
+    }
+    return {
+      real: data,
+      sim,
+      chosen,
+      candidates,
+      baseline: baselineResult[0],
+      quickHist: lastSimHitsHist
+    };
+  }).catch(err => {
+    console.error('[validator] comparison failed', err);
+    $('valCompareStatus').textContent = (err && err.message ? err.message : err);
+    throw err;
+  }).finally(() => {
+    $('btnRunComparison').disabled = false;
   });
 }
 
@@ -5682,6 +6222,7 @@ function renderValidatorComparison(real, sim) {
     { metric: t('val_metric_crit_mult'), real: real.critMultObserved || 0, sim: sim.critMultUsed || CRIT_BASE, fmt: fmtMult, suffix: '', contextOnly: true },
     { metric: t('val_metric_charm_rate'), real: real.charmRateObserved || 0, sim: sim.charmRateUsed || 0, fmt: fmtPct, suffix: '', contextOnly: true },
     { metric: t('val_metric_charm_dmg'), real: real.avgCharm || 0, sim: sim.charmDmgUsed || 0, fmt: n => Math.round(n).toString(), suffix: '', contextOnly: true },
+    ...(!real.isPaladin && !real.isMage && real.reflectDmg ? [{ metric: t('val_metric_reflect_dmg'), real: real.reflectDmg || 0, sim: sim.reflectDmgUsed || 0, fmt: n => Math.round(n).toString(), suffix: '', contextOnly: true }] : []),
     { metric: t('val_metric_spawn_curve'), real: real.spawnCurve || 2.0, sim: sim.spawnCurveUsed || 2.0, fmt: fmtSpawn, suffix: '', contextOnly: true },
     { metric: t('val_metric_box_time_used'), real: real.boxChangeTime || 0, sim: sim.boxChangeTimeUsed || 0, fmt: n => Math.round(n) + 's', suffix: '', contextOnly: true }
   ];
@@ -5808,6 +6349,176 @@ function renderValidatorComparison(real, sim) {
   }
 }
 
+let validatorBenchLogs = [];
+
+function guessBenchProfile(fileName, text) {
+  const name = (fileName || '').toLowerCase();
+  if (name.includes('rp') || name.includes('paladin')) return 'rp';
+  if (name.includes('mage') || name.includes('ms') || name.includes('ed')) return 'mage';
+  if (name.includes('ek') || name.includes('knight')) return 'ek';
+  if (/divine|arrow|grenade/i.test(text)) return 'rp';
+  return 'ek';
+}
+
+function readBenchFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = ev => resolve({ name: file.name, text: ev.target.result || '' });
+    reader.onerror = () => reject(reader.error || new Error('file read failed'));
+    reader.readAsText(file);
+  });
+}
+
+function fmtBenchNum(n) {
+  if (!isFinite(n)) return '—';
+  if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return (n / 1e3).toFixed(0) + 'k';
+  return Math.round(n).toString();
+}
+
+function benchComponentsText(data) {
+  if (data.isPaladin) {
+    return [
+      'arrow ' + Math.round(data.paladinArrowDmg || 0),
+      'spell [' + (data.dmgCycle || []).join(', ') + ']',
+      'grenade ' + Math.round(data.rpGrenadeDmg || 0),
+      'charm ' + Math.round(data.avgCharm || 0)
+    ].join(' · ');
+  }
+  if (data.isMage) {
+    return [
+      'spell [' + (data.dmgCycle || []).join(', ') + ']',
+      'UE ' + Math.round(data.mageUeDmg || 0),
+      'charm ' + Math.round(data.avgCharm || 0)
+    ].join(' · ');
+  }
+  return [
+    'auto ' + Math.round(data.autoDmg || 0),
+    'reflect ' + Math.round(data.reflectDmg || 0),
+    'spell [' + (data.dmgCycle || []).join(', ') + ']',
+    'charm ' + Math.round(data.avgCharm || 0)
+  ].join(' · ');
+}
+
+function benchQuickRead(row) {
+  if (row.error) return t('bench_error');
+  const bits = [];
+  if (Math.abs(row.xpErr) > 15) bits.push('XP fora de ±15%');
+  if (Math.abs(row.killErr) > 15) bits.push('mortes/h fora de ±15%');
+  if (row.histDist > 25) bits.push('histograma distante');
+  if (row.data.reflectDmg) bits.push('reflect EK detectado');
+  if (row.data.isPaladin && row.data.rpGrenadeDmg) bits.push('granada RP ativa');
+  if (row.data.isMage && row.data.mageUeDmg) bits.push('UE Mage ativa');
+  return bits.length ? bits.join(' · ') : 'ok dentro dos principais guardrails';
+}
+
+function renderBenchResults(rows) {
+  if (!rows.length) {
+    $('benchResults').innerHTML = '';
+    return;
+  }
+  let html = '<div style="overflow-x:auto"><table class="val-compare-table"><thead><tr>' +
+    '<th>' + t('bench_log') + '</th>' +
+    '<th>' + t('bench_vocation') + '</th>' +
+    '<th>' + t('bench_model') + '</th>' +
+    '<th>' + t('bench_xph_real') + '</th>' +
+    '<th>' + t('bench_xph_sim') + '</th>' +
+    '<th>' + t('bench_xph_err') + '</th>' +
+    '<th>' + t('bench_kills_err') + '</th>' +
+    '<th>' + t('bench_hist') + '</th>' +
+    '<th>' + t('bench_box') + '</th>' +
+    '<th>' + t('bench_hits') + '</th>' +
+    '<th>' + t('bench_components') + '</th>' +
+    '<th>' + t('bench_candidates') + '</th>' +
+    '<th>' + t('bench_notes') + '</th>' +
+    '</tr></thead><tbody>';
+  for (const row of rows) {
+    if (row.error) {
+      html += '<tr><td>' + row.file + '</td><td colspan="12" style="color:var(--danger)">' + row.error + '</td></tr>';
+      continue;
+    }
+    const errCls = Math.abs(row.xpErr) <= 15 ? 'color:var(--accent)' : 'color:var(--amber)';
+    html += '<tr>' +
+      '<td>' + row.file + '</td>' +
+      '<td>' + row.profile.toUpperCase() + '</td>' +
+      '<td>' + row.model + '</td>' +
+      '<td>' + fmtBenchNum(row.data.xphReal) + '</td>' +
+      '<td>' + fmtBenchNum(row.sim.xph) + '</td>' +
+      '<td style="' + errCls + '">' + (row.xpErr >= 0 ? '+' : '') + row.xpErr.toFixed(1) + '%</td>' +
+      '<td>' + (row.killErr >= 0 ? '+' : '') + row.killErr.toFixed(1) + '%</td>' +
+      '<td>' + row.histDist.toFixed(1) + '</td>' +
+      '<td>' + (row.data.boxSizeEffective || row.data.boxSizeP95) + '</td>' +
+      '<td>' + (row.data.mobsHitMode || 0) + ' / ' + (row.data.mobsHitMean || 0).toFixed(2) + ' / ' + (row.data.boxSizeStrictP90 || row.data.boxSizeP95) + '</td>' +
+      '<td style="min-width:260px">' + benchComponentsText(row.data) + '</td>' +
+      '<td style="min-width:260px">' + (row.candidateSummary || '—') + '</td>' +
+      '<td style="min-width:220px">' + benchQuickRead(row) + '</td>' +
+      '</tr>';
+  }
+  html += '</tbody></table></div>';
+  $('benchResults').innerHTML = html;
+}
+
+async function runValidatorBench() {
+  if (!validatorBenchLogs.length) return;
+  $('btnRunBench').disabled = true;
+  const rows = [];
+  for (let i = 0; i < validatorBenchLogs.length; i++) {
+    const item = validatorBenchLogs[i];
+    $('benchStatus').textContent = t('bench_running')
+      .replace('{i}', i + 1)
+      .replace('{n}', validatorBenchLogs.length)
+      .replace('{file}', item.name);
+    try {
+      const profile = guessBenchProfile(item.name, item.text);
+      const data = parseServerLog(item.text, profile === 'rp', profile);
+      data.combatProfile = profile;
+      data.isMage = profile === 'mage';
+      if (data.error) {
+        rows.push({ file: item.name, profile, error: data.error + ' · ' + (data.eventCount || 0) + ' eventos' });
+        renderBenchResults(rows);
+        continue;
+      }
+      lastValidatorData = data;
+      if ($('val-vocation')) $('val-vocation').value = profile;
+      if ($('cb-paladin')) $('cb-paladin').checked = profile === 'rp';
+      renderValidatorExtracted(data);
+      populateValidatorModelSelect(data);
+      if ($('valModelSelect')) $('valModelSelect').value = 'auto';
+      lastSimTemporalSeries = null;
+      renderValidatorFunnel(data);
+      renderValidatorHistogram(data);
+      renderValidatorTemporal(data);
+      $('valResults').style.display = 'block';
+      const result = await runValidatorComparison(data);
+      const realKillsPerHour = data.totalKills / (data.duration / 3600);
+      const simKillsPerHour = result.sim.xph / data.avgXpPerKill;
+      const candidateSummary = (result.candidates || [])
+        .slice()
+        .sort((a, b) => a.histDist - b.histDist)
+        .slice(0, 4)
+        .map(c => c.label + ': ' + (c.err >= 0 ? '' : '') + c.err.toFixed(1) + '% XP · hist ' + c.histDist.toFixed(1))
+        .join('<br>');
+      rows.push({
+        file: item.name,
+        profile,
+        data,
+        sim: result.sim,
+        model: result.chosen.label,
+        candidateSummary,
+        xpErr: data.xphReal ? (result.sim.xph - data.xphReal) / data.xphReal * 100 : 0,
+        killErr: realKillsPerHour ? (simKillsPerHour - realKillsPerHour) / realKillsPerHour * 100 : 0,
+        histDist: result.chosen.histDist || 0
+      });
+      renderBenchResults(rows);
+    } catch (err) {
+      rows.push({ file: item.name, profile: '—', error: err && err.message ? err.message : String(err) });
+      renderBenchResults(rows);
+    }
+  }
+  $('benchStatus').textContent = t('bench_done').replace('{n}', rows.length);
+  $('btnRunBench').disabled = false;
+}
+
 function openValidator() {
   $('validatorModal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -5837,44 +6548,88 @@ $('valFileInput').addEventListener('change', (e) => {
   reader.readAsText(file);
 });
 
+$('btnBenchFiles').addEventListener('click', () => $('benchFileInput').click());
+$('benchFileInput').addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
+  $('benchStatus').textContent = t('val_status_analyzing');
+  validatorBenchLogs = await Promise.all(files.map(readBenchFile));
+  $('btnRunBench').disabled = validatorBenchLogs.length === 0;
+  $('benchStatus').textContent = t('bench_loaded').replace('{n}', validatorBenchLogs.length);
+  renderBenchResults([]);
+});
+$('btnRunBench').addEventListener('click', runValidatorBench);
+
 $('btnAnalyzeLog').addEventListener('click', () => {
   const txt = $('valLogInput').value.trim();
   if (!txt) {
     $('valStatus').textContent = t('val_status_no_data');
     return;
   }
-  $('valStatus').textContent = t('val_status_analyzing');
+  $('valStatus').textContent = t('val_status_reading');
   $('btnAnalyzeLog').disabled = true;
   setTimeout(() => {
-    const valProfile = normalizeProfile($('val-vocation') ? $('val-vocation').value : null, $('cb-paladin').checked);
-    $('cb-paladin').checked = valProfile === 'rp';
-    const isPaladin = valProfile === 'rp';
-    const data = parseServerLog(txt, isPaladin, valProfile);
-    data.combatProfile = valProfile;
-    data.isMage = valProfile === 'mage';
-    $('btnAnalyzeLog').disabled = false;
-    if (data.error) {
-      $('valStatus').textContent = t('val_status_no_data') + ' (' + data.eventCount + ' eventos)';
-      $('valResults').style.display = 'none';
-      return;
+    let stage = 'parse';
+    try {
+      const valProfile = normalizeProfile($('val-vocation') ? $('val-vocation').value : null, $('cb-paladin').checked);
+      $('cb-paladin').checked = valProfile === 'rp';
+      const isPaladin = valProfile === 'rp';
+      const data = parseServerLog(txt, isPaladin, valProfile);
+      data.combatProfile = valProfile;
+      data.isMage = valProfile === 'mage';
+      if (data.error) {
+        $('valStatus').textContent = t('val_status_no_data') + ' (' + data.eventCount + ' eventos)';
+        $('valResults').style.display = 'none';
+        return;
+      }
+      lastValidatorData = data;
+
+      stage = 'cards';
+      $('valStatus').textContent = t('val_status_cards');
+      renderValidatorExtracted(data);
+      populateValidatorModelSelect(data);
+      lastSimTemporalSeries = null;
+      renderValidatorFunnel(data);
+
+      stage = 'histograma';
+      $('valStatus').textContent = t('val_status_histogram');
+      renderValidatorHistogram(data);
+
+      $('valResults').style.display = 'block';
+      $('valComparison').innerHTML = '';
+      $('valStatus').textContent = t('val_status_temporal');
+      const drawTemporal = () => {
+        try {
+          renderValidatorTemporal(data);
+          $('valStatus').textContent = t('val_status_analyzed').replace('{n}', data.eventCount);
+        } catch (err) {
+          console.error('[validator] render temporal failed', err);
+          const el = $('valTemporalSummary');
+          if (el) {
+            el.style.display = 'block';
+            el.innerHTML = '<strong>' + t('val_temporal_render_error') + ':</strong> ' + (err && err.message ? err.message : err);
+          }
+          $('valStatus').textContent = t('val_status_analyzed').replace('{n}', data.eventCount);
+        }
+      };
+      const raf = window.requestAnimationFrame || ((fn) => setTimeout(fn, 0));
+      raf(drawTemporal);
+    } catch (err) {
+      console.error('[validator] analyze failed at stage:', stage, err);
+      $('valStatus').textContent = t('val_status_render_error') + ': ' + (err && err.message ? err.message : err);
+      $('valResults').style.display = 'block';
+    } finally {
+      $('btnAnalyzeLog').disabled = false;
     }
-    lastValidatorData = data;
-    renderValidatorExtracted(data);
-    populateValidatorModelSelect(data);
-    renderValidatorFunnel(data);
-    renderValidatorHistogram(data);
-    $('valResults').style.display = 'block';
-    $('valComparison').innerHTML = '';
-    $('valStatus').textContent = t('val_status_analyzed').replace('{n}', data.eventCount);
   }, 30);
 });
 
 $('btnRunComparison').addEventListener('click', () => {
-  if (lastValidatorData) runValidatorComparison(lastValidatorData);
+  if (lastValidatorData) runValidatorComparison(lastValidatorData).catch(() => {});
 });
 $('valModelSelect').addEventListener('change', () => {
   renderValidatorModelHelp(lastValidatorData);
-  if (lastValidatorData && $('valComparison').innerHTML.trim() !== '') runValidatorComparison(lastValidatorData);
+  if (lastValidatorData && $('valComparison').innerHTML.trim() !== '') runValidatorComparison(lastValidatorData).catch(() => {});
 });
 
 // ===== inicialização =====
