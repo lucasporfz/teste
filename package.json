@@ -1,0 +1,14 @@
+{
+  "name": "tibia-xph-simulator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check-html.mjs",
+    "test": "node tests/validator-smoke.test.mjs",
+    "bench": "node scripts/bench.mjs",
+    "git:ready": "node scripts/check-git-ready.mjs",
+    "validate": "npm run check && npm test && npm run bench && npm run git:ready"
+  }
+}

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.cache/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Keep private/full hunt logs out of commits unless explicitly sanitized.
+logs/
+*.har
+

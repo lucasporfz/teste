@@ -1,0 +1,37 @@
+14:00:00 A cobra assassin loses 475 hitpoints due to your attack.
+14:00:00 A cobra assassin loses 480 hitpoints due to your attack.
+14:00:00 A cobra assassin loses 485 hitpoints due to your attack.
+14:00:00 You gained 11000 experience points.
+14:00:02 A cobra assassin loses 470 hitpoints due to your attack.
+14:00:02 A cobra assassin loses 595 hitpoints due to your attack.
+14:00:02 A cobra assassin loses 600 hitpoints due to your attack.
+14:00:02 A cobra assassin loses 954 hitpoints due to your attack.
+14:00:02 A cobra assassin loses 960 hitpoints due to your attack.
+14:00:02 A cobra assassin loses 948 hitpoints due to your attack.
+14:00:02 You gained 11000 experience points.
+14:00:04 A cobra assassin loses 476 hitpoints due to your attack.
+14:00:04 A cobra assassin loses 482 hitpoints due to your attack.
+14:00:04 A cobra assassin loses 700 hitpoints due to your attack.
+14:00:04 A cobra assassin loses 706 hitpoints due to your critical attack.
+14:00:04 You gained 11000 experience points.
+14:00:06 A cobra assassin loses 478 hitpoints due to your attack.
+14:00:06 A cobra assassin loses 470 hitpoints due to your attack.
+14:00:06 A cobra assassin loses 806 hitpoints due to your attack.
+14:00:06 A cobra assassin loses 798 hitpoints due to your attack.
+14:00:06 You gained 11000 experience points.
+14:00:08 A cobra assassin loses 477 hitpoints due to your attack.
+14:00:08 A cobra assassin loses 481 hitpoints due to your attack.
+14:00:08 A cobra assassin loses 475 hitpoints due to your attack.
+14:00:08 You gained 11000 experience points.
+14:00:10 A cobra assassin loses 472 hitpoints due to your attack.
+14:00:10 A cobra assassin loses 595 hitpoints due to your attack.
+14:00:10 A cobra assassin loses 600 hitpoints due to your attack.
+14:00:10 A cobra assassin loses 954 hitpoints due to your attack.
+14:00:10 A cobra assassin loses 948 hitpoints due to your attack.
+14:00:10 A cobra assassin loses 960 hitpoints due to your attack.
+14:00:10 You gained 11000 experience points.
+14:00:12 A cobra assassin loses 478 hitpoints due to your attack.
+14:00:12 A cobra assassin loses 482 hitpoints due to your attack.
+14:00:12 A cobra assassin loses 700 hitpoints due to your attack.
+14:00:12 A cobra assassin loses 706 hitpoints due to your attack.
+14:00:12 You gained 11000 experience points.

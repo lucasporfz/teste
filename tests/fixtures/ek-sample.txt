@@ -1,0 +1,37 @@
+12:00:00 A werehyaena loses 740 hitpoints due to your attack.
+12:00:00 A werehyaena loses 1020 hitpoints due to your attack.
+12:00:00 A werehyaena loses 1005 hitpoints due to your attack.
+12:00:00 A werehyaena loses 1012 hitpoints due to your attack.
+12:00:00 You gained 7000 experience points.
+12:00:02 A werehyaena loses 760 hitpoints due to your critical attack.
+12:00:02 A werehyaena loses 1110 hitpoints due to your attack.
+12:00:02 A werehyaena loses 1120 hitpoints due to your attack.
+12:00:02 A werehyaena loses 536 hitpoints due to your attack. (overflux charm)
+12:00:02 You gained 7000 experience points.
+12:00:04 A werehyaena loses 720 hitpoints due to your attack.
+12:00:04 A werehyaena loses 980 hitpoints due to your attack.
+12:00:04 A werehyaena loses 990 hitpoints due to your attack.
+12:00:04 You gained 7000 experience points.
+12:00:06 A werehyaena loses 130 hitpoints due to your damage reflection.
+12:00:06 A werehyaena loses 745 hitpoints due to your attack.
+12:00:06 A werehyaena loses 1050 hitpoints due to your attack.
+12:00:06 You gained 7000 experience points.
+12:00:08 A werehyaena loses 755 hitpoints due to your attack.
+12:00:08 A werehyaena loses 1090 hitpoints due to your attack.
+12:00:08 You gained 7000 experience points.
+12:00:10 A werehyaena loses 735 hitpoints due to your attack.
+12:00:10 A werehyaena loses 1015 hitpoints due to your attack.
+12:00:10 A werehyaena loses 1008 hitpoints due to your attack.
+12:00:10 You gained 7000 experience points.
+12:00:12 A werehyaena loses 758 hitpoints due to your attack.
+12:00:12 A werehyaena loses 1104 hitpoints due to your attack.
+12:00:12 A werehyaena loses 1088 hitpoints due to your critical attack.
+12:00:12 You gained 7000 experience points.
+12:00:14 A werehyaena loses 742 hitpoints due to your attack.
+12:00:14 A werehyaena loses 1019 hitpoints due to your attack.
+12:00:14 A werehyaena loses 1025 hitpoints due to your attack.
+12:00:14 You gained 7000 experience points.
+12:00:16 A werehyaena loses 751 hitpoints due to your attack.
+12:00:16 A werehyaena loses 999 hitpoints due to your attack.
+12:00:16 A werehyaena loses 536 hitpoints due to your attack. (overflux charm)
+12:00:16 You gained 7000 experience points.

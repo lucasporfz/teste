@@ -1,0 +1,37 @@
+13:00:00 A werelion loses 475 hitpoints due to your attack.
+13:00:00 A werelion loses 470 hitpoints due to your attack.
+13:00:00 A werelion loses 595 hitpoints due to your attack.
+13:00:00 A werelion loses 600 hitpoints due to your attack.
+13:00:00 You gained 9000 experience points.
+13:00:02 A werelion loses 480 hitpoints due to your attack.
+13:00:02 A werelion loses 478 hitpoints due to your attack.
+13:00:02 A werelion loses 700 hitpoints due to your attack.
+13:00:02 A werelion loses 705 hitpoints due to your attack.
+13:00:02 You gained 9000 experience points.
+13:00:04 A werelion loses 472 hitpoints due to your attack.
+13:00:04 A werelion loses 481 hitpoints due to your attack.
+13:00:04 A werelion loses 806 hitpoints due to your critical attack.
+13:00:04 A werelion loses 798 hitpoints due to your attack.
+13:00:04 A werelion loses 874 hitpoints due to your attack. (overflux charm)
+13:00:04 You gained 9000 experience points.
+13:00:06 A werelion loses 476 hitpoints due to your attack.
+13:00:06 A werelion loses 599 hitpoints due to your attack.
+13:00:06 You gained 9000 experience points.
+13:00:08 A werelion loses 482 hitpoints due to your attack.
+13:00:08 A werelion loses 690 hitpoints due to your attack.
+13:00:08 You gained 9000 experience points.
+13:00:10 A werelion loses 477 hitpoints due to your attack.
+13:00:10 A werelion loses 479 hitpoints due to your attack.
+13:00:10 A werelion loses 595 hitpoints due to your attack.
+13:00:10 A werelion loses 603 hitpoints due to your attack.
+13:00:10 You gained 9000 experience points.
+13:00:12 A werelion loses 481 hitpoints due to your attack.
+13:00:12 A werelion loses 475 hitpoints due to your attack.
+13:00:12 A werelion loses 700 hitpoints due to your attack.
+13:00:12 A werelion loses 711 hitpoints due to your attack.
+13:00:12 You gained 9000 experience points.
+13:00:14 A werelion loses 474 hitpoints due to your attack.
+13:00:14 A werelion loses 480 hitpoints due to your attack.
+13:00:14 A werelion loses 806 hitpoints due to your attack.
+13:00:14 A werelion loses 810 hitpoints due to your attack.
+13:00:14 You gained 9000 experience points.
