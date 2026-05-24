@@ -19,3 +19,5 @@
 ## GitHub
 - This project expects GitHub CLI (`gh`) for authentication.
 - If `npm run git:ready` fails, fix the listed setup items before committing/pushing.
+- Before Codex attempts an automated commit/push, run `scripts/codex-autonomy-check.cmd`.
+- If the autonomy check fails, Codex may prepare files and instructions, but must not claim it can push from this environment.

@@ -51,3 +51,13 @@ git config --global user.name "Seu Nome"
 git config --global user.email "seu-email@example.com"
 gh auth login
 ```
+
+## Codex Autônomo
+
+Para verificar se o ambiente atual permite que o Codex faça commit/push sozinho:
+
+```powershell
+.\scripts\codex-autonomy-check.cmd
+```
+
+Se falhar em escrita no `.git`, autenticação `gh` ou rede GitHub, isso precisa ser corrigido no ambiente do Codex antes de automatizar push.
