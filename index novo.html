@@ -332,6 +332,7 @@
      ======================================================================== -->
 <script id="simWorker" type="javascript/worker">
 'use strict';
+importScripts('/js/sim-core.js');
 
 const CHARM_RATE = 0.1;
 const CRIT_RATE = 0.1;
@@ -365,14 +366,6 @@ function shouldCastRpGrenade(nowReachable, spawningCount, threshold, heldTurns, 
 }
 
 // PRNG inline (LCG numerix-recipes) — ultra-rápido
-function makeRng(seed) {
-  let s = (seed >>> 0) || 1;
-  return function() {
-    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
-    return s / 4294967296;
-  };
-}
-
 // Lookup table de pPresent: como spawnDuration (boxChangeTime) é fixo dentro
 // de uma execução e elapsed avança em passos fixos de TURN_DURATION, podemos
 // pré-calcular pPresent em todos os pontos discretos que vamos consultar.
@@ -396,33 +389,6 @@ function buildPostWalkWaveTable() {
   return tbl;
 }
 
-function resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode, aoeBoxP90, exitThreshold, aoeCoverage) {
-  if (coverageMode === 'screen_ratio') {
-    const coverage = Math.max(0.05, Math.min(1, aoeCoverage || 1));
-    const jitter = rng() - 0.5;
-    return Math.max(0, Math.min(aliveLen, Math.round(aliveLen * coverage + jitter)));
-  }
-  if (coverageMode === 'none' || !aoeHitSamples || aoeHitSamples.length === 0) {
-    return aliveLen;
-  }
-
-  const p90 = Math.max(1, Math.round(aoeBoxP90 || 0));
-  let hits = Math.max(0, Math.min(aliveLen, Math.round(aoeHitSamples[Math.floor(rng() * aoeHitSamples.length)] || 0)));
-
-  if (p90 > 0 && aliveLen >= p90 && hits === p90 - 1 && rng() < 0.7) {
-    hits = Math.min(aliveLen, p90);
-  }
-
-  if (coverageMode === 'hybrid') {
-    let minDamage = hits;
-    if (p90 > 0 && aliveLen >= p90) minDamage = Math.ceil(aliveLen * 0.9);
-    else if (aliveLen > exitThreshold) minDamage = Math.ceil(aliveLen * 0.8);
-    return Math.max(hits, Math.min(aliveLen, minDamage));
-  }
-
-  return hits;
-}
-
 function resolveRpGrenadeResidualHits(aliveLen, flags, rng) {
   if (!flags || !flags.rpGrenadePeakResidualMode) return null;
   const target = Math.max(0, +(flags.rpGrenadeResidualHits || 0));
@@ -431,15 +397,6 @@ function resolveRpGrenadeResidualHits(aliveLen, flags, rng) {
   return Math.max(1, Math.min(aliveLen, Math.round(target * jitter)));
 }
 
-function shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng) {
-  if (aoeHits <= 0 || aoeHits >= aliveLen) return;
-  for (let i = 0; i < aoeHits; i++) {
-    const j = i + Math.floor(rng() * (aliveLen - i));
-    const tmp = aliveHp[i];
-    aliveHp[i] = aliveHp[j];
-    aliveHp[j] = tmp;
-  }
-}
 
 function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
   const rng = makeRng(seed);
@@ -992,6 +949,7 @@ self.onmessage = function(e) {
 </script>
 
 <script src="js/stats.js"></script>
+<script src="js/sim-core.js"></script>
 <script>
 // ========== Constantes (expostas pro código UI) ==========
 const CRIT_BASE = 1.72;
@@ -1079,21 +1037,11 @@ function partitionLevels(nLevels, nWorkers) {
 function runSimInline(config, onProgress) {
   const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
   const flags = { ...inputFlags, rpGrenadeMode: !!rpGrenadeMode, mageUeMode: !!mageUeMode };
-  
-  // Importa as funções do worker inline
   const CHARM_RATE = 0.1, CRIT_RATE = 0.1, TURN_DURATION = 2.25;
   const POST_WALK_SPAWN_TURNS = 3, POST_WALK_SPAWN_CURVE = 2.2, UE_COOLDOWN_SECONDS = 4;
   const RP_GRENADE_DELAY_SECONDS = 3, RP_GRENADE_DEFAULT_INTERVAL_SECONDS = 24, MAGE_UE_DEFAULT_INTERVAL_SECONDS = 50;
   const POST_WALK_WAVE_PCTS = [0, 0.30, 0.65, 1.00];
 
-  function makeRng(seed) {
-    let s = (seed >>> 0) || 1;
-    return function() {
-      s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
-      return s / 4294967296;
-    };
-  }
-  
   function buildPresentTable(spawnDuration, curve = spawnCurve) {
     if (spawnDuration <= 0) return null;
     const maxSteps = Math.ceil(spawnDuration / TURN_DURATION) + 2;
@@ -1112,43 +1060,6 @@ function runSimInline(config, onProgress) {
     return tbl;
   }
 
-  function resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode, aoeBoxP90, exitThreshold, aoeCoverage) {
-    if (coverageMode === 'screen_ratio') {
-      const coverage = Math.max(0.05, Math.min(1, aoeCoverage || 1));
-      const jitter = rng() - 0.5;
-      return Math.max(0, Math.min(aliveLen, Math.round(aliveLen * coverage + jitter)));
-    }
-    if (coverageMode === 'none' || !aoeHitSamples || aoeHitSamples.length === 0) {
-      return aliveLen;
-    }
-
-    const p90 = Math.max(1, Math.round(aoeBoxP90 || 0));
-    let hits = Math.max(0, Math.min(aliveLen, Math.round(aoeHitSamples[Math.floor(rng() * aoeHitSamples.length)] || 0)));
-
-    if (p90 > 0 && aliveLen >= p90 && hits === p90 - 1 && rng() < 0.7) {
-      hits = Math.min(aliveLen, p90);
-    }
-
-    if (coverageMode === 'hybrid') {
-      let minDamage = hits;
-      if (p90 > 0 && aliveLen >= p90) minDamage = Math.ceil(aliveLen * 0.9);
-      else if (aliveLen > exitThreshold) minDamage = Math.ceil(aliveLen * 0.8);
-      return Math.max(hits, Math.min(aliveLen, minDamage));
-    }
-
-    return hits;
-  }
-
-  function shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng) {
-    if (aoeHits <= 0 || aoeHits >= aliveLen) return;
-    for (let i = 0; i < aoeHits; i++) {
-      const j = i + Math.floor(rng() * (aliveLen - i));
-      const tmp = aliveHp[i];
-      aliveHp[i] = aliveHp[j];
-      aliveHp[j] = tmp;
-    }
-  }
-  
   function simSession(seed, dmgs, charmDmg, critMult, autoDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl, postWalkTbl) {
     const rng = makeRng(seed);
     const boxFloor = Math.floor(boxSize), boxFrac = boxSize - boxFloor;
@@ -1801,58 +1712,6 @@ function runSim(simState = currentSimState) {
 
   const t0 = performance.now();
   const runSeed = (Math.random() * 0xFFFFFFFF) >>> 0;
-  // FALLBACK: se workers não disponíveis, usa simulação inline
-  if (!USE_WORKERS) {
-    runSimInline({
-      baseDmgs: inp.baseDmgs,
-      charmDmg: inp.charmDmg,
-      autoDmg: inp.autoDmg,
-      reflectDmg: inp.reflectDmg,
-      paladinArrowDmg: inp.paladinArrowDmg,
-      aoeHitSamples: inp.aoeHitSamples,
-      coverageMode: inp.coverageMode,
-      aoeBoxP90: inp.aoeBoxP90,
-      aoeCoverage: inp.aoeCoverage,
-      boxVariance: inp.boxVariance,
-      paladinArrowCoverage: inp.paladinArrowCoverage,
-      paladinSpellCoverage: inp.paladinSpellCoverage,
-      rpGrenadeMode: inp.rpGrenadeMode,
-      mageUeMode: inp.mageUeMode,
-      rpGrenadeDmg: inp.rpGrenadeDmg,
-      rpGrenadeDelaySeconds: inp.rpGrenadeDelaySeconds,
-      rpGrenadeIntervalSeconds: inp.rpGrenadeIntervalSeconds,
-      mageUeDmg: inp.mageUeDmg,
-      mageUeIntervalSeconds: inp.mageUeIntervalSeconds,
-      mageUeLockoutSeconds: inp.mageUeLockoutSeconds,
-      spawnCurve: inp.spawnCurve,
-      critMult,
-      mobHp: inp.mobHp,
-      mobXp: inp.mobXp,
-      boxSize: inp.boxSize,
-      exitThreshold: inp.exitThreshold,
-      boxChangeTime: inp.boxChangeTime,
-      flags,
-      runSeed
-    }, (done, total) => {
-      setProgress(done, total);
-    }).then(result => {
-      const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
-      lastElapsed = elapsed;
-      cache = result;
-      const totalHours = N_SESSIONS * SESSION_SECONDS / 3600 * N_LEVELS;
-      const locale = LANG === 'pt' ? 'pt-BR' : 'en-US';
-      status.textContent = t('status_done')
-        .replace('{n}', N_SESSIONS)
-        .replace('{h}', SESSION_SECONDS / 3600)
-        .replace('{total}', totalHours.toLocaleString(locale))
-        .replace('{elapsed}', elapsed);
-      $('btnRun').disabled = false;
-      hideLoading();
-      drawAll();
-    });
-    return;
-  }
-
   // WORKERS: versão paralela original
   createWorkerPool();
   const buckets = partitionLevels(N_LEVELS, N_WORKERS);
@@ -5199,11 +5058,6 @@ function collectSimHitDistribution(config, nSessions) {
   const splitPaladinDamage = flags.paladin && paladinArrowDmg > 0;
   const reflectActive = !flags.paladin && !flags.mage && reflectDmg > 0;
 
-  function makeRng(seed) {
-    let s = (seed >>> 0) || 1;
-    return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; };
-  }
-
   function buildPresentTbl(spawnDuration, curve = spawnCurve) {
     if (spawnDuration <= 0) return null;
     const maxSteps = Math.ceil(spawnDuration / TD) + 2;
@@ -5218,43 +5072,6 @@ function collectSimHitDistribution(config, nSessions) {
     const tbl = new Float64Array(POST_WALK_WAVE_PCTS.length + 1);
     for (let i = 0; i < tbl.length; i++) tbl[i] = POST_WALK_WAVE_PCTS[Math.min(i, POST_WALK_WAVE_PCTS.length - 1)];
     return tbl;
-  }
-
-  function resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode, aoeBoxP90, exitThreshold, aoeCoverage) {
-    if (coverageMode === 'screen_ratio') {
-      const coverage = Math.max(0.05, Math.min(1, aoeCoverage || 1));
-      const jitter = rng() - 0.5;
-      return Math.max(0, Math.min(aliveLen, Math.round(aliveLen * coverage + jitter)));
-    }
-    if (coverageMode === 'none' || !aoeHitSamples || aoeHitSamples.length === 0) {
-      return aliveLen;
-    }
-
-    const p90 = Math.max(1, Math.round(aoeBoxP90 || 0));
-    let hits = Math.max(0, Math.min(aliveLen, Math.round(aoeHitSamples[Math.floor(rng() * aoeHitSamples.length)] || 0)));
-
-    if (p90 > 0 && aliveLen >= p90 && hits === p90 - 1 && rng() < 0.7) {
-      hits = Math.min(aliveLen, p90);
-    }
-
-    if (coverageMode === 'hybrid') {
-      let minDamage = hits;
-      if (p90 > 0 && aliveLen >= p90) minDamage = Math.ceil(aliveLen * 0.9);
-      else if (aliveLen > exitThreshold) minDamage = Math.ceil(aliveLen * 0.8);
-      return Math.max(hits, Math.min(aliveLen, minDamage));
-    }
-
-    return hits;
-  }
-
-  function shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng) {
-    if (aoeHits <= 0 || aoeHits >= aliveLen) return;
-    for (let i = 0; i < aoeHits; i++) {
-      const j = i + Math.floor(rng() * (aliveLen - i));
-      const tmp = aliveHp[i];
-      aliveHp[i] = aliveHp[j];
-      aliveHp[j] = tmp;
-    }
   }
 
   const hitsHist = {};
