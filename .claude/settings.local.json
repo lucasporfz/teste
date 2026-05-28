@@ -10,7 +10,9 @@
       "PowerShell(py --version)",
       "PowerShell(python --version)",
       "PowerShell(python3 --version)",
-      "PowerShell(Get-Command powershell -ErrorAction SilentlyContinue; $PSVersionTable.PSVersion)"
+      "PowerShell(Get-Command powershell -ErrorAction SilentlyContinue; $PSVersionTable.PSVersion)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
