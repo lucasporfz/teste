@@ -13,7 +13,8 @@
       "PowerShell(Get-Command powershell -ErrorAction SilentlyContinue; $PSVersionTable.PSVersion)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(python3 \"c:/Users/Lucas/Desktop/claude/check_guide.py\")"
     ]
   }
 }
