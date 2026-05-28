@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx skills *)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(gh api *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(py --version)",
+      "PowerShell(py --version)",
+      "PowerShell(python --version)",
+      "PowerShell(python3 --version)",
+      "PowerShell(Get-Command powershell -ErrorAction SilentlyContinue; $PSVersionTable.PSVersion)"
+    ]
+  }
+}
