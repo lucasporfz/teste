@@ -1,0 +1,581 @@
+{
+  "version": 1,
+  "generatedFrom": "app/index.html",
+  "mode": "fixture",
+  "tolerance": {
+    "xph": 0.005,
+    "histDist": 1,
+    "mean": 0.05,
+    "p50": 0.05,
+    "p90": 0.05,
+    "componentMean": 0.05
+  },
+  "logs": [
+    {
+      "file": "ek-sample.txt",
+      "profile": "ek",
+      "real": {
+        "xph": 14175000,
+        "turns": 9,
+        "mean": 1.7778,
+        "p50": 2,
+        "p90": 2,
+        "components": {
+          "arrow": 0,
+          "spell": 0,
+          "rune": 0,
+          "grenade": 0
+        }
+      },
+      "chosen": {
+        "key": "warm_carryover",
+        "label": "Warm carryover",
+        "xph": 9597292,
+        "histDist": 1.8772,
+        "cfg": {
+          "coverageMode": "hybrid",
+          "boxSize": 2,
+          "exitThreshold": 1,
+          "boxChangeTime": 6,
+          "spawnCurve": 2,
+          "rpGrenadeMode": false,
+          "mageUeMode": false,
+          "paladinArrowCoverage": 1,
+          "paladinSpellCoverage": 1,
+          "rpGrenadeIntervalSeconds": 24,
+          "mageUeIntervalSeconds": 50,
+          "runSeed": 530242871,
+          "flags": {
+            "paladin": false,
+            "mage": false,
+            "intel": true,
+            "rpCycleMode": false,
+            "ekFlowMode": false
+          }
+        }
+      },
+      "candidates": [
+        {
+          "key": "ek_flow",
+          "label": "EK fluxo de hunt",
+          "xph": 8197875,
+          "err": 42.1667,
+          "histDist": 50.7278,
+          "passXp": false
+        },
+        {
+          "key": "ek_probabilistic_box_time",
+          "label": "EK tempo entre box probabilístico",
+          "xph": 9599625,
+          "err": 32.2778,
+          "histDist": 2.0031,
+          "passXp": true
+        },
+        {
+          "key": "flow_no_time",
+          "label": "Fluxo sem tempo entre box",
+          "xph": 9268292,
+          "err": 34.6152,
+          "histDist": 22.2222,
+          "passXp": false
+        },
+        {
+          "key": "none",
+          "label": "sem cobertura",
+          "xph": 9599625,
+          "err": 32.2778,
+          "histDist": 2.0031,
+          "passXp": true
+        },
+        {
+          "key": "warm_carryover",
+          "label": "Warm carryover",
+          "xph": 9597292,
+          "err": 32.2942,
+          "histDist": 1.8772,
+          "passXp": true
+        }
+      ]
+    },
+    {
+      "file": "mage-sample.txt",
+      "profile": "mage",
+      "real": {
+        "xph": 14230588,
+        "turns": 14,
+        "mean": 3.0714,
+        "p50": 3,
+        "p90": 4,
+        "components": {
+          "arrow": 0,
+          "spell": 0,
+          "rune": 0,
+          "grenade": 0
+        }
+      },
+      "chosen": {
+        "key": "mage_ue_cycle",
+        "label": "Mage ciclo por UE",
+        "xph": 14128400,
+        "histDist": 198.8891,
+        "cfg": {
+          "coverageMode": "none",
+          "boxSize": 3,
+          "exitThreshold": 3,
+          "boxChangeTime": 50,
+          "spawnCurve": 2,
+          "rpGrenadeMode": false,
+          "mageUeMode": true,
+          "paladinArrowCoverage": 1,
+          "paladinSpellCoverage": 1,
+          "rpGrenadeIntervalSeconds": 50,
+          "mageUeIntervalSeconds": 50,
+          "runSeed": 530242871,
+          "flags": {
+            "paladin": false,
+            "mage": true,
+            "intel": true,
+            "rpCycleMode": true,
+            "ekFlowMode": false
+          }
+        }
+      },
+      "candidates": [
+        {
+          "key": "flow_no_time",
+          "label": "Fluxo sem tempo entre box",
+          "xph": 5290800,
+          "err": 62.8209,
+          "histDist": 168.3031,
+          "passXp": false
+        },
+        {
+          "key": "mage_base",
+          "label": "Baseline",
+          "xph": 7944000,
+          "err": 44.1766,
+          "histDist": 199.3684,
+          "passXp": true
+        },
+        {
+          "key": "mage_ue_cycle",
+          "label": "Mage ciclo por UE",
+          "xph": 14128400,
+          "err": 0.7181,
+          "histDist": 198.8891,
+          "passXp": true
+        },
+        {
+          "key": "warm_carryover",
+          "label": "Warm carryover",
+          "xph": 7964400,
+          "err": 44.0332,
+          "histDist": 199.5099,
+          "passXp": true
+        }
+      ]
+    },
+    {
+      "file": "mazzerin-rp-sample.txt",
+      "profile": "rp",
+      "real": {
+        "xph": 23100000,
+        "turns": 7,
+        "mean": 4.2857,
+        "p50": 4,
+        "p90": 6,
+        "components": {
+          "arrow": 1.8571,
+          "spell": 2.4286,
+          "rune": 0,
+          "grenade": 0
+        }
+      },
+      "chosen": {
+        "key": "rp_grenade_peak_residual",
+        "label": "RP granada por pico",
+        "xph": 6231958,
+        "histDist": 78.4792,
+        "cfg": {
+          "coverageMode": "rp_split",
+          "boxSize": 6,
+          "exitThreshold": 3,
+          "boxChangeTime": 6,
+          "spawnCurve": 2,
+          "rpGrenadeMode": true,
+          "mageUeMode": false,
+          "paladinArrowCoverage": 0.3095,
+          "paladinSpellCoverage": 0.4048,
+          "rpGrenadeIntervalSeconds": 24,
+          "mageUeIntervalSeconds": 50,
+          "runSeed": 530242871,
+          "flags": {
+            "paladin": true,
+            "mage": false,
+            "intel": true,
+            "rpCycleMode": false,
+            "ekFlowMode": false
+          }
+        }
+      },
+      "candidates": [
+        {
+          "key": "flow_no_time",
+          "label": "Fluxo sem tempo entre box",
+          "xph": 11774125,
+          "err": 49.0298,
+          "histDist": 191.3125,
+          "passXp": true
+        },
+        {
+          "key": "rp_cadence_from_log",
+          "label": "RP cadência do log",
+          "xph": 22882750,
+          "err": 0.9405,
+          "histDist": 199.3958,
+          "passXp": true
+        },
+        {
+          "key": "rp_coverage",
+          "label": "RP separado + cobertura real",
+          "xph": 6231958,
+          "err": 73.0218,
+          "histDist": 79.7188,
+          "passXp": true
+        },
+        {
+          "key": "rp_grenade_cycle_hybrid",
+          "label": "RP ciclo híbrido",
+          "xph": 22866708,
+          "err": 1.0099,
+          "histDist": 199.2292,
+          "passXp": true
+        },
+        {
+          "key": "rp_grenade_peak_residual",
+          "label": "RP granada por pico",
+          "xph": 6231958,
+          "err": 73.0218,
+          "histDist": 78.4792,
+          "passXp": true
+        },
+        {
+          "key": "rp_hit_target_coverage",
+          "label": "RP alvo de hits",
+          "xph": 14249583,
+          "err": 38.3135,
+          "histDist": 191.3958,
+          "passXp": true
+        },
+        {
+          "key": "rp_hit_target_cycle",
+          "label": "RP alvo de hits + ciclo",
+          "xph": 22913917,
+          "err": 0.8056,
+          "histDist": 199.6042,
+          "passXp": true
+        },
+        {
+          "key": "rp_multi_pulse_cycle",
+          "label": "RP ciclo multi-pulso",
+          "xph": 22886875,
+          "err": 0.9226,
+          "histDist": 199.3125,
+          "passXp": true
+        },
+        {
+          "key": "rp_split",
+          "label": "RP arrow/spell separado",
+          "xph": 6231958,
+          "err": 73.0218,
+          "histDist": 79.7188,
+          "passXp": true
+        },
+        {
+          "key": "rp_two_phase_cycle",
+          "label": "RP ciclo duas fases",
+          "xph": 22867625,
+          "err": 1.006,
+          "histDist": 199.125,
+          "passXp": true
+        },
+        {
+          "key": "rp_visible_latent_budget",
+          "label": "RP budget visível/latente",
+          "xph": 18675250,
+          "err": 19.1548,
+          "histDist": 198.8542,
+          "passXp": true
+        }
+      ]
+    },
+    {
+      "file": "rp-ingol-sample.txt",
+      "profile": "rp",
+      "real": {
+        "xph": 22739143,
+        "turns": 12,
+        "mean": 4.4167,
+        "p50": 4,
+        "p90": 5,
+        "components": {
+          "arrow": 0.9167,
+          "spell": 3.25,
+          "rune": 4,
+          "grenade": 0
+        }
+      },
+      "chosen": {
+        "key": "rp_cadence_from_log",
+        "label": "RP cadência do log",
+        "xph": 22559476,
+        "histDist": 197.75,
+        "cfg": {
+          "coverageMode": "rp_split",
+          "boxSize": 5,
+          "exitThreshold": 4,
+          "boxChangeTime": 24,
+          "spawnCurve": 2,
+          "rpGrenadeMode": true,
+          "mageUeMode": false,
+          "paladinArrowCoverage": 0.1833,
+          "paladinSpellCoverage": 0.65,
+          "rpGrenadeIntervalSeconds": 24,
+          "mageUeIntervalSeconds": 50,
+          "runSeed": 530242871,
+          "flags": {
+            "paladin": true,
+            "mage": false,
+            "intel": true,
+            "rpCycleMode": true,
+            "ekFlowMode": false
+          }
+        }
+      },
+      "candidates": [
+        {
+          "key": "flow_no_time",
+          "label": "Fluxo sem tempo entre box",
+          "xph": 19492674,
+          "err": 14.277,
+          "histDist": 199.8021,
+          "passXp": true
+        },
+        {
+          "key": "rp_cadence_from_log",
+          "label": "RP cadência do log",
+          "xph": 22559476,
+          "err": 0.7901,
+          "histDist": 197.75,
+          "passXp": true
+        },
+        {
+          "key": "rp_coverage",
+          "label": "RP separado + cobertura real",
+          "xph": 9055478,
+          "err": 60.1767,
+          "histDist": 66.5555,
+          "passXp": true
+        },
+        {
+          "key": "rp_grenade_cycle_hybrid",
+          "label": "RP ciclo híbrido",
+          "xph": 22536754,
+          "err": 0.89,
+          "histDist": 197.7708,
+          "passXp": true
+        },
+        {
+          "key": "rp_grenade_peak_residual",
+          "label": "RP granada por pico",
+          "xph": 9055478,
+          "err": 60.1767,
+          "histDist": 64.9232,
+          "passXp": true
+        },
+        {
+          "key": "rp_hit_target_coverage",
+          "label": "RP alvo de hits",
+          "xph": 19751209,
+          "err": 13.14,
+          "histDist": 190.9792,
+          "passXp": true
+        },
+        {
+          "key": "rp_hit_target_cycle",
+          "label": "RP alvo de hits + ciclo",
+          "xph": 22652818,
+          "err": 0.3796,
+          "histDist": 199.3958,
+          "passXp": true
+        },
+        {
+          "key": "rp_multi_pulse_cycle",
+          "label": "RP ciclo multi-pulso",
+          "xph": 22560090,
+          "err": 0.7874,
+          "histDist": 197.7708,
+          "passXp": true
+        },
+        {
+          "key": "rp_split",
+          "label": "RP arrow/spell separado",
+          "xph": 9055478,
+          "err": 60.1767,
+          "histDist": 66.5555,
+          "passXp": true
+        },
+        {
+          "key": "rp_two_phase_cycle",
+          "label": "RP ciclo duas fases",
+          "xph": 22513418,
+          "err": 0.9927,
+          "histDist": 197.8125,
+          "passXp": true
+        },
+        {
+          "key": "rp_visible_latent_budget",
+          "label": "RP budget visível/latente",
+          "xph": 20438384,
+          "err": 10.1181,
+          "histDist": 196.7708,
+          "passXp": true
+        }
+      ]
+    },
+    {
+      "file": "rp-sample.txt",
+      "profile": "rp",
+      "real": {
+        "xph": 18514286,
+        "turns": 8,
+        "mean": 3.5,
+        "p50": 4,
+        "p90": 4,
+        "components": {
+          "arrow": 1.875,
+          "spell": 1.625,
+          "rune": 0,
+          "grenade": 0
+        }
+      },
+      "chosen": {
+        "key": "rp_grenade_peak_residual",
+        "label": "RP granada por pico",
+        "xph": 12511875,
+        "histDist": 98.2083,
+        "cfg": {
+          "coverageMode": "rp_split",
+          "boxSize": 4,
+          "exitThreshold": 2,
+          "boxChangeTime": 6,
+          "spawnCurve": 2,
+          "rpGrenadeMode": true,
+          "mageUeMode": false,
+          "paladinArrowCoverage": 0.4688,
+          "paladinSpellCoverage": 0.4063,
+          "rpGrenadeIntervalSeconds": 24,
+          "mageUeIntervalSeconds": 50,
+          "runSeed": 530242871,
+          "flags": {
+            "paladin": true,
+            "mage": false,
+            "intel": true,
+            "rpCycleMode": false,
+            "ekFlowMode": false
+          }
+        }
+      },
+      "candidates": [
+        {
+          "key": "flow_no_time",
+          "label": "Fluxo sem tempo entre box",
+          "xph": 14400750,
+          "err": 22.2182,
+          "histDist": 114.1146,
+          "passXp": true
+        },
+        {
+          "key": "rp_cadence_from_log",
+          "label": "RP cadência do log",
+          "xph": 18495375,
+          "err": 0.1021,
+          "histDist": 152.1458,
+          "passXp": true
+        },
+        {
+          "key": "rp_coverage",
+          "label": "RP separado + cobertura real",
+          "xph": 12511875,
+          "err": 32.4204,
+          "histDist": 98.4947,
+          "passXp": true
+        },
+        {
+          "key": "rp_grenade_cycle_hybrid",
+          "label": "RP ciclo híbrido",
+          "xph": 18484500,
+          "err": 0.1609,
+          "histDist": 155.1875,
+          "passXp": true
+        },
+        {
+          "key": "rp_grenade_peak_residual",
+          "label": "RP granada por pico",
+          "xph": 12511875,
+          "err": 32.4204,
+          "histDist": 98.2083,
+          "passXp": true
+        },
+        {
+          "key": "rp_hit_target_coverage",
+          "label": "RP alvo de hits",
+          "xph": 26483625,
+          "err": 43.0443,
+          "histDist": 188.5,
+          "passXp": false
+        },
+        {
+          "key": "rp_hit_target_cycle",
+          "label": "RP alvo de hits + ciclo",
+          "xph": 18511125,
+          "err": 0.0171,
+          "histDist": 165.8728,
+          "passXp": true
+        },
+        {
+          "key": "rp_multi_pulse_cycle",
+          "label": "RP ciclo multi-pulso",
+          "xph": 18484875,
+          "err": 0.1589,
+          "histDist": 152.6042,
+          "passXp": true
+        },
+        {
+          "key": "rp_split",
+          "label": "RP arrow/spell separado",
+          "xph": 12511875,
+          "err": 32.4204,
+          "histDist": 98.4947,
+          "passXp": true
+        },
+        {
+          "key": "rp_two_phase_cycle",
+          "label": "RP ciclo duas fases",
+          "xph": 18456000,
+          "err": 0.3148,
+          "histDist": 155.1293,
+          "passXp": true
+        },
+        {
+          "key": "rp_visible_latent_budget",
+          "label": "RP budget visível/latente",
+          "xph": 14301750,
+          "err": 22.7529,
+          "histDist": 96.7237,
+          "passXp": true
+        }
+      ]
+    }
+  ]
+}

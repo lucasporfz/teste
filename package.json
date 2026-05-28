@@ -8,7 +8,10 @@
     "check": "node scripts/check-html.mjs",
     "test": "node tests/validator-smoke.test.mjs",
     "bench": "node scripts/bench.mjs",
+    "snapshot": "node scripts/model-snapshot.mjs",
+    "snapshot:update": "node scripts/model-snapshot.mjs --update",
+    "snapshot:local": "node scripts/model-snapshot.mjs --local",
     "git:ready": "node scripts/check-git-ready.mjs",
-    "validate": "npm run check && npm test && npm run bench && npm run git:ready"
+    "validate": "npm run check && npm test && npm run bench && npm run snapshot && npm run git:ready"
   }
 }

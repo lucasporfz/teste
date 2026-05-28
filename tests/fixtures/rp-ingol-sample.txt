@@ -1,0 +1,69 @@
+16:00:00 A boar man loses 501 hitpoints due to your attack.
+16:00:00 A carnivostrich loses 595 hitpoints due to your attack.
+16:00:00 A liodile loses 909 hitpoints due to your attack.
+16:00:00 A boar man loses 695 hitpoints due to your attack.
+16:00:00 You gained 14515 experience points.
+16:00:02 Using one of 71 avalanche runes...
+16:00:02 A boar man loses 430 hitpoints due to your attack.
+16:00:02 A carnivostrich loses 510 hitpoints due to your attack.
+16:00:02 A liodile loses 735 hitpoints due to your attack.
+16:00:02 A rhindeer loses 560 hitpoints due to your attack.
+16:00:02 You gained 14200 experience points.
+16:00:04 A boar man loses 954 hitpoints due to your attack.
+16:00:04 A carnivostrich loses 1086 hitpoints due to your attack.
+16:00:04 A liodile loses 1234 hitpoints due to your attack.
+16:00:04 A rhindeer loses 655 hitpoints due to your attack.
+16:00:04 A crape man loses 990 hitpoints due to your attack.
+16:00:04 You gained 15000 experience points.
+16:00:08 A boar man loses 490 hitpoints due to your attack.
+16:00:08 A carnivostrich loses 599 hitpoints due to your attack.
+16:00:08 A liodile loses 909 hitpoints due to your attack.
+16:00:08 A boar man loses 695 hitpoints due to your attack.
+16:00:08 You gained 14515 experience points.
+16:00:10 Using one of 70 avalanche runes...
+16:00:10 A boar man loses 425 hitpoints due to your attack.
+16:00:10 A carnivostrich loses 505 hitpoints due to your attack.
+16:00:10 A liodile loses 728 hitpoints due to your attack.
+16:00:10 A rhindeer loses 555 hitpoints due to your attack.
+16:00:10 You gained 14200 experience points.
+16:00:12 A boar man loses 695 hitpoints due to your critical attack.
+16:00:12 A carnivostrich loses 760 hitpoints due to your critical attack.
+16:00:12 A liodile loses 909 hitpoints due to your critical attack.
+16:00:12 A boar man loses 812 hitpoints due to your attack.
+16:00:12 A carnivostrich loses 888 hitpoints due to your attack.
+16:00:12 A liodile loses 1063 hitpoints due to your attack.
+16:00:12 You gained 16000 experience points.
+16:00:16 A boar man loses 501 hitpoints due to your attack.
+16:00:16 A carnivostrich loses 595 hitpoints due to your attack.
+16:00:16 A liodile loses 909 hitpoints due to your attack.
+16:00:16 A boar man loses 695 hitpoints due to your attack.
+16:00:16 You gained 14515 experience points.
+16:00:18 Using one of 69 avalanche runes...
+16:00:18 A boar man loses 432 hitpoints due to your attack.
+16:00:18 A carnivostrich loses 512 hitpoints due to your attack.
+16:00:18 A liodile loses 740 hitpoints due to your attack.
+16:00:18 A rhindeer loses 562 hitpoints due to your attack.
+16:00:18 You gained 14200 experience points.
+16:00:20 A boar man loses 954 hitpoints due to your attack.
+16:00:20 A carnivostrich loses 1086 hitpoints due to your attack.
+16:00:20 A liodile loses 1234 hitpoints due to your attack.
+16:00:20 A rhindeer loses 655 hitpoints due to your attack.
+16:00:20 A crape man loses 990 hitpoints due to your attack.
+16:00:20 You gained 15000 experience points.
+16:00:24 A boar man loses 490 hitpoints due to your attack.
+16:00:24 A carnivostrich loses 599 hitpoints due to your attack.
+16:00:24 A liodile loses 909 hitpoints due to your attack.
+16:00:24 A boar man loses 695 hitpoints due to your attack.
+16:00:24 You gained 14515 experience points.
+16:00:26 Using one of 68 avalanche runes...
+16:00:26 A boar man loses 430 hitpoints due to your attack.
+16:00:26 A carnivostrich loses 510 hitpoints due to your attack.
+16:00:26 A liodile loses 735 hitpoints due to your attack.
+16:00:26 A rhindeer loses 560 hitpoints due to your attack.
+16:00:26 You gained 14200 experience points.
+16:00:28 A boar man loses 812 hitpoints due to your attack.
+16:00:28 A carnivostrich loses 888 hitpoints due to your attack.
+16:00:28 A liodile loses 1063 hitpoints due to your attack.
+16:00:28 A liodile loses 1063 hitpoints due to your attack.
+16:00:28 A crape man loses 990 hitpoints due to your attack.
+16:00:28 You gained 16000 experience points.

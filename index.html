@@ -600,6 +600,25 @@ input[type="range"] { accent-color: var(--accent); cursor: pointer; }
         <div style="position:relative;height:240px"><canvas id="valHistogram"></canvas></div>
       </div>
 
+      <div id="valRpComponentSection" style="display:none">
+        <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_rp_components">histogramas RP por componente</h3>
+        <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5" data-i18n="val_rp_components_desc">
+          Diagnostico separado da arrow, spell/rune e granada. A granada e mostrada por disparo, entao a amostra costuma ser pequena.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <div class="chart-container" style="margin:0">
+            <div style="position:relative;height:220px"><canvas id="valRpArrowHistogram"></canvas></div>
+          </div>
+          <div class="chart-container" style="margin:0">
+            <div style="position:relative;height:220px"><canvas id="valRpSpellHistogram"></canvas></div>
+          </div>
+          <div class="chart-container" style="margin:0">
+            <div style="position:relative;height:220px"><canvas id="valRpGrenadeHistogram"></canvas></div>
+          </div>
+        </div>
+        <div id="valRpComponentDebug" class="val-model-help" style="display:none;margin-top:10px"></div>
+      </div>
+
       <h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)" data-i18n="val_h_timeline">análise temporal do log</h3>
       <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.5" data-i18n="val_timeline_desc">
         Veja a hunt como sequência: mobs acertados, mortes, XP acumulada e componentes por turno ao longo do tempo.
@@ -854,6 +873,23 @@ const I18N = {
     val_h_extracted: 'parâmetros extraídos do log',
     val_h_histogram: 'distribuição de mobs acertados por turno no log',
     val_histogram_desc: 'Histograma dos mobs acertados pela rotação principal no log. Charms não entram nessa curva; para não-paladino, o auto attack single target é removido. As linhas verticais marcam o ponto de saída (vermelho, p10) e o tamanho da box (verde, p90).',
+    val_h_rp_components: 'histogramas RP por componente',
+    val_rp_components_desc: 'Diagnóstico separado da arrow, spell/rune e granada. A granada é mostrada por disparo, então a amostra costuma ser pequena.',
+    val_rp_component_arrow: 'arrow por turno',
+    val_rp_component_spell: 'spell/rune por turno',
+    val_rp_component_grenade: 'granada por disparo',
+    val_rp_component_real: 'log real',
+    val_rp_component_sim: 'simulação',
+    val_rp_component_small_n: 'amostra pequena',
+    val_rp_component_samples: 'amostras',
+    val_rp_component_no_grenade: 'sem disparos detectados',
+    val_rp_debug_title: 'auditoria da classificação RP',
+    val_rp_debug_desc: 'A separação é heurística. Estes turnos mostram como o parser classificou as linhas ofensivas.',
+    val_rp_debug_turn: 'turno',
+    val_rp_debug_reason_order: 'ordem do turno',
+    val_rp_debug_reason_cast: 'cast de granada',
+    val_rp_debug_reason_explode: 'excedente do pico',
+    val_metric_rp_component_dist: 'distância por componente RP',
     val_h_timeline: 'análise temporal do log',
     val_timeline_desc: 'Veja a hunt como sequência: mobs acertados, mortes, XP acumulada e componentes por turno ao longo do tempo.',
     val_timeline_hits: 'mobs acertados por turno',
@@ -971,7 +1007,7 @@ const I18N = {
     val_model_help_mage_note: 'Mage usa UE como parte natural da vocacao; o seletor compara geometria/cobertura, nao liga ou desliga UE.',
     val_open_hunt_log: 'ver log de hunt deste modelo',
     bench_title: 'bancada de validação',
-    bench_desc: 'Rode vários logs de referência contra o validador atual para comparar XP/h, mortes/h, histograma, box e componentes sem mudar os modelos.',
+    bench_desc: 'Rode varios logs de referencia contra o validador atual para comparar XP/h com bonus, RAW XP/h, histograma, box e componentes sem mudar os modelos.',
     bench_load_files: 'carregar logs da bancada',
     bench_run: 'rodar bancada',
     bench_empty: 'nenhum log carregado',
@@ -985,7 +1021,8 @@ const I18N = {
     bench_xph_real: 'XP/h real',
     bench_xph_sim: 'XP/h sim',
     bench_xph_err: 'erro XP',
-    bench_kills_err: 'erro mortes',
+    bench_raw_xph: 'RAW XP/h',
+    bench_raw_amb: 'ambig. RAW',
     bench_hist: 'dist. hist',
     bench_box: 'box',
     bench_hits: 'moda / média / p90',
@@ -1002,7 +1039,6 @@ const I18N = {
     diag_model: 'modelo',
     diag_xph: 'XP/h',
     diag_xp_err: 'erro XP',
-    diag_kills_h: 'mortes/h',
     diag_hist: 'hist',
     diag_special: 'granada/UE',
     diag_observed_box: 'box observado',
@@ -1031,6 +1067,7 @@ const I18N = {
     val_metric_arrow_spell_hits: 'arrow / spell hits',
     val_card_duration: 'duração da hunt',
     val_card_xph: 'XP/h real',
+    val_card_raw_xph: 'RAW XP/h',
     val_card_kills: 'mortes',
     val_card_turns_per_h: 'turnos efetivos/h',
     val_card_xp_avg: 'XP médio por mob',
@@ -1044,6 +1081,8 @@ const I18N = {
     val_card_pal_arrow: 'arrow média RP',
     val_card_pal_spell: 'ciclo spell RP',
     val_card_pal_split_method: 'separação RP',
+    val_card_pal_damage_method: 'método de dano RP',
+    val_card_rp_elemental_fix: 'correção elemental RP',
     val_card_exit: 'ponto de saída (p10)',
     val_card_dmg_avg: 'dano médio (sem prey/crit)',
     val_card_dmg_cycle: 'ciclo de dano detectado',
@@ -1106,6 +1145,8 @@ const I18N = {
     // Subtítulos dos cards do validador
     val_sub_events_turns: '{n} eventos · {t} turnos',
     val_sub_xp_in: '{xp} XP em {dur}',
+    val_sub_raw_xph_ok: 'XP seca invertida do log · ambiguidade {amb}% · match {match}%',
+    val_sub_raw_xph_uncertain: 'incerto: ambiguidade {amb}% · sem match {unr}%',
     val_sub_kills_per_h: '{n}/h',
     val_sub_turns_per_h: '{n} turnos com hits em {d}',
     val_sub_dmg_div_kills: 'dano total ÷ mortes',
@@ -1122,6 +1163,8 @@ const I18N = {
     val_sub_pal_arrow: 'cluster baixo recorrente do log paladino',
     val_sub_pal_spell: 'cluster alto usado como spell/rune',
     val_sub_pal_split_low: 'separação baixa/indisponível; fallback para ciclo misto',
+    val_sub_pal_order_rejected: 'split por ordem rejeitado: ciclo muito baixo contra os clusters',
+    val_sub_rp_elemental_fix: 'reetiquetados / ambíguos / sem mod elemental',
     val_sub_p5_hits: 'percentil 10 dos mobs acertados/turno',
     val_sub_pal_div2: ' (÷2)',
     val_sub_gaps_median: 'mediana das pausas de 3-15s entre ataques',
@@ -1150,10 +1193,10 @@ const I18N = {
     val_sub_box_variance_triangular: 'sorteio triangular: a box varia para cima ou para baixo em torno da média, com extremos menos frequentes',
     val_sub_mage_box_target: 'moda/platô alto sem turnos de UE; evita o p90 inflado por burst',
     val_sub_model_seed: 'seed usada nesta comparação; muda a cada clique',
-    val_sub_arrow_hits: 'média estimada dos hits da arrow por turno',
-    val_sub_spell_hits: 'média estimada dos hits de spell/rune por turno',
-    val_sub_arrow_coverage: 'arrow hits ÷ p90',
-    val_sub_spell_coverage: 'spell hits ÷ p90',
+    val_sub_arrow_hits: 'média observada no histograma de arrow por turno',
+    val_sub_spell_hits: 'média observada no histograma de spell/rune por turno',
+    val_sub_arrow_coverage: 'arrow hits ÷ p90, sem piso fixo',
+    val_sub_spell_coverage: 'spell hits ÷ p90, sem piso fixo',
     val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
     val_sub_prey_xp_only: '⚠ prey de XP detectada — sem prey de atk no log',
     val_warn_short_log_title: 'log curto:',
@@ -1179,7 +1222,6 @@ const I18N = {
     val_metric_xph_old_rp: 'XP/h RP sem cobertura',
     val_metric_xph_coverage: 'XP/h com cobertura',
     val_metric_xph_hybrid: 'XP/h híbrido leve',
-    val_metric_kills_per_hour: 'mortes/h',
     val_metric_avg_turns: 'turnos médios por box',
     val_metric_crit_rate: 'crit rate',
     val_metric_crit_mult: 'crit multiplier',
@@ -1343,6 +1385,23 @@ const I18N = {
     val_h_extracted: 'parameters extracted from log',
     val_h_histogram: 'distribution of mobs hit per turn in log',
     val_histogram_desc: 'Histogram of mobs hit by the main rotation in the log. Charms are excluded from this curve; for non-paladin logs, the single-target auto attack is removed. Vertical lines mark the exit threshold (red, p10) and box size (green, p90).',
+    val_h_rp_components: 'RP component histograms',
+    val_rp_components_desc: 'Separate diagnostic for arrow, spell/rune, and grenade. Grenade is shown per shot, so the sample is usually small.',
+    val_rp_component_arrow: 'arrow per turn',
+    val_rp_component_spell: 'spell/rune per turn',
+    val_rp_component_grenade: 'grenade per shot',
+    val_rp_component_real: 'real log',
+    val_rp_component_sim: 'simulation',
+    val_rp_component_small_n: 'small sample',
+    val_rp_component_samples: 'samples',
+    val_rp_component_no_grenade: 'no shots detected',
+    val_rp_debug_title: 'RP classification audit',
+    val_rp_debug_desc: 'The split is heuristic. These turns show how the parser classified offensive lines.',
+    val_rp_debug_turn: 'turn',
+    val_rp_debug_reason_order: 'turn order',
+    val_rp_debug_reason_cast: 'grenade cast',
+    val_rp_debug_reason_explode: 'peak excess',
+    val_metric_rp_component_dist: 'RP component distance',
     val_h_timeline: 'temporal log analysis',
     val_timeline_desc: 'See the hunt as a sequence: mobs hit, kills, cumulative XP, and turn components over time.',
     val_timeline_hits: 'mobs hit per turn',
@@ -1460,7 +1519,7 @@ const I18N = {
     val_model_help_mage_note: 'Mage uses UE as a natural vocation spell; the selector compares geometry/coverage, not UE on/off.',
     val_open_hunt_log: 'view hunt log for this model',
     bench_title: 'validation bench',
-    bench_desc: 'Run several reference logs against the current validator to compare XP/h, kills/h, histogram, box, and components without changing models.',
+    bench_desc: 'Run several reference logs against the current validator to compare bonus XP/h, RAW XP/h, histogram, box, and components without changing models.',
     bench_load_files: 'load bench logs',
     bench_run: 'run bench',
     bench_empty: 'no logs loaded',
@@ -1474,7 +1533,8 @@ const I18N = {
     bench_xph_real: 'real XP/h',
     bench_xph_sim: 'sim XP/h',
     bench_xph_err: 'XP error',
-    bench_kills_err: 'kills error',
+    bench_raw_xph: 'RAW XP/h',
+    bench_raw_amb: 'RAW ambig.',
     bench_hist: 'hist. dist',
     bench_box: 'box',
     bench_hits: 'mode / mean / p90',
@@ -1491,7 +1551,6 @@ const I18N = {
     diag_model: 'model',
     diag_xph: 'XP/h',
     diag_xp_err: 'XP error',
-    diag_kills_h: 'kills/h',
     diag_hist: 'hist',
     diag_special: 'grenade/UE',
     diag_observed_box: 'observed box',
@@ -1520,6 +1579,7 @@ const I18N = {
     val_metric_arrow_spell_hits: 'arrow / spell hits',
     val_card_duration: 'hunt duration',
     val_card_xph: 'real XP/h',
+    val_card_raw_xph: 'RAW XP/h',
     val_card_kills: 'kills',
     val_card_turns_per_h: 'effective turns/h',
     val_card_xp_avg: 'avg XP per mob',
@@ -1533,6 +1593,8 @@ const I18N = {
     val_card_pal_arrow: 'avg RP arrow',
     val_card_pal_spell: 'RP spell cycle',
     val_card_pal_split_method: 'RP split method',
+    val_card_pal_damage_method: 'RP damage method',
+    val_card_rp_elemental_fix: 'RP elemental correction',
     val_card_exit: 'exit threshold (p10)',
     val_card_dmg_avg: 'avg damage (no prey/crit)',
     val_card_dmg_cycle: 'detected damage cycle',
@@ -1595,6 +1657,8 @@ const I18N = {
     // Subtitles for validator cards
     val_sub_events_turns: '{n} events · {t} turns',
     val_sub_xp_in: '{xp} XP in {dur}',
+    val_sub_raw_xph_ok: 'raw XP inverted from log · ambiguity {amb}% · match {match}%',
+    val_sub_raw_xph_uncertain: 'uncertain: ambiguity {amb}% · unmatched {unr}%',
     val_sub_kills_per_h: '{n}/h',
     val_sub_turns_per_h: '{n} turns with hits in {d}',
     val_sub_dmg_div_kills: 'total damage ÷ kills',
@@ -1611,6 +1675,8 @@ const I18N = {
     val_sub_pal_arrow: 'recurring low-damage cluster from paladin log',
     val_sub_pal_spell: 'high-damage cluster used as spell/rune',
     val_sub_pal_split_low: 'low/unavailable split; falling back to mixed cycle',
+    val_sub_pal_order_rejected: 'order split rejected: cycle too low against clusters',
+    val_sub_rp_elemental_fix: 'retagged / ambiguous / missing elemental mod',
     val_sub_p5_hits: '10th percentile of mobs hit/turn',
     val_sub_pal_div2: ' (÷2)',
     val_sub_gaps_median: 'median of 3-15s pauses between attacks',
@@ -1639,10 +1705,10 @@ const I18N = {
     val_sub_box_variance_triangular: 'triangular roll: box varies up or down around the average, with extremes less frequent',
     val_sub_mage_box_target: 'mode/high plateau without UE turns; avoids p90 inflated by burst',
     val_sub_model_seed: 'seed used for this comparison; changes on each click',
-    val_sub_arrow_hits: 'estimated average arrow hits per turn',
-    val_sub_spell_hits: 'estimated average spell/rune hits per turn',
-    val_sub_arrow_coverage: 'arrow hits ÷ p90',
-    val_sub_spell_coverage: 'spell hits ÷ p90',
+    val_sub_arrow_hits: 'observed average from arrow-per-turn histogram',
+    val_sub_spell_hits: 'observed average from spell/rune-per-turn histogram',
+    val_sub_arrow_coverage: 'arrow hits ÷ p90, no fixed floor',
+    val_sub_spell_coverage: 'spell hits ÷ p90, no fixed floor',
     val_sub_prey_mult: 'mult {m}x · raw [{raw}]',
     val_sub_prey_xp_only: '⚠ XP prey detected — no attack prey in log',
     val_warn_short_log_title: 'short log:',
@@ -1668,7 +1734,6 @@ const I18N = {
     val_metric_xph_old_rp: 'RP without coverage XP/h',
     val_metric_xph_coverage: 'XP/h with coverage',
     val_metric_xph_hybrid: 'XP/h light hybrid',
-    val_metric_kills_per_hour: 'kills/h',
     val_metric_avg_turns: 'avg turns per box',
     val_metric_crit_rate: 'crit rate',
     val_metric_crit_mult: 'crit multiplier',
@@ -4728,6 +4793,164 @@ let lastValidatorData = null;
 
 const MOBS_TABLE = {"rotworm":[65,40],"wolf":[25,18],"rabbit":[15,0],"stone golem":[270,160],"badger":[23,5],"bear":[80,23],"cave rat":[30,10],"hyaena":[60,20],"lion":[80,30],"pig":[25,0],"polar bear":[85,28],"skunk":[20,3],"winter wolf":[30,20],"flamingo":[25,0],"parrot":[25,0],"panda":[80,23],"spit nettle":[150,20],"crab":[55,30],"tiger":[75,40],"terror bird":[300,150],"crocodile":[105,40],"chicken":[15,0],"bat":[30,10],"elephant":[320,160],"blood crab":[290,160],"carrion worm":[145,70],"seagull":[25,0],"tortoise":[185,90],"mammoth":[320,160],"magicthrower":[100,18],"deathslicer":[8200,0],"plaguethrower":[100,18],"serpent spawn":[3000,3050],"yeti":[950,460],"frost troll":[55,23],"vampire":[475,305],"minotaur mage":[155,150],"minotaur":[100,50],"minotaur archer":[100,65],"minotaur guard":[185,160],"amazon":[110,60],"ashmunrah":[5000,3100],"priestess":[390,420],"stalker":[120,90],"thornback tortoise":[300,150],"valkyrie":[190,85],"dwarf guard":[245,165],"elf":[100,42],"lich":[880,900],"dwarf soldier":[135,70],"bug":[29,18],"elf scout":[160,75],"swamp troll":[55,25],"goblin":[50,25],"poison spider":[26,22],"ghoul":[100,85],"scarab":[320,120],"larva":[70,44],"scorpion":[45,45],"snake":[15,10],"orc leader":[450,270],"orc rider":[180,110],"orc shaman":[115,110],"orc berserker":[210,195],"orc spearman":[105,38],"orc warlord":[950,670],"orc warrior":[125,50],"demon skeleton":[400,240],"skeleton":[50,35],"quara pincher":[1800,1500],"wild warrior":[135,60],"wasp":[35,24],"bonebeast":[515,580],"crypt shambler":[330,195],"grorlam":[3000,2400],"centipede":[70,34],"gargoyle":[250,150],"ghost":[150,120],"mummy":[240,150],"dipthrah":[4200,2900],"mahrdis":[3900,3050],"vashresamun":[4000,2950],"adept of the cult":[430,400],"efreet":[550,410],"thalas":[4100,2950],"rahemos":[3700,3100],"gazer":[120,90],"bandit":[245,65],"smuggler":[130,48],"lizard snakecharmer":[325,210],"butterfly (purple)":[2,0],"pirate cutthroat":[325,175],"sibang":[225,105],"kongra":[340,115],"quara pincher scout":[775,600],"merlkin":[235,145],"lizard sentinel":[265,160],"dworc fleshhunter":[85,40],"azure frog":[60,20],"coral frog":[60,20],"acolyte of the cult":[390,300],"enlightened of the cult":[700,500],"novice of the cult":[285,100],"pirate buccaneer":[425,250],"pirate corsair":[675,350],"pirate ghost":[275,250],"pirate marauder":[210,125],"pirate skeleton":[190,85],"quara hydromancer":[1100,950],"quara predator scout":[890,400],"quara mantassin":[800,600],"toad":[135,60],"water elemental":[550,650],"massive water elemental":[1250,1100],"island troll":[50,20],"orchid frog":[60,20],"crimson frog":[60,20],"green frog":[25,0],"thul":[2950,2700],"quara mantassin scout":[220,100],"quara hydromancer scout":[1100,800],"fernfang":[400,600],"hand of cursed fate":[6600,5000],"phantasm":[3950,4400],"son of verminor":[8500,5900],"dwarf geomancer":[380,265],"apprentice sheng":[95,150],"wyvern":[795,515],"munster":[58,35],"flamethrower":[100,18],"the evil eye":[1200,750],"the horned fox":[265,300],"the old widow":[3200,4200],"brutus bloodbeard":[1555,795],"deadeye devious":[1450,750],"general murius":[550,450],"lethal lissy":[1450,500],"ron the ripper":[1500,500],"tiquandas revenge":[1800,2635],"demon (goblin)":[50,25],"the handmaiden":[19500,7500],"witch":[300,120],"webster":[2950,1200],"spirit of water":[1400,850],"norgle glacierbeard":[4280,2100],"spirit of earth":[1200,800],"slim":[1025,580],"kreebosh the exile":[705,350],"the dark dancer":[805,435],"the hag":[935,510],"deathbringer":[8440,5100],"darakan the executioner":[3480,1600],"grimgor guteater":[1155,670],"drasilla":[1260,700],"orcus the cruel":[480,280],"svoren the mad":[6310,3000],"fallen mooh'tah master ghar":[7990,4400],"quara constrictor":[450,380],"orc":[70,25],"elf arcanist":[220,175],"cat":[20,0],"squirrel":[20,0],"poacher":[90,70],"troll champion":[75,40],"cyclops drone":[325,200],"cyclops smith":[435,255],"dark magician":[325,185],"dark apprentice":[225,100],"mechanical fighter":[420,255],"dwarf henchman":[350,15],"thief (creature)":[60,5],"assassin":[175,105],"mad technomancer":[1800,55],"koshei the deathless":[3000,0],"slime":[150,160],"fire devil":[200,145],"dworc voodoomaster":[80,55],"nomad (basic)":[160,60],"dryad":[310,190],"goblin assassin":[75,52],"rotworm queen":[105,75],"massive energy elemental":[1100,950],"eye of the seven":[120,0],"skeleton warrior":[65,45],"ungreez":[8200,500],"massive fire elemental":[1800,1400],"wisp":[115,0],"overcharged energy element":[1200,1300],"zugurosh":[90500,10000],"massive earth elemental":[1330,1100],"golgordan":[40000,10000],"latrivan":[25000,10000],"young sea serpent":[1050,1000],"roaring water elemental":[1750,1300],"jagged earth elemental":[1500,1300],"dwarf miner":[120,60],"charged energy elemental":[500,450],"blazing fire elemental":[650,450],"sir valorcrest":[1600,1800],"goblin scavenger":[60,37],"lord of the elements":[8000,8000],"the weakened count":[740,450],"energy overlord":[4000,2800],"smuggler baron silvertoe":[280,170],"earth overlord":[4000,2800],"fire overlord":[4000,2800],"arachir the ancient one":[1600,1800],"big boss trolliver":[140,105],"ice overlord":[4000,2800],"high templar cobrass":[410,515],"the big bad one":[300,170],"xenia":[200,255],"zevelon duskbringer":[1400,1800],"slick water elemental":[550,450],"barbaria":[345,355],"diblis the fair":[1500,1800],"the frog prince":[55,1],"warlord ruzad":[1500,1700],"zarabustor":[5100,8000],"stonecracker":[6500,3500],"hell hole":[120,0],"hero":[1400,1200],"the old whopper":[785,750],"the count":[1250,450],"foreman kneebiter":[570,445],"hairman the huge":[600,335],"the imperor":[15000,8000],"chakoya windcaller":[84,48],"chakoya toolshaper":[80,40],"chakoya tribewarden":[68,40],"frostfur":[65,35],"bloodpaw":[100,50],"bovinus":[150,60],"achad":[185,70],"colerian the barbarian":[265,90],"the hairy one":[325,115],"axeitus headbanger":[365,140],"rocky":[390,190],"avalanche (creature)":[550,305],"cursed gladiator":[435,215],"the pit lord":[5270,2500],"crystal spider":[1250,900],"barbarian bloodwalker":[305,195],"penguin":[33,1],"the masked marauder":[7320,3500],"ushuriel":[31500,10000],"barbarian headsplitter":[100,85],"barbarian skullhunter":[135,85],"barbarian brutetamer":[145,90],"the obliverator":[9020,6000],"spirit of fire":[2210,950],"braindeath":[1225,985],"dire penguin":[173,119],"ice golem":[385,295],"frost giant":[270,150],"silver rabbit":[15,0],"mutated human":[240,150],"mercury blob":[150,180],"mad scientist":[325,205],"gladiator":[185,90],"gang member":[295,70],"damaged worker golem":[260,95],"mutated rat":[550,450],"mutated tiger":[1100,750],"nightstalker":[700,500],"nightmare scion":[1400,1350],"undead gladiator":[1000,800],"war golem":[4300,2680],"death blob":[320,300],"frost giantess":[275,150],"rift brood":[2950,1600],"rift scythe":[3600,2000],"rift worm":[2800,1195],"marziel":[1900,3000],"lersatio":[1645,2500],"morik the gladiator":[1235,160],"sharptooth":[3100,3000],"inky":[750,700],"splasher":[1700,1500],"yalahari (creature)":[150,5],"diseased bill":[1000,300],"diseased dan":[800,300],"diseased fred":[1100,300],"pythius the rotten (creature)":[9000,7000],"crazed beggar":[100,35],"shadow of marziel":[600,0],"shadow of lersatio":[600,0],"ice witch":[650,580],"armenius (creature)":[550,500],"shadow of boreth":[600,0],"gravelord oshuran":[3100,2400],"servant golem":[1400,5],"ghostly apparition":[150,120],"husky":[140,0],"dharalion":[390,570],"countess sorrow":[6500,13000],"cyclops":[260,150],"blightwalker":[8100,6400],"black knight":[1800,1600],"azerus":[26000,6000],"worker golem":[1470,1250],"diabolic imp":[1950,2900],"quara predator":[2200,1850],"lost soul":[5800,4000],"spectre":[1350,2100],"yakchal":[5750,4400],"betrayed wraith":[4200,3500],"madareth":[75000,10000],"dracola":[16200,11000],"arthei":[4200,4000],"boreth":[1400,1800],"necropharus":[750,1050],"undead jester":[355,5],"dark monk":[190,145],"the snapper":[300,150],"merikh the slaughterer":[2000,1500],"bride of night":[275,450],"killer rabbit":[205,160],"hot dog":[505,190],"berserker chicken":[465,220],"demon parrot":[360,225],"evil sheep lord":[400,340],"evil sheep":[350,240],"doom deer":[405,200],"doctor perhaps":[475,325],"dirtbeard":[630,375],"mephiles":[415,415],"boogey":[930,475],"monstor":[960,575],"evil mastermind":[1295,675],"rottie the rotworm":[65,40],"the bloodtusk":[600,300],"shardhead":[800,650],"vampire pig":[305,165],"zombie":[500,280],"leviathan":[6000,5000],"carniphila":[255,150],"bonelord":[260,170],"troll legionnaire":[210,140],"gozzler":[240,180],"mad sheep":[22,0],"butterfly (red)":[2,0],"butterfly (blue)":[2,0],"enraged bookworm":[145,55],"harbinger of darkness":[120000,8700],"spawn of despair":[35000,2550],"gloombringer":[50000,6000],"eclipse knight":[45000,4650],"dreadbeast":[800,250],"fahim the wise":[2000,1500],"deathspawn":[225,0],"infernal frog":[655,190],"duskbringer":[3550,2600],"shadow hound":[555,600],"nightslayer":[400,250],"doomsday cultist":[125,100],"bane of light":[1100,750],"midnight spawn":[2000,900],"midnight warrior":[1000,750],"herald of gloom":[340,450],"rat":[20,5],"orc marauder":[235,205],"lizard zaogun":[2955,1700],"lizard legionnaire":[1400,1100],"lizard chosen":[3050,2530],"insect swarm":[50,40],"terramite":[365,160],"sandcrawler":[30,20],"killer caiman":[1500,900],"lancer beetle":[400,275],"enraged squirrel":[35,15],"the voice of ruin":[5500,3500],"the collector":[340,100],"undead mine worker":[65,45],"undead prospector":[100,85],"renegade orc":[450,270],"eternal guardian":[2500,1800],"battlemaster zunzu":[4000,2500],"shard of corruption":[600,5],"baron brute":[5025,3000],"the axeorcist":[5100,3000],"menace":[6000,3250],"doomhowl":[8500,3750],"rocko":[10000,3400],"dreadwing":[8500,3750],"fatality":[6000,3250],"tremorak":[10000,1300],"incineron":[7000,3500],"haunter":[8500,4000],"the dreadorian":[9000,4000],"coldheart":[7000,3500],"tirecz":[25000,6000],"the blightfather":[400,400],"grand mother foulscale":[1850,1400],"cublarc the plunderer":[400,400],"dreadmaw":[3500,1500],"lizard dragon priest":[1450,1320],"lizard gate guardian":[5000,2500],"fleabringer":[265,100],"flamecaller zazrak":[2690,3031],"behemoth":[4000,2500],"war wolf":[140,55],"draken elite":[5550,4750],"brimstone bug":[1300,900],"heoni":[900,515],"the keeper":[40000,3205],"fury of the emperor":[51000,550],"snake god essence":[65000,7410],"lizard abomination":[95000,9700],"lizard noble":[7000,2000],"scorn of the emperor":[45000,450],"spite of the emperor":[48000,500],"lizard magistratus":[6250,2000],"teleskor":[80,70],"snake thing":[70000,8400],"mutated zalamon":[155000,10980],"elder bonelord":[500,280],"devovorga":[500000,65000],"teneshpar":[15000,20000],"chikhaton":[130000,50000],"bloom of doom":[30000,0],"spawn of devovorga":[8900,0],"vulnerable cocoon":[200000,0],"dwarf":[90,45],"grandfather tridian":[1800,1400],"stampor":[1200,780],"boar":[198,60],"undead cavebear":[450,600],"travelling merchant":[100,65],"bane bringer":[2500,400],"soul spark":[115,0],"cake golem":[444,100],"glitterscale":[1111,700],"draken spellweaver":[5000,3100],"draken abomination":[6250,4500],"sandstone scorpion":[900,680],"askarak lord":[2100,1200],"askarak prince":[2600,1700],"bog frog":[25,0],"death priest":[800,750],"desperate white deer":[55,35],"diamond servant":[1000,700],"dromedary":[45,0],"elder mummy":[850,560],"enraged white deer":[255,165],"feverish citizen":[125,30],"filth toad":[185,90],"firestarter":[180,80],"ghoulish hyaena":[400,195],"golden servant":[550,450],"grave guard":[720,485],"honour guard":[85,55],"horse (taupe)":[75,0],"insectoid scout":[230,150],"iron servant":[350,210],"mad mage":[2500,1800],"sacred spider":[550,330],"shaburak prince":[2600,2300],"slug":[255,70],"starving wolf":[85,65],"thornfire wolf":[600,200],"tomb servant":[475,215],"groam":[400,180],"askarak demon":[1500,900],"troll guard":[60,25],"wild dog":[20,0],"weakened demon":[5,0],"white deer":[195,0],"incredibly old witch":[620,0],"energized raging mage":[3500,0],"shaburak demon":[1500,1150],"spider queen":[10000,120],"butterfly (yellow)":[2,0],"clay guardian":[625,400],"crystal wolf":[750,275],"horestis":[6000,3500],"massacre":[32000,20000],"ghazbaran":[77000,15000],"destroyer":[3700,2500],"lizard templar":[410,265],"draken warmaster":[4150,2400],"lizard high guard":[1800,1450],"hellspawn":[3500,2550],"black sheep":[20,0],"tarantula":[225,120],"plaguesmith":[8250,3800],"elf overseer":[500,290],"shaburak lord":[2100,1800],"fleshcrawler":[1450,1000],"ethershreck":[9500,5600],"the bloodweb":[1750,1450],"deathbine":[525,340],"ribstride":[1000,1100],"flameborn":[3500,2550],"gorgo":[4500,7000],"sulphur scuttler":[1300,900],"necromancer":[580,580],"orshabaal":[22500,10000],"morgaroth":[55000,15000],"wild horse":[75,0],"demodras":[4500,6000],"zulazza the corruptor":[46500,10000],"the mutated pumpkin":[500000,30000],"crustacea gigantica":[1600,1800],"hide":[500,240],"deer":[25,0],"the halloween hare":[2000,0],"energy elemental":[500,550],"fire elemental":[280,220],"hatebreeder":[18000,10000],"mutated bat":[900,750],"deepsea blood crab":[320,180],"grynch clan goblin":[80,4],"blistering fire elemental":[1500,1300],"hellgorak":[25850,10000],"hellfire fighter":[3800,3800],"dog":[20,0],"wrath of the emperor":[55000,600],"acolyte of darkness":[325,200],"souleater":[1100,1300],"essence of darkness":[1000,30],"deepling worker":[190,130],"kerberos":[11000,10000],"shark":[1200,700],"jellyfish":[55,0],"calamary":[75,0],"fish (creature)":[25,0],"northern pike (creature)":[95,0],"obujos":[35000,20000],"tanjis":[30000,15000],"insectoid worker":[950,650],"waspoid":[1100,830],"swarmer":[460,350],"crawler":[1450,1000],"kollos":[3800,2400],"spidris":[3700,2600],"ladybug":[255,70],"swarmer hatchling":[5,0],"lesser swarmer":[230,0],"spitter":[1500,1100],"hive overseer":[7500,5500],"giant spider (wyda)":[20,12],"deepling warrior":[1600,1500],"spidris elite":[5000,4000],"terrified elephant":[320,160],"elvira hammerthrust":[245,165],"poodle":[20,0],"slippery northern pike":[100,0],"mornenion":[190,115],"bane lord":[3000,500],"mirade (creature)":[100000,30000],"rejana (creature)":[100000,30000],"wolf (nostalgia)":[25,15],"bear (nostalgia)":[80,21],"wasp (nostalgia)":[35,21],"bug (nostalgia)":[29,15],"spider (nostalgia)":[20,10],"bonelord (nostalgia)":[260,157],"giant spider (nostalgia)":[1300,840],"craban (creature)":[300000,200],"denson larika (creature)":[50000,3000],"robby the reckless":[155,110],"delany (creature)":[100000,30000],"siramal (creature)":[100000,35000],"bolfrim (creature)":[100000,35000],"jesse the wicked":[280,180],"dragon hatchling":[380,185],"dragon":[1000,700],"frost dragon hatchling":[800,745],"draptor":[3000,2400],"dragon lord hatchling":[750,645],"frost dragon":[1800,2100],"undead dragon":[8350,7500],"chayenne (creature)":[100000,40000],"baby pet of chayenne":[380,0],"count tofifti (creature)":[100000,40000],"penciljack (creature)":[150000,35000],"lionet (creature)":[100000,35000],"muse of penciljack":[1200,1050],"lyxoph (creature)":[45000,10000],"grims little hamster":[5500,0],"tin lizzard of lyxoph":[0,5500160],"fazzrah":[2955,2600],"bruise payne":[1600,1000],"manta ray":[680,125],"deepling spellsinger":[850,1000],"deepling scout":[240,160],"deepling guard":[1900,2100],"tromphonyte":[3000,1300],"paiz the pauperizer":[8500,6300],"tormentor":[4100,3200],"deepling elite":[3200,3000],"deepling tyrant":[4500,4200],"hemming":[3000,2850],"zanakeph":[13000,9900],"maw":[8200,6500],"fleshslicer":[5700,5500],"chopper":[7200,5400],"mindmasher":[9500,6000],"shadowstalker":[6100,4000],"rotspit":[6800,0],"deepling brawler":[380,260],"grave robber":[165,65],"crypt defiler":[185,70],"deepling master librarian":[1700,1900],"crystalcrusher":[570,500],"enslaved dwarf":[3800,2700],"lost berserker":[5900,4800],"gnomevil":[250000,400000],"mushroom sniffer":[250,0],"wiggler":[1200,900],"mamma longlegs":[1800,2200],"lagatos":[0,35189],"tormented ghost":[210,5],"the noxious spawn":[9500,6000],"magma crawler":[4800,4250],"dragonling":[2600,2200],"ironblight":[6600,5400],"hideous fungus":[4600,3700],"humongous fungus":[3400,2900],"stone devourer":[4200,3650],"orewalker":[7200,5900],"cliff strider":[9400,7100],"anmothra":[7000,15000],"irahsae":[35000,25000],"phrodomo":[150000,50000],"fury":[4100,4000],"dark torturer":[7350,4650],"the many":[5000,4000],"esmeralda":[800,600],"abyssador":[340000,400000],"deathstrike":[200000,400000],"gnarlhound":[198,60],"modified gnarlhound":[1500,0],"vulcongra":[1600,1100],"enraged crystal golem":[700,550],"damaged crystal golem":[500,0],"rukor zad":[380,380],"yaga the crone":[620,375],"humorless fungus":[1600,0],"armadile":[3800,3200],"lava golem":[9000,7900],"weeper":[6800,5800],"vampire bride":[1200,1050],"yielothax":[1500,1250],"versperoth":[100000,30000],"strange slime":[15,0],"infected weeper":[3000,1200],"parasite":[550,0],"raging mage":[3500,3250],"minion of versperoth":[9000,4000],"marid":[550,410],"shredderthrower":[100,18],"nomad (female)":[160,60],"nomad (blue)":[160,60],"young troll":[30,12],"berrypest":[500,0],"annihilon":[46500,15000],"green djinn":[330,215],"emerald damselfly":[90,35],"marsh stalker":[100,50],"salamander":[70,25],"swampling":[80,45],"bibby bloodbath":[1200,1500],"corym charlatan":[250,150],"corym skirmisher":[450,260],"lost basher":[2600,2300],"lost husher":[1600,1800],"pigeon":[30,0],"water buffalo":[390,20],"lost thrower":[1700,1500],"drillworm":[1500,1200],"adventurer":[65,0],"little corym charlatan":[90,40],"angry adventurer":[65,50],"party skeleton":[40,0],"earth elemental":[650,550],"demon":[8200,6000],"corym vanguard":[700,490],"mr. punish":[22000,9000],"medusa":[4500,4050],"elder wyrm":[2700,2500],"vampire viscount":[1200,800],"vicious manbat":[1700,1200],"white shade":[260,120],"tarnished spirit":[150,120],"shadow pupil":[450,410],"blood hand":[700,750],"blood priest":[820,900],"forest fury":[480,330],"rorc":[260,105],"undead pet of chayenne":[8350,0],"kraknaknork":[80,300],"nightfiend":[2700,2100],"tyrn":[12000,6900],"the welter":[25000,11000],"white pale":[500,390],"the pale count":[50000,28000],"bretzecutioner":[5600,3700],"willi wasp":[250,250],"chizzoron the distorter":[16000,4000],"omruc":[4300,2950],"zomba":[300,300],"necromancer servant":[600,590],"enraged soul":[150,120],"hirintror":[1500,800],"zushuka":[15000,9000],"furyosa":[25000,11500],"weakened shlorg":[10000,6500],"spawn of the welter":[1850,0],"egg (creature)":[800,0],"demon outcast":[6900,6200],"shock head":[4200,2300],"sight of surrender":[28000,17000],"silencer":[5400,5100],"terrorsleep":[7200,7240],"choking fear":[5800,4700],"feversleep":[5900,5060],"nightmare of gaz'haragoth":[5500,0],"minion of gaz'haragoth":[5500,0],"zavarash":[35000,21000],"horadron":[30000,18000],"terofar":[40000,24000],"prince drazzak":[330000,210000],"mawhawk":[45000,14000],"shiversleep":[4600,1900],"shimmying butterfly":[20,0],"wounded cave draptor":[5,50],"omrafir":[322000,0],"flame of omrafir":[800,0],"phantasm (weak)":[65,1],"hellhound":[7500,5440],"mooh'tah warrior":[1200,900],"metal gargoyle":[2100,1470],"minotaur amazon":[2600,2200],"execowtioner":[3500,2400],"minotaur hunter":[1400,1700],"worm priestess":[1100,1500],"walker":[3000,2200],"blood beast":[1600,1000],"devourer":[1900,1755],"glooth blob":[750,700],"rustheap golem":[2800,2350],"rot elemental":[850,750],"bullwark":[72000,22000],"glooth golem":[2700,1930],"glooth anemone":[2400,1755],"the ravager":[53500,14980],"death priest shargon":[65000,20000],"glooth fairy":[59000,19000],"lisa":[55000,18000],"lesser death minion":[550,0],"greater death minion":[1500,0],"superior death minion":[2500,0],"mountain troll":[30,12],"troll-trained salamander":[70,23],"dawnfly":[90,35],"brittle skeleton":[50,35],"muglex clan scavenger":[60,37],"salamander trainer":[220,70],"woodling":[80,40],"juvenile cyclops":[260,130],"sacred snake":[10,0],"minotaur bruiser":[100,50],"muglex clan assassin":[45,34],"crazed dwarf":[105,50],"dawn scorpion":[65,45],"lesser fire devil":[175,110],"meadow strider":[100,50],"minotaur occultist":[125,100],"minotaur poacher":[160,55],"scar tribe shaman":[115,85],"scar tribe warrior":[125,85],"professor maxxen":[90000,15500],"noble lion":[1000,400],"renegade quara constrictor":[1500,1250],"renegade quara hydromancer":[2000,1800],"renegade quara mantassin":[1200,1000],"renegade quara predator":[3250,2700],"renegade quara pincher":[2800,2200],"abyssal calamary":[300,200],"high voltage elemental":[1500,1500],"glooth-generator":[12000,0],"control tower":[7500,4500],"glooth battery":[8000,4200],"glooth horror":[15000,900],"feeble glooth horror":[5000,245],"weakened glooth horror":[10000,245],"strong glooth horror":[20000,1500],"empowered glooth horror":[25000,2150],"tentacle of the deep terror":[25500,0],"deep terror":[100000,35000],"glooth bomb":[250000,0],"tremor worm":[125000,80000],"depowered minotaur":[1500,1100],"minotaur totem":[6000,500],"minotaur invader":[1850,1760],"moohtant wallbreaker":[250000,0],"glooth brigand":[2400,1900],"glooth bandit":[2600,2000],"troll marauder":[70,40],"frost spider":[1250,0],"frost servant":[385,0],"raging fire":[1800,1500],"acid blob":[250,250],"ancient scarab":[1000,720],"troll":[50,20],"werewolf":[1955,1900],"the plasmother":[7500,12000],"sheep":[20,0],"muddy earth elemental":[650,450],"monk (creature)":[240,200],"mimic":[1200,0],"man in the cave":[485,777],"infernalist":[3650,4000],"furious troll":[245,185],"dworc venomsniper":[80,35],"defiler":[3650,3700],"cobra":[65,30],"werebear":[2400,2100],"werebadger":[1700,1600],"wereboar":[2200,2000],"gloom wolf":[200,70],"ghost wolf":[160,65],"tainted soul":[250,0],"redeemed soul":[250,0],"omnivora":[1200,750],"vicious squire":[1000,900],"renegade knight":[1450,1200],"vile grandmaster":[1700,1500],"dawnfire asura":[2900,3610],"midnight asura":[3100,3700],"ekatrix":[500,200],"the flaming orchid":[4000,8500],"mahatheb":[650,600],"feroxa (killable werewolf)":[150000,0],"oodok witchmaster":[450,550],"tzumrah the dazzler":[1700,1700],"canopic jar":[1000,0],"owin (creature)":[9600,5000],"hydra":[2350,2100],"dragon lord":[1900,2100],"arthom the hunter":[500,550],"the mean masher":[8000,6000],"vexclaw":[8500,6248],"grimeleech":[9500,7216],"ogre savage":[1400,950],"clomp":[900,475],"plagirath":[290000,500000],"shulgrax":[290000,500000],"tarbaz":[290000,500000],"zamulosh":[0,500000],"ragiaz":[290000,500000],"razzagorn":[290000,500000],"ogre brute":[1000,800],"seacrest serpent":[3000,2900],"ferumbras mortal shell":[300000,2000000],"rage of mazoran":[4500,300],"ferumbras soul splinter":[90000,0],"mazoran":[290000,500000],"dread intruder":[4500,2400],"reality reaver":[3900,2480],"breach brood":[3500,1760],"enthralled demon":[8200,0],"rift invader":[6250,0],"death dragon":[8350,320],"eruption of destruction":[8500,0],"despair":[10000,0],"instable breach brood":[2200,1100],"instable sparkion":[1900,1350],"stabilizing reality reaver":[2500,1950],"stabilizing dread intruder":[2800,1900],"charged anomaly":[18000,0],"anomaly":[290000,50000],"grim reaper":[3900,5500],"spark of destruction":[3900,0],"outburst":[290000,50000],"charging outburst":[12000,50000],"eradicator":[290000,50000],"realityquake":[110000,20000],"aftershock":[105000,0],"foreshock":[105000,0],"rupture":[290000,112000],"world devourer":[25000,77700],"charger":[1600,85],"frenzy":[8210,1313],"disruption":[12000,398],"overcharge":[8000,0],"burster":[10000,10000],"damage resonance":[11000,560],"unstable spark":[10500,1500],"midnight panther":[1200,900],"jaul":[90000,30000],"warlock":[3500,4000],"sea serpent":[1950,2300],"gaz'haragoth":[350000,1000000],"frazzlemaw":[4100,3740],"ferumbras":[90000,35000],"guzzlemaw":[6400,6050],"retching horror":[5300,4100],"juggernaut":[18000,11200],"twisted shaper":[2500,2050],"shaper matriarch":[2000,1650],"orclops ravager":[1200,1100],"stone rhino":[3000,1800],"broken shaper":[2200,1800],"corrupted soul":[1100,1300],"the time guardian":[290000,50000],"lady tenebris":[250000,50000],"cave parrot":[30,0],"orclops doomhauler":[1700,1450],"squidgy slime":[150,55],"golden servant replica":[2000,1250],"diamond servant replica":[2000,1400],"mounted thorn knight":[0,15000],"possessed tree":[2500,1300],"time keeper":[2500,0],"cosmic energy prism a":[1000,840],"cosmic energy prism b":[1000,840],"cosmic energy prism c":[1000,840],"cosmic energy prism d":[1000,840],"the freezing time guardian":[290000,50000],"the blazing time guardian":[290000,50000],"iron servant replica":[1000,600],"lost time":[4000,0],"the enraged thorn knight":[0,30000],"elder forest fury":[670,480],"angry demon":[8200,6000],"pi\u00f1ata dragon":[10000,50],"tazhadur":[10000,9000],"kalyassa":[10000,9000],"haunted dragon":[6500,6500],"angry plant":[10000,0],"zorvorax":[10000,9000],"the first dragon":[50000,0],"an observer eye":[30000,0],"gelidrazah the frozen":[10000,9000],"giant spider 7.4":[3250,0],"giant spider brood 7.4":[1050,0],"giant spider brood 7.6":[1100,0],"giant spider brood 8.1":[1700,0],"queen nostalgia (2)":[1700,0],"giant spider drone 7.4":[1150,0],"giant spider hatchling 7.4":[950,0],"knight familiar":[10000,0],"paladin familiar":[15000,0],"druid familiar":[20000,0],"sorcerer familiar":[20000,0],"furious fire elemental":[280,220],"pooka":[500,500],"swan maiden":[800,700],"pixie":[770,700],"boogy":[1300,950],"barkless devotee":[2800,2200],"the manhunter":[4500,3000],"dark faun":[1100,900],"weakened frazzlemaw":[1200,1000],"nymph":[900,850],"twisted pooka":[700,600],"animated clomp":[900,475],"animated guzzlemaw":[6400,5500],"animated mummy":[240,150],"animated ogre brute":[1000,800],"animated ogre savage":[1400,950],"animated rotworm":[65,40],"animated cyclops":[260,150],"putrid mummy":[1500,900],"minotaur cult prophet":[1700,1100],"orc cult minion":[1000,850],"orc cultist":[1350,950],"orc cult inquisitor":[1500,1150],"orc cult priest":[1300,1000],"orc cult fanatic":[1300,1100],"enfeebled silencer":[1100,1100],"kroazur":[3000,2700],"goldhanded cultist":[3000,2000],"goldhanded cultist bride":[3000,2000],"the armored voidborn":[60000,0],"the sandking":[0,200000],"leiden":[30000,0],"cult believer":[975,850],"cult enforcer":[1150,1000],"cult scholar":[1650,1100],"minotaur cult follower":[1600,950],"minotaur cult zealot":[1800,1350],"minotaur idol":[6500,0],"misguided bully":[2000,1800],"misguided thief":[1800,1600],"the false god":[300000,50000],"roaring lion":[1000,800],"sand brood":[2100,0],"enraged sand brood":[2600,0],"vermin swarm":[2800,0],"misguided shadow":[3000,1500],"pillar of healing":[7300,0],"dread minion":[2500,0],"security golem":[6500,0],"containment machine":[6500,0],"fox":[22,15],"werefox":[1500,1600],"cave devourer":[4500,3380],"deepworm":[3500,2520],"diremaw":[3600,2770],"chasm spawn":[4500,3600],"tunnel tyrant":[5200,4420],"lava lurker":[5900,4000],"mole":[200,100],"ghost of a planegazer":[1450,1100],"lost exile":[1600,1800],"stonerefiner":[800,500],"makeshift home":[7000,1800],"bloodback":[5200,4000],"darkfang":[4800,4000],"black vixen":[3200,3200],"shadowpelt":[6000,4600],"cave spider":[1800,2000],"the count of the core":[500000,300000],"lost gnome":[10000,0],"fiery blood":[25000,0],"fiery heart (creature)":[7500,0],"the source of corruption":[0,50000],"dawn bat":[30,10],"last planegazer":[50000,10000],"reflection of a mage":[3500,3250],"reflection of mawhawk":[45000,14000],"reflection of obujos":[35000,20000],"aggressive matter":[3000,0],"snail slime":[5000,0],"fallen challenger":[9000,0],"dragon essence":[30000,0],"ravenous lava lurker":[5000,4000],"sparkion":[2700,1520],"museum stone golem":[270,160],"museum stone rhino":[3000,1800],"animated ogre shaman":[800,625],"knowledge elemental":[10500,10603],"raxias":[1100,900],"deathling scout":[7200,6300],"falcon knight":[9000,6300],"falcon paladin":[8500,6900],"undead elite gladiator":[8000,5700],"energetic book":[18500,12034],"cursed book":[20000,13345],"burning book":[18000,13200],"icecold book":[21000,12750],"guardian of tales":[15000,10600],"energuardian of tales":[14000,11361],"rage squid":[17000,16300],"squid warden":[16500,15300],"animated feather":[13000,9860],"frost flower asura":[3500,4200],"true dawnfire asura":[8500,7475],"true frost flower asura":[4000,7069],"floating savant":[8000,8000],"brain squid":[18000,17672],"flying book":[500,200],"ink blob":[9500,14450],"biting book":[6500,9350],"grand canon dominus":[15000,11000],"grand commander soeren":[17000,12000],"grand chaplain gaunder":[18000,14000],"thawing dragon lord":[25000,2100],"bone jaw":[4500,0],"ghulosh":[0,45000],"lokathmor":[0,55000],"gorzindel":[350000,55000],"mazzinor":[350000,55000],"neutral deepling warrior":[1600,1500],"librarian":[11000,0],"jailer":[65,45],"dazed leaf golem":[10000,8000],"grand master oberon":[30000,20000],"deathling spellsinger":[7200,6400],"horse (brown)":[75,0],"horse (grey)":[75,0],"furious scorpion":[15000,12000],"the blazing rose":[0,10000],"the lily of night":[19000,10000],"the book of death":[7800,0],"malicious minion":[4000,0],"the scourge of oblivion":[0,75000],"ice dragon":[2500,2300],"giant spider":[1300,900],"skeleton elite warrior":[7800,5370],"moohtant":[3200,2600],"the book of secrets":[8000,0],"lloyd":[65000,50000],"arachnophobica":[5000,4700],"burster spectre":[6500,6000],"gazer spectre":[4500,4200],"insane siren":[6500,6000],"menacing carnivor":[3500,2112],"ripper spectre":[3800,3500],"soul-broken harbinger":[6300,5800],"spiky carnivor":[2800,1650],"thanatursus":[7200,6300],"lumbering carnivor":[2600,1452],"crazed summer rearguard":[5300,4700],"crazed summer vanguard":[5500,5000],"crazed winter rearguard":[5200,4700],"crazed winter vanguard":[5800,5400],"hibernal moth":[850,700],"lacewing moth":[900,800],"faceless bane":[17000,14000],"lucifuga aranea":[12000,10000],"the nightmare beast":[750000,255000],"alptramun":[320000,55000],"izcandar champion of winter":[0,55000],"malofur mangrinder":[320000,55000],"the shatterer":[80000,0],"plagueroot":[0,55000],"maxxenius":[320000,55000],"the unarmored voidborn":[250000,15000],"essence of malice":[250000,150000],"the duke of the depths":[0,300000],"the souldespoiler":[290000,50000],"the baron from below":[0,300000],"animated snowman":[450,400],"baleful bunny":[500,450],"wyrm":[1825,1550],"percht":[620,600],"schiach":[600,580],"bonny bunny":[200,0],"warm fire":[200,0],"the percht queen":[2300,500],"plant abomination":[3900,0],"goblin leader":[50,75],"hellflayer":[14000,11720],"barkless fanatic":[3200,2500],"vortex spawn":[500,0],"murderous ghost":[1500,0],"dreadful disruptor":[10000,14000],"gryphon":[3200,1000],"lamassu":[8700,9000],"manticore":[6700,4750],"sphinx":[8500,6980],"urmahlullu the immaculate":[120000,0],"cobra assassin":[8200,6980],"cobra scout":[8500,7310],"cobra vizier":[8500,7650],"black sphinx acolyte":[8100,7200],"feral sphinx":[9800,8450],"crypt warden":[8300,8400],"young goanna":[6950,5250],"adult goanna":[8300,6180],"priestess of the wild sun":[8500,6400],"bragrumol":[38000,18000],"xogixath":[35000,22000],"ogre ruffian":[5500,5000],"ogre rowdy":[4500,4200],"ogre sage":[4800,5500],"mozradek":[28000,21000],"sun-marked goanna":[7800,7600],"count vlarkorth":[300000,55000],"custodian":[47000,27500],"gaffir":[48500,25000],"duke krule":[290000,55000],"sir nictros":[0,55000],"sir baeloc":[150000,55000],"earl osam":[0,55000],"scarlett etzel":[30000,20000],"earworm":[4000,2000],"king zelos":[480000,75000],"cart packed with gold":[10000,0],"lord azaram":[300000,55000],"burning gladiator":[10000,7350],"cow":[700,400],"orger":[700,550],"bellicose orger":[700,500],"loricate orger":[750,570],"roast pork":[420,280],"ugly monster":[10000,1000],"flimsy lost soul":[4000,4500],"mean lost soul":[5000,5580],"freakish lost soul":[7000,7020],"brain head":[230000,50000],"evil prospector":[8500,9800],"cursed prospector":[3900,5250],"guard captain quaid":[55000,28000],"cerebellum":[15000,18000],"unaz the mean":[28000,22000],"irgix the flimsy":[24000,18000],"vok the freakish":[32000,27000],"thaian":[50000,9000],"thaian's ghost":[5000,4500],"brother worm":[290000,0],"the dread maiden":[300000,72000],"the fear feaster":[290000,0],"the pale worm":[435000,128000],"a weak spot":[435000,128000],"bad thought":[500,0],"rewar the bloody":[250000,0],"risen soldier":[6000,0],"fetter":[5500,0],"the red knight":[200000,0],"magnor mournbringer":[250000,0],"shard of magnor":[205000,0],"vampiric blood":[3500,0],"regenerating mass":[110000,0],"soul scourge":[6900,0],"nargol the impaler":[250000,0],"animated moohtant":[3200,2600],"the lord of the lice":[80000,0],"animated skunk":[20,3],"nightmare":[2700,1800],"hunter":[150,150],"the great schnitzel":[110000,0],"fat porker":[20000,0],"orger treasure":[50000,0],"spawn of the schnitzel":[1000,0],"black cobra":[10000,0],"greater canopic jar":[7000,0],"planestrider":[30000,9000],"aggressive chicken":[15000,0],"agrestic chicken":[15,0],"bony sea devil":[24000,17328],"brachiodemon":[25000,15770],"branchy crawler":[27000,17324],"cloak of terror":[28000,19700],"courage leech":[27000,18900],"infernal demon":[32000,17430],"many faces":[30000,18870],"monk of the order":[240,200],"rotten golem":[28000,17324],"turbulent elemental":[28000,17230],"white lion":[2700,2300],"werehyaena":[2700,2200],"werehyaena shaman":[2500,2200],"vibrant phantom":[27000,19700],"capricious phantom":[30000,17230],"infernal phantom":[26000,15770],"mould phantom":[28000,17780],"distorted phantom":[26000,18870],"ancient lion knight":[9100,8100],"lion archer":[7300,0],"lion knight":[8200,0],"lion warlock":[7500,0],"usurper archer":[7300,6800],"usurper knight":[8200,6900],"usurper warlock":[7500,7000],"druid's apparition":[25000,18870],"knight's apparition":[25000,18870],"paladin's apparition":[25000,18870],"sorcerer's apparition":[25000,18870],"goshnar's cruelty":[0,75000],"goshnar's greed":[0,150000],"goshnar's hatred":[0,75000],"goshnar's malice":[0,75000],"goshnar's spite":[0,75000],"hazardous phantom":[70000,66000],"mirror image":[35000,27000],"fugue":[32000,23000],"usurper commander":[8500,7200],"drume":[35000,25000],"katex blood tongue":[6300,5000],"srezz yellow eyes":[6200,4800],"utua stone sting":[6400,5100],"yirkas blue scales":[6300,4900],"crypt warrior":[7800,6050],"hardened usurper archer":[7300,0],"hardened usurper knight":[8200,0],"hardened usurper warlock":[7500,0],"lion commander":[8500,0],"true midnight asura":[9000,7313],"damned soul":[800,1],"quara constrictor scout":[450,200],"blood tear":[3500,0],"mezlon the defiler":[0,50000],"the last lore keeper":[0,45000],"exotic cave spider":[1900,1400],"exotic bat":[1500,1200],"angry elemental":[7000,0],"pirat cutthroat":[2600,1800],"pirat bombardier":[2300,1700],"pirat mate":[3200,2400],"werelioness":[3000,2300],"spyrat (facing south)":[3000,2500],"spyrat (facing north)":[3000,2500],"spyrat (facing east)":[3000,2500],"spyrat (facing west)":[3000,2500],"tentugly's head":[75000,40000],"the hungerer":[2000,1700],"cheese thief":[1100,0],"ratmiral blackwhiskers":[0,50000],"quara saboteur":[7000,0],"mean termite":[4300,0],"holy bog frog":[25,0],"tentacle":[2500,0],"ogre shaman":[800,625],"ghastly dragon":[7800,4600],"gravedigger":[1500,950],"human (creature)":[150,50],"poor soul":[1000,0],"soul sphere":[15000,0],"lavaworm":[7500,6500],"tremendous tyrant":[11500,6950],"varnished diremaw":[9000,6300],"eyeless devourer":[10000,6000],"blemished spawn":[9000,5300],"afflicted strider":[10000,6550],"lavafungus":[7200,6200],"cave chimera":[8000,6800],"girtablilu warrior":[8500,5800],"venerable girtablilu":[8500,5300],"bashmu":[8200,5000],"juvenile bashmu":[7500,4500],"hulking carnisylvan":[8600,4700],"poisonous carnisylvan":[8000,4400],"dark carnisylvan":[7500,4400],"carnisylvan sapling":[750,0],"the brainstealer":[0,72000],"spider":[20,12],"domestikion":[750,0],"hoodinion":[800,0],"mearidion":[850,0],"murmillion":[1100,0],"scissorion":[950,0],"the mega magmaoid":[104000,80000],"haunted treeling":[450,310],"leaf golem":[90,45],"neferi the spy":[28000,19650],"amenef the burning":[26000,21500],"sister hetai":[25000,20500],"magma fiend":[1600,0],"instable fire":[1000,0],"enusat the onyx wing":[25000,21500],"megasylvan yselda":[32000,19900],"thieving squirrel":[55,15],"mental-nexus":[70,0],"morshabaal":[1000000,0],"lord retro":[2500,0],"unexpected":[3500,1800],"unsolicited":[3700,1750],"unwanted":[3750,1720],"retros treasure":[37500,0],"uninvited":[4700,2000],"memory of a carnisylvan":[3800,1850],"memory of a werelion":[3880,1800],"memory of a manticore":[3730,1590],"pig (nostalgia)":[25,0],"memory of a book":[3670,1770],"memory of a faun":[3500,1600],"memory of a shaper":[3710,1750],"memory of an ogre":[3570,1680],"memory of a golem":[3660,1620],"memory of a frazzlemaw":[3770,1810],"memory of a fungus":[3580,1660],"memory of an insectoid":[3630,1610],"memory of a lizard":[3520,1450],"memory of a vampire":[3650,1550],"memory of a yalahari":[3540,1640],"memory of a mammoth":[3850,1830],"memory of a pirate":[3750,1500],"memory of a hydra":[3550,1800],"memory of a scarab":[3620,1590],"memory of an amazon":[3600,1480],"memory of a banshee":[3600,1430],"memory of a hero":[3850,1750],"memory of an elf":[3440,1440],"memory of a dwarf":[3730,1460],"memory of a wolf":[3640,1640],"minor timedisplaced anomaly (rookgaard)":[40000,0],"enraged morshabaal":[1000000,0],"furious morshabaal":[1000000,0],"streaked devourer":[7000,6300],"minor timedisplaced anomaly (greenshore)":[44000,0],"minor timedisplaced anomaly (ankrahmun)":[48000,0],"timedisplaced anomaly (banuta)":[52500,0],"timedisplaced anomaly (chazorai)":[56000,0],"timedisplaced anomaly (warzone)":[60000,0],"major timedisplaced anomaly (rascacoon)":[65000,0],"major timedisplaced anomaly (issavi)":[70000,0],"major timedisplaced anomaly (fiehonja)":[75000,0],"great timedisplaced anomaly":[250000,0],"wilting leaf golem":[380,225],"pirat scoundrel":[2200,1600],"preceptor lazare":[16000,10000],"naga archer":[4640,4640],"naga warrior":[5530,5480],"parder":[1200,1100],"makara":[5050,5180],"jungle moa":[1300,1200],"tunnel devourer":[10000,0],"two-headed turtle":[5010,3310],"mantosaurus":[19400,12440],"stalking stalk":[17100,12440],"undertaker":[20100,14560],"sulphider":[21000,14330],"noxious ripptor":[22700,14180],"hulking prehemoth":[20700,13640],"nighthunter":[19200,13600],"gore horn":[20620,13540],"mercurial menace":[18500,13000],"emerald tortoise":[22300,13040],"gorerilla":[16850,14160],"shrieking cry-stal":[20650,14580],"sulphur spouter":[19000,12381],"headpecker":[16300,12930],"fungosaurus":[30000,0],"timira the many-headed":[75000,45500],"the end of days":[90000,0],"kusuma":[7650,9380],"magma bubble":[150000,80000],"the winter bloom":[4750,9250],"the moonlight aster":[4500,9250],"rogue naga":[6200,4510],"corrupt naga":[5990,4380],"cave hydra":[2350,2100],"vicious lich":[880,900],"sharpclaw":[3300,3000],"magma crystal":[22000,0],"lava puddle (creature)":[6000,0],"lesser magma crystal":[15000,0],"blocking stalagmite":[10500,0],"venerable foam stalker":[5650,3740],"greater energy elemental":[1100,950],"greater fire elemental":[1800,1400],"vile destroyer":[3700,2500],"solitary frost dragon":[1800,2100],"toxic swarm":[9000,0],"dorokoll the mystic":[0,50000],"eshtaba the conjurer":[0,50000],"malkhar deathbringer":[0,50000],"eliz the unyielding":[0,50000],"morguthis":[4800,3000],"pillar (zugurosh)":[120,0],"the diamond blossom":[20000,10000],"harpy":[7700,5720],"iks chuka":[1240,1310],"iks pututu":[1310,1390],"iks ahpututu":[1630,1700],"boar man":[9200,7100],"carnivostrich":[8250,6710],"liodile":[8600,6310],"crape man":[9150,5040],"rhindeer":[8650,5600],"iks aucar":[1520,1240],"the monster":[45000,30000],"ahau":[9000,17500],"cursed ape":[1700,2000],"iks churrascan":[1520,0],"lab assistant":[4000,0],"gnorre chyllson":[7150,4000],"magmaoid":[15000,0],"banshee":[1000,900],"abominable servant":[8900,0],"the abomination":[750000,1500000],"guardian golem":[2500,0],"clutter":[1000,0],"faun":[900,800],"darklight striker":[29700,22200],"bakragore":[660000,15000000],"chagorz":[0,3250000],"vemiath":[0,3250000],"ichgahal":[0,3250000],"murcion":[0,3250000],"bloated man-maggot":[31700,21570],"converter":[29600,21425],"darklight construct":[32200,22050],"darklight emitter":[27500,20600],"darklight matter":[30150,22250],"darklight source":[31550,22465],"meandering mushroom":[29100,21980],"mycobiontic beetle":[30200,21175],"oozing carcass":[27500,20980],"oozing corpus":[28700,20600],"rotten man-maggot":[31100,22625],"sopping carcass":[32700,23425],"sopping corpus":[33400,22465],"walking pillar":[38000,24300],"wandering pillar":[37000,23200],"cunning werepanther":[4300,3620],"werepanther":[4200,3550],"feral werecrocodile":[6400,5430],"werecrocodile":[5280,4140],"white weretiger":[6100,5200],"weretiger":[5000,3920],"white tiger":[75,40],"bloodjaw":[40000,24000],"elder bloodjaw":[86000,0],"pillar of dark energy":[37500,0],"ayana the crimson curse":[17000,12400],"mushroom":[10000,0],"tamru the black":[15500,11200],"radicular totem":[50000,0],"brokul":[50000,23000],"werelion":[2800,2200],"wailing widow":[850,450],"megasylvan sapling (creature)":[10000,0],"albino dragon":[5000,2250],"iks yapunac":[3125,2340],"bulltaur brute":[6560,4700],"atab":[8100,6800],"mitmah vanguard":[50000,300000],"despor":[50000,0],"bulltaur alchemist":[5690,4500],"bulltaur forgepriest":[6840,6400],"dragolisk":[6180,4650],"wardragon":[6960,5340],"mitmah scout":[3940,3230],"mitmah seer":[4620,4900],"mega dragon":[7920,7180],"cellar rat":[1800,0],"greedok":[50000,0],"vengar":[50000,0],"crultor":[50000,0],"maliz":[50000,0],"vilear":[50000,0],"bruton":[50000,0],"ancient ugly monster":[10000,0],"dragon hoard":[50000,600000],"sabretooth (creature)":[17300,12830],"rabid wolf":[75,90],"ragged rabid wolf":[120,126],"trollwut":[280,250],"captain jones":[555,620],"gorga":[15000,13000],"blue djinn":[330,215],"antenna":[10000,0],"alchemistical container":[1000,0],"gingerbread man":[85,22],"angry sugar fairy":[3000,3100],"honey elemental":[2560,2400],"candy horror":[3100,3000],"candy floss elemental":[3700,3850],"goggle cake":[2700,2700],"quara looter":[11500,8650],"rootthing amber shaper":[15000,13380],"rootthing bug tracker":[12500,10420],"rootthing nutshell":[13500,9940],"cream blob":[76,21],"sugar cube worker":[65,20],"fruit drop":[63,18],"truffle cook":[54,13],"chocolate blob":[70,17],"sugar cube":[28,19],"truffle":[70,15],"quara plunderer":[13500,10800],"quara raider":[12500,8150],"nibblemaw":[2900,2700],"the rootkraken":[0,700000],"sugar mommy":[6000,6800],"carnivorous butterfly":[100,0],"herd weevil":[3700,0],"blight bug":[3700,0],"common beetle":[3700,0],"wafer paper butterfly":[2,0],"grove guardian":[20000,0],"thorn lily":[15000,0],"truffle worker":[26,0],"pupated rootthing":[15000,0],"mint drop":[20,0],"sugar daddy":[9500,15550],"cheeky sugar cube":[28,0],"spellreaper inferniarch":[11800,8350],"gorger inferniarch":[9450,7180],"brinebrute inferniarch":[32000,20300],"broodrider inferniarch":[9600,7400],"sineater inferniarch":[9150,6750],"hellhunter inferniarch":[11300,8100],"arbaziloth":[360000,500000],"twisterror":[35000,25000],"gralvalon":[33000,24000],"malvaroth":[40000,28000],"imp warden":[10500,0],"worker imp":[13500,0],"the forgemaster (creature)":[10500,0],"ocyakao":[700,490],"arctic faun":[300,300],"rotten plant thing":[100000,0],"angry plant thing":[100000,0],"frenzied plant thing":[100000,0],"monk's apparition":[25000,18870],"dark merudri":[6500,0],"spirit overlord":[4000,2800],"foam stalker":[4500,3525],"sir leopold":[81000,26000],"tropical desolator":[20500,23000],"blight mariner":[20500,25500],"wrathful archivist":[15000,24000],"sir leonard":[22000,26000],"inkwing":[12000,17500],"vladrukh":[0,450000],"cinder wyrmling":[2350,2350],"shell drake":[2800,2900],"varg":[5400,5630],"norcferatu nightweaver":[6100,6370],"norcferatu heartless":[5700,5900],"bluebeak":[2430,2330],"lion hydra":[2760,2600],"crusader":[3400,3300],"hawk hopper":[2180,2250],"headwalker":[2460,2250],"bramble wyrmling":[2350,2350],"gloom maw":[8700,8770],"orclops bloodbreaker":[10300,10250],"dworc shadowstalker":[8900,8930],"ink splash":[1950,1450],"vicious ink splash":[1950,0],"drowned deck hand":[2000,0],"enpa yolo":[65,0],"tame terror bird":[300,0],"vampiric essence":[20000,0],"crusader guardian":[3400,0],"corrupted skeleton":[45,34],"corrupted ghost":[30,29],"muglex clan footman":[30,24],"muglex clan chief":[100,175],"the corruptor":[100,170],"creepy crawler":[27000,23000],"crypt fiend":[30000,22500],"crypt mage":[14000,14200],"cyclursus":[13500,11775],"haunted hunter":[23000,19500],"imperial":[100,0],"night harpy":[14000,21000],"raubritter chastener":[10000,9500],"raubritter marksman":[10500,9025],"raubritter skirmisher":[11000,8550],"roaming dread":[14500,10350],"stag":[50,0],"walking dread":[25000,18000],"the gravedigger":[0,750000],"eldritch dragon lord":[0,750000],"michael the stalwart":[60000,75000],"adlerauge":[45000,75000],"clavius":[40000,75000],"overseer osverger":[75000,75000],"fatal bug":[0,750000],"bone barrier":[10000,0],"bonelord's phylactery":[0,1000000],"crypt construct":[25000,20500],"bog raider":[1300,800],"lizard commander":[160,240],"herald of fire":[900,1350],"infernoid hound":[86,102],"infernoid blob":[85,100],"infernoid spiritual":[102,120],"infernoid soul":[95,115],"lizard executioner":[74,90],"lizard swordmaster":[68,80],"lizard magician":[62,75],"lizard henchman":[50,70],"sea captain":[190,280],"pirate quartermaster":[80,95],"pirate cook":[90,105],"pirate gunner":[68,80],"pirate navigator":[64,75],"tamed frazzlemaw":[1000,0],"flickering spirit elemental":[600,450],"psychic spirit elemental":[1400,1300]};
 
+const MOB_ELEMENT_MODS = {
+  // Recorte estático do tibia-json/bestiary.json para os mobs usados nos logs RP atuais.
+  // Os valores são multiplicadores decimais de dano recebido; mitigation não entra no dano causado.
+  'boar man': { physicalDmgMod: 1.00, holyDmgMod: 1.10, iceDmgMod: 1.00 },
+  'carnivostrich': { physicalDmgMod: 1.00, holyDmgMod: 1.20, iceDmgMod: 1.00 },
+  'liodile': { physicalDmgMod: 1.00, holyDmgMod: 1.15, iceDmgMod: 1.00 },
+  'crape man': { physicalDmgMod: 1.00, holyDmgMod: 1.13, iceDmgMod: 1.00 },
+  'rhindeer': { physicalDmgMod: 1.00, holyDmgMod: 1.19, iceDmgMod: 1.00 },
+  'harpy': { physicalDmgMod: 1.00, holyDmgMod: 1.00, iceDmgMod: 1.00 },
+  'roaming dread': { physicalDmgMod: 1.00, holyDmgMod: 1.00, iceDmgMod: 1.00 },
+  'cyclursus': { physicalDmgMod: 1.00, holyDmgMod: 1.00, iceDmgMod: 1.00 },
+  'crypt mage': { physicalDmgMod: 1.00, holyDmgMod: 1.00, iceDmgMod: 1.00 }
+};
+
+function getMobElementMods(name) {
+  return MOB_ELEMENT_MODS[(name || '').toLowerCase().trim()] || null;
+}
+
+function normalizeSeenDamageForElement(ev, elementKey, critMultObserved, preyMult) {
+  const mods = getMobElementMods(ev.mob);
+  if (!mods) return null;
+  let dmg = ev.dmg || 0;
+  if (ev.type === 'crit' && critMultObserved > 0) dmg /= critMultObserved;
+  if (ev.isPrey && preyMult > 1) dmg /= preyMult;
+  const mod = mods[elementKey] || 1;
+  return mod > 0 ? dmg / mod : dmg;
+}
+
+function buildRpClassifiedLines(turn, stat, mark) {
+  if (!turn || !stat) return [];
+  const ordered = turn
+    .filter(e => e.type === 'normal' || e.type === 'crit')
+    .slice()
+    .sort((a, b) => (a.ts - b.ts) || ((a.seq || 0) - (b.seq || 0)));
+  const arrowCount = Math.max(0, Math.round((stat.components && stat.components.arrow) || 0));
+  const spellCount = Math.max(0, Math.round((stat.components && stat.components.spell) || 0));
+  return ordered.map((e, lineIdx) => {
+    let component = 'spell';
+    let reason = 'order';
+    if (mark === 'cast') {
+      component = 'arrow';
+      reason = 'cast';
+    } else if (mark === 'explode') {
+      if (lineIdx < arrowCount) component = 'arrow';
+      else if (lineIdx < arrowCount + spellCount) component = 'spell';
+      else component = 'grenade';
+      reason = component === 'grenade' ? 'explode' : 'order';
+    } else {
+      component = lineIdx < arrowCount ? 'arrow' : 'spell';
+    }
+    return {
+      component,
+      correctedComponent: component,
+      beforeComponent: component,
+      reason,
+      correctionReason: 'count',
+      ts: e.ts,
+      mob: e.mob,
+      dmg: e.dmg,
+      type: e.type,
+      isPrey: !!e.isPrey,
+      physicalOriginal: normalizeSeenDamageForElement(e, 'physicalDmgMod', 0, 1),
+      holyOriginal: null,
+      iceOriginal: null,
+      inferredElement: component === 'arrow' ? 'physical' : 'holy'
+    };
+  });
+}
+
+function correctRpComponentsByElement(turns, turnStats, runeEvents, critMultObserved, preyMult) {
+  const diag = { retagged: 0, ambiguous: 0, missingMod: 0, total: 0 };
+  const runeSeconds = new Set((runeEvents || []).filter(e => e.rune === 'avalanche').map(e => e.ts));
+  for (let idx = 0; idx < turnStats.length; idx++) {
+    const stat = turnStats[idx];
+    const lines = buildRpClassifiedLines(turns[idx], stat, stat.rpGrenade);
+    if (!lines.length) {
+      stat.rpComponentLines = [];
+      continue;
+    }
+    const hasAvalanche = lines.some(line => runeSeconds.has(line.ts));
+    for (const line of lines) {
+      const ev = { mob: line.mob, dmg: line.dmg, type: line.type, isPrey: line.isPrey };
+      const mods = getMobElementMods(line.mob);
+      diag.total++;
+      if (!mods) {
+        diag.missingMod++;
+        line.correctionReason = 'missing_mod';
+        continue;
+      }
+      line.physicalOriginal = normalizeSeenDamageForElement(ev, 'physicalDmgMod', critMultObserved, preyMult);
+      line.holyOriginal = normalizeSeenDamageForElement(ev, 'holyDmgMod', critMultObserved, preyMult);
+      line.iceOriginal = normalizeSeenDamageForElement(ev, 'iceDmgMod', critMultObserved, preyMult);
+    }
+    if (hasAvalanche) {
+      const iceVals = lines.map(l => l.iceOriginal).filter(v => Number.isFinite(v) && v > 0);
+      const iceCenter = median(iceVals);
+      for (const line of lines) {
+        if (!Number.isFinite(line.iceOriginal) || !iceCenter) continue;
+        const closeToIce = Math.abs(line.iceOriginal - iceCenter) <= Math.max(70, iceCenter * 0.13);
+        if (closeToIce && line.correctedComponent !== 'arrow') {
+          line.correctedComponent = 'spell';
+          line.inferredElement = 'ice';
+          line.correctionReason = 'avalanche_same_second';
+        }
+      }
+    }
+    if (stat.rpGrenade === 'explode') {
+      const holyLines = lines.filter(l => l.correctedComponent !== 'arrow' && Number.isFinite(l.holyOriginal) && l.holyOriginal > 0);
+      const spellSeed = holyLines.filter(l => l.beforeComponent === 'spell').map(l => l.holyOriginal);
+      const grenadeSeed = holyLines.filter(l => l.beforeComponent === 'grenade').map(l => l.holyOriginal);
+      let spellCenter = median(spellSeed);
+      let grenadeCenter = median(grenadeSeed);
+      if (spellCenter && grenadeCenter && spellCenter > grenadeCenter) {
+        const tmp = spellCenter;
+        spellCenter = grenadeCenter;
+        grenadeCenter = tmp;
+      }
+      const separation = spellCenter && grenadeCenter ? (grenadeCenter - spellCenter) / Math.max(1, spellCenter) : 0;
+      for (const line of holyLines) {
+        if (!spellCenter || !grenadeCenter || separation < 0.08) {
+          line.correctionReason = 'ambiguous_centers';
+          diag.ambiguous++;
+          continue;
+        }
+        const ds = Math.abs(line.holyOriginal - spellCenter);
+        const dg = Math.abs(line.holyOriginal - grenadeCenter);
+        const best = ds <= dg ? 'spell' : 'grenade';
+        const bestDist = Math.min(ds, dg);
+        const otherDist = Math.max(ds, dg);
+        const decisive = otherDist - bestDist >= Math.max(45, Math.max(spellCenter, grenadeCenter) * 0.07);
+        if (!decisive) {
+          line.correctionReason = 'ambiguous_distance';
+          diag.ambiguous++;
+          continue;
+        }
+        line.inferredElement = 'holy';
+        line.correctionReason = 'holy_original_cluster';
+        if (line.correctedComponent !== best) {
+          line.correctedComponent = best;
+          diag.retagged++;
+        }
+      }
+    }
+    const corrected = { arrow: 0, spell: 0, grenade: 0 };
+    for (const line of lines) {
+      if (line.correctedComponent === 'arrow') corrected.arrow++;
+      else if (line.correctedComponent === 'grenade') corrected.grenade++;
+      else corrected.spell++;
+      if (line.correctedComponent !== line.beforeComponent && !line._countedRetag) {
+        line._countedRetag = true;
+      }
+    }
+    stat.components = corrected;
+    stat.rpComponentLines = lines;
+  }
+  return diag;
+}
+
 function parseServerLog(logText, isPaladin, combatProfile = null) {
   const isMage = combatProfile === 'mage';
   const lines = logText.split(/\r?\n/);
@@ -4737,6 +4960,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const tsPattern = /^(\d{2}):(\d{2}):(\d{2})\s+(.+)$/;
   const attackPattern = /(?:A|An|The)\s+([A-Za-z][A-Za-z\s'\-]+?)\s+loses\s+(\d+)\s+hitpoints\s+due to your\s+(critical attack|attack)\b\.?\s*(\([^)]*\))?/i;
   const xpPattern = /You gained\s+(\d+)\s+experience(?:\s+points?)?\s*(\([^)]*\))?/;
+  const avalancheUsePattern = /Using one of \d+\s+avalanche runes/i;
 
   // Crit-charms (Tibia Winter Update 2024): aumentam o dano de crítico em AOE.
   // Entram na média PONDERADA com crits puros pra calcular o multiplicador efetivo.
@@ -4759,6 +4983,10 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     // Tentar match de ataque (cobre 100% dos hits, com ou sem suffix)
     const a = attackPattern.exec(body);
     if (!a) {
+      if (avalancheUsePattern.test(body)) {
+        events.push({ ts, type: 'rune', rune: 'avalanche' });
+        continue;
+      }
       const x = xpPattern.exec(body);
       if (x) {
         const xpSuffix = x[2] || '';
@@ -4834,6 +5062,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const charmEventsAll = events.filter(e => e.type === 'charm');
   const reflectEventsAll = events.filter(e => e.type === 'reflect');
   const xpEventsAll = events.filter(e => e.type === 'xp');
+  const runeEventsAll = events.filter(e => e.type === 'rune');
 
   // Validação: precisa ter ataques E mortes pra simular
   if (attackEventsAll.length < 20 || xpEventsAll.length < 5) {
@@ -4854,6 +5083,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const charmEvents = charmEventsAll;
   const reflectEvents = reflectEventsAll;
   const xpEvents = xpEventsAll;
+  const runeEvents = runeEventsAll;
 
   // Duração total
   const tsList = events.map(e => e.ts);
@@ -5173,6 +5403,10 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
       components: componentHits
     };
   });
+  const rpElementalPreyMult = isPaladin && attackEvents.some(e => e.isPrey) ? 1.25 : preyMult;
+  const rpElementalCorrection = isPaladin
+    ? correctRpComponentsByElement(turns, turnStats, runeEvents, critMultObserved, rpElementalPreyMult)
+    : { retagged: 0, ambiguous: 0, missingMod: 0, total: 0 };
   const rpGrenadeShare = turnStats.length ? turnStats.filter(t => t.rpGrenade).length / turnStats.length : 0;
   const rpGrenadeConfidence = rpGrenadePairCount >= 6 ? 'strong' : (rpGrenadePairCount >= 2 ? 'weak' : 'none');
   const rpGrenadeCastTs = turnStats.filter(t => t.rpGrenade === 'cast').map(t => t.ts);
@@ -5209,6 +5443,37 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     : autoCritSamples.map(d => critMultObserved > 0 ? d / critMultObserved : d);
   const autoDmg = isPaladin || autoDmgSamples.length === 0 ? 0 : mean(autoDmgSamples);
   const mobsHitPerTurn = turnStats.map(t => t.mobsHit);
+  const rpComponentSeries = isPaladin ? {
+    arrowHitsPerTurn: turnStats.map(t => Math.max(0, Math.round((t.components && t.components.arrow) || 0))),
+    spellHitsPerTurn: turnStats.map(t => Math.max(0, Math.round((t.components && t.components.spell) || 0))),
+    grenadeHitsPerShot: turnStats.filter(t => t.rpGrenade === 'explode').map(t => Math.max(0, Math.round((t.components && t.components.grenade) || 0))).filter(v => v > 0),
+    grenadeEvents: turnStats
+      .map((t, idx) => ({ turn: idx + 1, ts: t.ts, mark: t.rpGrenade, hits: Math.max(0, Math.round((t.components && t.components.grenade) || 0)), rawAttackHits: t.rawAttackHits }))
+      .filter(e => e.mark)
+  } : null;
+  const classifyRpTurnLines = (turn, stat, mark) => {
+    if (!isPaladin || !turn || !stat) return [];
+    return stat.rpComponentLines || buildRpClassifiedLines(turn, stat, mark);
+  };
+  const rpComponentDebugExamples = isPaladin ? (() => {
+    const wanted = [];
+    const normalIdx = turnStats.findIndex(t => !t.rpGrenade && t.rawAttackHits > 0);
+    const castIdx = turnStats.findIndex(t => t.rpGrenade === 'cast');
+    const explodeIdx = turnStats.findIndex(t => t.rpGrenade === 'explode');
+    const retagIdx = turnStats.findIndex(t => t.rpComponentLines && t.rpComponentLines.some(l => l.beforeComponent !== l.correctedComponent));
+    [normalIdx, castIdx, explodeIdx, retagIdx].forEach(idx => { if (idx >= 0 && !wanted.includes(idx)) wanted.push(idx); });
+    for (let i = 0; i < turnStats.length && wanted.length < 4; i++) {
+      if (!wanted.includes(i) && turnStats[i].rawAttackHits > 0) wanted.push(i);
+    }
+    return wanted.slice(0, 4).map(idx => ({
+      turn: idx + 1,
+      ts: turnStats[idx].ts,
+      mark: turnStats[idx].rpGrenade || 'normal',
+      rawAttackHits: turnStats[idx].rawAttackHits,
+      components: turnStats[idx].components,
+      lines: classifyRpTurnLines(turns[idx], turnStats[idx], turnStats[idx].rpGrenade)
+    }));
+  })() : [];
   let xpAccumTimeline = 0;
   const temporalSeries = turnStats.map(t => {
     xpAccumTimeline += t.xp || 0;
@@ -5273,6 +5538,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const mobsRecognized = mobNames.filter(n => MOBS_TABLE[n]);
   const mobsUnrecognized = mobNames.filter(n => !MOBS_TABLE[n]);
   const allMobsRecognized = mobsUnrecognized.length === 0 && mobNames.length > 0;
+  const rawXpDiag = estimateRawXpFromLog(xpEvents, mobAttackCounts, duration);
 
   let hpEstimated, hpSource, hpMobBreakdown;
   if (allMobsRecognized) {
@@ -5306,46 +5572,68 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     ? splitPaladinDamage(cleanSpellNormals.length > 0 ? cleanSpellNormals : cleanNormals)
     : { arrowDmg: 0, spellDmgs: null, confidence: 'none', method: 'none' };
   if (paladinClusterSplit && !paladinClusterSplit.method) paladinClusterSplit.method = 'cluster';
-  const paladinSplit = isPaladin && paladinOrderSplit.spellDmgs ? paladinOrderSplit : paladinClusterSplit;
-  const dmgCycleRaw = isPaladin && paladinSplit.spellDmgs ? paladinSplit.spellDmgs : mixedCycleRaw;
-  let arrowHitsMean = 0, spellHitsMean = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1;
-  if (isPaladin && paladinSplit.method === 'order' && paladinSplit.spellDmgs && paladinSplit.arrowDmg > 0) {
-    arrowHitsMean = paladinSplit.arrowHitsMean || 0;
-    spellHitsMean = paladinSplit.spellHitsMean || 0;
-    paladinSpellCoverage = boxSizeP95 > 0 ? Math.max(0.65, Math.min(1, spellHitsMean / boxSizeP95)) : 1;
-    paladinArrowCoverage = boxSizeP95 > 0 ? Math.max(0.45, Math.min(paladinSpellCoverage, arrowHitsMean / boxSizeP95)) : 1;
-  } else if (isPaladin && paladinSplit.spellDmgs && paladinSplit.arrowDmg > 0) {
-    const arrowBase = paladinSplit.arrowDmg;
-    const spellBases = paladinSplit.spellDmgs;
-    const perTurnSplit = turns.map(t => {
-      let arrowHits = 0, spellHits = 0;
-      for (const e of t) {
-        if (!(e.type === 'normal' || e.type === 'crit')) continue;
-        let normalized = e.dmg;
-        if (e.type === 'crit' && critMultObserved > 0) normalized /= critMultObserved;
-        if (e.isPrey && preyMult > 1) normalized /= preyMult;
-        const arrowDist = Math.abs(normalized - arrowBase);
-        const spellDist = Math.min(...spellBases.map(d => Math.abs(normalized - d)));
-        if (arrowDist <= spellDist) arrowHits++;
-        else spellHits++;
-      }
-      return { arrowHits, spellHits };
-    });
-    const arrowSamples = perTurnSplit.map(v => v.arrowHits).filter(v => v > 0);
-    const spellSamples = perTurnSplit.map(v => v.spellHits).filter(v => v > 0);
-    arrowHitsMean = arrowSamples.length ? mean(arrowSamples) : 0;
-    spellHitsMean = spellSamples.length ? mean(spellSamples) : 0;
-    paladinSpellCoverage = boxSizeP95 > 0 ? Math.max(0.65, Math.min(1, spellHitsMean / boxSizeP95)) : 1;
-    paladinArrowCoverage = boxSizeP95 > 0 ? Math.max(0.45, Math.min(paladinSpellCoverage, arrowHitsMean / boxSizeP95)) : 1;
-  }
-  // Aplicar fator efetivo do prey (média ponderada do dano com prey)
-  function cycleWithoutSpecial(cycle) {
+  const cycleWithoutSpecialPreview = cycle => {
     const vals = (cycle || []).filter(v => Number.isFinite(v) && v > 0);
-    if (vals.length < 3) return cycle;
+    if (vals.length < 3) return vals;
     const maxVal = Math.max(...vals);
     const rest = vals.filter(v => v !== maxVal);
     const replacement = rest.length ? Math.round(median(rest)) : Math.round(maxVal);
     return vals.map(v => v === maxVal ? replacement : v);
+  };
+  const cycleMedian = cycle => median((cycle || []).filter(v => Number.isFinite(v) && v > 0));
+  const mixedCycleMedian = cycleMedian(mixedCycleRaw);
+  const orderCycleMedian = cycleMedian(paladinOrderSplit.spellDmgs || []);
+  const orderLooksTooLow = isPaladin && paladinOrderSplit.spellDmgs && mixedCycleMedian > 0 &&
+    orderCycleMedian > 0 && orderCycleMedian < mixedCycleMedian * 0.80;
+  const orderAfterSpecial = isPaladin && paladinOrderSplit.spellDmgs
+    ? cycleWithoutSpecialPreview(paladinOrderSplit.spellDmgs)
+    : null;
+  const orderAfterSpecialLooksLow = isPaladin && orderAfterSpecial && mixedCycleMedian > 0 &&
+    cycleMedian(orderAfterSpecial) < mixedCycleMedian * 0.80;
+  let paladinSplit = isPaladin && paladinOrderSplit.spellDmgs && !orderLooksTooLow && !orderAfterSpecialLooksLow
+    ? paladinOrderSplit
+    : paladinClusterSplit;
+  if (isPaladin && (!paladinSplit || !paladinSplit.spellDmgs || orderLooksTooLow || orderAfterSpecialLooksLow)) {
+    paladinSplit = {
+      arrowDmg: paladinOrderSplit.arrowDmg || paladinClusterSplit.arrowDmg || 0,
+      spellDmgs: mixedCycleRaw,
+      confidence: orderLooksTooLow || orderAfterSpecialLooksLow ? 'fallback' : 'weak',
+      method: 'fallback',
+      arrowHitsMean: paladinOrderSplit.arrowHitsMean || 0,
+      spellHitsMean: paladinOrderSplit.spellHitsMean || 0,
+      rejectedOrder: orderLooksTooLow || orderAfterSpecialLooksLow
+    };
+  }
+  const dmgCycleRaw = isPaladin && paladinSplit.spellDmgs ? paladinSplit.spellDmgs : mixedCycleRaw;
+  let arrowHitsMean = 0, spellHitsMean = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1;
+  let rpArrowCoverageObserved = 1, rpSpellCoverageObserved = 1;
+  let rpArrowCoverageUsed = 1, rpSpellCoverageUsed = 1;
+  const coverageFromHits = hits => boxSizeP95 > 0 ? Math.max(0, Math.min(1, hits / boxSizeP95)) : 1;
+  if (isPaladin) {
+    const componentArrowSamples = rpComponentSeries
+      ? rpComponentSeries.arrowHitsPerTurn.filter(v => Number.isFinite(v))
+      : [];
+    const componentSpellSamples = rpComponentSeries
+      ? rpComponentSeries.spellHitsPerTurn.filter(v => Number.isFinite(v))
+      : [];
+    if (componentArrowSamples.length || componentSpellSamples.length) {
+      arrowHitsMean = componentArrowSamples.length ? mean(componentArrowSamples) : 0;
+      spellHitsMean = componentSpellSamples.length ? mean(componentSpellSamples) : 0;
+    } else {
+      arrowHitsMean = paladinSplit.arrowHitsMean || 0;
+      spellHitsMean = paladinSplit.spellHitsMean || 0;
+    }
+    rpArrowCoverageObserved = coverageFromHits(arrowHitsMean);
+    rpSpellCoverageObserved = coverageFromHits(spellHitsMean);
+    rpArrowCoverageUsed = rpArrowCoverageObserved;
+    rpSpellCoverageUsed = rpSpellCoverageObserved;
+    paladinArrowCoverage = rpArrowCoverageUsed;
+    paladinSpellCoverage = rpSpellCoverageUsed;
+  }
+  // Aplicar fator efetivo do prey (média ponderada do dano com prey)
+  function cycleWithoutSpecial(cycle) {
+    const vals = cycleWithoutSpecialPreview(cycle);
+    return vals.length ? vals : cycle;
   }
   const mageUeRawSamples = isMage ? mageTurnMeta.flatMap(m => m.ueEvents).map(normalizeCombatDamage).filter(v => Number.isFinite(v) && v > 0) : [];
   const mageUeDetected = isMage && mageUeRawSamples.length > 0;
@@ -5359,6 +5647,10 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const rpGrenadeDmg = isPaladin ? Math.round(specialBaseRaw * preyEffectiveFactor) : 0;
   const mageUeDmg = mageUeDetected ? Math.round(specialBaseRaw * preyEffectiveFactor) : 0;
   const paladinArrowDmg = isPaladin ? Math.round((paladinSplit.arrowDmg || 0) * preyEffectiveFactor) : 0;
+  const paladinDamageMethod = isPaladin ? (paladinSplit.method || 'fallback') : 'none';
+  const paladinDamageWarning = isPaladin && paladinSplit.rejectedOrder
+    ? 'order_rejected_low_cycle'
+    : '';
 
   // ===== DETECÇÃO DE INTELIGÊNCIA =====
   // Heurística: "intel ON" = jogador puxa novos mobs antes do anterior morrer,
@@ -5484,20 +5776,23 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
 
   return {
     duration, totalXp, totalKills, xphReal, avgXpPerKill,
+    rawXpDiag,
     dmgTotal, avgNormal, avgCrit, avgCharm,
     critRateObserved, critMultObserved, charmRateObserved,
     hpEstimated, hpSource, mobsUnrecognized, hpMobBreakdown,
     boxSizeP95, boxSizeStrictP90, mageBoxTarget, mobsHitMode, mobsHitMean, mobsHitP50, p90Share, p90IsMode,
     boxVariance, boxRangeMin, boxRangeMax,
     exitP5, hitsPerTurn, mobsHitPerTurn, temporalSeries, autoDmg, reflectDmg: isPaladin || isMage ? 0 : reflectDmgObserved, reflectHitCount: reflectEvents.length, paladinArrowDmg,
+    rpComponentSeries, rpComponentDebugExamples, rpElementalCorrection,
     specialCastThreshold: Math.max(1, Math.round(boxSizeP95 || boxSizeEffective || 1)),
     aoeHitSamples, aoeCoverageMean, boxSizeEffective, spawnCurve,
     arrowHitsMean, spellHitsMean, paladinArrowCoverage, paladinSpellCoverage,
+    rpArrowCoverageObserved, rpSpellCoverageObserved, rpArrowCoverageUsed, rpSpellCoverageUsed,
     rpGrenadePairCount, rpGrenadeShare, rpGrenadeConfidence, rpGrenadeDetected: rpGrenadePairCount > 0,
     rpGrenadeDmg, rpGrenadeIntervalSeconds,
     rpGrenadePeakResidual: rpPeakResidualDiag,
     mageUeDmg, mageUeDetected, mageUeCooldown: 4, mageUeIntervalSeconds,
-    dmgCycle, dmgCycleRaw, dmgCycleMixed, paladinSplitConfidence: paladinSplit.confidence, paladinSplitMethod: paladinSplit.method || 'none', boxChangeTime, boxChangeTimeEstimated, boxChangeTimeConfidence, bctSource,
+    dmgCycle, dmgCycleRaw, dmgCycleMixed, paladinSplitConfidence: paladinSplit.confidence, paladinSplitMethod: paladinSplit.method || 'none', paladinDamageMethod, paladinDamageWarning, boxChangeTime, boxChangeTimeEstimated, boxChangeTimeConfidence, bctSource,
     intelDetected, emptyTurnPct,
     preyRate, preyMult, preyEffectiveFactor, preyXpActive,
     isPaladin, isMage,
@@ -5555,6 +5850,103 @@ function denseP90(arr, strictP90) {
   const prevCumPct = prevCum / arr.length;
   const strictPct = counts[strictP90] / arr.length;
   return prevCumPct >= 0.87 && strictPct <= 0.06 ? prev : strictP90;
+}
+
+function estimateRawXpFromLog(xpEvents, mobAttackCounts, durationSeconds) {
+  const recognized = Object.entries(mobAttackCounts || {})
+    .filter(([name]) => MOBS_TABLE[name] && MOBS_TABLE[name][1] > 0)
+    .map(([name, count]) => ({ name, count, raw: MOBS_TABLE[name][1] }))
+    .sort((a, b) => b.count - a.count);
+  const totalDeaths = (xpEvents || []).length;
+  if (!totalDeaths || !recognized.length || !durationSeconds) {
+    return {
+      rawXph: 0,
+      rawTotal: 0,
+      ambiguityRate: 0,
+      unresolvedRate: totalDeaths ? 1 : 0,
+      matchRate: 0,
+      totalDeaths,
+      ambiguousDeaths: 0,
+      unresolvedDeaths: totalDeaths,
+      confident: false,
+      lowConfidenceReason: 'no_data',
+      globalSummary: '',
+      preyShare: 0,
+      animusSummary: ''
+    };
+  }
+  // A linha de XP do server log ja indica quando houve active prey bonus.
+  // Usamos todos os mobs reconhecidos como candidatos e deixamos a blindagem de
+  // ambiguidade decidir quando isso ficou incerto demais para exibir sem aviso.
+  const preyEligible = new Set(recognized.map(m => m.name));
+  const globals = [1.00, 1.50, 2.25];
+  const animusValues = [1.00, 1.02, 1.03, 1.04];
+  const tolerance = 0.0075;
+  const globalCounts = {};
+  const animusCounts = {};
+  let rawTotal = 0;
+  let matched = 0;
+  let ambiguousDeaths = 0;
+  let unresolvedDeaths = 0;
+  let preyDeaths = 0;
+
+  for (const ev of xpEvents || []) {
+    const gained = ev.xp || 0;
+    const matches = [];
+    for (const mob of recognized) {
+      for (const global of globals) {
+        const preyBonus = global === 1 ? 0.40 : 0.60;
+        const preyOptions = ev.xpHasPrey && preyEligible.has(mob.name) ? [0, preyBonus] : [0];
+        for (const prey of preyOptions) {
+          for (const animus of animusValues) {
+            const expected = mob.raw * (global + prey) * animus;
+            const relErr = Math.abs(expected - gained) / Math.max(1, gained);
+            if (relErr <= tolerance) {
+              matches.push({ mob: mob.name, raw: mob.raw, global, prey, animus, relErr });
+            }
+          }
+        }
+      }
+    }
+    if (!matches.length) {
+      unresolvedDeaths++;
+      continue;
+    }
+    matches.sort((a, b) => a.relErr - b.relErr);
+    const best = matches[0];
+    const distinctMobs = new Set(matches.map(m => m.mob));
+    if (distinctMobs.size > 1) ambiguousDeaths++;
+    matched++;
+    rawTotal += best.raw;
+    globalCounts[best.global] = (globalCounts[best.global] || 0) + 1;
+    animusCounts[best.animus] = (animusCounts[best.animus] || 0) + 1;
+    if (best.prey > 0) preyDeaths++;
+  }
+
+  const hours = Math.max(1 / 3600, durationSeconds / 3600);
+  const ambiguityRate = totalDeaths ? ambiguousDeaths / totalDeaths : 0;
+  const unresolvedRate = totalDeaths ? unresolvedDeaths / totalDeaths : 0;
+  const matchRate = totalDeaths ? matched / totalDeaths : 0;
+  const dominant = obj => {
+    const entries = Object.entries(obj || {}).sort((a, b) => b[1] - a[1]);
+    return entries.length ? entries[0][0] : '';
+  };
+  const confident = ambiguityRate < 0.05 && unresolvedRate < 0.10 && matchRate >= 0.90;
+  return {
+    rawXph: rawTotal / hours,
+    rawTotal,
+    ambiguityRate,
+    unresolvedRate,
+    matchRate,
+    totalDeaths,
+    ambiguousDeaths,
+    unresolvedDeaths,
+    confident,
+    lowConfidenceReason: !confident ? (ambiguityRate >= 0.05 ? 'ambiguous' : unresolvedRate >= 0.10 ? 'unresolved' : 'weak_match') : '',
+    globalSummary: dominant(globalCounts),
+    preyShare: matched ? preyDeaths / matched : 0,
+    animusSummary: dominant(animusCounts)
+  };
 }
 
 function splitPaladinDamage(dmgs) {
@@ -5709,6 +6101,14 @@ function renderValidatorExtracted(data) {
   }
 
   const palDiv2Suffix = data.isPaladin ? t('val_sub_pal_div2') : '';
+  const rawDiag = data.rawXpDiag || {};
+  const rawXpSub = rawDiag.confident
+    ? t('val_sub_raw_xph_ok')
+        .replace('{amb}', ((rawDiag.ambiguityRate || 0) * 100).toFixed(1).replace('.', dec))
+        .replace('{match}', ((rawDiag.matchRate || 0) * 100).toFixed(1).replace('.', dec))
+    : t('val_sub_raw_xph_uncertain')
+        .replace('{amb}', ((rawDiag.ambiguityRate || 0) * 100).toFixed(1).replace('.', dec))
+        .replace('{unr}', ((rawDiag.unresolvedRate || 0) * 100).toFixed(1).replace('.', dec));
 
   const cards = [
     { lbl: t('val_card_vocation'), val: data.isMage ? t('voc_mage') : (data.isPaladin ? t('voc_rp') : t('voc_ek')), sub: data.isMage ? t('val_sub_mage_ue') : (data.isPaladin ? t('val_sub_pal_on') : t('val_sub_pal_off')) },
@@ -5716,8 +6116,8 @@ function renderValidatorExtracted(data) {
       sub: t('val_sub_events_turns').replace('{n}', data.eventCount).replace('{t}', data.nTurns) },
     { lbl: t('val_card_xph'), val: fmtNum(data.xphReal) + ' XP/h',
       sub: t('val_sub_xp_in').replace('{xp}', fmtNum(data.totalXp)).replace('{dur}', durStr) },
-    { lbl: t('val_card_kills'), val: data.totalKills,
-      sub: t('val_sub_kills_per_h').replace('{n}', (data.totalKills / (data.duration / 3600)).toFixed(0)) },
+    { lbl: t('val_card_raw_xph'), val: rawDiag.rawXph && rawDiag.confident ? fmtNum(rawDiag.rawXph) + ' XP/h' : (rawDiag.rawXph ? fmtNum(rawDiag.rawXph) + ' XP/h' : '—'),
+      sub: rawXpSub },
     { lbl: t('val_card_turns_per_h'),
       val: Math.round(data.effectiveTurnsCount / (data.duration / 3600)).toLocaleString(LANG === 'pt' ? 'pt-BR' : 'en-US'),
       sub: t('val_sub_turns_per_h').replace('{n}', data.effectiveTurnsCount).replace('{d}', durStr) },
@@ -5744,6 +6144,8 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_pal_arrow'), val: Math.round(data.paladinArrowDmg || 0), sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_arrow')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_spell'), val: data.isPaladin ? '[' + data.dmgCycle.join(', ') + ']' : '—', sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_spell')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_split_method'), val: data.isPaladin ? ((data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : '—', sub: data.isPaladin ? (data.paladinSplitMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster de dano') : t('val_sub_pal_off') },
+    { lbl: t('val_card_pal_damage_method'), val: data.isPaladin ? ((data.paladinDamageMethod || data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : 'â€”', sub: data.isPaladin ? (data.paladinDamageWarning ? '<span style="color:var(--amber)">' + t('val_sub_pal_order_rejected') + '</span>' : (data.paladinDamageMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster/ciclo misto')) : t('val_sub_pal_off') },
+    { lbl: t('val_card_rp_elemental_fix'), val: data.isPaladin ? ((data.rpElementalCorrection && data.rpElementalCorrection.retagged) || 0) + ' / ' + ((data.rpElementalCorrection && data.rpElementalCorrection.ambiguous) || 0) + ' / ' + ((data.rpElementalCorrection && data.rpElementalCorrection.missingMod) || 0) : '—', sub: data.isPaladin ? t('val_sub_rp_elemental_fix') : t('val_sub_pal_off') },
     { lbl: t('val_card_auto_dmg'), val: Math.round(data.autoDmg || 0), sub: data.isPaladin ? t('val_sub_pal_off') : t('val_sub_auto_dmg') },
     { lbl: t('val_card_reflect_dmg'), val: data.reflectDmg ? Math.round(data.reflectDmg) : '—', sub: data.reflectDmg ? t('val_sub_reflect_dmg') + ' · ' + (data.reflectHitCount || 0) + ' hits' : t('val_sub_pal_off') },
     { lbl: t('val_card_aoe_coverage'), val: ((data.aoeCoverageMean || 0) * 100).toFixed(1).replace('.', dec) + '%', sub: t('val_sub_aoe_coverage') },
@@ -5833,15 +6235,16 @@ function renderValidatorExtracted(data) {
     t('val_card_aoe_coverage'), t('val_card_box_effective')
   ]);
   const isRelevant = c => {
+    if (data.isPaladin && c.lbl === t('val_card_dmg_cycle')) return false;
     if (c.lbl === t('val_card_reflect_dmg') && !data.reflectDmg) return false;
     if (!data.isPaladin && !data.isMage && [
-      t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_arrow_hits'),
+      t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_pal_damage_method'), t('val_card_rp_elemental_fix'), t('val_card_arrow_hits'),
       t('val_card_spell_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'), t('val_card_rp_grenade'),
       t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
-    if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_reflect_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_post_walk_spawn'), t('val_card_paladin')].includes(c.lbl)) return false;
+    if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_reflect_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_post_walk_spawn'), t('val_card_paladin'), t('val_card_pal_split_method')].includes(c.lbl)) return false;
     if (data.isMage && [
-      t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'),
+      t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_pal_damage_method'), t('val_card_rp_elemental_fix'),
       t('val_card_arrow_hits'), t('val_card_spell_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
       t('val_card_rp_grenade'), t('val_card_post_walk_spawn'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
@@ -6088,6 +6491,9 @@ let valTimelineXpChart = null;
 let valTimelineComponentsChart = null;
 let valTimelineDamageChart = null;
 let valImpactAnalyserChart = null;
+let valRpArrowHistogramChart = null;
+let valRpSpellHistogramChart = null;
+let valRpGrenadeHistogramChart = null;
 let lastSimHitsHist = null;
 let lastSimTemporalSeries = null;
 const VALIDATOR_TURN_DURATION = 2.25;
@@ -6163,6 +6569,11 @@ function collectSimHitDistribution(config, nSessions) {
   }
 
   const hitsHist = {};
+  const componentHists = { arrow: {}, spell: {}, grenade: {} };
+  const addHist = (hist, value) => {
+    const key = Math.max(0, Math.round(value || 0));
+    hist[key] = (hist[key] || 0) + 1;
+  };
   const presentTbl = buildPresentTbl(flags && flags.rpCycleMode ? (flags.rpCycleFillTime || boxChangeTime) : boxChangeTime);
   const postWalkTbl = flags && !flags.intel && !flags.paladin && !flags.mage ? buildPostWalkWaveTbl() : null;
   const bFloor = Math.floor(boxSize), bFrac = boxSize - bFloor;
@@ -6498,6 +6909,7 @@ function collectSimHitDistribution(config, nSessions) {
       let histRawHits = 0;
       let histComponentCount = 0;
       let histResidualGrenade = false;
+      const turnComponentHits = { arrow: 0, spell: 0, grenade: 0 };
       const turnAoeCoverage = flags.paladin && coverageMode !== 'screen_ratio' && coverageMode !== 'rp_split'
         ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode, aoeBoxP90, exitThreshold, aoeCoverage)
         : null;
@@ -6540,6 +6952,8 @@ function collectSimHitDistribution(config, nSessions) {
         if (flags.paladin) {
           histRawHits += aoeHits;
           if (aoeHits > 0) histComponentCount++;
+          if (atkIdx === 0) turnComponentHits.arrow = aoeHits;
+          else turnComponentHits.spell = aoeHits;
         }
         else histRawHits = aoeHits;
         shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng);
@@ -6574,6 +6988,9 @@ function collectSimHitDistribution(config, nSessions) {
         const aoeHits = residualHits != null
           ? residualHits
           : resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode === 'rp_split' ? 'screen_ratio' : coverageMode, aoeBoxP90, exitThreshold, coverageMode === 'rp_split' ? paladinSpellCoverage : aoeCoverage);
+        const grenadePeakRaw = flags && flags.rpGrenadePeakRaw ? Math.max(0, Math.round(flags.rpGrenadePeakRaw + (Math.floor(rng() * 3) - 1))) : 0;
+        const grenadeVisualHits = grenadePeakRaw > 0 ? grenadePeakRaw : aoeHits;
+        turnComponentHits.grenade = grenadeVisualHits;
         histRawHits += aoeHits;
         if (aoeHits > 0) histComponentCount++;
         shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng);
@@ -6594,6 +7011,9 @@ function collectSimHitDistribution(config, nSessions) {
         nextUeAt = timeElapsed + ueInterval;
       }
       if (flags.paladin) {
+        addHist(componentHists.arrow, turnComponentHits.arrow);
+        addHist(componentHists.spell, turnComponentHits.spell);
+        if (turnComponentHits.grenade > 0) addHist(componentHists.grenade, turnComponentHits.grenade);
         const paladinVisual = histResidualGrenade
           ? Math.max(0, Math.round(histRawHits))
           : Math.max(0, Math.round(histRawHits / Math.max(1, histComponentCount)));
@@ -6603,7 +7023,12 @@ function collectSimHitDistribution(config, nSessions) {
       }
     }
   }
-  return hitsHist; // { [hitsValue]: count }
+  Object.defineProperty(hitsHist, 'components', {
+    value: componentHists,
+    enumerable: false,
+    configurable: true
+  });
+  return hitsHist; // { [hitsValue]: count } + components (non-enumerable)
 }
 
 function collectSimTemporalSeries(config, maxTurns = 220) {
@@ -7018,7 +7443,6 @@ function renderModelDiagnosticsTable(diagnostics, chosenKey) {
     '<th>' + t('diag_model') + '</th>' +
     '<th>' + t('diag_xph') + '</th>' +
     '<th>' + t('diag_xp_err') + '</th>' +
-    '<th>' + t('diag_kills_h') + '</th>' +
     '<th>' + t('diag_hist') + '</th>' +
     '<th>' + t('diag_special') + '</th>' +
     '<th>' + t('diag_observed_box') + '</th>' +
@@ -7041,7 +7465,6 @@ function renderModelDiagnosticsTable(diagnostics, chosenKey) {
       '<td>' + row.label + (chosen ? ' ✓' : '') + '</td>' +
       '<td>' + fmtN(row.xph) + '</td>' +
       '<td>' + (row.isReal ? '—' : ((row.xphErr >= 0 ? '+' : '') + row.xphErr.toFixed(1) + '%')) + '</td>' +
-      '<td>' + fmtN(row.killsPerHour) + '</td>' +
       '<td>' + (row.isReal ? '—' : (row.histDist || 0).toFixed(1)) + '</td>' +
       '<td>' + fmtSec(row.specialInterval) + '</td>' +
       '<td>' + fmtSec(row.observedBoxTime) + '</td>' +
@@ -7058,6 +7481,43 @@ function renderModelDiagnosticsTable(diagnostics, chosenKey) {
       '<td>' + (row.isReal ? '—' : fmtScore(row.diagnosticScore)) + '</td>' +
       '<td>' + (row.mainGap || '—') + '</td>' +
       '</tr>';
+  }
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function renderRpMethodologyTable(real, sim) {
+  if (!real || !real.isPaladin) return '';
+  const pt = LANG === 'pt';
+  const rows = [
+    ['MECANICA FIXA', 'Turno RP', 'arrow AoE + spell/rune AoE; granada e parte natural da vocacao quando ha dano detectado/manual.'],
+    ['MECANICA FIXA', 'Variacao/crit/charm', 'Dano rola variacao 80-120%; crit/charm usam a regra global do simulador.'],
+    ['MECANICA FIXA', 'Granada', 'Cooldown/timing e regra de cast sao mecanica do RP; dano/intervalo detectados do log entram como parametro.'],
+    ['MECANICA FIXA', 'Guardrail de escolha', 'Auto escolhe primeiro por erro de XP/h com bonus; histograma desempata entre candidatos seguros.'],
+    ['POR LOG', 'XP/h com bonus', 'Extraida diretamente das linhas de XP do server log; e a metrica visivel usada no fit.'],
+    ['POR LOG', 'RAW XP/h', 'Invertida pelas mortes do log usando MOBS_TABLE, global/prey/animus; nao entra no criterio de validacao.'],
+    ['POR LOG', 'HP/XP medio', 'HP vem da tabela ponderada pelos mobs reconhecidos; XP medio por kill vem do log com bonus embutido.'],
+    ['POR LOG', 'Box/saida/tempo', 'box efetiva, p90, p10 e boxChangeTime sao extraidos da curva temporal/histograma do proprio log.'],
+    ['POR LOG', 'Dano RP', 'arrow, spell/rune, granada, charm e crit observado sao estimados do log analisado.'],
+    ['ALERTA METODOLOGICO', 'Modelos *_from_log/cadence', 'Usam cadencia temporal do proprio log; servem como diagnostico/fit individual, mas nao contam como mecanica fixa para generalizacao.']
+  ];
+  let html = '<h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)">' +
+    (pt ? 'metodologia RP: mecanica fixa vs parametro do log' : 'RP methodology: fixed mechanics vs per-log parameter') +
+    '</h3>';
+  html += '<div class="val-note" style="margin-bottom:10px">' +
+    (pt
+      ? 'Fit individual valida se o modelo reconstruiu este log. Generalizacao so vale quando a mecanica fixa nao foi escolhida otimizando contra o mesmo log.'
+      : 'Individual fit checks whether the model reconstructed this log. Generalization only counts when fixed mechanics were not chosen by optimizing against the same log.') +
+    '</div>';
+  html += '<div style="overflow-x:auto"><table class="val-compare-table"><thead><tr>' +
+    '<th>' + (pt ? 'tipo' : 'type') + '</th>' +
+    '<th>' + (pt ? 'parametro' : 'parameter') + '</th>' +
+    '<th>' + (pt ? 'origem / leitura' : 'source / reading') + '</th>' +
+    '</tr></thead><tbody>';
+  for (const r of rows) {
+    const warn = r[0] === 'ALERTA METODOLOGICO';
+    html += '<tr' + (warn ? ' style="color:var(--amber)"' : '') + '>' +
+      '<td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>';
   }
   html += '</tbody></table></div>';
   return html;
@@ -7523,6 +7983,152 @@ function renderValidatorHistogram(data, simHitsHist) {
     },
     plugins: [verticalLinesPlugin]
   });
+  renderValidatorRpComponentHistograms(data, simHitsHist && simHitsHist.components ? simHitsHist.components : null);
+}
+
+function histogramFromArray(values) {
+  const hist = {};
+  for (const v of values || []) {
+    const key = Math.max(0, Math.round(v || 0));
+    hist[key] = (hist[key] || 0) + 1;
+  }
+  return hist;
+}
+
+function histTotal(hist) {
+  let total = 0;
+  for (const k in (hist || {})) total += hist[k] || 0;
+  return total;
+}
+
+function renderSmallComponentHistogram(canvasId, assignChart, realValues, simHist, title, note) {
+  const canvas = $(canvasId);
+  if (!canvas || typeof Chart === 'undefined') return;
+  const realHist = histogramFromArray(realValues || []);
+  const realTotal = histTotal(realHist);
+  const simTotal = histTotal(simHist);
+  let maxHit = 0;
+  for (const k in realHist) maxHit = Math.max(maxHit, +k);
+  for (const k in (simHist || {})) maxHit = Math.max(maxHit, +k);
+  const labels = [];
+  const realData = [];
+  const simData = [];
+  for (let i = 0; i <= Math.max(1, maxHit + 1); i++) {
+    labels.push(i);
+    realData.push(realTotal ? +((realHist[i] || 0) / realTotal * 100).toFixed(2) : 0);
+    simData.push(simTotal ? +((simHist[i] || 0) / simTotal * 100).toFixed(2) : 0);
+  }
+  const datasets = [
+    {
+      type: 'bar',
+      label: t('val_rp_component_real'),
+      data: realData,
+      backgroundColor: 'rgba(59, 130, 246, 0.48)',
+      borderColor: '#3B82F6',
+      borderWidth: 1,
+      order: 2
+    }
+  ];
+  if (simTotal > 0) {
+    datasets.push({
+      type: 'line',
+      label: t('val_rp_component_sim'),
+      data: simData,
+      borderColor: '#00C49A',
+      backgroundColor: 'rgba(0,196,154,.08)',
+      borderWidth: 2,
+      pointRadius: 2,
+      tension: 0.3,
+      fill: true,
+      order: 1
+    });
+  }
+  assignChart(new Chart(canvas, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: simTotal > 0, labels: { color: '#8BA4C2', font: { size: 10 }, boxWidth: 10 } },
+        title: { display: true, text: title + ' · n=' + realTotal + (note ? ' · ' + note : ''), color: '#DDE6F3', font: { size: 12, weight: '500' } },
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(139,164,194,0.1)' }, ticks: { color: '#8BA4C2', font: { size: 10 } } },
+        y: { beginAtZero: true, grid: { color: 'rgba(139,164,194,0.1)' }, ticks: { color: '#8BA4C2', font: { size: 10 }, callback: v => v + '%' } }
+      }
+    }
+  }));
+}
+
+function renderValidatorRpComponentDebug(data) {
+  const el = $('valRpComponentDebug');
+  if (!el) return;
+  const examples = data && data.rpComponentDebugExamples || [];
+  if (!examples.length) {
+    el.style.display = 'none';
+    el.innerHTML = '';
+    return;
+  }
+  const reasonLabel = reason => reason === 'cast'
+    ? t('val_rp_debug_reason_cast')
+    : reason === 'explode'
+    ? t('val_rp_debug_reason_explode')
+    : t('val_rp_debug_reason_order');
+  const rows = examples.map(ex => {
+    const lines = (ex.lines || []).map(line =>
+      '<div style="display:grid;grid-template-columns:90px 70px 1fr 70px 120px 90px 140px;gap:8px;padding:2px 0;border-top:1px solid rgba(139,164,194,.10)">' +
+        '<span>' + (line.beforeComponent || line.component) + '→' + (line.correctedComponent || line.component) + '</span>' +
+        '<span>' + line.type + '</span>' +
+        '<span>' + (line.mob || 'mob') + '</span>' +
+        '<span>' + Math.round(line.dmg || 0) + '</span>' +
+        '<span>' + (line.inferredElement || '—') + ' ' + (Number.isFinite(line.holyOriginal) ? Math.round(line.holyOriginal) : '—') + '</span>' +
+        '<span>' + reasonLabel(line.reason) + '</span>' +
+        '<span>' + (line.correctionReason || 'count') + '</span>' +
+      '</div>'
+    ).join('');
+    return '<div style="margin-top:8px">' +
+      '<strong>' + t('val_rp_debug_turn') + ' ' + ex.turn + '</strong>' +
+      ' · ' + ex.mark + ' · raw=' + ex.rawAttackHits +
+      ' · arrow=' + Math.round((ex.components && ex.components.arrow) || 0) +
+      ' spell=' + Math.round((ex.components && ex.components.spell) || 0) +
+      ' grenade=' + Math.round((ex.components && ex.components.grenade) || 0) +
+      '<div style="margin-top:5px;font-family:Menlo,Consolas,monospace;font-size:11px;color:var(--text-muted)">' + lines + '</div>' +
+    '</div>';
+  }).join('');
+  el.style.display = 'block';
+  el.innerHTML = '<strong>' + t('val_rp_debug_title') + '</strong><br>' +
+    '<span style="color:var(--text-muted)">' + t('val_rp_debug_desc') + '</span>' + rows;
+}
+
+function renderValidatorRpComponentHistograms(data, simComponentHists) {
+  const section = $('valRpComponentSection');
+  const destroy = chart => { try { if (chart && typeof chart.destroy === 'function') chart.destroy(); } catch (err) {} };
+  destroy(valRpArrowHistogramChart);
+  destroy(valRpSpellHistogramChart);
+  destroy(valRpGrenadeHistogramChart);
+  valRpArrowHistogramChart = null;
+  valRpSpellHistogramChart = null;
+  valRpGrenadeHistogramChart = null;
+  if (!section || !data || !data.isPaladin || !data.rpComponentSeries) {
+    if (section) section.style.display = 'none';
+    const dbg = $('valRpComponentDebug');
+    if (dbg) dbg.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  const real = data.rpComponentSeries;
+  const sim = simComponentHists || {};
+  const grenadeN = (real.grenadeHitsPerShot || []).length;
+  const grenadeNote = grenadeN <= 8
+    ? t('val_rp_component_small_n')
+    : (grenadeN ? t('val_rp_component_samples') : t('val_rp_component_no_grenade'));
+  renderSmallComponentHistogram('valRpArrowHistogram', chart => { valRpArrowHistogramChart = chart; }, real.arrowHitsPerTurn, sim.arrow, t('val_rp_component_arrow'));
+  renderSmallComponentHistogram('valRpSpellHistogram', chart => { valRpSpellHistogramChart = chart; }, real.spellHitsPerTurn, sim.spell, t('val_rp_component_spell'));
+  renderSmallComponentHistogram('valRpGrenadeHistogram', chart => { valRpGrenadeHistogramChart = chart; }, real.grenadeHitsPerShot, sim.grenade, t('val_rp_component_grenade'), grenadeNote);
+  renderValidatorRpComponentDebug(data);
 }
 
 function histogramDistance(realHits, simHitsHist) {
@@ -8181,6 +8787,15 @@ function runValidatorComparison(data) {
     sim.coverageDamageStrength = chosen.strength;
     sim.manualModel = manualMode;
     sim.histDist = chosen.histDist;
+    if (data.isPaladin && data.rpComponentSeries && lastSimHitsHist && lastSimHitsHist.components) {
+      sim.rpComponentDists = {
+        arrow: histogramDistance(data.rpComponentSeries.arrowHitsPerTurn, lastSimHitsHist.components.arrow),
+        spell: histogramDistance(data.rpComponentSeries.spellHitsPerTurn, lastSimHitsHist.components.spell),
+        grenade: histogramDistance(data.rpComponentSeries.grenadeHitsPerShot, lastSimHitsHist.components.grenade)
+      };
+    } else {
+      sim.rpComponentDists = null;
+    }
     sim.chosenKey = chosen.key;
     sim.diagnosticScore = chosen.diagnosticScore || 0;
     sim.modelDiagnostics = diagnostics;
@@ -8253,9 +8868,6 @@ function renderValidatorComparison(real, sim) {
     return n.toFixed(2) + ' (' + label + ')';
   };
 
-  const realKillsPerHour = real.totalKills / (real.duration / 3600);
-  const simKillsPerHour = sim.xph / real.avgXpPerKill;
-
   // Calcular erros %
   const calcErr = (r, s) => r === 0 ? 0 : (s - r) / r * 100;
 
@@ -8264,7 +8876,6 @@ function renderValidatorComparison(real, sim) {
     ...(sim.baselineXph ? [{ metric: real.isPaladin ? t('val_metric_xph_old_rp') : t('val_metric_xph_before'), real: real.xphReal, sim: sim.baselineXph, fmt: fmtN, suffix: ' XP/h', contextOnly: true }] : []),
     ...(sim.coverageXph ? [{ metric: t('val_metric_xph_coverage'), real: real.xphReal, sim: sim.coverageXph, fmt: fmtN, suffix: ' XP/h', contextOnly: true }] : []),
     ...(sim.hybridXph ? [{ metric: t('val_metric_xph_hybrid'), real: real.xphReal, sim: sim.hybridXph, fmt: fmtN, suffix: ' XP/h', contextOnly: true }] : []),
-    { metric: t('val_metric_kills_per_hour'), real: realKillsPerHour, sim: simKillsPerHour, fmt: n => Math.round(n).toString(), suffix: '/h' },
     { metric: t('val_metric_crit_rate'), real: real.critRateObserved || 0, sim: sim.critRateUsed || 0, fmt: fmtPct, suffix: '', contextOnly: true },
     { metric: t('val_metric_crit_mult'), real: real.critMultObserved || 0, sim: sim.critMultUsed || CRIT_BASE, fmt: fmtMult, suffix: '', contextOnly: true },
     { metric: t('val_metric_charm_rate'), real: real.charmRateObserved || 0, sim: sim.charmRateUsed || 0, fmt: fmtPct, suffix: '', contextOnly: true },
@@ -8320,6 +8931,7 @@ function renderValidatorComparison(real, sim) {
     ] : []),
     ...(real.isPaladin ? [
       { metric: t('val_metric_arrow_spell_hits'), sim: funnelDiag.arrowHits.toFixed(2) + ' / ' + funnelDiag.spellHits.toFixed(2) },
+      ...(sim.rpComponentDists ? [{ metric: t('val_metric_rp_component_dist'), sim: 'arrow ' + sim.rpComponentDists.arrow.toFixed(1) + ' · spell ' + sim.rpComponentDists.spell.toFixed(1) + ' · grenade ' + sim.rpComponentDists.grenade.toFixed(1) }] : []),
       { metric: t('val_card_rp_grenade'), sim: (sim.rpGrenadeModeUsed ? 'ON' : 'OFF') + ' · ' + (real.rpGrenadePairCount || 0) + ' pares · ~' + (real.rpGrenadeIntervalSeconds || 24) + 's' }
     ] : []),
     ...(real.isMage ? [
@@ -8344,6 +8956,7 @@ function renderValidatorComparison(real, sim) {
     '</tr>';
   html += '</tbody></table>';
   html += renderModelDiagnosticsTable(sim.modelDiagnostics, sim.chosenKey);
+  html += renderRpMethodologyTable(real, sim);
 
   if (sim.coverageModeLabel) {
     html += '<div class="val-note" style="margin-top:10px">' +
@@ -8463,7 +9076,6 @@ function benchQuickRead(row) {
   if (row.error) return t('bench_error');
   const bits = [];
   if (Math.abs(row.xpErr) > 15) bits.push('XP fora de ±15%');
-  if (Math.abs(row.killErr) > 15) bits.push('mortes/h fora de ±15%');
   if (row.histDist > 25) bits.push('histograma distante');
   if (row.data.reflectDmg) bits.push('reflect EK detectado');
   if (row.data.isPaladin && row.data.rpGrenadeDmg) bits.push('granada RP ativa');
@@ -8483,7 +9095,8 @@ function renderBenchResults(rows) {
     '<th>' + t('bench_xph_real') + '</th>' +
     '<th>' + t('bench_xph_sim') + '</th>' +
     '<th>' + t('bench_xph_err') + '</th>' +
-    '<th>' + t('bench_kills_err') + '</th>' +
+    '<th>' + t('bench_raw_xph') + '</th>' +
+    '<th>' + t('bench_raw_amb') + '</th>' +
     '<th>' + t('bench_hist') + '</th>' +
     '<th>' + t('bench_visual_fill') + '</th>' +
     '<th>' + t('bench_special') + '</th>' +
@@ -8498,7 +9111,7 @@ function renderBenchResults(rows) {
     '</tr></thead><tbody>';
   for (const row of rows) {
     if (row.error) {
-      html += '<tr><td>' + row.file + '</td><td colspan="17" style="color:var(--danger)">' + row.error + '</td></tr>';
+      html += '<tr><td>' + row.file + '</td><td colspan="18" style="color:var(--danger)">' + row.error + '</td></tr>';
       continue;
     }
     const errCls = Math.abs(row.xpErr) <= 15 ? 'color:var(--accent)' : 'color:var(--amber)';
@@ -8509,7 +9122,8 @@ function renderBenchResults(rows) {
       '<td>' + fmtBenchNum(row.data.xphReal) + '</td>' +
       '<td>' + fmtBenchNum(row.sim.xph) + '</td>' +
       '<td style="' + errCls + '">' + (row.xpErr >= 0 ? '+' : '') + row.xpErr.toFixed(1) + '%</td>' +
-      '<td>' + (row.killErr >= 0 ? '+' : '') + row.killErr.toFixed(1) + '%</td>' +
+      '<td>' + (row.data.rawXpDiag && row.data.rawXpDiag.rawXph ? fmtBenchNum(row.data.rawXpDiag.rawXph) : '—') + '</td>' +
+      '<td>' + (row.data.rawXpDiag ? ((row.data.rawXpDiag.ambiguityRate || 0) * 100).toFixed(1) + '%' : '—') + '</td>' +
       '<td>' + row.histDist.toFixed(1) + '</td>' +
       '<td>' + (row.visualFillBoxTime ? Math.round(row.visualFillBoxTime) + 's' : '-') + '</td>' +
       '<td>' + (row.specialInterval ? Math.round(row.specialInterval) + 's' : '—') + '</td>' +
@@ -8524,7 +9138,91 @@ function renderBenchResults(rows) {
       '</tr>';
   }
   html += '</tbody></table></div>';
+  html += renderRpValidationSummary(rows);
   $('benchResults').innerHTML = html;
+}
+
+function renderRpValidationSummary(rows) {
+  const validRows = (rows || []).filter(r => !r.error && r.profile === 'rp');
+  if (!validRows.length) return '';
+  const pt = LANG === 'pt';
+  const fmtPct = n => Number.isFinite(n) ? ((n >= 0 ? '+' : '') + n.toFixed(1) + '%') : '—';
+  const fmtN = n => !Number.isFinite(n) ? '—' : Math.abs(n) >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : Math.round(n).toString();
+  const classify = row => {
+    const n = (row.file || '').toLowerCase();
+    if (n.includes('ingol')) return 'ingol';
+    if (n.includes('mazzerin')) return 'mazzerin';
+    if (n.includes('server') && n.includes('rp')) return 'other_spawn';
+    return 'other';
+  };
+  const byClass = {};
+  for (const r of validRows) byClass[classify(r)] = r;
+  let html = '<h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)">' +
+    (pt ? 'relatorio RP: fit, RAW e previsao' : 'RP report: fit, RAW, and prediction') +
+    '</h3>';
+  html += '<div class="val-note" style="margin-bottom:10px">' +
+    (pt
+      ? 'XP/h com bonus e a metrica visual do fit. RAW XP/h e diagnostico extra invertido do log. Kills/h fica interno e nao aparece como alvo de confianca.'
+      : 'Bonus XP/h is the visual fit metric. RAW XP/h is an extra inverted-from-log diagnostic. Kills/h stays internal and is not shown as a trust target.') +
+    '</div>';
+  html += '<div style="overflow-x:auto"><table class="val-compare-table"><thead><tr>' +
+    '<th>' + (pt ? 'teste' : 'test') + '</th><th>log</th><th>XP/h real</th><th>XP/h sim</th><th>' +
+    (pt ? 'erro XP' : 'XP error') + '</th><th>RAW XP/h</th><th>' + (pt ? 'ambiguidade RAW' : 'RAW ambiguity') +
+    '</th><th>' + (pt ? 'histDist' : 'histDist') + '</th><th>' + (pt ? 'modelo' : 'model') + '</th></tr></thead><tbody>';
+  for (const r of validRows) {
+    const cls = classify(r);
+    const test = cls === 'other_spawn' ? 'T2' : 'T1';
+    html += '<tr><td>' + test + '</td><td>' + r.file + '</td><td>' + fmtN(r.data.xphReal) +
+      '</td><td>' + fmtN(r.sim.xph) + '</td><td>' + fmtPct(r.xpErr) + '</td><td>' +
+      (r.data.rawXpDiag && r.data.rawXpDiag.rawXph ? fmtN(r.data.rawXpDiag.rawXph) : '—') +
+      '</td><td>' + (r.data.rawXpDiag ? ((r.data.rawXpDiag.ambiguityRate || 0) * 100).toFixed(1) + '%' : '—') +
+      '</td><td>' + (r.histDist || 0).toFixed(1) + '</td><td>' + r.model + '</td></tr>';
+  }
+  html += '</tbody></table></div>';
+
+  const ingolRows = [byClass.ingol, byClass.mazzerin].filter(Boolean);
+  const t2 = byClass.other_spawn || null;
+  const modelMap = {};
+  for (const r of validRows) {
+    for (const c of r.candidates || []) {
+      if (!modelMap[c.key]) modelMap[c.key] = { key: c.key, label: c.label, vals: {} };
+      modelMap[c.key].vals[classify(r)] = { err: c.err, hist: c.histDist };
+    }
+  }
+  const modelRows = Object.values(modelMap)
+    .filter(m => (m.vals.ingol || m.vals.mazzerin || m.vals.other_spawn))
+    .sort((a, b) => {
+      const avg = m => {
+        const vals = [m.vals.ingol, m.vals.mazzerin, m.vals.other_spawn].filter(Boolean);
+        return vals.length ? mean(vals.map(v => Math.abs(v.err) + (v.hist || 0) * 0.15)) : 999;
+      };
+      return avg(a) - avg(b);
+    });
+  if (modelRows.length) {
+    html += '<h3 style="font-size:14px;font-weight:500;margin:18px 0 10px;color:var(--accent)">Teste 3 - modelos RP por previsao</h3>';
+    html += '<div style="overflow-x:auto"><table class="val-compare-table"><thead><tr><th>Modelo</th><th>T1 erro Ingol</th><th>T1 erro Mazzerin</th><th>T1 hist medio</th><th>T2 erro XP</th><th>T2 hist</th><th>nota</th></tr></thead><tbody>';
+    for (const m of modelRows.slice(0, 12)) {
+      const t1Vals = [m.vals.ingol, m.vals.mazzerin].filter(Boolean);
+      const t1Hist = t1Vals.length ? mean(t1Vals.map(v => v.hist || 0)).toFixed(1) : '—';
+      const methodWarn = /from_log|cadence/i.test(m.key)
+        ? (pt ? 'diagnostico por-log; nao conta como mecanica fixa pura' : 'per-log diagnostic; not pure fixed mechanics')
+        : '';
+      html += '<tr><td>' + m.label + '</td><td>' + (m.vals.ingol ? fmtPct(m.vals.ingol.err) : '—') +
+        '</td><td>' + (m.vals.mazzerin ? fmtPct(m.vals.mazzerin.err) : '—') +
+        '</td><td>' + t1Hist + '</td><td>' + (m.vals.other_spawn ? fmtPct(m.vals.other_spawn.err) : '—') +
+        '</td><td>' + (m.vals.other_spawn ? (m.vals.other_spawn.hist || 0).toFixed(1) : '—') +
+        '</td><td>' + methodWarn + '</td></tr>';
+    }
+    html += '</tbody></table></div>';
+  }
+  if (t2) {
+    html += '<div class="val-note" style="margin-top:10px">' +
+      (pt
+        ? '<strong>Teste 2:</strong> este log e tratado como spawn diferente. Nao compare desempenho bruto entre hunts; use apenas erro de fit/previsao. Se o modelo escolhido usar cadencia do proprio log, ele deve ser lido como diagnostico, nao como generalizacao pura.'
+        : '<strong>Test 2:</strong> this log is treated as a different spawn. Do not compare raw performance across hunts; read only fit/prediction error. If the chosen model uses this log cadence, read it as diagnostic, not pure generalization.') +
+      '</div>';
+  }
+  return html;
 }
 
 async function runValidatorBench() {
@@ -8559,8 +9257,6 @@ async function runValidatorBench() {
       renderValidatorTemporal(data);
       $('valResults').style.display = 'block';
       const result = await runValidatorComparison(data);
-      const realKillsPerHour = data.totalKills / (data.duration / 3600);
-      const simKillsPerHour = result.sim.xph / data.avgXpPerKill;
       const candidateSummary = (result.candidates || [])
         .slice()
         .sort((a, b) => (a.diagnosticScore || a.histDist) - (b.diagnosticScore || b.histDist))
@@ -8574,9 +9270,9 @@ async function runValidatorBench() {
         data,
         sim: result.sim,
         model: result.chosen.label,
+        candidates: result.candidates || [],
         candidateSummary,
         xpErr: data.xphReal ? (result.sim.xph - data.xphReal) / data.xphReal * 100 : 0,
-        killErr: realKillsPerHour ? (simKillsPerHour - realKillsPerHour) / realKillsPerHour * 100 : 0,
         histDist: result.chosen.histDist || 0,
         specialInterval: chosenDiag ? chosenDiag.specialInterval : 0,
         observedBoxTime: chosenDiag ? chosenDiag.observedBoxTime : 0,

@@ -1,0 +1,57 @@
+15:00:00 A sphinx loses 820 hitpoints due to your attack.
+15:00:00 A lamassu loses 835 hitpoints due to your attack.
+15:00:00 A sphinx loses 830 hitpoints due to your attack.
+15:00:00 You gained 9600 experience points.
+15:00:02 A sphinx loses 810 hitpoints due to your attack.
+15:00:02 A lamassu loses 840 hitpoints due to your attack.
+15:00:02 A lamassu loses 825 hitpoints due to your attack.
+15:00:02 You gained 9600 experience points.
+15:00:04 A sphinx loses 1450 hitpoints due to your critical attack.
+15:00:04 A lamassu loses 1480 hitpoints due to your critical attack.
+15:00:04 A sphinx loses 1460 hitpoints due to your critical attack.
+15:00:04 You gained 9600 experience points.
+15:00:08 A sphinx loses 790 hitpoints due to your attack.
+15:00:08 A lamassu loses 815 hitpoints due to your attack.
+15:00:08 You gained 9600 experience points.
+15:00:10 A sphinx loses 805 hitpoints due to your attack.
+15:00:10 A lamassu loses 835 hitpoints due to your attack.
+15:00:10 A sphinx loses 820 hitpoints due to your attack.
+15:00:10 You gained 9600 experience points.
+15:00:12 A sphinx loses 1500 hitpoints due to your critical attack.
+15:00:12 A lamassu loses 1490 hitpoints due to your critical attack.
+15:00:12 A sphinx loses 1475 hitpoints due to your critical attack.
+15:00:12 A lamassu loses 1485 hitpoints due to your critical attack.
+15:00:12 You gained 9600 experience points.
+15:00:16 A sphinx loses 815 hitpoints due to your attack.
+15:00:16 A lamassu loses 830 hitpoints due to your attack.
+15:00:16 A sphinx loses 825 hitpoints due to your attack.
+15:00:16 You gained 9600 experience points.
+15:00:18 A sphinx loses 800 hitpoints due to your attack.
+15:00:18 A lamassu loses 820 hitpoints due to your attack.
+15:00:18 A lamassu loses 835 hitpoints due to your attack.
+15:00:18 You gained 9600 experience points.
+15:00:20 A sphinx loses 1495 hitpoints due to your critical attack.
+15:00:20 A lamassu loses 1510 hitpoints due to your critical attack.
+15:00:20 A sphinx loses 1480 hitpoints due to your critical attack.
+15:00:20 You gained 9600 experience points.
+15:00:24 A sphinx loses 810 hitpoints due to your attack.
+15:00:24 A lamassu loses 825 hitpoints due to your attack.
+15:00:24 A sphinx loses 805 hitpoints due to your attack.
+15:00:24 You gained 9600 experience points.
+15:00:26 A sphinx loses 795 hitpoints due to your attack.
+15:00:26 A lamassu loses 830 hitpoints due to your attack.
+15:00:26 A lamassu loses 820 hitpoints due to your attack.
+15:00:26 You gained 9600 experience points.
+15:00:28 A sphinx loses 1470 hitpoints due to your critical attack.
+15:00:28 A lamassu loses 1505 hitpoints due to your critical attack.
+15:00:28 A sphinx loses 1490 hitpoints due to your critical attack.
+15:00:28 A lamassu loses 1515 hitpoints due to your critical attack.
+15:00:28 You gained 9600 experience points.
+15:00:32 A sphinx loses 820 hitpoints due to your attack.
+15:00:32 A lamassu loses 840 hitpoints due to your attack.
+15:00:32 A sphinx loses 815 hitpoints due to your attack.
+15:00:32 You gained 9600 experience points.
+15:00:34 A sphinx loses 805 hitpoints due to your attack.
+15:00:34 A lamassu loses 825 hitpoints due to your attack.
+15:00:34 A lamassu loses 835 hitpoints due to your attack.
+15:00:34 You gained 9600 experience points.
