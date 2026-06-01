@@ -3851,7 +3851,13 @@ function renderValidatorTemporal(data, simSeries) {
   });
 
   const compLabels = data.isPaladin ? ['arrow', 'spell', 'rune', 'grenade'] : (data.isMage ? ['auto', 'spell', 'ue'] : ['auto', 'reflect', 'spell']);
-  const compColors = ['#F59E0B', '#00C49A', '#38BDF8', '#EF4444', '#8BA4C2'];
+  const compColors = ['#F59E0B', '#22C55E', '#60A5FA', '#F87171', '#8BA4C2'];
+  const allCompVals = [
+    ...real.flatMap(p => compLabels.map(k => (p.components && p.components[k]) || 0)),
+    ...sim.flatMap(p => compLabels.map(k => (p.components && p.components[k]) || 0))
+  ];
+  const compMaxY = Math.ceil(Math.max(1, ...allCompVals) * 1.1);
+  const compScales = () => ({ ...makeTemporalScales(), y: { ...makeTemporalScales().y, max: compMaxY } });
   drawChart('valTimelineComponents', chart => { valTimelineComponentsChart = chart; }, {
     type: 'line',
     data: {
@@ -3861,12 +3867,13 @@ function renderValidatorTemporal(data, simSeries) {
         data: real.map(p => p.components && p.components[key] ? p.components[key] : 0),
         borderColor: compColors[idx],
         backgroundColor: compColors[idx],
-        borderWidth: 1,
+        borderWidth: 2,
         pointRadius: 0,
-        tension: .2
+        tension: 0.35,
+        fill: false
       }))
     },
-    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_components'), color: '#DDE6F3' } }, scales: makeTemporalScales() }
+    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_components'), color: '#DDE6F3' } }, scales: compScales() }
   });
 
   drawChart('valTimelineSimComponents', chart => { valTimelineSimComponentsChart = chart; }, {
@@ -3878,12 +3885,13 @@ function renderValidatorTemporal(data, simSeries) {
         data: sim.map(p => p.components && p.components[key] ? p.components[key] : 0),
         borderColor: compColors[idx],
         backgroundColor: compColors[idx],
-        borderWidth: 1,
+        borderWidth: 2,
         pointRadius: 0,
-        tension: .2
+        tension: 0.35,
+        fill: false
       })) : []
     },
-    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_sim_components'), color: '#DDE6F3' } }, scales: makeTemporalScales() }
+    options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_sim_components'), color: '#DDE6F3' } }, scales: compScales() }
   });
 
   drawChart('valTimelineDamage', chart => { valTimelineDamageChart = chart; }, {
@@ -3920,6 +3928,18 @@ function renderValidatorTemporal(data, simSeries) {
       scales: makeTemporalScales()
     }
   });
+  {
+    const temporalCharts = [
+      valTimelineHitsChart, valTimelineKillsChart, valTimelineXpChart,
+      valTimelineComponentsChart, valTimelineSimComponentsChart,
+      valTimelineDamageChart, valImpactAnalyserChart
+    ].filter(c => c && c.scales && c.scales.y);
+    const maxW = Math.max(...temporalCharts.map(c => c.scales.y.width));
+    temporalCharts.forEach(c => {
+      c.options.scales.y.afterFit = s => { s.width = maxW; };
+      c.update('none');
+    });
+  }
   renderTemporalSummary(data, sim);
 }
 

@@ -113,6 +113,12 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const xpEventsAll = events.filter(e => e.type === 'xp');
   const runeEventsAll = events.filter(e => e.type === 'rune');
 
+  // Overkill por hit: um ataque mata o mob quando o evento seguinte (ordem do log,
+  // via seq global) é um ganho de XP. Dano capado pela vida restante. Read-only:
+  // só anota o flag, não muda nenhuma classificação aqui.
+  const xpSeqSet = new Set(xpEventsAll.map(e => e.seq));
+  for (const e of attackEventsAll) e.overkill = xpSeqSet.has(e.seq + 1);
+
   // Validação: precisa ter ataques E mortes pra simular
   if (attackEventsAll.length < 20 || xpEventsAll.length < 5) {
     return {

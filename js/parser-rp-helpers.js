@@ -307,12 +307,111 @@ function rpApplyGrenadePositionBlock(lines, rotationEnd, boundaryInfo = null) {
   return { ambiguous: 0, delaySpillover: hasDelaySpillover };
 }
 
+// Classificador arrow→spell→granada por ASSINATURA DE DANO (método do usuário, validado
+// contra gabarito de 24 turnos em tools/rp-gabarito.mjs — 24/24).
+// Regras:
+//  • Mesmo mob + mesmo componente = MESMO dano EXATO (spell/granada são holy, sem armadura).
+//    Arrow é físico → varia por armadura. ⇒ "âncora de mob" = 1º dano visto numa banda; um hit
+//    quebra a banda se (não-overkill) E (mob já visto na banda) E (dano ≠ âncora).
+//  • Backward-scan: banda1 (do fim) = granada (se explode) ou spell; banda2 = spell; resto = arrow.
+//  • crit-run: troca crit↔não-crit é fronteira de componente (2 trocas = arrow/spell/granada;
+//    1 troca com sufixo-crit = granada crit no fim).
+//  • overkill (dano capado) = ambíguo, herda posição (não quebra banda).
+//  • 2º segundo desambigua granada quando spell e granada têm dano-base holy ~igual.
+// `lines` aqui têm {dmg, mob, type, overkill, holyOriginal, ts}. Retorna {arrowEnd, spellEnd}.
+function rpClassifyTurnByBands(lines, mark) {
+  const n = lines.length;
+  if (n === 0) return { arrowEnd: 0, spellEnd: 0, reason: 'bands_empty' };
+  if (mark === 'cast') return { arrowEnd: n, spellEnd: n, reason: 'bands_cast' };
+  const EQ = 2;
+  const eq = (a, b) => Math.abs(a - b) <= EQ;
+  const val = i => lines[i].dmg;
+  const mobOf = i => lines[i].mob || '';
+  const isOK = i => !!lines[i].overkill;
+
+  const critChanges = [];
+  for (let i = 1; i < n; i++) if ((lines[i].type === 'crit') !== (lines[i - 1].type === 'crit')) critChanges.push(i);
+
+  function bandStart(hi) {
+    const anchor = Object.create(null);
+    let start = hi;
+    for (let i = hi - 1; i >= 0; i--) {
+      if (isOK(i)) { start = i; continue; }
+      const m = mobOf(i), v = val(i);
+      if (anchor[m] === undefined) { anchor[m] = v; start = i; continue; }
+      if (eq(v, anchor[m])) { start = i; continue; }
+      break;
+    }
+    return start;
+  }
+  function sustained(lo, hi) {
+    const c = Object.create(null);
+    for (let i = lo; i < hi; i++) { if (isOK(i)) continue; const m = mobOf(i); (c[m] = c[m] || []).push(val(i)); }
+    for (const m in c) { const ds = c[m]; for (let a = 0; a < ds.length; a++) for (let b = a + 1; b < ds.length; b++) if (eq(ds[a], ds[b])) return true; }
+    return false;
+  }
+
+  // segundo (timestamp) em que cada hit cai: 0 = mesmo segundo do 1º hit; ≥1 = depois.
+  const t0ts = lines[0].ts;
+  const secStartFrom = (lo) => { for (let i = lo; i < n; i++) if (Number.isFinite(lines[i].ts) && lines[i].ts > t0ts) return i; return -1; };
+
+  if (critChanges.length === 2) return { arrowEnd: critChanges[0], spellEnd: critChanges[1], reason: 'crit_run_3blocks' };
+  if (critChanges.length === 1) {
+    // 1 troca de crit-run → dois runs de crit-state. Como há 3 componentes possíveis
+    // (arrow→spell→granada) e só 1 troca, UM dos dois runs contém 2 componentes:
+    //  (a) prefixo = arrow+spell (mesma crit-state), sufixo = granada — ex. t158;
+    //  (b) prefixo = arrow, sufixo = spell+granada (mesma crit-state) — ex. t2.
+    const c0 = critChanges[0];
+    if (mark === 'explode') {
+      const aEndPrefix = bandStart(c0);
+      if (aEndPrefix < c0 && sustained(aEndPrefix, c0)) {
+        // (a) prefixo splittável em arrow+spell; sufixo [c0,n) = granada.
+        return { arrowEnd: aEndPrefix, spellEnd: c0, reason: 'crit_prefix_arrowspell_grenade' };
+      }
+      // (b) prefixo = arrow; sufixo [c0,n) = spell+granada → separa por 2º segundo (ou banda).
+      const sec = secStartFrom(c0);
+      let sEnd;
+      if (sec > c0) sEnd = sec;
+      else { sEnd = bandStart(n); if (sEnd <= c0 || !sustained(sEnd, n)) sEnd = n; }
+      return { arrowEnd: c0, spellEnd: sEnd, reason: 'crit_arrow_then_spell_grenade' };
+    }
+    // normal (sem granada): arrow | spell na troca de crit.
+    return { arrowEnd: c0, spellEnd: n, reason: 'crit_run_arrow_spell' };
+  }
+
+  const b1 = bandStart(n);
+  if (!sustained(b1, n)) return { arrowEnd: n, spellEnd: n, reason: 'bands_all_arrow' };
+  const b2 = b1 > 0 ? bandStart(b1) : 0;
+
+  let arrowEnd, spellEnd;
+  if (mark === 'explode') {
+    spellEnd = b1; arrowEnd = b2;
+    const t0 = lines[0].ts; let sec = -1;
+    for (let i = 0; i < n; i++) if (Number.isFinite(lines[i].ts) && lines[i].ts > t0) { sec = i; break; }
+    if (sec > 0 && sec > arrowEnd && sec <= n) {
+      const med = (lo, hi) => { const a = []; for (let i = lo; i < hi; i++) if (!isOK(i) && Number.isFinite(lines[i].holyOriginal)) a.push(lines[i].holyOriginal); a.sort((x, y) => x - y); return a.length ? a[a.length >> 1] : 0; };
+      const g = med(b1, n), s = med(b2, b1);
+      if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
+    }
+  } else {
+    spellEnd = n; arrowEnd = b1;
+  }
+  arrowEnd = Math.max(0, Math.min(arrowEnd, spellEnd, n));
+  spellEnd = Math.max(arrowEnd, Math.min(spellEnd, n));
+  return { arrowEnd, spellEnd, reason: mark === 'explode' ? 'bands_arrow_spell_grenade' : 'bands_arrow_spell' };
+}
+
 function classifyRpTurnComponents(turn, stat, mark, critMultObserved = 0, preyMult = 1, runeEvents = []) {
   const ordered = getOrderedRpOffensiveHits(turn);
   const total = ordered.length;
-  const runeAnchor = findRpRuneAnchor(turn, runeEvents);
+  const rawRuneAnchor = findRpRuneAnchor(turn, runeEvents);
+  // Runa FALSA: o log tem a linha "Using one of N runes" mas a runa não saiu — o que veio
+  // foi spell + granada. Sinal: o turno foi detectado como `explode` (granada presente).
+  // Como rune legítimo NUNCA é explode (rotação = arrow + [runa OU spell], runa sai no mesmo
+  // segundo; granada explode no 2º), descartamos o runeAnchor e tratamos como granada normal.
+  const runeAnchor = (rawRuneAnchor && mark === 'explode') ? null : rawRuneAnchor;
   const turnKind = runeAnchor ? 'rune' : 'spell';
-  const turnConflict = runeAnchor && mark === 'explode' ? 'explode_with_rune' : '';
+  const turnConflict = (rawRuneAnchor && mark === 'explode') ? 'explode_with_rune' : '';
   const canExplode = mark === 'explode' && !runeAnchor;
   const secondComponent = turnKind === 'rune' ? 'rune' : 'spell';
   const secondElement = turnKind === 'rune' ? (runeAnchor.element || 'unknown') : 'holy';
@@ -347,6 +446,7 @@ function classifyRpTurnComponents(turn, stat, mark, critMultObserved = 0, preyMu
       revertedDmg,
       type: e.type,
       isPrey: !!e.isPrey,
+      overkill: !!e.overkill,
       physicalOriginal: mods ? normalizeSeenDamageForElement(ev, 'physicalDmgMod', critMultObserved, preyMult) : null,
       holyOriginal: mods ? normalizeSeenDamageForElement(ev, 'holyDmgMod', critMultObserved, preyMult) : null,
       fireOriginal: mods ? normalizeSeenDamageForElement(ev, 'fireDmgMod', critMultObserved, preyMult) : null,
@@ -381,57 +481,33 @@ function classifyRpTurnComponents(turn, stat, mark, critMultObserved = 0, preyMu
 
   let spellEnd = seedSpellEnd;
   const minArrowEnd = runeAnchor ? Math.min(spellEnd, runeAnchor.protectedCount || 0) : 0;
-  const critPattern = rpDetectCritPattern(lines, spellEnd);
   let arrowEnd = 0;
   let boundaryReason = 'order_fallback';
   let boundaryConfidence = 'weak';
-  let needsSameMobSpellMatch = false;
+
   if (runeAnchor) {
+    // Turno de rune: caminho preservado (arrow protegido + bloco rune).
     arrowEnd = minArrowEnd;
+    spellEnd = total;
     boundaryReason = 'rune_turn_boundary';
     boundaryConfidence = 'strong';
     rpApplyArrowSecondBlocks(lines, arrowEnd, spellEnd, secondComponent, secondElement, boundaryReason, 'rune_turn', boundaryConfidence);
-  } else if (critPattern) {
-    arrowEnd = Math.max(critPattern.arrowEnd, minArrowEnd);
-    boundaryReason = critPattern.kind;
-    boundaryConfidence = 'strong';
-    rpApplyArrowSecondBlocks(lines, arrowEnd, spellEnd, secondComponent, secondElement, critPattern.kind, 'crit_pattern', boundaryConfidence);
-  } else {
-    const boundary = rpFindOrderBoundary(lines, spellEnd);
-    arrowEnd = Math.max(boundary.arrowEnd, minArrowEnd);
-    boundaryReason = boundary.reason === 'order_damage_boundary' ? 'crit_not_discriminating' : boundary.reason;
-    boundaryConfidence = boundary.confidence;
-    rpApplyArrowSecondBlocks(lines, arrowEnd, spellEnd, secondComponent, secondElement, boundaryReason, 'damage_local', boundaryConfidence);
-    needsSameMobSpellMatch = true;
-  }
-
-  for (let i = spellEnd; i < total; i++) {
-    rpSetLineComponent(lines[i], 'grenade', 'grenade_residual_order', 'damage_local', 'holy');
-  }
-  for (const line of lines) line.beforeComponent = line.correctedComponent;
-  if (needsSameMobSpellMatch) {
-    const adjusted = rpFindSameMobSecondBoundary(lines, arrowEnd, spellEnd, minArrowEnd, secondComponent, secondOriginalKey);
-    if (adjusted.shifted) {
-      arrowEnd = Math.max(adjusted.arrowEnd, minArrowEnd);
-      boundaryReason = adjusted.reason;
-      boundaryConfidence = 'strong';
-      rpApplyArrowSecondBlocks(lines, arrowEnd, spellEnd, secondComponent, secondElement, boundaryReason, 'damage_local', boundaryConfidence);
+    for (const line of lines) line.beforeComponent = line.correctedComponent;
+    if (turnConflict) {
+      for (const line of lines) { line.grenadeBoundaryReason = turnConflict; line.grenadeBoundaryConfidence = 'conflict'; }
     }
-  }
-
-  const grenadeBoundary = resolveRpSpellGrenadeBoundary(lines, arrowEnd, seedSpellEnd, canExplode ? mark : null);
-  if (canExplode) {
-    spellEnd = grenadeBoundary.spellEnd;
-    rpApplyArrowSecondBlocks(lines, arrowEnd, spellEnd, secondComponent, secondElement, boundaryReason, boundaryConfidence === 'strong' && critPattern ? 'crit_pattern' : 'damage_local', boundaryConfidence);
-  }
-
-  if (canExplode) {
-    const grenadeDiag = rpApplyGrenadePositionBlock(lines, spellEnd, grenadeBoundary);
-    diag.ambiguous += grenadeDiag.ambiguous || 0;
-  } else if (turnConflict) {
-    for (const line of lines) {
-      line.grenadeBoundaryReason = turnConflict;
-      line.grenadeBoundaryConfidence = 'conflict';
+  } else {
+    // Caminho por assinatura de dano (bandas) — validado 24/24 contra gabarito.
+    const bands = rpClassifyTurnByBands(lines, mark);
+    arrowEnd = bands.arrowEnd;
+    spellEnd = bands.spellEnd;
+    boundaryReason = bands.reason;
+    boundaryConfidence = 'strong';
+    rpApplyArrowSecondBlocks(lines, arrowEnd, spellEnd, secondComponent, secondElement, boundaryReason, 'damage_local', boundaryConfidence);
+    for (const line of lines) line.beforeComponent = line.correctedComponent;
+    if (spellEnd < total) {
+      const grenadeDiag = rpApplyGrenadePositionBlock(lines, spellEnd, { reason: boundaryReason, confidence: 'strong' });
+      diag.ambiguous += grenadeDiag.ambiguous || 0;
     }
   }
 

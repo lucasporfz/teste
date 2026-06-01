@@ -1,0 +1,995 @@
+17:35:21 You were healed for 74 hitpoints.
+17:35:21 You gained 24 mana.
+17:35:21 A bulltaur brute loses 683 hitpoints due to your attack. 
+17:35:21 You were healed for 66 hitpoints.
+17:35:21 You gained 22 mana.
+17:35:21 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:21 You lose 227 hitpoints due to an attack by a bulltaur brute. 
+17:35:21 You lose 510 hitpoints due to an attack by a bulltaur brute. 
+17:35:21 You healed yourself for 691 hitpoints.
+17:35:22 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:22 You lose 248 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:22 You lose 323 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:22 You lose 242 hitpoints due to an attack by a bulltaur brute. 
+17:35:22 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:22 You lose 124 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:22 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:22 You lose 143 hitpoints due to an attack by a bulltaur brute. 
+17:35:22 You lose 465 hitpoints due to an attack by a bulltaur brute. 
+17:35:22 You healed yourself for 780 hitpoints.
+17:35:22 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:22 You lose 52 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:22 You lose 342 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:23 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:23 You lose 141 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:23 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:23 You lose 72 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:23 You lose 297 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:23 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:23 You lose 123 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:23 You lose 348 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:23 A bulltaur alchemist loses 1065 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:23 You were healed for 1044 hitpoints.
+17:35:23 You gained 280 mana.
+17:35:23 You gained 4680 experience points (Animus mastery).
+17:35:23 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:23 You lose 181 hitpoints due to an attack by a bulltaur brute. 
+17:35:23 You lose 281 hitpoints due to an attack by a bulltaur brute. 
+17:35:23 A bulltaur forgepriest loses 1795 hitpoints due to your attack. 
+17:35:23 You were healed for 209 hitpoints.
+17:35:23 You gained 67 mana.
+17:35:23 A bulltaur forgepriest loses 1770 hitpoints due to your attack. 
+17:35:23 You were healed for 206 hitpoints.
+17:35:23 You gained 66 mana.
+17:35:23 A bulltaur brute loses 1599 hitpoints due to your attack. 
+17:35:23 You were healed for 186 hitpoints.
+17:35:23 You gained 60 mana.
+17:35:23 A bulltaur alchemist loses 514 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:23 You were healed for 234 hitpoints.
+17:35:23 You gained 63 mana.
+17:35:23 You gained 4680 experience points (Animus mastery).
+17:35:23 A bulltaur alchemist loses 1946 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:23 You were healed for 236 hitpoints.
+17:35:23 You gained 64 mana.
+17:35:23 A bulltaur forgepriest loses 1784 hitpoints due to your attack. 
+17:35:23 You were healed for 208 hitpoints.
+17:35:23 You gained 67 mana.
+17:35:23 A bulltaur brute loses 1595 hitpoints due to your attack. 
+17:35:23 You were healed for 186 hitpoints.
+17:35:23 You gained 60 mana.
+17:35:23 You lose 332 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:23 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:23 You lose 85 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:23 You healed yourself for 763 hitpoints.
+17:35:24 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:24 You lose 51 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 You lose 311 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:24 You lose 96 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 You lose 348 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 You lose 496 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:24 You lose 233 hitpoints due to an attack by a bulltaur brute. 
+17:35:24 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:24 You lose 303 hitpoints due to an attack by a bulltaur brute. 
+17:35:24 You lose 500 hitpoints due to an attack by a bulltaur brute. 
+17:35:24 You healed yourself for 708 hitpoints.
+17:35:24 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:24 You lose 163 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 You lose 307 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:24 You lose 480 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:25 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:25 You lose 166 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:25 You lose 328 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:25 You lose 399 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:25 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:25 You lose 175 hitpoints due to an attack by a bulltaur brute. 
+17:35:25 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:25 A bulltaur forgepriest loses 615 hitpoints due to your attack. 
+17:35:25 You were healed for 313 hitpoints.
+17:35:25 You gained 100 mana.
+17:35:25 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:25 You lose 151 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:25 You lose 349 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:26 You lose 158 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 You lose 331 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 You lose 492 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 A bulltaur forgepriest loses 864 hitpoints due to your attack. 
+17:35:26 You were healed for 94 hitpoints.
+17:35:26 You gained 30 mana.
+17:35:26 A bulltaur brute loses 753 hitpoints due to your attack. 
+17:35:26 You were healed for 82 hitpoints.
+17:35:26 You gained 27 mana.
+17:35:26 A bulltaur forgepriest loses 853 hitpoints due to your attack. 
+17:35:26 You were healed for 93 hitpoints.
+17:35:26 You gained 30 mana.
+17:35:26 A bulltaur brute loses 538 hitpoints due to your attack. 
+17:35:26 You were healed for 84 hitpoints.
+17:35:26 You gained 27 mana.
+17:35:26 You gained 4888 experience points (Animus mastery).
+17:35:26 A bulltaur forgepriest loses 857 hitpoints due to your attack. 
+17:35:26 You were healed for 93 hitpoints.
+17:35:26 You gained 30 mana.
+17:35:26 A bulltaur alchemist loses 38 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:26 You were healed for 104 hitpoints.
+17:35:26 You gained 28 mana.
+17:35:26 You gained 4680 experience points (Animus mastery).
+17:35:26 A bulltaur forgepriest loses 851 hitpoints due to your attack. 
+17:35:26 You were healed for 92 hitpoints.
+17:35:26 You gained 30 mana.
+17:35:26 A bulltaur brute loses 777 hitpoints due to your attack. 
+17:35:26 You were healed for 84 hitpoints.
+17:35:26 You gained 27 mana.
+17:35:26 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:26 You lose 187 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 You lose 285 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 You lose 354 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 You healed yourself for 726 hitpoints.
+17:35:26 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:26 You lose 221 hitpoints due to an attack by a bulltaur brute. 
+17:35:26 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:26 You lose 125 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:26 You lose 327 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:27 You healed yourself for 733 hitpoints.
+17:35:27 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:27 You lose 141 hitpoints due to an attack by a bulltaur brute. 
+17:35:27 You lose 263 hitpoints due to an attack by a bulltaur brute. 
+17:35:27 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:27 You lose 77 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:27 You lose 296 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:28 You lose 123 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 You lose 300 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 You lose 461 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 A bulltaur brute loses 744 hitpoints due to your attack. 
+17:35:28 You were healed for 378 hitpoints.
+17:35:28 You gained 121 mana.
+17:35:28 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:28 You lose 157 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 You lose 297 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 You lose 469 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 A bulltaur forgepriest loses 803 hitpoints due to your attack. 
+17:35:28 You were healed for 102 hitpoints.
+17:35:28 You gained 33 mana.
+17:35:28 A bulltaur brute loses 694 hitpoints due to your attack. 
+17:35:28 You were healed for 89 hitpoints.
+17:35:28 You gained 29 mana.
+17:35:28 A bulltaur forgepriest loses 789 hitpoints due to your attack. 
+17:35:28 You were healed for 101 hitpoints.
+17:35:28 You gained 33 mana.
+17:35:28 A bulltaur forgepriest loses 787 hitpoints due to your attack. 
+17:35:28 You were healed for 100 hitpoints.
+17:35:28 You gained 32 mana.
+17:35:28 A bulltaur brute loses 694 hitpoints due to your attack. 
+17:35:28 You were healed for 89 hitpoints.
+17:35:28 You gained 29 mana.
+17:35:28 A bulltaur forgepriest loses 389 hitpoints due to your attack. 
+17:35:28 You were healed for 101 hitpoints.
+17:35:28 You gained 33 mana.
+17:35:28 You gained 6656 experience points (Animus mastery).
+17:35:28 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:28 You lose 126 hitpoints due to an attack by a bulltaur brute. 
+17:35:28 You lose 254 hitpoints due to an attack by a bulltaur brute. 
+17:35:28 You healed yourself for 704 hitpoints.
+17:35:28 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:28 You lose 121 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:28 You lose 304 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:29 Using one of 1983 strong mana potions...
+17:35:29 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:29 You lose 371 hitpoints due to an attack by a bulltaur brute. 
+17:35:29 You healed yourself for 687 hitpoints.
+17:35:29 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:29 You lose 55 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:29 You lose 347 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:29 You lose 445 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:30 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:30 You lose 51 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:30 You lose 334 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:30 You lose 402 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:30 A bulltaur forgepriest loses 882 hitpoints due to your attack. 
+17:35:30 You were healed for 448 hitpoints.
+17:35:30 You gained 144 mana.
+17:35:30 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:30 You lose 228 hitpoints due to an attack by a bulltaur brute. 
+17:35:30 A bulltaur brute loses 1456 hitpoints due to your attack. 
+17:35:30 You were healed for 207 hitpoints.
+17:35:30 You gained 67 mana.
+17:35:30 A bulltaur brute loses 278 hitpoints due to your attack. 
+17:35:30 You were healed for 206 hitpoints.
+17:35:30 You gained 66 mana.
+17:35:30 You gained 4888 experience points (Animus mastery).
+17:35:30 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:30 A bulltaur forgepriest loses 1628 hitpoints due to your attack. 
+17:35:30 You were healed for 232 hitpoints.
+17:35:30 You gained 75 mana.
+17:35:30 A bulltaur forgepriest loses 1605 hitpoints due to your attack. 
+17:35:30 You were healed for 229 hitpoints.
+17:35:30 You gained 74 mana.
+17:35:30 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:30 A bulltaur forgepriest loses 201 hitpoints due to your attack. 
+17:35:30 You were healed for 230 hitpoints.
+17:35:30 You gained 74 mana.
+17:35:30 You gained 6656 experience points (Animus mastery).
+17:35:31 You healed yourself for 776 hitpoints.
+17:35:31 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:31 You lose 27 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:31 You lose 340 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:32 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:32 You lose 95 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:32 You lose 307 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:32 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:32 You lose 243 hitpoints due to an attack by a bulltaur brute. 
+17:35:32 You lose 483 hitpoints due to an attack by a bulltaur brute. 
+17:35:32 A bulltaur brute loses 721 hitpoints due to your attack. 
+17:35:32 You were healed for 366 hitpoints.
+17:35:32 You gained 118 mana.
+17:35:33 A bulltaur brute loses 1349 hitpoints due to your attack. 
+17:35:33 You were healed for 453 hitpoints.
+17:35:33 You gained 145 mana.
+17:35:33 You gained 4888 experience points (Animus mastery).
+17:35:33 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:33 A bulltaur forgepriest loses 487 hitpoints due to your attack. 
+17:35:33 You were healed for 497 hitpoints.
+17:35:33 You gained 160 mana.
+17:35:33 You gained 6656 experience points (Animus mastery).
+17:35:33 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:33 A bulltaur forgepriest loses 907 hitpoints due to your attack. 
+17:35:33 You were healed for 502 hitpoints.
+17:35:33 You gained 161 mana.
+17:35:33 You gained 6656 experience points (Animus mastery).
+17:35:34 You healed yourself for 740 hitpoints.
+17:35:36 You healed yourself for 785 hitpoints.
+17:35:36 Using one of 1983 strong mana potions...
+17:35:36 You gained 136 mana.
+17:35:37 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:37 You lose 297 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:37 A bulltaur alchemist loses 829 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:37 You were healed for 440 hitpoints.
+17:35:37 You gained 118 mana.
+17:35:37 A bulltaur alchemist loses 757 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:37 You were healed for 221 hitpoints.
+17:35:37 You gained 60 mana.
+17:35:37 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:37 A bulltaur forgepriest loses 704 hitpoints due to your attack. 
+17:35:37 You were healed for 197 hitpoints.
+17:35:37 You gained 64 mana.
+17:35:37 Using one of 1982 strong mana potions...
+17:35:37 You lose 295 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:37 You lose 245 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:38 You healed yourself for 689 hitpoints.
+17:35:39 You healed yourself for 740 hitpoints.
+17:35:39 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:39 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:39 You lose 54 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:39 A bulltaur forgepriest loses 524 hitpoints due to your attack. 
+17:35:39 You were healed for 266 hitpoints.
+17:35:39 You gained 86 mana.
+17:35:39 You lose 245 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:40 You lose 291 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:40 A bulltaur brute loses 626 hitpoints due to your attack. 
+17:35:40 You were healed for 175 hitpoints.
+17:35:40 You gained 57 mana.
+17:35:40 A bulltaur alchemist loses 752 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:40 You were healed for 220 hitpoints.
+17:35:40 You gained 59 mana.
+17:35:40 Using one of 1982 strong mana potions...
+17:35:40 You gained 174 mana.
+17:35:40 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:40 You lose 106 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:40 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:40 You lose 101 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:40 You healed yourself for 674 hitpoints.
+17:35:40 You lose 294 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:40 You lose 299 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:41 You lose 265 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:41 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:41 You lose 128 hitpoints due to an attack by a bulltaur brute. 
+17:35:41 You lose 163 hitpoints due to an attack by a bulltaur brute. 
+17:35:41 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:41 You lose 91 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:41 You lose 325 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:41 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:41 You lose 60 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:41 You lose 301 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:41 You healed yourself for 712 hitpoints.
+17:35:42 A bulltaur forgepriest loses 1461 hitpoints due to your critical attack. 
+17:35:42 You were healed for 742 hitpoints.
+17:35:42 You gained 238 mana.
+17:35:42 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You lose 118 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:42 You lose 123 hitpoints due to an attack by a bulltaur brute. 
+17:35:42 You lose 385 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You lose 258 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 A bulltaur alchemist loses 2158 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You were healed for 244 hitpoints.
+17:35:42 You gained 66 mana.
+17:35:42 A bulltaur brute loses 1799 hitpoints due to your attack. 
+17:35:42 You were healed for 195 hitpoints.
+17:35:42 You gained 63 mana.
+17:35:42 A bulltaur brute loses 1799 hitpoints due to your attack. 
+17:35:42 You were healed for 195 hitpoints.
+17:35:42 You gained 63 mana.
+17:35:42 A bulltaur alchemist loses 2174 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You were healed for 245 hitpoints.
+17:35:42 You gained 66 mana.
+17:35:42 A bulltaur alchemist loses 2172 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You were healed for 245 hitpoints.
+17:35:42 You gained 66 mana.
+17:35:42 A bulltaur forgepriest loses 1999 hitpoints due to your attack. 
+17:35:42 You were healed for 216 hitpoints.
+17:35:42 You gained 70 mana.
+17:35:42 A bulltaur forgepriest loses 2002 hitpoints due to your attack. 
+17:35:42 You were healed for 217 hitpoints.
+17:35:42 You gained 70 mana.
+17:35:42 A bulltaur alchemist loses 2172 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You were healed for 245 hitpoints.
+17:35:42 You gained 66 mana.
+17:35:42 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You lose 70 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:42 You lose 66 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 You lose 354 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 You lose 332 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:42 You healed yourself for 723 hitpoints.
+17:35:42 You lose 327 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:43 You lose 377 hitpoints due to an attack by a bulltaur brute. 
+17:35:43 You lose 301 hitpoints due to an attack by a bulltaur brute. 
+17:35:43 You lose 292 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:43 You lose 141 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You lose 348 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You lose 463 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:43 You lose 96 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You lose 289 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You lose 466 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You lose 325 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You lose 410 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:43 You healed yourself for 766 hitpoints.
+17:35:43 You lose 290 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:44 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You lose 139 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:44 You lose 105 hitpoints due to an attack by a bulltaur brute. 
+17:35:44 You lose 478 hitpoints due to an attack by a bulltaur brute. 
+17:35:44 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You lose 67 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 You lose 328 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 You lose 343 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 A bulltaur brute loses 553 hitpoints due to your attack. 
+17:35:44 You were healed for 281 hitpoints.
+17:35:44 You gained 90 mana.
+17:35:44 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You lose 181 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You lose 35 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 You lose 372 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:44 A bulltaur alchemist loses 1579 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You were healed for 142 hitpoints.
+17:35:44 You gained 38 mana.
+17:35:44 A bulltaur brute loses 1568 hitpoints due to your critical attack. (savage blow charm)
+17:35:44 You were healed for 135 hitpoints.
+17:35:44 You gained 44 mana.
+17:35:44 A bulltaur brute loses 1568 hitpoints due to your critical attack. (savage blow charm)
+17:35:44 You were healed for 135 hitpoints.
+17:35:44 You gained 44 mana.
+17:35:44 A bulltaur alchemist loses 1531 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You were healed for 138 hitpoints.
+17:35:44 You gained 37 mana.
+17:35:44 A bulltaur alchemist loses 1547 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You were healed for 139 hitpoints.
+17:35:44 You gained 38 mana.
+17:35:44 A bulltaur forgepriest loses 1447 hitpoints due to your critical attack. 
+17:35:44 You were healed for 125 hitpoints.
+17:35:44 You gained 40 mana.
+17:35:44 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:44 A bulltaur forgepriest loses 1437 hitpoints due to your critical attack. 
+17:35:44 You were healed for 124 hitpoints.
+17:35:44 You gained 40 mana.
+17:35:44 A bulltaur alchemist loses 1556 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You were healed for 140 hitpoints.
+17:35:44 You gained 38 mana.
+17:35:44 A bulltaur alchemist loses 1579 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:44 You were healed for 142 hitpoints.
+17:35:44 You gained 38 mana.
+17:35:44 A bulltaur forgepriest loses 1402 hitpoints due to your critical attack. 
+17:35:44 You were healed for 121 hitpoints.
+17:35:44 You gained 39 mana.
+17:35:44 A bulltaur forgepriest loses 1437 hitpoints due to your critical attack. 
+17:35:44 You were healed for 124 hitpoints.
+17:35:44 You gained 40 mana.
+17:35:44 A bulltaur forgepriest loses 1409 hitpoints due to your critical attack. 
+17:35:44 You were healed for 122 hitpoints.
+17:35:44 You gained 39 mana.
+17:35:44 A bulltaur forgepriest loses 1403 hitpoints due to your critical attack. 
+17:35:44 You were healed for 121 hitpoints.
+17:35:44 You gained 39 mana.
+17:35:44 You healed yourself for 786 hitpoints.
+17:35:44 You lose 353 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:45 You lose 299 hitpoints due to an attack by a bulltaur brute. 
+17:35:45 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:45 You lose 80 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 You lose 288 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 You lose 341 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:45 You lose 75 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 You lose 313 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 You lose 330 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:45 You lose 461 hitpoints due to an attack by a bulltaur brute. 
+17:35:45 You healed yourself for 769 hitpoints.
+17:35:46 You lose 299 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:46 You lose 491 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:46 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You lose 83 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 You lose 336 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 You lose 387 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:46 You lose 211 hitpoints due to an attack by a bulltaur brute. 
+17:35:46 You lose 507 hitpoints due to an attack by a bulltaur brute. 
+17:35:46 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You lose 178 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 You lose 327 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You lose 92 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You lose 165 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 You lose 325 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:46 A bulltaur brute loses 656 hitpoints due to your attack. 
+17:35:46 You were healed for 333 hitpoints.
+17:35:46 You gained 107 mana.
+17:35:46 A bulltaur alchemist loses 945 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You were healed for 107 hitpoints.
+17:35:46 You gained 29 mana.
+17:35:46 A bulltaur brute loses 769 hitpoints due to your attack. 
+17:35:46 You were healed for 84 hitpoints.
+17:35:46 You gained 27 mana.
+17:35:46 A bulltaur brute loses 770 hitpoints due to your attack. 
+17:35:46 You were healed for 84 hitpoints.
+17:35:46 You gained 27 mana.
+17:35:46 A bulltaur alchemist loses 942 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You were healed for 107 hitpoints.
+17:35:46 You gained 29 mana.
+17:35:46 A bulltaur alchemist loses 205 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You were healed for 104 hitpoints.
+17:35:46 You gained 28 mana.
+17:35:46 You gained 4680 experience points (Animus mastery).
+17:35:46 A bulltaur forgepriest loses 845 hitpoints due to your attack. 
+17:35:46 You were healed for 92 hitpoints.
+17:35:46 You gained 30 mana.
+17:35:46 A bulltaur forgepriest loses 853 hitpoints due to your attack. 
+17:35:46 You were healed for 93 hitpoints.
+17:35:46 You gained 30 mana.
+17:35:46 A bulltaur alchemist loses 945 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:46 You were healed for 107 hitpoints.
+17:35:46 You gained 29 mana.
+17:35:46 You healed yourself for 704 hitpoints.
+17:35:46 You lose 288 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:47 You dodged an attack. (Ruse)
+17:35:47 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:47 You lose 128 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 You lose 353 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:47 You lose 25 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:47 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:47 You lose 188 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 You lose 300 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 You lose 349 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 You lose 457 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:47 You lose 343 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:48 You healed yourself for 779 hitpoints.
+17:35:48 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You lose 88 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:48 You lose 339 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:48 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:48 You lose 241 hitpoints due to an attack by a bulltaur brute. 
+17:35:48 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You lose 96 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:48 You lose 322 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:48 You lose 345 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:48 You lose 531 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:48 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You lose 77 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:48 A bulltaur alchemist loses 2028 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You were healed for 1075 hitpoints.
+17:35:48 You gained 288 mana.
+17:35:48 A bulltaur alchemist loses 864 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You were healed for 532 hitpoints.
+17:35:48 You gained 143 mana.
+17:35:48 You gained 4680 experience points (Animus mastery).
+17:35:48 A bulltaur brute loses 1638 hitpoints due to your critical attack. (savage blow charm)
+17:35:48 You were healed for 512 hitpoints.
+17:35:48 You gained 164 mana.
+17:35:48 You gained 4888 experience points (Animus mastery).
+17:35:48 A bulltaur brute loses 1086 hitpoints due to your critical attack. (savage blow charm)
+17:35:48 You were healed for 506 hitpoints.
+17:35:48 You gained 162 mana.
+17:35:48 You gained 4888 experience points (Animus mastery).
+17:35:48 A bulltaur alchemist loses 899 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You were healed for 536 hitpoints.
+17:35:48 You gained 144 mana.
+17:35:48 You gained 4680 experience points (Animus mastery).
+17:35:48 A bulltaur alchemist loses 3626 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You were healed for 535 hitpoints.
+17:35:48 You gained 144 mana.
+17:35:48 You gained 4680 experience points (Animus mastery).
+17:35:48 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:48 A bulltaur forgepriest loses 1049 hitpoints due to your critical attack. 
+17:35:48 You were healed for 474 hitpoints.
+17:35:48 You gained 152 mana.
+17:35:48 You gained 6656 experience points (Animus mastery).
+17:35:48 A bulltaur forgepriest loses 69 hitpoints due to your critical attack. 
+17:35:48 You were healed for 471 hitpoints.
+17:35:48 You gained 151 mana.
+17:35:48 You gained 6656 experience points (Animus mastery).
+17:35:48 A bulltaur alchemist loses 85 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:48 You were healed for 530 hitpoints.
+17:35:48 You gained 142 mana.
+17:35:48 You gained 4680 experience points (Animus mastery).
+17:35:49 You healed yourself for 727 hitpoints.
+17:35:49 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:49 You lose 95 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:49 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:49 You lose 125 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:49 You lose 297 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:49 You lose 307 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:49 You lose 307 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:49 You lose 347 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:50 You healed yourself for 707 hitpoints.
+17:35:50 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:50 You lose 100 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:50 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:50 You lose 65 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:50 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:50 You lose 185 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:50 A bulltaur forgepriest loses 839 hitpoints due to your attack. 
+17:35:50 You were healed for 426 hitpoints.
+17:35:50 You gained 137 mana.
+17:35:51 A bulltaur forgepriest loses 713 hitpoints due to your attack. 
+17:35:51 You were healed for 91 hitpoints.
+17:35:51 You gained 29 mana.
+17:35:51 A bulltaur alchemist loses 793 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:51 You were healed for 106 hitpoints.
+17:35:51 You gained 29 mana.
+17:35:51 A bulltaur forgepriest loses 725 hitpoints due to your attack. 
+17:35:51 You were healed for 92 hitpoints.
+17:35:51 You gained 30 mana.
+17:35:51 A bulltaur forgepriest loses 725 hitpoints due to your attack. 
+17:35:51 You were healed for 92 hitpoints.
+17:35:51 You gained 30 mana.
+17:35:51 A bulltaur forgepriest loses 713 hitpoints due to your attack. 
+17:35:51 You were healed for 91 hitpoints.
+17:35:51 You gained 29 mana.
+17:35:51 A bulltaur brute loses 640 hitpoints due to your attack. 
+17:35:51 You were healed for 82 hitpoints.
+17:35:51 You gained 26 mana.
+17:35:51 You healed yourself for 708 hitpoints.
+17:35:51 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:51 You lose 93 hitpoints due to an attack by a bulltaur brute. 
+17:35:51 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:51 You lose 75 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:51 You lose 300 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:51 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:51 You lose 98 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:51 You lose 261 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:51 You lose 457 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:52 You healed yourself for 735 hitpoints.
+17:35:52 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:52 You dodged an attack. (Ruse)
+17:35:52 You lose 279 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:52 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:52 You lose 63 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:52 You lose 297 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:52 You lose 432 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:52 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:52 You lose 106 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:52 You lose 266 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:53 A bulltaur brute loses 955 hitpoints due to your attack. 
+17:35:53 You were healed for 485 hitpoints.
+17:35:53 You gained 156 mana.
+17:35:53 A bulltaur brute loses 762 hitpoints due to your attack. 
+17:35:53 You were healed for 97 hitpoints.
+17:35:53 You gained 31 mana.
+17:35:53 A bulltaur forgepriest loses 866 hitpoints due to your attack. 
+17:35:53 You were healed for 110 hitpoints.
+17:35:53 You gained 36 mana.
+17:35:53 A bulltaur alchemist loses 946 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:35:53 You were healed for 126 hitpoints.
+17:35:53 You gained 34 mana.
+17:35:53 A bulltaur forgepriest loses 857 hitpoints due to your attack. 
+17:35:53 You were healed for 109 hitpoints.
+17:35:53 You gained 35 mana.
+17:35:53 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:53 A bulltaur forgepriest loses 880 hitpoints due to your attack. 
+17:35:53 You were healed for 112 hitpoints.
+17:35:53 You gained 36 mana.
+17:35:53 A bulltaur forgepriest loses 863 hitpoints due to your attack. 
+17:35:53 You were healed for 110 hitpoints.
+17:35:53 You gained 36 mana.
+17:35:53 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:53 You lose 171 hitpoints due to an attack by a bulltaur brute. 
+17:35:53 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:53 You lose 85 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:53 You lose 353 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:53 You lose 302 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:53 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:53 You lose 182 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:53 You lose 304 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:53 You healed yourself for 671 hitpoints.
+17:35:54 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:54 You lose 79 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:54 You lose 287 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:54 You lose 474 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:54 You healed yourself for 770 hitpoints.
+17:35:54 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:54 You lose 75 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:54 You lose 351 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:54 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:54 You lose 55 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:54 You lose 284 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:55 A bulltaur brute loses 641 hitpoints due to your attack. 
+17:35:55 You were healed for 326 hitpoints.
+17:35:55 You gained 105 mana.
+17:35:55 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:55 You lose 230 hitpoints due to an attack by a bulltaur brute. 
+17:35:55 You lose 247 hitpoints due to an attack by a bulltaur brute. 
+17:35:55 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:35:55 You lose 46 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:55 You lose 333 hitpoints due to an attack by a bulltaur alchemist. 
+17:35:55 A bulltaur brute loses 1479 hitpoints due to your attack. 
+17:35:55 You were healed for 188 hitpoints.
+17:35:55 You gained 61 mana.
+17:35:55 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:35:55 A bulltaur forgepriest loses 1653 hitpoints due to your attack. 
+17:35:55 You were healed for 210 hitpoints.
+17:35:55 You gained 68 mana.
+17:35:55 A bulltaur alchemist loses 2228 hitpoints due to your critical attack. (low blow charm, Bounty Talisman Effect: More Damage Dealt)
+17:35:55 You were healed for 478 hitpoints.
+17:35:55 You gained 128 mana.
+17:35:55 You gained 4680 experience points (Animus mastery).
+17:35:55 A bulltaur forgepriest loses 1636 hitpoints due to your attack. 
+17:35:55 You were healed for 208 hitpoints.
+17:35:55 You gained 67 mana.
+17:35:55 A bulltaur forgepriest loses 1656 hitpoints due to your attack. 
+17:35:55 You were healed for 211 hitpoints.
+17:35:55 You gained 68 mana.
+17:35:55 A bulltaur forgepriest loses 1644 hitpoints due to your attack. 
+17:35:55 You were healed for 209 hitpoints.
+17:35:55 You gained 67 mana.
+17:35:55 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:55 You lose 118 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:55 You lose 341 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:55 You healed yourself for 776 hitpoints.
+17:35:56 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:56 You lose 72 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:56 You lose 333 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:56 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:56 You lose 180 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:56 You lose 301 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:56 You healed yourself for 708 hitpoints.
+17:35:56 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:56 You lose 162 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:56 You lose 286 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:57 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:57 You lose 89 hitpoints due to an attack by a bulltaur brute. 
+17:35:57 You lose 514 hitpoints due to an attack by a bulltaur brute. 
+17:35:57 A bulltaur forgepriest loses 501 hitpoints due to your attack. 
+17:35:57 You were healed for 255 hitpoints.
+17:35:57 You gained 82 mana.
+17:35:57 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:57 You lose 65 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:57 You lose 350 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:57 You lose 497 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:57 A bulltaur brute loses 770 hitpoints due to your attack. 
+17:35:57 You were healed for 110 hitpoints.
+17:35:57 You gained 36 mana.
+17:35:57 A bulltaur forgepriest loses 886 hitpoints due to your attack. 
+17:35:57 You were healed for 126 hitpoints.
+17:35:57 You gained 41 mana.
+17:35:57 A bulltaur forgepriest loses 837 hitpoints due to your attack. 
+17:35:57 You were healed for 126 hitpoints.
+17:35:57 You gained 41 mana.
+17:35:57 You gained 6656 experience points (Animus mastery).
+17:35:57 A bulltaur forgepriest loses 873 hitpoints due to your attack. 
+17:35:57 You were healed for 125 hitpoints.
+17:35:57 You gained 40 mana.
+17:35:57 A bulltaur forgepriest loses 880 hitpoints due to your attack. 
+17:35:57 You were healed for 126 hitpoints.
+17:35:57 You gained 41 mana.
+17:35:57 You healed yourself for 674 hitpoints.
+17:35:58 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:58 You lose 96 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:58 You lose 300 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:58 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:58 You lose 112 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:58 You lose 349 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:58 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:35:58 You lose 87 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:58 You lose 347 hitpoints due to an attack by a bulltaur forgepriest. 
+17:35:59 You healed yourself for 756 hitpoints.
+17:35:59 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:35:59 You lose 152 hitpoints due to an attack by a bulltaur brute. 
+17:35:59 A bulltaur forgepriest loses 681 hitpoints due to your attack. 
+17:35:59 You were healed for 346 hitpoints.
+17:35:59 You gained 111 mana.
+17:36:00 A bulltaur forgepriest loses 462 hitpoints due to your attack. 
+17:36:00 You were healed for 434 hitpoints.
+17:36:00 You gained 139 mana.
+17:36:00 You gained 6656 experience points (Animus mastery).
+17:36:00 A bulltaur forgepriest loses 838 hitpoints due to your attack. 
+17:36:00 You were healed for 432 hitpoints.
+17:36:00 You gained 139 mana.
+17:36:00 You gained 6656 experience points (Animus mastery).
+17:36:00 A bulltaur forgepriest loses 673 hitpoints due to your attack. 
+17:36:00 You were healed for 434 hitpoints.
+17:36:00 You gained 139 mana.
+17:36:00 You gained 6656 experience points (Animus mastery).
+17:36:00 A bulltaur brute loses 1153 hitpoints due to your attack. 
+17:36:00 You were healed for 391 hitpoints.
+17:36:00 You gained 126 mana.
+17:36:00 You gained 4888 experience points (Animus mastery).
+17:36:00 You healed yourself for 740 hitpoints.
+17:36:01 Using one of 1981 strong mana potions...
+17:36:01 You gained 143 mana.
+17:36:01 You healed yourself for 687 hitpoints.
+17:36:02 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:02 You lose 76 hitpoints due to an attack by a bulltaur brute. 
+17:36:02 You healed yourself for 666 hitpoints.
+17:36:03 A bulltaur brute loses 329 hitpoints due to your attack. 
+17:36:03 You were healed for 167 hitpoints.
+17:36:03 You gained 54 mana.
+17:36:03 You lose 265 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:03 A bulltaur brute loses 721 hitpoints due to your attack. 
+17:36:03 You were healed for 366 hitpoints.
+17:36:03 You gained 118 mana.
+17:36:03 Using one of 1980 strong mana potions...
+17:36:03 You gained 158 mana.
+17:36:03 You lose 306 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:03 You lose 284 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:03 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:03 You lose 264 hitpoints due to an attack by a bulltaur brute. 
+17:36:04 You lose 278 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:04 You lose 328 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:04 You healed yourself for 721 hitpoints.
+17:36:04 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:04 You lose 138 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:04 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:04 You lose 145 hitpoints due to an attack by a bulltaur brute. 
+17:36:04 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:36:04 You lose 76 hitpoints due to an attack by a bulltaur alchemist. 
+17:36:04 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:04 You lose 135 hitpoints due to an attack by a bulltaur brute. 
+17:36:04 You lose 457 hitpoints due to an attack by a bulltaur brute. 
+17:36:04 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:04 You lose 200 hitpoints due to an attack by a bulltaur brute. 
+17:36:05 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:05 You lose 108 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:05 You healed yourself for 775 hitpoints.
+17:36:05 A bulltaur alchemist loses 579 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:36:05 You were healed for 307 hitpoints.
+17:36:05 You gained 83 mana.
+17:36:05 A bulltaur brute loses 4339 hitpoints due to your critical attack. (savage blow charm)
+17:36:05 You were healed for 504 hitpoints.
+17:36:05 You gained 162 mana.
+17:36:05 A bulltaur forgepriest loses 4013 hitpoints due to your critical attack. 
+17:36:05 You were healed for 466 hitpoints.
+17:36:05 You gained 150 mana.
+17:36:05 A bulltaur brute loses 4348 hitpoints due to your critical attack. (savage blow charm)
+17:36:05 You were healed for 505 hitpoints.
+17:36:05 You gained 162 mana.
+17:36:05 A bulltaur forgepriest loses 3979 hitpoints due to your critical attack. 
+17:36:05 You were healed for 462 hitpoints.
+17:36:05 You gained 148 mana.
+17:36:05 A bulltaur brute loses 4341 hitpoints due to your critical attack. (savage blow charm)
+17:36:05 You were healed for 504 hitpoints.
+17:36:05 You gained 162 mana.
+17:36:05 A bulltaur alchemist loses 4353 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:36:05 You were healed for 527 hitpoints.
+17:36:05 You gained 142 mana.
+17:36:05 A bulltaur brute loses 4294 hitpoints due to your critical attack. (savage blow charm)
+17:36:05 You were healed for 499 hitpoints.
+17:36:05 You gained 160 mana.
+17:36:05 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:05 You lose 155 hitpoints due to an attack by a bulltaur brute. 
+17:36:05 You lose 494 hitpoints due to an attack by a bulltaur brute. 
+17:36:06 You lose 327 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:06 You lose 516 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:06 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:06 You lose 149 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:06 You lose 348 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:06 You lose 465 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:06 You healed yourself for 746 hitpoints.
+17:36:06 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:06 You lose 179 hitpoints due to an attack by a bulltaur brute. 
+17:36:06 You lose 248 hitpoints due to an attack by a bulltaur brute. 
+17:36:06 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:36:06 You lose 79 hitpoints due to an attack by a bulltaur alchemist. 
+17:36:06 You lose 309 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:06 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:06 You lose 113 hitpoints due to an attack by a bulltaur brute. 
+17:36:06 You lose 486 hitpoints due to an attack by a bulltaur brute. 
+17:36:06 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:06 You lose 83 hitpoints due to an attack by a bulltaur brute. 
+17:36:06 You lose 227 hitpoints due to an attack by a bulltaur brute. 
+17:36:07 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:07 You lose 117 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:07 You lose 338 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:07 You lose 496 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:07 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:07 You lose 136 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:07 You healed yourself for 708 hitpoints.
+17:36:07 A bulltaur brute loses 448 hitpoints due to your attack. 
+17:36:07 You were healed for 228 hitpoints.
+17:36:07 You gained 73 mana.
+17:36:07 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:07 You lose 284 hitpoints due to an attack by a bulltaur brute. 
+17:36:07 You lose 258 hitpoints due to an attack by a bulltaur brute. 
+17:36:08 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:08 You lose 41 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:08 You lose 345 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:08 A bulltaur brute loses 757 hitpoints due to your attack. 
+17:36:08 You were healed for 77 hitpoints.
+17:36:08 You gained 25 mana.
+17:36:08 A bulltaur forgepriest loses 841 hitpoints due to your attack. 
+17:36:08 You were healed for 86 hitpoints.
+17:36:08 You gained 28 mana.
+17:36:08 A bulltaur brute loses 759 hitpoints due to your attack. 
+17:36:08 You were healed for 78 hitpoints.
+17:36:08 You gained 25 mana.
+17:36:08 A bulltaur forgepriest loses 821 hitpoints due to your attack. 
+17:36:08 You were healed for 84 hitpoints.
+17:36:08 You gained 27 mana.
+17:36:08 A bulltaur brute loses 729 hitpoints due to your attack. 
+17:36:08 You were healed for 74 hitpoints.
+17:36:08 You gained 24 mana.
+17:36:08 A bulltaur alchemist loses 686 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:36:08 You were healed for 96 hitpoints.
+17:36:08 You gained 26 mana.
+17:36:08 You gained 4680 experience points (Animus mastery).
+17:36:08 A bulltaur brute loses 732 hitpoints due to your attack. 
+17:36:08 You were healed for 75 hitpoints.
+17:36:08 You gained 24 mana.
+17:36:08 A bulltaur forgepriest loses 826 hitpoints due to your attack. 
+17:36:08 You were healed for 84 hitpoints.
+17:36:08 You gained 27 mana.
+17:36:08 A bulltaur alchemist loses 893 hitpoints due to your attack. (Bounty Talisman Effect: More Damage Dealt)
+17:36:08 You were healed for 95 hitpoints.
+17:36:08 You gained 26 mana.
+17:36:08 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:08 You lose 132 hitpoints due to an attack by a bulltaur brute. 
+17:36:08 You lose 514 hitpoints due to an attack by a bulltaur brute. 
+17:36:08 You lose 351 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:08 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:08 You lose 103 hitpoints due to an attack by a bulltaur brute. 
+17:36:08 You lose 273 hitpoints due to an attack by a bulltaur brute. 
+17:36:08 You healed yourself for 742 hitpoints.
+17:36:08 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:08 You dodged an attack. (Ruse)
+17:36:09 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:09 You lose 111 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:09 You lose 349 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:09 You lose 480 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:09 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:09 You lose 103 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:09 You lose 354 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:09 You lose 365 hitpoints due to an attack by a bulltaur alchemist. 
+17:36:09 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:09 You lose 169 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:09 You healed yourself for 710 hitpoints.
+17:36:09 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:09 You lose 220 hitpoints due to an attack by a bulltaur brute. 
+17:36:09 You lose 262 hitpoints due to an attack by a bulltaur brute. 
+17:36:10 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:10 You lose 187 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:10 You lose 292 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:10 A bulltaur forgepriest loses 822 hitpoints due to your attack. 
+17:36:10 You were healed for 418 hitpoints.
+17:36:10 You gained 134 mana.
+17:36:10 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:10 You lose 92 hitpoints due to an attack by a bulltaur brute. 
+17:36:10 You lose 253 hitpoints due to an attack by a bulltaur brute. 
+17:36:10 A bulltaur brute loses 286 hitpoints due to your attack. 
+17:36:10 You were healed for 87 hitpoints.
+17:36:10 You gained 28 mana.
+17:36:10 You gained 4888 experience points (Animus mastery).
+17:36:10 A bulltaur forgepriest loses 923 hitpoints due to your attack. 
+17:36:10 You were healed for 100 hitpoints.
+17:36:10 You gained 32 mana.
+17:36:10 A bulltaur forgepriest loses 916 hitpoints due to your attack. 
+17:36:10 You were healed for 99 hitpoints.
+17:36:10 You gained 32 mana.
+17:36:10 A bulltaur forgepriest loses 896 hitpoints due to your attack. 
+17:36:10 You were healed for 97 hitpoints.
+17:36:10 You gained 32 mana.
+17:36:10 A bulltaur brute loses 808 hitpoints due to your attack. 
+17:36:10 You were healed for 88 hitpoints.
+17:36:10 You gained 29 mana.
+17:36:10 A bulltaur brute loses 797 hitpoints due to your attack. 
+17:36:10 You were healed for 87 hitpoints.
+17:36:10 You gained 28 mana.
+17:36:10 A bulltaur brute loses 813 hitpoints due to your attack. 
+17:36:10 You were healed for 88 hitpoints.
+17:36:10 You gained 29 mana.
+17:36:10 A bulltaur forgepriest loses 917 hitpoints due to your attack. 
+17:36:10 You were healed for 100 hitpoints.
+17:36:10 You gained 32 mana.
+17:36:10 You healed yourself for 721 hitpoints.
+17:36:10 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:10 You lose 85 hitpoints due to an attack by a bulltaur brute. 
+17:36:10 You lose 463 hitpoints due to an attack by a bulltaur brute. 
+17:36:11 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:11 You lose 95 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 You lose 294 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 You lose 450 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:11 You lose 105 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 You lose 355 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:11 You lose 121 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 You lose 290 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:11 You healed yourself for 727 hitpoints.
+17:36:11 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:11 You lose 336 hitpoints due to an attack by a bulltaur brute. 
+17:36:11 You lose 487 hitpoints due to an attack by a bulltaur brute. 
+17:36:12 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:12 You lose 225 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:12 You lose 296 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:12 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:12 You lose 235 hitpoints due to an attack by a bulltaur brute. 
+17:36:12 A bulltaur forgepriest loses 730 hitpoints due to your attack. 
+17:36:12 You were healed for 371 hitpoints.
+17:36:12 You gained 119 mana.
+17:36:12 A bulltaur brute loses 32 hitpoints due to your attack. (damage reflection)
+17:36:12 You lose 103 hitpoints due to an attack by a bulltaur brute. 
+17:36:12 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:36:12 You lose 146 hitpoints due to an attack by a bulltaur alchemist. 
+17:36:12 You healed yourself for 735 hitpoints.
+17:36:12 A bulltaur brute loses 522 hitpoints due to your critical attack. (savage blow charm)
+17:36:12 You were healed for 433 hitpoints.
+17:36:12 You gained 139 mana.
+17:36:12 You gained 4888 experience points (Animus mastery).
+17:36:12 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:36:12 A bulltaur forgepriest loses 601 hitpoints due to your critical attack. 
+17:36:12 You were healed for 400 hitpoints.
+17:36:12 You gained 128 mana.
+17:36:12 You gained 6656 experience points (Animus mastery).
+17:36:12 A bulltaur forgepriest loses 1847 hitpoints due to your critical attack. 
+17:36:12 You were healed for 396 hitpoints.
+17:36:12 You gained 127 mana.
+17:36:12 You gained 6656 experience points (Animus mastery).
+17:36:12 A bulltaur forgepriest loses 334 hitpoints due to your attack. (poison charm)
+17:36:12 A bulltaur forgepriest loses 3707 hitpoints due to your critical attack. 
+17:36:12 You were healed for 400 hitpoints.
+17:36:12 You gained 129 mana.
+17:36:12 A bulltaur alchemist loses 3997 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:36:12 You were healed for 450 hitpoints.
+17:36:12 You gained 121 mana.
+17:36:12 A bulltaur brute loses 48 hitpoints due to your critical attack. (savage blow charm)
+17:36:12 You were healed for 433 hitpoints.
+17:36:12 You gained 139 mana.
+17:36:12 You gained 4888 experience points (Animus mastery).
+17:36:12 A bulltaur brute loses 561 hitpoints due to your critical attack. (savage blow charm)
+17:36:12 You were healed for 433 hitpoints.
+17:36:12 You gained 139 mana.
+17:36:12 You gained 4888 experience points (Animus mastery).
+17:36:12 A bulltaur forgepriest loses 104 hitpoints due to your critical attack. 
+17:36:12 You were healed for 398 hitpoints.
+17:36:12 You gained 128 mana.
+17:36:12 You gained 6656 experience points (Animus mastery).
+17:36:13 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:13 You lose 134 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:13 You lose 342 hitpoints due to an attack by a bulltaur forgepriest. 
+17:36:14 You healed yourself for 771 hitpoints.
+17:36:14 A bulltaur alchemist loses 36 hitpoints due to your attack. (damage reflection, Bounty Talisman Effect: More Damage Dealt)
+17:36:14 You lose 104 hitpoints due to an attack by a bulltaur alchemist. 
+17:36:14 A bulltaur alchemist loses 728 hitpoints due to your critical attack. (Bounty Talisman Effect: More Damage Dealt)
+17:36:14 You were healed for 1130 hitpoints.
+17:36:14 You gained 303 mana.
+17:36:14 You gained 4680 experience points (Animus mastery).
+17:36:15 A bulltaur forgepriest loses 32 hitpoints due to your attack. (damage reflection)
+17:36:15 You lose 96 hitpoints due to an attack by a bulltaur forgepriest. 

@@ -1,0 +1,988 @@
+Channel Server Log saved Sun May 03 14:13:13 2026
+14:12:27 You lose 348 hitpoints due to an attack by a crypt mage. 
+14:12:27 You lose 197 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:27 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:12:27 You lose 415 hitpoints due to an attack by a roaming dread. 
+14:12:27 You healed yourself for 2644 hitpoints.
+14:12:27 You lose 363 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:27 You lose 376 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:27 You lose 450 hitpoints due to an attack by a crypt mage. 
+14:12:27 You lose 392 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:28 A crypt mage loses 115 hitpoints due to your attack. 
+14:12:28 You were healed for 32 hitpoints.
+14:12:28 You gained 20 mana.
+14:12:28 You lose 376 hitpoints due to an attack by a cyclursus. 
+14:12:28 You lose 307 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:28 Using one of 1554 great fireball runes...
+14:12:28 A cyclursus loses 653 hitpoints due to your attack. 
+14:12:28 You were healed for 41 hitpoints.
+14:12:28 You gained 20 mana.
+14:12:28 A roaming dread loses 694 hitpoints due to your attack. 
+14:12:28 You were healed for 34 hitpoints.
+14:12:28 You gained 23 mana.
+14:12:28 A roaming dread loses 1160 hitpoints due to your attack. (overflux charm)
+14:12:28 A roaming dread loses 694 hitpoints due to your attack. 
+14:12:28 You were healed for 34 hitpoints.
+14:12:28 You gained 23 mana.
+14:12:28 A crypt mage loses 635 hitpoints due to your attack. 
+14:12:28 You were healed for 31 hitpoints.
+14:12:28 You gained 19 mana.
+14:12:28 A cyclursus loses 653 hitpoints due to your attack. 
+14:12:28 You were healed for 41 hitpoints.
+14:12:28 You gained 20 mana.
+14:12:28 A crypt mage loses 635 hitpoints due to your attack. 
+14:12:28 You were healed for 36 hitpoints.
+14:12:28 You gained 19 mana.
+14:12:28 A crypt mage loses 678 hitpoints due to your attack. (zap charm)
+14:12:28 A crypt mage loses 635 hitpoints due to your attack. 
+14:12:28 You were healed for 31 hitpoints.
+14:12:28 You gained 19 mana.
+14:12:28 A roaming dread loses 694 hitpoints due to your attack. 
+14:12:28 You were healed for 39 hitpoints.
+14:12:28 You gained 23 mana.
+14:12:28 A cyclursus loses 653 hitpoints due to your attack. 
+14:12:28 You were healed for 41 hitpoints.
+14:12:28 You gained 20 mana.
+14:12:28 A cyclursus loses 653 hitpoints due to your attack. 
+14:12:28 You were healed for 41 hitpoints.
+14:12:28 You gained 20 mana.
+14:12:28 A roaming dread loses 27 hitpoints due to your attack. 
+14:12:28 You were healed for 39 hitpoints.
+14:12:28 You gained 23 mana.
+14:12:28 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:28 A cyclursus loses 653 hitpoints due to your attack. 
+14:12:28 You were healed for 36 hitpoints.
+14:12:28 You gained 20 mana.
+14:12:28 You healed yourself for 2404 hitpoints.
+14:12:29 You lose 113 hitpoints due to an attack by a crypt mage. 
+14:12:29 You lose 519 hitpoints due to an attack by a crypt mage. 
+14:12:29 You lose 197 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:29 You lose 425 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:29 You lose 275 hitpoints due to an attack by a crypt mage. 
+14:12:29 You lose 172 hitpoints due to an attack by a roaming dread. 
+14:12:29 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:29 You lose 222 hitpoints due to an attack by a crypt mage. 
+14:12:29 You lose 307 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:29 You healed yourself for 1945 hitpoints.
+14:12:29 You lose 234 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:29 You lose 315 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:29 You lose 351 hitpoints due to an attack by a roaming dread. 
+14:12:29 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:12:30 A crypt mage loses 111 hitpoints due to your attack. 
+14:12:30 You were healed for 31 hitpoints.
+14:12:30 You gained 19 mana.
+14:12:30 Using one of 1553 great fireball runes...
+14:12:30 A cyclursus loses 531 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 45 hitpoints.
+14:12:30 You gained 22 mana.
+14:12:30 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:30 A cyclursus loses 637 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 40 hitpoints.
+14:12:30 You gained 22 mana.
+14:12:30 A cyclursus loses 637 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 45 hitpoints.
+14:12:30 You gained 22 mana.
+14:12:30 A roaming dread loses 678 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 38 hitpoints.
+14:12:30 You gained 26 mana.
+14:12:30 A crypt mage loses 620 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 35 hitpoints.
+14:12:30 You gained 22 mana.
+14:12:30 A roaming dread loses 96 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 44 hitpoints.
+14:12:30 You gained 26 mana.
+14:12:30 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:30 A roaming dread loses 678 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 38 hitpoints.
+14:12:30 You gained 26 mana.
+14:12:30 A crypt mage loses 678 hitpoints due to your attack. (zap charm)
+14:12:30 A crypt mage loses 620 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 40 hitpoints.
+14:12:30 You gained 22 mana.
+14:12:30 A cyclursus loses 637 hitpoints due to your attack. (Runic Mastery)
+14:12:30 You were healed for 45 hitpoints.
+14:12:30 You gained 22 mana.
+14:12:30 You lose 284 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:30 You lose 331 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:30 You lose 301 hitpoints due to an attack by a cyclursus. 
+14:12:31 You dodged an attack. (Ruse)
+14:12:31 You lose 212 hitpoints due to an attack by a crypt mage. 
+14:12:31 You lose 228 hitpoints due to an attack by a crypt mage. 
+14:12:31 You lose 475 hitpoints due to an attack by a crypt mage. 
+14:12:31 You lose 433 hitpoints due to an attack by a crypt mage. 
+14:12:31 You lose 332 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:31 You lose 313 hitpoints due to an attack by a crypt mage. 
+14:12:31 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:32 You lose 465 hitpoints due to an attack by a roaming dread. 
+14:12:32 You healed yourself for 1747 hitpoints.
+14:12:32 You lose 247 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:32 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:32 You lose 307 hitpoints due to an attack by a roaming dread. 
+14:12:32 A crypt mage loses 107 hitpoints due to your attack. 
+14:12:32 You were healed for 30 hitpoints.
+14:12:32 You gained 19 mana.
+14:12:32 Using one of 1552 great fireball runes...
+14:12:32 You lose 285 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:32 A cyclursus loses 943 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 71 hitpoints.
+14:12:32 You gained 35 mana.
+14:12:32 A roaming dread loses 1003 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 60 hitpoints.
+14:12:32 You gained 40 mana.
+14:12:32 A cyclursus loses 943 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 63 hitpoints.
+14:12:32 You gained 35 mana.
+14:12:32 A roaming dread loses 1003 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 60 hitpoints.
+14:12:32 You gained 40 mana.
+14:12:32 A crypt mage loses 918 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 55 hitpoints.
+14:12:32 You gained 34 mana.
+14:12:32 A cyclursus loses 943 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 71 hitpoints.
+14:12:32 You gained 35 mana.
+14:12:32 A crypt mage loses 918 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 55 hitpoints.
+14:12:32 You gained 34 mana.
+14:12:32 A crypt mage loses 918 hitpoints due to your attack. (Runic Mastery)
+14:12:32 You were healed for 55 hitpoints.
+14:12:32 You gained 34 mana.
+14:12:33 You healed yourself for 2151 hitpoints.
+14:12:33 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:33 You lose 370 hitpoints due to an attack by a crypt mage. 
+14:12:33 You lose 383 hitpoints due to an attack by a cyclursus. 
+14:12:33 You lose 507 hitpoints due to an attack by a crypt mage. 
+14:12:33 You lose 380 hitpoints due to an attack by a roaming dread. 
+14:12:34 You healed yourself for 3281 hitpoints.
+14:12:34 A crypt mage loses 99 hitpoints due to your attack. 
+14:12:34 You were healed for 28 hitpoints.
+14:12:34 You gained 17 mana.
+14:12:34 You lose 373 hitpoints due to an attack by a cyclursus. 
+14:12:35 You lose 331 hitpoints due to an attack by a roaming dread. 
+14:12:35 Using one of 1551 great fireball runes...
+14:12:35 A cyclursus loses 799 hitpoints due to your attack. 
+14:12:35 You were healed for 53 hitpoints.
+14:12:35 You gained 29 mana.
+14:12:35 A crypt mage loses 777 hitpoints due to your attack. 
+14:12:35 You were healed for 46 hitpoints.
+14:12:35 You gained 29 mana.
+14:12:35 A crypt mage loses 777 hitpoints due to your attack. 
+14:12:35 You were healed for 46 hitpoints.
+14:12:35 You gained 29 mana.
+14:12:35 A crypt mage loses 777 hitpoints due to your attack. 
+14:12:35 You were healed for 46 hitpoints.
+14:12:35 You gained 29 mana.
+14:12:35 A cyclursus loses 731 hitpoints due to your attack. (curse charm)
+14:12:35 A cyclursus loses 799 hitpoints due to your attack. 
+14:12:35 You were healed for 53 hitpoints.
+14:12:35 You gained 29 mana.
+14:12:35 A roaming dread loses 849 hitpoints due to your attack. 
+14:12:35 You were healed for 51 hitpoints.
+14:12:35 You gained 34 mana.
+14:12:35 A roaming dread loses 849 hitpoints due to your attack. 
+14:12:35 You were healed for 51 hitpoints.
+14:12:35 You gained 34 mana.
+14:12:35 A crypt mage loses 678 hitpoints due to your attack. (zap charm)
+14:12:35 A crypt mage loses 777 hitpoints due to your attack. 
+14:12:35 You were healed for 46 hitpoints.
+14:12:35 You gained 29 mana.
+14:12:35 You lose 347 hitpoints due to an attack by a crypt mage. 
+14:12:35 You healed yourself for 2315 hitpoints.
+14:12:35 You lose 160 hitpoints due to an attack by a crypt mage. 
+14:12:35 You lose 542 hitpoints due to an attack by a crypt mage. 
+14:12:35 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:35 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:35 You lose 177 hitpoints due to an attack by a roaming dread. 
+14:12:35 You lose 489 hitpoints due to an attack by a crypt mage. 
+14:12:36 You lose 383 hitpoints due to an attack by a cyclursus. 
+14:12:36 You lose 323 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:36 You lose 363 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:36 You lose 350 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:36 You lose 378 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:36 You lose 126 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:36 You healed yourself for 2617 hitpoints.
+14:12:37 You lose 363 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:37 You lose 357 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:37 A crypt mage loses 99 hitpoints due to your attack. 
+14:12:37 You were healed for 32 hitpoints.
+14:12:37 You gained 17 mana.
+14:12:37 You lose 175 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:37 A roaming dread loses 2504 hitpoints due to your critical attack. 
+14:12:37 You were healed for 170 hitpoints.
+14:12:37 You gained 121 mana.
+14:12:37 A crypt mage loses 2290 hitpoints due to your critical attack. 
+14:12:37 You were healed for 155 hitpoints.
+14:12:37 You gained 103 mana.
+14:12:37 A crypt mage loses 2290 hitpoints due to your critical attack. 
+14:12:37 You were healed for 155 hitpoints.
+14:12:37 You gained 103 mana.
+14:12:37 A roaming dread loses 2504 hitpoints due to your critical attack. 
+14:12:37 You were healed for 170 hitpoints.
+14:12:37 You gained 121 mana.
+14:12:37 A cyclursus loses 2355 hitpoints due to your critical attack. 
+14:12:37 You were healed for 176 hitpoints.
+14:12:37 You gained 106 mana.
+14:12:37 A roaming dread loses 2504 hitpoints due to your critical attack. 
+14:12:37 You were healed for 148 hitpoints.
+14:12:37 You gained 121 mana.
+14:12:37 A cyclursus loses 2355 hitpoints due to your critical attack. 
+14:12:37 You were healed for 176 hitpoints.
+14:12:37 You gained 106 mana.
+14:12:37 A cyclursus loses 2355 hitpoints due to your critical attack. 
+14:12:37 You were healed for 176 hitpoints.
+14:12:37 You gained 106 mana.
+14:12:37 You lose 123 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:37 You healed yourself for 2270 hitpoints.
+14:12:37 You lose 273 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:37 You lose 172 hitpoints due to an attack by a crypt mage. 
+14:12:37 You lose 520 hitpoints due to an attack by a crypt mage. 
+14:12:38 Using one of 1316 ultimate mana potions...
+14:12:38 You lose 335 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:38 You dodged an attack. (Ruse)
+14:12:38 You gained 561 mana.
+14:12:38 You lose 376 hitpoints due to an attack by a roaming dread. 
+14:12:38 You lose 417 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:38 You lose 134 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:38 You lose 307 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:38 You lose 309 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:38 You healed yourself for 2302 hitpoints.
+14:12:38 You lose 387 hitpoints due to an attack by a cyclursus. 
+14:12:38 You lose 401 hitpoints due to an attack by a cyclursus. 
+14:12:39 A roaming dread loses 125 hitpoints due to your attack. 
+14:12:39 You were healed for 40 hitpoints.
+14:12:39 You gained 24 mana.
+14:12:39 Transcendence was triggered.
+14:12:39 You lose 261 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:39 Using one of 1550 great fireball runes...
+14:12:39 You lose 183 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:39 You lose 252 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:39 You lose 303 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:39 A crypt mage loses 1485 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 101 hitpoints.
+14:12:39 You gained 54 mana.
+14:12:39 A crypt mage loses 1485 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 88 hitpoints.
+14:12:39 You gained 54 mana.
+14:12:39 A roaming dread loses 1625 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 96 hitpoints.
+14:12:39 You gained 65 mana.
+14:12:39 A crypt mage loses 1485 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 101 hitpoints.
+14:12:39 You gained 54 mana.
+14:12:39 A roaming dread loses 1625 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 110 hitpoints.
+14:12:39 You gained 65 mana.
+14:12:39 A roaming dread loses 1625 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 110 hitpoints.
+14:12:39 You gained 65 mana.
+14:12:39 A cyclursus loses 1526 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 114 hitpoints.
+14:12:39 You gained 56 mana.
+14:12:39 A crypt mage loses 1485 hitpoints due to your critical attack. (Runic Mastery)
+14:12:39 You were healed for 101 hitpoints.
+14:12:39 You gained 54 mana.
+14:12:39 You lose 341 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:39 You lose 228 hitpoints due to an attack by a roaming dread. 
+14:12:39 Using one of 1315 ultimate mana potions...
+14:12:40 You lose 219 hitpoints due to an attack by a crypt mage. 
+14:12:40 You lose 336 hitpoints due to an attack by a crypt mage. 
+14:12:40 You lose 308 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:40 You healed yourself for 2895 hitpoints.
+14:12:40 You lose 224 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:40 You lose 261 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:40 You lose 294 hitpoints due to an attack by a cyclursus. 
+14:12:40 You lose 300 hitpoints due to an attack by a cyclursus. 
+14:12:40 You lose 312 hitpoints due to an attack by a cyclursus. 
+14:12:40 You lose 351 hitpoints due to an attack by a cyclursus. 
+14:12:40 You lose 234 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:41 You lose 258 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:41 You lose 266 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:41 Using one of 1549 great fireball runes...
+14:12:41 A crypt mage loses 1562 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 87 hitpoints.
+14:12:41 You gained 54 mana.
+14:12:41 A roaming dread loses 1707 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 109 hitpoints.
+14:12:41 You gained 64 mana.
+14:12:41 A roaming dread loses 1707 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 109 hitpoints.
+14:12:41 You gained 64 mana.
+14:12:41 A roaming dread loses 1707 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 95 hitpoints.
+14:12:41 You gained 64 mana.
+14:12:41 A cyclursus loses 1606 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 100 hitpoints.
+14:12:41 You gained 55 mana.
+14:12:41 A cyclursus loses 1606 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 113 hitpoints.
+14:12:41 You gained 55 mana.
+14:12:41 A roaming dread loses 1707 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 109 hitpoints.
+14:12:41 You gained 64 mana.
+14:12:41 A cyclursus loses 1606 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 100 hitpoints.
+14:12:41 You gained 55 mana.
+14:12:41 A crypt mage loses 1562 hitpoints due to your critical attack. (Runic Mastery)
+14:12:41 You were healed for 100 hitpoints.
+14:12:41 You gained 54 mana.
+14:12:41 You healed yourself for 1578 hitpoints.
+14:12:41 You lose 270 hitpoints due to an attack by a roaming dread. 
+14:12:41 You lose 343 hitpoints due to an attack by a roaming dread. 
+14:12:41 You lose 261 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:42 Using one of 1315 ultimate mana potions...
+14:12:42 You lose 141 hitpoints due to an attack by a crypt mage. 
+14:12:42 You lose 377 hitpoints due to an attack by a crypt mage. 
+14:12:42 You lose 261 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:42 You lose 165 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:42 You lose 274 hitpoints due to an attack by a roaming dread. 
+14:12:42 You lose 261 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:42 You healed yourself for 2178 hitpoints.
+14:12:42 You lose 290 hitpoints due to an attack by a roaming dread. 
+14:12:42 You lose 314 hitpoints due to an attack by a crypt mage. 
+14:12:42 You dodged an attack. (Ruse)
+14:12:42 You lose 293 hitpoints due to an attack by a cyclursus. 
+14:12:43 You lose 215 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:43 You lose 262 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:43 You lose 306 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:43 You lose 238 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:43 You lose 308 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:43 A roaming dread loses 229 hitpoints due to your critical attack. 
+14:12:43 You were healed for 73 hitpoints.
+14:12:43 You gained 43 mana.
+14:12:43 Using one of 1548 great fireball runes...
+14:12:43 You lose 297 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:43 A roaming dread loses 1347 hitpoints due to your critical attack. 
+14:12:43 You were healed for 71 hitpoints.
+14:12:43 You gained 42 mana.
+14:12:43 A roaming dread loses 1347 hitpoints due to your critical attack. 
+14:12:43 You were healed for 62 hitpoints.
+14:12:43 You gained 42 mana.
+14:12:43 A crypt mage loses 678 hitpoints due to your attack. (zap charm)
+14:12:43 A crypt mage loses 1233 hitpoints due to your critical attack. 
+14:12:43 You were healed for 57 hitpoints.
+14:12:43 You gained 35 mana.
+14:12:43 A roaming dread loses 1160 hitpoints due to your attack. (overflux charm)
+14:12:43 A roaming dread loses 1347 hitpoints due to your critical attack. 
+14:12:43 You were healed for 62 hitpoints.
+14:12:43 You gained 42 mana.
+14:12:43 A crypt mage loses 1233 hitpoints due to your critical attack. 
+14:12:43 You were healed for 65 hitpoints.
+14:12:43 You gained 35 mana.
+14:12:43 A crypt mage loses 678 hitpoints due to your attack. (zap charm)
+14:12:43 A crypt mage loses 1233 hitpoints due to your critical attack. 
+14:12:43 You were healed for 57 hitpoints.
+14:12:43 You gained 35 mana.
+14:12:43 A roaming dread loses 1347 hitpoints due to your critical attack. 
+14:12:43 You were healed for 71 hitpoints.
+14:12:43 You gained 42 mana.
+14:12:43 A cyclursus loses 1112 hitpoints due to your critical attack. 
+14:12:43 You were healed for 73 hitpoints.
+14:12:43 You gained 36 mana.
+14:12:43 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:43 A cyclursus loses 1268 hitpoints due to your critical attack. 
+14:12:43 You were healed for 65 hitpoints.
+14:12:43 You gained 36 mana.
+14:12:43 A roaming dread loses 1347 hitpoints due to your critical attack. 
+14:12:43 You were healed for 71 hitpoints.
+14:12:43 You gained 42 mana.
+14:12:43 A crypt mage loses 1233 hitpoints due to your critical attack. 
+14:12:43 You were healed for 65 hitpoints.
+14:12:43 You gained 35 mana.
+14:12:43 A cyclursus loses 1268 hitpoints due to your critical attack. 
+14:12:43 You were healed for 65 hitpoints.
+14:12:43 You gained 36 mana.
+14:12:43 A cyclursus loses 1268 hitpoints due to your critical attack. 
+14:12:43 You were healed for 73 hitpoints.
+14:12:43 You gained 36 mana.
+14:12:43 A cyclursus loses 1268 hitpoints due to your critical attack. 
+14:12:43 You were healed for 65 hitpoints.
+14:12:43 You gained 36 mana.
+14:12:43 You lose 236 hitpoints due to an attack by a roaming dread. 
+14:12:43 You lose 343 hitpoints due to an attack by a roaming dread. 
+14:12:43 You healed yourself for 2278 hitpoints.
+14:12:43 You dodged an attack. (Ruse)
+14:12:44 You lose 270 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:44 You lose 132 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:44 You lose 430 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:44 You lose 345 hitpoints due to an attack by a roaming dread. 
+14:12:44 You lose 290 hitpoints due to an attack by a roaming dread. 
+14:12:44 You lose 163 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:44 You healed yourself for 1630 hitpoints.
+14:12:44 You lose 288 hitpoints due to an attack by a cyclursus. 
+14:12:44 You lose 510 hitpoints due to an attack by a crypt mage. 
+14:12:45 You lose 309 hitpoints due to an attack by a roaming dread. 
+14:12:45 You lose 213 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:45 You lose 308 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:45 You lose 297 hitpoints due to an attack by a cyclursus. 
+14:12:45 You lose 369 hitpoints due to an attack by a cyclursus. 
+14:12:45 You lose 269 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:45 You lose 309 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:45 A roaming dread loses 205 hitpoints due to your critical attack. 
+14:12:45 You were healed for 57 hitpoints.
+14:12:45 You gained 39 mana.
+14:12:45 You lose 231 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:45 You lose 324 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:45 A roaming dread loses 6144 hitpoints due to your critical attack. 
+14:12:45 You were healed for 293 hitpoints.
+14:12:45 You gained 172 mana.
+14:12:45 A roaming dread loses 6144 hitpoints due to your critical attack. 
+14:12:45 You were healed for 256 hitpoints.
+14:12:45 You gained 172 mana.
+14:12:45 A roaming dread loses 1160 hitpoints due to your attack. (overflux charm)
+14:12:45 A roaming dread loses 1815 hitpoints due to your critical attack. 
+14:12:45 You were healed for 293 hitpoints.
+14:12:45 You gained 172 mana.
+14:12:45 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:45 A roaming dread loses 6144 hitpoints due to your critical attack. 
+14:12:45 You were healed for 256 hitpoints.
+14:12:45 You gained 172 mana.
+14:12:45 A crypt mage loses 678 hitpoints due to your attack. (zap charm)
+14:12:45 A crypt mage loses 5619 hitpoints due to your critical attack. 
+14:12:45 You were healed for 268 hitpoints.
+14:12:45 You gained 144 mana.
+14:12:45 A crypt mage loses 36 hitpoints due to your critical attack. 
+14:12:45 You were healed for 268 hitpoints.
+14:12:45 You gained 144 mana.
+14:12:45 You gained 64240 experience points (active prey bonus, Animus mastery).
+14:12:45 A roaming dread loses 6144 hitpoints due to your critical attack. 
+14:12:45 You were healed for 293 hitpoints.
+14:12:45 You gained 172 mana.
+14:12:45 A crypt mage loses 5619 hitpoints due to your critical attack. 
+14:12:45 You were healed for 234 hitpoints.
+14:12:45 You gained 144 mana.
+14:12:45 A roaming dread loses 4691 hitpoints due to your critical attack. 
+14:12:45 You were healed for 256 hitpoints.
+14:12:45 You gained 172 mana.
+14:12:45 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:45 A crypt mage loses 5619 hitpoints due to your critical attack. 
+14:12:45 You were healed for 234 hitpoints.
+14:12:45 You gained 144 mana.
+14:12:45 A cyclursus loses 5779 hitpoints due to your critical attack. 
+14:12:45 You were healed for 269 hitpoints.
+14:12:45 You gained 148 mana.
+14:12:45 A cyclursus loses 5779 hitpoints due to your critical attack. 
+14:12:45 You were healed for 269 hitpoints.
+14:12:45 You gained 148 mana.
+14:12:45 A cyclursus loses 5779 hitpoints due to your critical attack. 
+14:12:45 You were healed for 181 hitpoints.
+14:12:45 You gained 148 mana.
+14:12:45 A cyclursus loses 2829 hitpoints due to your critical attack. 
+14:12:45 You gained 148 mana.
+14:12:45 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:45 A cyclursus loses 1247 hitpoints due to your critical attack. 
+14:12:45 You gained 148 mana.
+14:12:45 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:45 A cyclursus loses 3000 hitpoints due to your critical attack. 
+14:12:45 You gained 148 mana.
+14:12:45 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:45 A crypt mage loses 5619 hitpoints due to your critical attack. 
+14:12:45 You gained 144 mana.
+14:12:45 A cyclursus loses 5779 hitpoints due to your critical attack. 
+14:12:45 You gained 148 mana.
+14:12:45 You lose 241 hitpoints due to an attack by a roaming dread. 
+14:12:45 You lose 343 hitpoints due to an attack by a roaming dread. 
+14:12:45 You lose 164 hitpoints due to an attack by a crypt mage. 
+14:12:45 You healed yourself for 744 hitpoints.
+14:12:45 You lose 357 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:45 You lose 339 hitpoints due to an attack by a crypt mage. 
+14:12:46 You lose 174 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:46 You lose 308 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:46 You lose 298 hitpoints due to an attack by a cyclursus. 
+14:12:46 You lose 335 hitpoints due to an attack by a cyclursus. 
+14:12:46 You lose 423 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:46 You lose 289 hitpoints due to an attack by a roaming dread. 
+14:12:46 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:12:46 You lose 144 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:46 You lose 180 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:46 Using one of 1315 ultimate mana potions...
+14:12:46 You gained 442 mana.
+14:12:47 You healed yourself for 3021 hitpoints.
+14:12:47 You lose 374 hitpoints due to an attack by a cyclursus. 
+14:12:47 You lose 329 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:47 Using one of 1314 ultimate mana potions...
+14:12:47 You lose 237 hitpoints due to an attack by a roaming dread. 
+14:12:47 You gained 537 mana.
+14:12:47 You lose 228 hitpoints due to an attack by a crypt mage. 
+14:12:47 You lose 480 hitpoints due to an attack by a crypt mage. 
+14:12:47 You dodged an attack. (Ruse)
+14:12:47 You lose 307 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:47 You lose 399 hitpoints due to an attack by a crypt mage. 
+14:12:48 You healed yourself for 2349 hitpoints.
+14:12:48 You lose 294 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:48 You lose 307 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:48 You lose 309 hitpoints due to an attack by a cyclursus. 
+14:12:48 You dodged an attack. (Ruse)
+14:12:48 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:48 You lose 218 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:48 You lose 360 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:48 You lose 435 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:49 You healed yourself for 2048 hitpoints.
+14:12:49 You lose 361 hitpoints due to an attack by a cyclursus. 
+14:12:49 You lose 302 hitpoints due to an attack by a cyclursus. (-10% damage reduction by Sap Strength)
+14:12:49 A roaming dread loses 118 hitpoints due to your attack. 
+14:12:49 You were healed for 38 hitpoints.
+14:12:49 You gained 22 mana.
+14:12:49 Transcendence was triggered.
+14:12:49 You lose 296 hitpoints due to an attack by a roaming dread. 
+14:12:49 You lose 343 hitpoints due to an attack by a roaming dread. 
+14:12:49 You lose 226 hitpoints due to an attack by a crypt mage. 
+14:12:49 You lose 383 hitpoints due to an attack by a crypt mage. 
+14:12:49 A roaming dread loses 1055 hitpoints due to your critical attack. 
+14:12:49 You were healed for 708 hitpoints.
+14:12:49 You gained 415 mana.
+14:12:49 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:49 A cyclursus loses 3813 hitpoints due to your critical attack. 
+14:12:49 You were healed for 650 hitpoints.
+14:12:49 You gained 357 mana.
+14:12:49 You lose 218 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:49 You lose 308 hitpoints due to an attack by a roaming dread. (-10% damage reduction by Sap Strength)
+14:12:50 You lose 163 hitpoints due to an attack by a crypt mage. 
+14:12:50 You lose 404 hitpoints due to an attack by a crypt mage. 
+14:12:50 You lose 308 hitpoints due to an attack by a cyclursus. 
+14:12:50 You lose 239 hitpoints due to an attack by a roaming dread. 
+14:12:50 You lose 343 hitpoints due to an attack by a roaming dread. 
+14:12:50 You lose 266 hitpoints due to an attack by a cyclursus. 
+14:12:50 You lose 178 hitpoints due to an attack by a crypt mage. (-10% damage reduction by Sap Strength)
+14:12:51 You lose 343 hitpoints due to an attack by a cyclursus. 
+14:12:51 You lose 368 hitpoints due to an attack by a cyclursus. 
+14:12:51 You lose 311 hitpoints due to an attack by a cyclursus. 
+14:12:51 You lose 290 hitpoints due to an attack by a roaming dread. 
+14:12:51 You lose 186 hitpoints due to an attack by a crypt mage. 
+14:12:51 You lose 341 hitpoints due to an attack by a crypt mage. 
+14:12:51 A crypt mage loses 206 hitpoints due to your critical attack. 
+14:12:51 You were healed for 58 hitpoints.
+14:12:51 You gained 36 mana.
+14:12:51 You lose 260 hitpoints due to an attack by a roaming dread. 
+14:12:51 You lose 455 hitpoints due to an attack by a roaming dread. 
+14:12:51 You lose 290 hitpoints due to an attack by a roaming dread. 
+14:12:52 You lose 328 hitpoints due to an attack by a crypt mage. 
+14:12:52 Using one of 1547 great fireball runes...
+14:12:52 A crypt mage loses 705 hitpoints due to your attack. (zap charm, increased damage by Expose Weakness)
+14:12:52 A crypt mage loses 196 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 80 hitpoints.
+14:12:52 You gained 55 mana.
+14:12:52 You gained 64240 experience points (active prey bonus, Animus mastery).
+14:12:52 A roaming dread loses 1557 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 87 hitpoints.
+14:12:52 You gained 65 mana.
+14:12:52 A roaming dread loses 1557 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 87 hitpoints.
+14:12:52 You gained 65 mana.
+14:12:52 A cyclursus loses 1468 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 91 hitpoints.
+14:12:52 You gained 56 mana.
+14:12:52 A roaming dread loses 1557 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 87 hitpoints.
+14:12:52 You gained 65 mana.
+14:12:52 A cyclursus loses 1413 hitpoints due to your critical attack. 
+14:12:52 You were healed for 88 hitpoints.
+14:12:52 You gained 49 mana.
+14:12:52 A crypt mage loses 1299 hitpoints due to your critical attack. 
+14:12:52 You were healed for 77 hitpoints.
+14:12:52 You gained 47 mana.
+14:12:52 You gained 64240 experience points (active prey bonus, Animus mastery).
+14:12:52 A crypt mage loses 1430 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 80 hitpoints.
+14:12:52 You gained 55 mana.
+14:12:52 A crypt mage loses 268 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:52 You were healed for 80 hitpoints.
+14:12:52 You gained 55 mana.
+14:12:52 You gained 64240 experience points (active prey bonus, Animus mastery).
+14:12:52 You healed yourself for 2891 hitpoints.
+14:12:52 You lose 290 hitpoints due to an attack by a roaming dread. 
+14:12:52 You lose 311 hitpoints due to an attack by a roaming dread. 
+14:12:52 You lose 340 hitpoints due to an attack by a cyclursus. 
+14:12:52 Using one of 1313 ultimate mana potions...
+14:12:53 You gained 501 mana.
+14:12:53 You healed yourself for 2534 hitpoints.
+14:12:53 You lose 285 hitpoints due to an attack by a cyclursus. 
+14:12:53 You lose 313 hitpoints due to an attack by a crypt mage. 
+14:12:53 Momentum was triggered.
+14:12:53 You lose 306 hitpoints due to an attack by a cyclursus. 
+14:12:54 You lose 198 hitpoints due to an attack by a roaming dread. 
+14:12:54 You lose 343 hitpoints due to an attack by a roaming dread. 
+14:12:54 A roaming dread loses 245 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:54 You were healed for 68 hitpoints.
+14:12:54 You gained 51 mana.
+14:12:54 Using one of 1546 great fireball runes...
+14:12:54 A roaming dread loses 1703 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:54 You were healed for 109 hitpoints.
+14:12:54 You gained 81 mana.
+14:12:54 A roaming dread loses 1703 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:54 You were healed for 109 hitpoints.
+14:12:54 You gained 81 mana.
+14:12:54 A roaming dread loses 1012 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:54 You were healed for 109 hitpoints.
+14:12:54 You gained 81 mana.
+14:12:54 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:54 A cyclursus loses 1545 hitpoints due to your critical attack. 
+14:12:54 You were healed for 110 hitpoints.
+14:12:54 You gained 61 mana.
+14:12:54 A crypt mage loses 1564 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:54 You were healed for 100 hitpoints.
+14:12:54 You gained 69 mana.
+14:12:54 A cyclursus loses 1545 hitpoints due to your critical attack. 
+14:12:54 You were healed for 110 hitpoints.
+14:12:54 You gained 61 mana.
+14:12:54 A cyclursus loses 757 hitpoints due to your attack. (curse charm, increased damage by Expose Weakness)
+14:12:54 A cyclursus loses 1606 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:54 You were healed for 114 hitpoints.
+14:12:54 You gained 70 mana.
+14:12:54 You lose 369 hitpoints due to an attack by a roaming dread. 
+14:12:54 You healed yourself for 1795 hitpoints.
+14:12:54 You lose 348 hitpoints due to an attack by a roaming dread. 
+14:12:54 Using one of 1312 ultimate mana potions...
+14:12:54 You lose 317 hitpoints due to an attack by a cyclursus. 
+14:12:55 You lose 293 hitpoints due to an attack by a cyclursus. 
+14:12:55 You healed yourself for 1407 hitpoints.
+14:12:55 You lose 317 hitpoints due to an attack by a cyclursus. 
+14:12:55 You lose 338 hitpoints due to an attack by a cyclursus. 
+14:12:56 A roaming dread loses 198 hitpoints due to your critical attack. 
+14:12:56 You were healed for 55 hitpoints.
+14:12:56 You gained 37 mana.
+14:12:56 Using one of 1545 great fireball runes...
+14:12:56 You lose 237 hitpoints due to an attack by a roaming dread. 
+14:12:56 A roaming dread loses 1436 hitpoints due to your critical attack. 
+14:12:56 You were healed for 85 hitpoints.
+14:12:56 You gained 57 mana.
+14:12:56 A cyclursus loses 77 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:56 You were healed for 93 hitpoints.
+14:12:56 You gained 57 mana.
+14:12:56 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:56 A cyclursus loses 320 hitpoints due to your critical attack. 
+14:12:56 You were healed for 89 hitpoints.
+14:12:56 You gained 49 mana.
+14:12:56 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:56 A cyclursus loses 1350 hitpoints due to your critical attack. 
+14:12:56 You were healed for 89 hitpoints.
+14:12:56 You gained 49 mana.
+14:12:56 A roaming dread loses 1489 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:56 You were healed for 88 hitpoints.
+14:12:56 You gained 66 mana.
+14:12:56 A cyclursus loses 1350 hitpoints due to your critical attack. 
+14:12:56 You were healed for 89 hitpoints.
+14:12:56 You gained 49 mana.
+14:12:56 A roaming dread loses 1489 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:12:56 You were healed for 88 hitpoints.
+14:12:56 You gained 66 mana.
+14:12:56 A cyclursus loses 1350 hitpoints due to your critical attack. 
+14:12:56 You were healed for 89 hitpoints.
+14:12:56 You gained 49 mana.
+14:12:56 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:12:56 You healed yourself for 469 hitpoints.
+14:12:56 You lose 436 hitpoints due to an attack by a crypt mage. 
+14:12:57 You lose 396 hitpoints due to an attack by a cyclursus. 
+14:12:57 You lose 325 hitpoints due to an attack by a cyclursus. 
+14:12:57 You lose 195 hitpoints due to an attack by a roaming dread. 
+14:12:57 You lose 388 hitpoints due to an attack by a roaming dread. 
+14:12:57 You healed yourself for 1740 hitpoints.
+14:12:58 You lose 382 hitpoints due to an attack by a roaming dread. 
+14:12:58 A roaming dread loses 116 hitpoints due to your attack. 
+14:12:58 You were healed for 33 hitpoints.
+14:12:58 You gained 22 mana.
+14:12:58 Using one of 1544 great fireball runes...
+14:12:58 A roaming dread loses 901 hitpoints due to your attack. 
+14:12:58 You were healed for 58 hitpoints.
+14:12:58 You gained 39 mana.
+14:12:58 A roaming dread loses 901 hitpoints due to your attack. 
+14:12:58 You were healed for 58 hitpoints.
+14:12:58 You gained 39 mana.
+14:12:58 A crypt mage loses 857 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:12:58 You were healed for 55 hitpoints.
+14:12:58 You gained 38 mana.
+14:12:58 A roaming dread loses 895 hitpoints due to your attack. (overflux charm, increased damage by Expose Weakness)
+14:12:58 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:58 A roaming dread loses 308 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:12:58 You were healed for 60 hitpoints.
+14:12:58 You gained 45 mana.
+14:12:58 You gained 46824 experience points (active prey bonus, Animus mastery).
+14:12:58 A cyclursus loses 848 hitpoints due to your attack. 
+14:12:58 You were healed for 61 hitpoints.
+14:12:58 You gained 34 mana.
+14:12:58 A cyclursus loses 539 hitpoints due to your attack. 
+14:12:58 You were healed for 57 hitpoints.
+14:12:58 You gained 34 mana.
+14:12:58 You gained 53269 experience points (active prey bonus, Animus mastery).
+14:12:58 You lose 249 hitpoints due to an attack by a crypt mage. 
+14:12:58 You lose 241 hitpoints due to an attack by a crypt mage. 
+14:12:58 You lose 426 hitpoints due to an attack by a crypt mage. 
+14:12:59 Using one of 1312 ultimate mana potions...
+14:12:59 You gained 459 mana.
+14:12:59 You healed yourself for 916 hitpoints.
+14:12:59 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:00 You lose 348 hitpoints due to an attack by a cyclursus. 
+14:13:00 You lose 402 hitpoints due to an attack by a cyclursus. 
+14:13:00 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:13:00 You lose 240 hitpoints due to an attack by a roaming dread. 
+14:13:00 You lose 192 hitpoints due to an attack by a roaming dread. 
+14:13:00 A roaming dread loses 131 hitpoints due to your attack. 
+14:13:00 You were healed for 37 hitpoints.
+14:13:00 You gained 25 mana.
+14:13:00 Using one of 1543 great fireball runes...
+14:13:00 A crypt mage loses 641 hitpoints due to your attack. 
+14:13:00 You were healed for 45 hitpoints.
+14:13:00 You gained 28 mana.
+14:13:00 A crypt mage loses 667 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:00 You were healed for 47 hitpoints.
+14:13:00 You gained 32 mana.
+14:13:00 A roaming dread loses 702 hitpoints due to your attack. 
+14:13:00 You were healed for 49 hitpoints.
+14:13:00 You gained 33 mana.
+14:13:00 A roaming dread loses 702 hitpoints due to your attack. 
+14:13:00 You were healed for 49 hitpoints.
+14:13:00 You gained 33 mana.
+14:13:00 A roaming dread loses 1160 hitpoints due to your attack. (overflux charm)
+14:13:00 A roaming dread loses 702 hitpoints due to your attack. 
+14:13:00 You were healed for 49 hitpoints.
+14:13:00 You gained 33 mana.
+14:13:00 A roaming dread loses 702 hitpoints due to your attack. 
+14:13:00 You were healed for 49 hitpoints.
+14:13:00 You gained 33 mana.
+14:13:00 You lose 171 hitpoints due to an attack by a crypt mage. 
+14:13:00 You lose 449 hitpoints due to an attack by a crypt mage. 
+14:13:00 You healed yourself for 1603 hitpoints.
+14:13:00 You lose 208 hitpoints due to an attack by a crypt mage. 
+14:13:01 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:01 You lose 330 hitpoints due to an attack by a cyclursus. 
+14:13:01 You lose 368 hitpoints due to an attack by a cyclursus. 
+14:13:01 Using one of 1311 ultimate mana potions...
+14:13:01 You lose 390 hitpoints due to an attack by a cyclursus. 
+14:13:01 You gained 484 mana.
+14:13:02 You lose 136 hitpoints due to an attack by a roaming dread. 
+14:13:02 You lose 342 hitpoints due to an attack by a cyclursus. 
+14:13:02 A roaming dread loses 1206 hitpoints due to your attack. (overflux charm, increased damage by Expose Weakness)
+14:13:02 A roaming dread loses 191 hitpoints due to your attack. (increased damage by Expose Weakness, Onslaught)
+14:13:02 You were healed for 54 hitpoints.
+14:13:02 You gained 40 mana.
+14:13:02 You dodged an attack. (Ruse)
+14:13:02 You lose 480 hitpoints due to an attack by a crypt mage. 
+14:13:02 Using one of 1542 great fireball runes...
+14:13:02 A crypt mage loses 823 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 53 hitpoints.
+14:13:02 You gained 36 mana.
+14:13:02 A roaming dread loses 896 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 57 hitpoints.
+14:13:02 You gained 43 mana.
+14:13:02 A roaming dread loses 896 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 57 hitpoints.
+14:13:02 You gained 43 mana.
+14:13:02 A roaming dread loses 1206 hitpoints due to your attack. (overflux charm, increased damage by Expose Weakness)
+14:13:02 A roaming dread loses 896 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 57 hitpoints.
+14:13:02 You gained 43 mana.
+14:13:02 A cyclursus loses 845 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 60 hitpoints.
+14:13:02 You gained 37 mana.
+14:13:02 A cyclursus loses 845 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 60 hitpoints.
+14:13:02 You gained 37 mana.
+14:13:02 A roaming dread loses 896 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:02 You were healed for 57 hitpoints.
+14:13:02 You gained 43 mana.
+14:13:02 You lose 179 hitpoints due to an attack by a roaming dread. 
+14:13:03 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:03 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:03 You healed yourself for 3199 hitpoints.
+14:13:03 You lose 379 hitpoints due to an attack by a cyclursus. 
+14:13:03 Using one of 1310 ultimate mana potions...
+14:13:03 You lose 338 hitpoints due to an attack by a cyclursus. 
+14:13:03 You lose 425 hitpoints due to an attack by a cyclursus. 
+14:13:04 You lose 182 hitpoints due to an attack by a roaming dread. 
+14:13:04 You healed yourself for 1745 hitpoints.
+14:13:04 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:13:04 You lose 185 hitpoints due to an attack by a roaming dread. 
+14:13:04 You lose 355 hitpoints due to an attack by a roaming dread. 
+14:13:04 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:04 A roaming dread loses 127 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:04 You were healed for 36 hitpoints.
+14:13:04 You gained 27 mana.
+14:13:05 You lose 338 hitpoints due to an attack by a roaming dread. 
+14:13:05 You lose 181 hitpoints due to an attack by a roaming dread. 
+14:13:05 Using one of 1541 great fireball runes...
+14:13:05 A crypt mage loses 705 hitpoints due to your attack. (zap charm, increased damage by Expose Weakness)
+14:13:05 A crypt mage loses 716 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 40 hitpoints.
+14:13:05 You gained 28 mana.
+14:13:05 A roaming dread loses 780 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 44 hitpoints.
+14:13:05 You gained 33 mana.
+14:13:05 A roaming dread loses 780 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 44 hitpoints.
+14:13:05 You gained 33 mana.
+14:13:05 A roaming dread loses 753 hitpoints due to your attack. 
+14:13:05 You were healed for 42 hitpoints.
+14:13:05 You gained 29 mana.
+14:13:05 A crypt mage loses 390 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 40 hitpoints.
+14:13:05 You gained 28 mana.
+14:13:05 You gained 64240 experience points (active prey bonus, Animus mastery).
+14:13:05 A roaming dread loses 753 hitpoints due to your attack. 
+14:13:05 You were healed for 42 hitpoints.
+14:13:05 You gained 29 mana.
+14:13:05 A roaming dread loses 780 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 44 hitpoints.
+14:13:05 You gained 33 mana.
+14:13:05 A roaming dread loses 780 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 44 hitpoints.
+14:13:05 You gained 33 mana.
+14:13:05 A cyclursus loses 736 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:05 You were healed for 46 hitpoints.
+14:13:05 You gained 28 mana.
+14:13:05 You lose 452 hitpoints due to an attack by a crypt mage. 
+14:13:05 You healed yourself for 1835 hitpoints.
+14:13:05 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:06 You lose 286 hitpoints due to an attack by a roaming dread. 
+14:13:06 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:13:06 You healed yourself for 1028 hitpoints.
+14:13:06 You lose 294 hitpoints due to an attack by a roaming dread. 
+14:13:06 You lose 353 hitpoints due to an attack by a cyclursus. 
+14:13:06 You lose 275 hitpoints due to an attack by a crypt mage. 
+14:13:06 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:06 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:07 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:07 A roaming dread loses 135 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:07 You were healed for 38 hitpoints.
+14:13:07 You gained 28 mana.
+14:13:07 You lose 372 hitpoints due to an attack by a cyclursus. 
+14:13:07 A roaming dread loses 1338 hitpoints due to your attack. 
+14:13:07 You were healed for 93 hitpoints.
+14:13:07 You gained 76 mana.
+14:13:07 A roaming dread loses 1160 hitpoints due to your attack. (overflux charm)
+14:13:07 A roaming dread loses 1338 hitpoints due to your attack. 
+14:13:07 You were healed for 93 hitpoints.
+14:13:07 You gained 76 mana.
+14:13:07 A roaming dread loses 1386 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:07 You were healed for 97 hitpoints.
+14:13:07 You gained 86 mana.
+14:13:07 A roaming dread loses 1386 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:07 You were healed for 97 hitpoints.
+14:13:07 You gained 86 mana.
+14:13:07 A cyclursus loses 1306 hitpoints due to your attack. (increased damage by Expose Weakness)
+14:13:07 You were healed for 102 hitpoints.
+14:13:07 You gained 76 mana.
+14:13:07 A cyclursus loses 1258 hitpoints due to your attack. 
+14:13:07 You were healed for 98 hitpoints.
+14:13:07 You gained 67 mana.
+14:13:07 You healed yourself for 1702 hitpoints.
+14:13:07 You lose 230 hitpoints due to an attack by a roaming dread. 
+14:13:07 You lose 309 hitpoints due to an attack by a cyclursus. 
+14:13:07 You lose 302 hitpoints due to an attack by a roaming dread. 
+14:13:08 Using one of 1310 ultimate mana potions...
+14:13:08 You gained 517 mana.
+14:13:08 You lose 333 hitpoints due to an attack by a cyclursus. 
+14:13:08 You healed yourself for 1174 hitpoints.
+14:13:08 You lose 254 hitpoints due to an attack by a roaming dread. 
+14:13:08 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:13:08 You lose 402 hitpoints due to an attack by a cyclursus. 
+14:13:08 You lose 220 hitpoints due to an attack by a cyclursus. 
+14:13:08 You lose 156 hitpoints due to an attack by a roaming dread. 
+14:13:08 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:08 You lose 404 hitpoints due to an attack by a cyclursus. 
+14:13:09 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:09 You lose 374 hitpoints due to an attack by a roaming dread. 
+14:13:09 A roaming dread loses 211 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 59 hitpoints.
+14:13:09 You gained 44 mana.
+14:13:09 Using one of 1540 great fireball runes...
+14:13:09 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:09 A roaming dread loses 1254 hitpoints due to your critical attack. 
+14:13:09 You were healed for 61 hitpoints.
+14:13:09 You gained 41 mana.
+14:13:09 A roaming dread loses 1300 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 47 mana.
+14:13:09 A roaming dread loses 1300 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 47 mana.
+14:13:09 A roaming dread loses 1254 hitpoints due to your critical attack. 
+14:13:09 You were healed for 61 hitpoints.
+14:13:09 You gained 41 mana.
+14:13:09 A cyclursus loses 1179 hitpoints due to your critical attack. 
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 36 mana.
+14:13:09 A roaming dread loses 1300 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 47 mana.
+14:13:09 A roaming dread loses 1254 hitpoints due to your critical attack. 
+14:13:09 You were healed for 61 hitpoints.
+14:13:09 You gained 41 mana.
+14:13:09 A cyclursus loses 757 hitpoints due to your attack. (curse charm, increased damage by Expose Weakness)
+14:13:09 A cyclursus loses 1225 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 67 hitpoints.
+14:13:09 You gained 41 mana.
+14:13:09 A cyclursus loses 731 hitpoints due to your attack. (curse charm)
+14:13:09 A cyclursus loses 1179 hitpoints due to your critical attack. 
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 36 mana.
+14:13:09 A crypt mage loses 1193 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 59 hitpoints.
+14:13:09 You gained 40 mana.
+14:13:09 A roaming dread loses 1300 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 47 mana.
+14:13:09 A cyclursus loses 731 hitpoints due to your attack. (curse charm)
+14:13:09 A cyclursus loses 1179 hitpoints due to your critical attack. 
+14:13:09 You were healed for 64 hitpoints.
+14:13:09 You gained 36 mana.
+14:13:09 You lose 340 hitpoints due to an attack by a cyclursus. 
+14:13:09 You lose 378 hitpoints due to an attack by a cyclursus. 
+14:13:09 You lose 353 hitpoints due to an attack by a cyclursus. 
+14:13:09 You healed yourself for 3110 hitpoints.
+14:13:09 You lose 171 hitpoints due to an attack by a roaming dread. 
+14:13:09 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:10 You lose 404 hitpoints due to an attack by a roaming dread. 
+14:13:10 You lose 411 hitpoints due to an attack by a crypt mage. 
+14:13:10 You lose 318 hitpoints due to an attack by a roaming dread. 
+14:13:10 You lose 390 hitpoints due to an attack by a cyclursus. 
+14:13:10 You lose 279 hitpoints due to an attack by a cyclursus. 
+14:13:10 You lose 375 hitpoints due to an attack by a cyclursus. 
+14:13:10 You healed yourself for 2233 hitpoints.
+14:13:10 You lose 441 hitpoints due to an attack by a roaming dread. 
+14:13:10 You lose 382 hitpoints due to an attack by a cyclursus. 
+14:13:11 You lose 381 hitpoints due to an attack by a roaming dread. 
+14:13:11 You lose 342 hitpoints due to an attack by a roaming dread. 
+14:13:11 You lose 262 hitpoints due to an attack by a roaming dread. 
+14:13:11 A roaming dread loses 218 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+14:13:11 You were healed for 61 hitpoints.
+14:13:11 You gained 45 mana.
+14:13:11 Using one of 1539 great fireball runes...
+14:13:11 A roaming dread loses 921 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 33 mana.
+14:13:11 A cyclursus loses 836 hitpoints due to your attack. (Runic Mastery)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 25 mana.
+14:13:11 A roaming dread loses 889 hitpoints due to your attack. (Runic Mastery)
+14:13:11 You were healed for 42 hitpoints.
+14:13:11 You gained 29 mana.
+14:13:11 A roaming dread loses 921 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 33 mana.
+14:13:11 A crypt mage loses 846 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 40 hitpoints.
+14:13:11 You gained 28 mana.
+14:13:11 A cyclursus loses 869 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 46 hitpoints.
+14:13:11 You gained 29 mana.
+14:13:11 A roaming dread loses 889 hitpoints due to your attack. (Runic Mastery)
+14:13:11 You were healed for 42 hitpoints.
+14:13:11 You gained 29 mana.
+14:13:11 A cyclursus loses 836 hitpoints due to your attack. (Runic Mastery)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 25 mana.
+14:13:11 A cyclursus loses 869 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 46 hitpoints.
+14:13:11 You gained 29 mana.
+14:13:11 A cyclursus loses 836 hitpoints due to your attack. (Runic Mastery)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 25 mana.
+14:13:11 A cyclursus loses 836 hitpoints due to your attack. (Runic Mastery)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 25 mana.
+14:13:11 A roaming dread loses 921 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 44 hitpoints.
+14:13:11 You gained 33 mana.
+14:13:11 A cyclursus loses 869 hitpoints due to your attack. (Runic Mastery, increased damage by Expose Weakness)
+14:13:11 You were healed for 46 hitpoints.
+14:13:11 You gained 29 mana.
+14:13:11 You healed yourself for 1678 hitpoints.
