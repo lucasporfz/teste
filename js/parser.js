@@ -507,6 +507,25 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
       .map((t, idx) => ({ turn: idx + 1, ts: t.ts, mark: t.rpGrenade, hits: Math.max(0, Math.round((t.components && t.components.grenade) || 0)), rawAttackHits: t.rawAttackHits }))
       .filter(e => e.mark)
   } : null;
+  // Dano-base por componente p/ o card "DANOS RP" — os 3 pela MESMA métrica: média do
+  // dano normalizado (revertedDmg = sem crit/prey) das lines de cada componente.
+  // (rpGrenadeDmg/dmgCycle seguem inalterados p/ a simulação; este trio é diagnóstico.)
+  // grenadeHitsMean: média de hits por explosão (série grenadeHitsPerShot).
+  let rpSpellDmgAvg = 0, rpRuneDmgAvg = 0, rpGrenadeDmgAvg = 0, grenadeHitsMean = 0;
+  if (isPaladin) {
+    const dmgByComp = { spell: [], rune: [], grenade: [] };
+    for (const t of turnStats) {
+      for (const l of (t.rpComponentLines || [])) {
+        const arr = dmgByComp[l.correctedComponent];
+        if (arr && Number.isFinite(l.revertedDmg) && l.revertedDmg > 0) arr.push(l.revertedDmg);
+      }
+    }
+    rpSpellDmgAvg = dmgByComp.spell.length ? Math.round(mean(dmgByComp.spell)) : 0;
+    rpRuneDmgAvg = dmgByComp.rune.length ? Math.round(mean(dmgByComp.rune)) : 0;
+    rpGrenadeDmgAvg = dmgByComp.grenade.length ? Math.round(mean(dmgByComp.grenade)) : 0;
+    const gShots = rpComponentSeries ? rpComponentSeries.grenadeHitsPerShot : [];
+    grenadeHitsMean = gShots.length ? mean(gShots) : 0;
+  }
   const classifyRpTurnLines = (turn, stat, mark) => {
     if (!isPaladin || !turn || !stat) return [];
     return stat.rpComponentLines || buildRpClassifiedLines(turn, stat, mark, critMultObserved, rpElementalPreyMult);
@@ -692,7 +711,9 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
       spellHitsMeanWhenUsed = spellHitsMean;
     }
     rpArrowCoverageObserved = coverageFromHits(arrowHitsMean);
-    rpSpellCoverageObserved = coverageFromHits(spellHitsMean);
+    // Cobertura de spell usa a média SEM zeros (spellHitsMeanWhenUsed): turnos cast/arrow-only
+    // não devem encolher a cobertura de spell quando ele de fato é lançado.
+    rpSpellCoverageObserved = coverageFromHits(spellHitsMeanWhenUsed || spellHitsMean);
     rpArrowCoverageUsed = rpArrowCoverageObserved;
     rpSpellCoverageUsed = rpSpellCoverageObserved;
     paladinArrowCoverage = rpArrowCoverageUsed;
@@ -854,7 +875,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     rpComponentSeries, rpComponentDebugExamples, rpComponentMonotonic, rpElementalCorrection,
     specialCastThreshold: Math.max(1, Math.round(boxSizeP95 || boxSizeEffective || 1)),
     aoeHitSamples, aoeCoverageMean, boxSizeEffective, spawnCurve,
-    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, paladinArrowCoverage, paladinSpellCoverage,
+    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, paladinArrowCoverage, paladinSpellCoverage,
     rpArrowCoverageObserved, rpSpellCoverageObserved, rpArrowCoverageUsed, rpSpellCoverageUsed,
     rpGrenadePairCount, rpGrenadeShare, rpGrenadeConfidence, rpGrenadeDetected: rpGrenadePairCount > 0,
     rpGrenadeDmg, rpGrenadeIntervalSeconds,

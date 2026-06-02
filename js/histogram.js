@@ -294,8 +294,8 @@ function renderValidatorRpComponentHistograms(data, simComponentHists) {
     ? t('val_rp_component_small_n')
     : (grenadeN ? t('val_rp_component_samples') : t('val_rp_component_no_grenade'));
   renderSmallComponentHistogram('valRpArrowHistogram', chart => { valRpArrowHistogramChart = chart; }, real.arrowHitsPerTurn, sim.arrow, t('val_rp_component_arrow'), undefined, '#F59E0B');
-  renderSmallComponentHistogram('valRpSpellHistogram', chart => { valRpSpellHistogramChart = chart; }, real.spellHitsPerTurn, sim.spell, t('val_rp_component_spell'), undefined, '#22C55E');
-  renderSmallComponentHistogram('valRpRuneHistogram', chart => { valRpRuneHistogramChart = chart; }, real.runeHitsPerTurn, sim.rune, t('val_rp_component_rune'), undefined, '#60A5FA');
+  renderSmallComponentHistogram('valRpSpellHistogram', chart => { valRpSpellHistogramChart = chart; }, (real.spellHitsPerTurn || []).filter(v => v > 0), sim.spell, t('val_rp_component_spell'), undefined, '#22C55E');
+  renderSmallComponentHistogram('valRpRuneHistogram', chart => { valRpRuneHistogramChart = chart; }, (real.runeHitsPerTurn || []).filter(v => v > 0), sim.rune, t('val_rp_component_rune'), undefined, '#60A5FA');
   renderSmallComponentHistogram('valRpGrenadeHistogram', chart => { valRpGrenadeHistogramChart = chart; }, real.grenadeHitsPerShot, sim.grenade, t('val_rp_component_grenade'), grenadeNote, '#F87171');
   renderValidatorRpComponentDebug(data);
 }

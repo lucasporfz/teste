@@ -2272,14 +2272,17 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_exit'), val: data.exitP5, sub: t('val_sub_p5_hits') + palDiv2Suffix },
     { lbl: t('val_card_box_change'), val: bctVal, sub: bctSub, raw: true },
     { lbl: t('val_card_dmg_avg'), val: Math.round(data.avgNormal), sub: t('val_sub_clean_hits') },
-    { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']',
-      sub: t('val_sub_atk_cycle').replace('{f}', data.preyEffectiveFactor.toFixed(3).replace('.', dec)) },
+    data.isPaladin
+      ? { lbl: t('val_card_rp_damages'),
+          val: 'spell ' + Math.round(data.rpSpellDmgAvg || 0)
+             + (data.rpRuneDmgAvg ? ' · runa ' + Math.round(data.rpRuneDmgAvg) : '')
+             + (data.rpGrenadeDmgAvg ? ' · granada ' + Math.round(data.rpGrenadeDmgAvg) : ''),
+          sub: t('val_sub_rp_damages') }
+      : { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']',
+          sub: t('val_sub_atk_cycle').replace('{f}', data.preyEffectiveFactor.toFixed(3).replace('.', dec)) },
     { lbl: t('val_card_pal_arrow'), val: Math.round(data.paladinArrowDmg || 0), sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_arrow')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_spell'), val: data.isPaladin ? '[' + data.dmgCycle.join(', ') + ']' : '—', sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_spell')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_split_method'), val: data.isPaladin ? ((data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : '—', sub: data.isPaladin ? (data.paladinSplitMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster de dano') : t('val_sub_pal_off') },
-    { lbl: t('val_card_pal_damage_method'), val: data.isPaladin ? ((data.paladinDamageMethod || data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : 'â€”', sub: data.isPaladin ? (data.paladinDamageWarning ? '<span style="color:var(--amber)">' + t('val_sub_pal_order_rejected') + '</span>' : (data.paladinDamageMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster/ciclo misto')) : t('val_sub_pal_off') },
-    { lbl: t('val_card_rp_elemental_fix'), val: data.isPaladin ? ((data.rpElementalCorrection && data.rpElementalCorrection.retagged) || 0) + ' / ' + ((data.rpElementalCorrection && data.rpElementalCorrection.ambiguous) || 0) + ' / ' + ((data.rpElementalCorrection && data.rpElementalCorrection.missingMod) || 0) : '—', sub: data.isPaladin ? t('val_sub_rp_elemental_fix') : t('val_sub_pal_off') },
-    { lbl: t('val_card_rp_turn_types'), val: data.isPaladin ? (((data.rpElementalCorrection && data.rpElementalCorrection.turnTypes && data.rpElementalCorrection.turnTypes.spell) || 0) + ' / ' + ((data.rpElementalCorrection && data.rpElementalCorrection.turnTypes && data.rpElementalCorrection.turnTypes.rune) || 0) + ' / ' + ((data.rpElementalCorrection && data.rpElementalCorrection.turnTypes && data.rpElementalCorrection.turnTypes.explode) || 0)) : '—', sub: data.isPaladin ? (t('val_sub_rp_turn_types') + ' · conflito: ' + ((data.rpElementalCorrection && data.rpElementalCorrection.turnConflicts && data.rpElementalCorrection.turnConflicts.explode_with_rune) || 0)) : t('val_sub_pal_off') },
     { lbl: t('val_card_auto_dmg'), val: Math.round(data.autoDmg || 0), sub: data.isPaladin ? t('val_sub_pal_off') : t('val_sub_auto_dmg') },
     { lbl: t('val_card_reflect_dmg'), val: data.reflectDmg ? Math.round(data.reflectDmg) : '—', sub: data.reflectDmg ? t('val_sub_reflect_dmg') + ' · ' + (data.reflectHitCount || 0) + ' hits' : t('val_sub_pal_off') },
     { lbl: t('val_card_aoe_coverage'), val: ((data.aoeCoverageMean || 0) * 100).toFixed(1).replace('.', dec) + '%', sub: t('val_sub_aoe_coverage') },
@@ -2291,6 +2294,7 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_arrow_hits'), val: data.isPaladin ? (data.arrowHitsMean || 0).toFixed(2).replace('.', dec) : '—', sub: data.isPaladin ? t('val_sub_arrow_hits') : t('val_sub_pal_off') },
     { lbl: t('val_card_spell_hits'), val: data.isPaladin ? (data.spellHitsMeanWhenUsed || data.spellHitsMean || 0).toFixed(2).replace('.', dec) : '—', sub: data.isPaladin ? t('val_sub_spell_hits') : t('val_sub_pal_off') },
     { lbl: t('val_card_rune_hits'), val: data.isPaladin ? (data.runeHitsMean || 0).toFixed(2).replace('.', dec) : '—', sub: data.isPaladin ? t('val_sub_rune_hits') : t('val_sub_pal_off') },
+    { lbl: t('val_card_grenade_hits'), val: data.isPaladin ? (data.grenadeHitsMean || 0).toFixed(2).replace('.', dec) : '—', sub: data.isPaladin ? t('val_sub_grenade_hits') : t('val_sub_pal_off') },
     { lbl: t('val_card_arrow_coverage'), val: data.isPaladin ? ((data.paladinArrowCoverage || 0) * 100).toFixed(0) + '%' : '—', sub: data.isPaladin ? t('val_sub_arrow_coverage') : t('val_sub_pal_off') },
     { lbl: t('val_card_spell_coverage'), val: data.isPaladin ? ((data.paladinSpellCoverage || 0) * 100).toFixed(0) + '%' : '—', sub: data.isPaladin ? t('val_sub_spell_coverage') : t('val_sub_pal_off') },
     { lbl: t('val_card_spawn_curve'), val: (data.spawnCurve || 2).toFixed(2).replace('.', dec), sub: t('val_sub_spawn_curve') },
@@ -2301,7 +2305,6 @@ function renderValidatorExtracted(data) {
     { lbl: t('val_card_screen_hits'), val: data.selectedAoeCoverage && data.selectedScreenBoxSize ? (data.selectedScreenBoxSize * data.selectedAoeCoverage).toFixed(2).replace('.', dec) : '—', sub: t('val_sub_screen_hits') },
     { lbl: t('val_card_model_box_time'), val: data.selectedBoxChangeTime ? data.selectedBoxChangeTime + 's' : '—', sub: t('val_sub_model_box_time') },
     { lbl: t('val_card_post_walk_spawn'), val: data.intelDetected === false ? '3 ondas' : '—', sub: data.intelDetected === false ? t('val_sub_post_walk_waves') : t('val_sub_post_walk_spawn') },
-    { lbl: t('val_card_rp_grenade'), val: data.isPaladin ? (data.rpGrenadePairCount || 0) + ' pares' : '—', sub: data.isPaladin ? t('val_sub_rp_grenade') + ' · ' + (data.rpGrenadeConfidence || 'none') + ' · ~' + (data.rpGrenadeIntervalSeconds || 24) + 's' : t('val_sub_pal_off') },
     { lbl: t('val_card_mage_ue'), val: data.isMage ? Math.round(data.mageUeDmg || 0) : '—', sub: data.isMage ? t('val_sub_mage_ue') + ' · ~' + (data.mageUeIntervalSeconds || 50) + 's' : t('val_sub_pal_off') },
     { lbl: t('val_card_ue_cooldown'), val: data.isMage ? '4s' : '—', sub: data.isMage ? t('val_sub_mage_ue') : t('val_sub_pal_off') },
     { lbl: t('val_card_special_timing'), val: (data.isPaladin || data.isMage) ? 'box cheia' : '—', sub: (data.isPaladin || data.isMage) ? 'cooldown pronto aguarda mobs suficientes' : t('val_sub_pal_off') },
@@ -2332,21 +2335,6 @@ function renderValidatorExtracted(data) {
     }
   }
 
-  if (data.isPaladin) {
-    cards.push({
-      lbl: t('val_card_rp_grenade_dmg'),
-      val: Math.round(data.rpGrenadeDmg || 0),
-      sub: t('val_sub_rp_grenade') + ' · ~' + (data.rpGrenadeIntervalSeconds || 24) + 's'
-    });
-  }
-  cards.push({
-    lbl: t('val_card_mob_distribution'),
-    val: data.hpMobBreakdown && data.hpMobBreakdown.length ? data.hpMobBreakdown.length + ' ' + t('val_types_suffix') : t('val_average_short'),
-    sub: data.hpMobBreakdown && data.hpMobBreakdown.length > 1
-      ? t('val_sub_mob_distribution_available')
-      : t('val_sub_mob_distribution_average')
-  });
-
   let html = '';
   // Banner de aviso quando log é curto (< 30 turnos efetivos): estatísticas
   // podem ser pouco confiáveis. Crit rate, charm rate, dmgCycle, p5/p95 todos
@@ -2373,15 +2361,15 @@ function renderValidatorExtracted(data) {
     if (data.isPaladin && c.lbl === t('val_card_dmg_cycle')) return false;
     if (c.lbl === t('val_card_reflect_dmg') && !data.reflectDmg) return false;
     if (!data.isPaladin && !data.isMage && [
-      t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_pal_damage_method'), t('val_card_rp_elemental_fix'), t('val_card_rp_turn_types'), t('val_card_arrow_hits'),
-      t('val_card_spell_hits'), t('val_card_rune_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'), t('val_card_rp_grenade'),
+      t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_arrow_hits'),
+      t('val_card_spell_hits'), t('val_card_rune_hits'), t('val_card_grenade_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
       t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
     if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_reflect_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_post_walk_spawn'), t('val_card_paladin'), t('val_card_pal_split_method')].includes(c.lbl)) return false;
     if (data.isMage && [
-      t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_pal_damage_method'), t('val_card_rp_elemental_fix'), t('val_card_rp_turn_types'),
-      t('val_card_arrow_hits'), t('val_card_spell_hits'), t('val_card_rune_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
-      t('val_card_rp_grenade'), t('val_card_post_walk_spawn'), t('val_card_paladin')
+      t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'),
+      t('val_card_arrow_hits'), t('val_card_spell_hits'), t('val_card_rune_hits'), t('val_card_grenade_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
+      t('val_card_post_walk_spawn'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
     return true;
   };

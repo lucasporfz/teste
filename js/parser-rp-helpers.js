@@ -385,13 +385,24 @@ function rpClassifyTurnByBands(lines, mark) {
 
   let arrowEnd, spellEnd;
   if (mark === 'explode') {
-    spellEnd = b1; arrowEnd = b2;
+    // GRANADA só é declarada se existir DUAS bandas repetidas (a única garantia, regra do
+    // usuário): a banda final [b1,n) (spell ou granada) E uma banda anterior [b2,b1) também
+    // SUSTENTADA. Se a região anterior não repete (t83: [b2,b1) são hits soltos de arrow),
+    // há só UMA banda repetida = spell, sem granada → o bloco pós-arrow inteiro é spell.
     const t0 = lines[0].ts; let sec = -1;
     for (let i = 0; i < n; i++) if (Number.isFinite(lines[i].ts) && lines[i].ts > t0) { sec = i; break; }
-    if (sec > 0 && sec > arrowEnd && sec <= n) {
-      const med = (lo, hi) => { const a = []; for (let i = lo; i < hi; i++) if (!isOK(i) && Number.isFinite(lines[i].holyOriginal)) a.push(lines[i].holyOriginal); a.sort((x, y) => x - y); return a.length ? a[a.length >> 1] : 0; };
-      const g = med(b1, n), s = med(b2, b1);
-      if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
+    const twoBands = b2 < b1 && sustained(b2, b1);
+    if (twoBands) {
+      spellEnd = b1; arrowEnd = b2;
+      // 2º segundo desambigua quando spell e granada têm dano-base ~igual (t99).
+      if (sec > 0 && sec > arrowEnd && sec <= n) {
+        const med = (lo, hi) => { const a = []; for (let i = lo; i < hi; i++) if (!isOK(i) && Number.isFinite(lines[i].holyOriginal)) a.push(lines[i].holyOriginal); a.sort((x, y) => x - y); return a.length ? a[a.length >> 1] : 0; };
+        const g = med(b1, n), s = med(b2, b1);
+        if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
+      }
+    } else {
+      // Falso explode (sem 2ª banda): arrow + spell, sem granada.
+      spellEnd = n; arrowEnd = b1;
     }
   } else {
     spellEnd = n; arrowEnd = b1;

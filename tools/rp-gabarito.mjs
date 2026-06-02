@@ -25,7 +25,7 @@ function loadTurns(log) {
 const GAB = {
   'logs/rp ingol.txt': { 16:[8,17], 24:[8,16], 46:[8,17], 63:[6,12], 80:[7,13], 119:[4,10], 155:[12,12], 156:[13,26] },
   'logs/mazzerin rp.txt': { 2:[10,22], 22:[7,7], 35:[4,12], 37:[9,19], 53:[6,15], 75:[10,20], 99:[11,22], 117:[10,21], 127:[6,10], 158:[10,14] },
-  'logs/server log rp.txt': { 15:[10,21], 26:[6,13], 69:[8,17], 78:[8,8], 85:[12,28], 87:[9,21], 89:[5,13], 93:[8,19] },
+  'logs/server log rp.txt': { 15:[10,21], 26:[6,13], 69:[8,17], 78:[8,8], 83:[10,20], 85:[12,28], 87:[9,21], 89:[5,13], 91:[9,21], 93:[8,19] },
 };
 
 // ===================== ALGORITMO CANDIDATO =====================
@@ -104,21 +104,21 @@ function rpClassifyTurn(hits, mark) {
 
   let arrowEnd, spellEnd;
   if (mark === 'explode') {
-    // banda1 = granada; banda2 = spell (se sustentada); resto = arrow.
-    if (b2 < b1 && sustained(b2, b1)) { spellEnd = b1; arrowEnd = b2; }
-    else { spellEnd = b1; arrowEnd = b2; } // granada + (spell curto / arrow)
-    // disambiguação por 2º segundo: se a granada começa mais cedo que a virada de segundo,
-    // e o dano de spell e granada coincide, usa o 2º segundo.
+    // granada só se há 2 bandas sustentadas (banda anterior tb repete). Senão = falso explode (arrow+spell).
+    const twoBands = b2 < b1 && sustained(b2, b1);
     const t0 = hits[0].ts; let sec = -1;
     for (let i = 0; i < n; i++) if (hits[i].ts > t0) { sec = i; break; }
-    if (sec > 0 && sec > arrowEnd && sec <= n) {
-      // se a banda1 (granada) e banda2 (spell) têm dano-base holy ~igual, a fronteira real é o 2º seg.
-      const med = (lo,hi) => { const a=[]; for(let i=lo;i<hi;i++) if(!hits[i].overkill) a.push(hits[i].holy); a.sort((x,y)=>x-y); return a.length?a[a.length>>1]:0; };
-      const g = med(b1, n), s = med(b2, b1);
-      if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
+    if (twoBands) {
+      spellEnd = b1; arrowEnd = b2;
+      if (sec > 0 && sec > arrowEnd && sec <= n) {
+        const med = (lo,hi) => { const a=[]; for(let i=lo;i<hi;i++) if(!hits[i].overkill) a.push(hits[i].holy); a.sort((x,y)=>x-y); return a.length?a[a.length>>1]:0; };
+        const g = med(b1, n), s = med(b2, b1);
+        if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
+      }
+    } else {
+      spellEnd = n; arrowEnd = b1; // falso explode: arrow + spell, sem granada
     }
   } else {
-    // normal: banda1 = spell; resto = arrow.
     spellEnd = n; arrowEnd = b1;
   }
   arrowEnd = Math.max(0, Math.min(arrowEnd, spellEnd, n));
