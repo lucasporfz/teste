@@ -22,6 +22,7 @@ for (let i = 1; i < seq.length; i++) { if (seq[i] === seq[i-1]) { runs++; if (se
 const pct = v => (100 * v).toFixed(1) + '%';
 console.log(log);
 console.log('  seq len=' + seq.length + ' (R=' + seq.filter(x=>x==='R').length + ' S=' + seq.filter(x=>x==='S').length + ')');
+console.log('  cobertura: arrow=' + pct(data.paladinArrowCoverage) + ' spell=' + pct(data.paladinSpellCoverage) + ' rune=' + pct(data.paladinRuneCoverage) + '  box(p95)=' + data.boxSizeP95);
 console.log('  rpRuneShare      = ' + pct(data.rpRuneShare));
 console.log('  rpRuneAfterRune  = ' + pct(data.rpRuneAfterRune) + '  (runa seguida de runa)');
 console.log('  rpRuneAfterSpell = ' + pct(data.rpRuneAfterSpell) + '  (spell seguida de runa)');

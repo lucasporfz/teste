@@ -24,6 +24,7 @@ function buildLogInputFromConfig(config) {
     boxVariance: cfg.boxVariance || 0,
     paladinArrowCoverage: cfg.paladinArrowCoverage || 1,
     paladinSpellCoverage: cfg.paladinSpellCoverage || 1,
+    paladinRuneCoverage: cfg.paladinRuneCoverage || 1,
     rpGrenadeMode: !!cfg.rpGrenadeMode,
     mageUeMode: !!cfg.mageUeMode,
     rpGrenadeDmg: cfg.rpGrenadeDmg || 0,
@@ -35,8 +36,6 @@ function buildLogInputFromConfig(config) {
     rpRuneAfterSpell: cfg.rpRuneAfterSpell || 0,
     rpSpellDmgSim: cfg.rpSpellDmgSim || 0,
     rpRuneDmgSim: cfg.rpRuneDmgSim || 0,
-    rpRuneHitsSamples: cfg.rpRuneHitsSamples || [],
-    rpSpellHitsSamples: cfg.rpSpellHitsSamples || [],
     mageUeDmg: cfg.mageUeDmg || 0,
     mageUeIntervalSeconds: cfg.mageUeIntervalSeconds || 50,
     mageUeLockoutSeconds: cfg.mageUeLockoutSeconds || 4,
@@ -108,11 +107,11 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
   }
 
   function resolveLogAoeHits(aliveLen) {
-    // Cobertura própria do componente (mistura rune/spell): amostra o nº de hits da série
-    // observada do componente do turno, se disponível.
-    const compSamples = inp._currentComponentHitsSamples;
-    if (compSamples && compSamples.length) {
-      return Math.max(0, Math.min(aliveLen, Math.round(compSamples[Math.floor(rng() * compSamples.length)] || 0)));
+    // Spell/runa (mistura): nº de hits = FRAÇÃO de cobertura observada do componente sobre os
+    // mobs vivos (screen_ratio), em qualquer coverageMode — não mais replay da série do log.
+    if (inp._useComponentCoverage) {
+      const coverage = Math.max(0.05, Math.min(1, inp._currentComponentCoverage || 1));
+      return Math.max(0, Math.min(aliveLen, Math.round(aliveLen * coverage + (rng() - 0.5))));
     }
     if (inp.coverageMode === 'rp_split') {
       const coverage = Math.max(0.05, Math.min(1, inp._currentComponentCoverage || 1));
@@ -620,13 +619,18 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
         const charm = rollCharm(label);
         charmHits.push(...charm.hits);
         charmKills += charm.kills;
-        inp._currentComponentCoverage = flags.paladin ? (inp.paladinSpellCoverage || 1) : (inp.aoeCoverage || 1);
-        inp._currentComponentHitsSamples = rpMixActive ? (isRuneTurn ? inp.rpRuneHitsSamples : inp.rpSpellHitsSamples) : null;
+        // Spell/runa (mistura): cobertura = fração observada do componente sobre os mobs vivos.
+        if (rpMixActive) {
+          inp._currentComponentCoverage = isRuneTurn ? (inp.paladinRuneCoverage || 1) : (inp.paladinSpellCoverage || 1);
+          inp._useComponentCoverage = true;
+        } else {
+          inp._currentComponentCoverage = flags.paladin ? (inp.paladinSpellCoverage || 1) : (inp.aoeCoverage || 1);
+        }
         const spellDmgTurn = rpMixActive ? inp.rpSpellDmgSim + level : dmgs[ac % 3];
         const runeDmgTurn = rpMixActive ? inp.rpRuneDmgSim + level : dmgs[ac % 3];
         const secondDmg = isMageUeTurn ? ueBaseDmg : (flags.paladin && rpMixActive ? (isRuneTurn ? runeDmgTurn : spellDmgTurn) : dmgs[ac % 3]);
         components.push(rollAttack(label, secondDmg, true));
-        inp._currentComponentHitsSamples = null;
+        inp._useComponentCoverage = false;
         if (flags.paladin) rpSecondTurnIndex++;
       }
     }
@@ -640,6 +644,7 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
       pendingGrenade = 0;
     }
     delete inp._currentComponentCoverage;
+    inp._useComponentCoverage = false;
     const killsThisTurn = charmKills + components.reduce((sum, c) => sum + c.kills, 0);
     const mainComponent = components[components.length - 1] || { baseDmg: dmgs[ac % 3], varMul: 1, isCrit: false, finalDmg: 0 };
     const aoeComponents = flags.paladin

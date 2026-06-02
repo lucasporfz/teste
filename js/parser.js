@@ -721,7 +721,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     };
   }
   const dmgCycleRaw = isPaladin && paladinSplit.spellDmgs ? paladinSplit.spellDmgs : mixedCycleRaw;
-  let arrowHitsMean = 0, spellHitsMean = 0, runeHitsMean = 0, spellHitsMeanWhenUsed = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1;
+  let arrowHitsMean = 0, spellHitsMean = 0, runeHitsMean = 0, spellHitsMeanWhenUsed = 0, runeHitsMeanWhenUsed = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, paladinRuneCoverage = 1;
   let rpArrowCoverageObserved = 1, rpSpellCoverageObserved = 1;
   let rpArrowCoverageUsed = 1, rpSpellCoverageUsed = 1;
   const coverageFromHits = hits => boxSizeP95 > 0 ? Math.max(0, Math.min(1, hits / boxSizeP95)) : 1;
@@ -741,6 +741,8 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
       runeHitsMean = componentRuneSamples.length ? mean(componentRuneSamples) : 0;
       const usedSpellSamples = componentSpellSamples.filter(v => v > 0);
       spellHitsMeanWhenUsed = usedSpellSamples.length ? mean(usedSpellSamples) : spellHitsMean;
+      const usedRuneSamples = componentRuneSamples.filter(v => v > 0);
+      runeHitsMeanWhenUsed = usedRuneSamples.length ? mean(usedRuneSamples) : runeHitsMean;
     } else {
       arrowHitsMean = paladinSplit.arrowHitsMean || 0;
       spellHitsMean = paladinSplit.spellHitsMean || 0;
@@ -754,6 +756,9 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     rpSpellCoverageUsed = rpSpellCoverageObserved;
     paladinArrowCoverage = rpArrowCoverageUsed;
     paladinSpellCoverage = rpSpellCoverageUsed;
+    // Cobertura de runa: fração observada (hits sem zeros / box), análoga à de spell. Usada
+    // pela simulação p/ derivar os hits de runa do nº de mobs vivos (não mais replay da série).
+    paladinRuneCoverage = coverageFromHits(runeHitsMeanWhenUsed || runeHitsMean);
   }
   // Aplicar fator efetivo do prey (média ponderada do dano com prey)
   function cycleWithoutSpecial(cycle) {
@@ -916,7 +921,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     rpComponentSeries, rpComponentDebugExamples, rpComponentMonotonic, rpElementalCorrection,
     specialCastThreshold: Math.max(1, Math.round(boxSizeP95 || boxSizeEffective || 1)),
     aoeHitSamples, aoeCoverageMean, boxSizeEffective, spawnCurve,
-    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, rpSpellDmgSim, rpRuneDmgSim, rpGrenadeDmgSim, rpRuneShare, rpRuneAfterRune, rpRuneAfterSpell, rpRuneHitsSamples, rpSpellHitsSamples, paladinArrowCoverage, paladinSpellCoverage,
+    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, rpSpellDmgSim, rpRuneDmgSim, rpGrenadeDmgSim, rpRuneShare, rpRuneAfterRune, rpRuneAfterSpell, paladinArrowCoverage, paladinSpellCoverage, paladinRuneCoverage,
     rpArrowCoverageObserved, rpSpellCoverageObserved, rpArrowCoverageUsed, rpSpellCoverageUsed,
     rpGrenadePairCount, rpGrenadeShare, rpGrenadeConfidence, rpGrenadeDetected: rpGrenadePairCount > 0,
     rpGrenadeDmg, rpGrenadeIntervalSeconds,

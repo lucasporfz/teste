@@ -860,14 +860,14 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladin
       if (flags.var) base *= 0.8 + rng() * 0.4;
       if (rng() < CRIT_RATE) base *= critMult;
 
-      const compHitsSamples = (isPaladinSecond && rpMixShare > 0)
-        ? (isRuneTurn ? rpMix.runeHits : rpMix.spellHits)
-        : null;
+      // Spell/runa: fração de cobertura observada do componente sobre os mobs vivos (não replay).
+      const useComponentCov = isPaladinSecond && rpMixShare > 0;
+      const componentMagicCov = isRuneTurn ? rpMix.runeCoverage : rpMix.spellCoverage;
       const componentCoverage = coverageMode === 'rp_split' && flags.paladin
         ? (atkIdx === 0 ? paladinArrowCoverage : paladinSpellCoverage)
         : aoeCoverage;
-      const aoeHits = (compHitsSamples && compHitsSamples.length)
-        ? Math.max(0, Math.min(aliveLen, Math.round(compHitsSamples[Math.floor(rng() * compHitsSamples.length)] || 0)))
+      const aoeHits = useComponentCov
+        ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentMagicCov)
         : coverageMode === 'rp_split' && flags.paladin
         ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentCoverage)
         : turnAoeCoverage != null
@@ -982,10 +982,10 @@ self.onmessage = function(e) {
   const cfg = e.data;
   const {
     baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp,
-    boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = SPAWN_CURVE, rpGrenadeMode = false, mageUeMode = false,
+    boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, paladinRuneCoverage = 1, spawnCurve = SPAWN_CURVE, rpGrenadeMode = false, mageUeMode = false,
     rpGrenadeDmg = 0, rpGrenadeDelaySeconds = RP_GRENADE_DELAY_SECONDS, rpGrenadeIntervalSeconds = RP_GRENADE_DEFAULT_INTERVAL_SECONDS,
     mageUeDmg = 0, mageUeIntervalSeconds = MAGE_UE_DEFAULT_INTERVAL_SECONDS, mageUeLockoutSeconds = UE_COOLDOWN_SECONDS,
-    rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpRuneHitsSamples = [], rpSpellHitsSamples = [],
+    rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0,
     runSeed, levels, nSessions, sessionSeconds
   } = cfg;
   const flags = { ...inputFlags, rpGrenadeMode: !!rpGrenadeMode, mageUeMode: !!mageUeMode };
@@ -1001,7 +1001,7 @@ self.onmessage = function(e) {
     const levelGrenadeDmg = rpGrenadeDmg ? rpGrenadeDmg + inc : 0;
     const levelUeDmg = mageUeDmg ? mageUeDmg + inc : 0;
     // Mistura rune/spell observada, com dano por nível (+inc) e séries de cobertura próprias.
-    const rpMix = { share: rpRuneShare, runAfterRune: rpRuneAfterRune, runAfterSpell: rpRuneAfterSpell, spellDmg: rpSpellDmgSim ? rpSpellDmgSim + inc : 0, runeDmg: rpRuneDmgSim ? rpRuneDmgSim + inc : 0, runeHits: rpRuneHitsSamples, spellHits: rpSpellHitsSamples };
+    const rpMix = { share: rpRuneShare, runAfterRune: rpRuneAfterRune, runAfterSpell: rpRuneAfterSpell, spellDmg: rpSpellDmgSim ? rpSpellDmgSim + inc : 0, runeDmg: rpRuneDmgSim ? rpRuneDmgSim + inc : 0, spellCoverage: paladinSpellCoverage, runeCoverage: paladinRuneCoverage };
     result[inc] = simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, levelGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, levelUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds, rpMix);
     self.postMessage({ type: 'progress', level: inc });
   }
@@ -1103,7 +1103,7 @@ function partitionLevels(nLevels, nWorkers) {
 // ========== Fallback: simulação inline (sem workers) ==========
 // Cópia da lógica do worker, rodando na main thread com yields pra não travar UI
 function runSimInline(config, onProgress) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpRuneHitsSamples = [], rpSpellHitsSamples = [], mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, paladinRuneCoverage = 1, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
   const flags = { ...inputFlags, rpGrenadeMode: !!rpGrenadeMode, mageUeMode: !!mageUeMode };
   const CHARM_RATE = 0.1, CRIT_RATE = 0.1, TURN_DURATION = 2.25;
   const POST_WALK_SPAWN_TURNS = 3, POST_WALK_SPAWN_CURVE = 2.2, UE_COOLDOWN_SECONDS = 4;
@@ -1514,14 +1514,14 @@ function runSimInline(config, onProgress) {
         if (isPaladinSecond && rpMixActive) prevRpRuneTurn = isRuneTurn;
         if (flags.var) base *= 0.8 + rng() * 0.4;
         if (rng() < CRIT_RATE) base *= critMult;
-        const compHitsSamples = (isPaladinSecond && rpMixActive)
-          ? (isRuneTurn ? rpRuneHitsSamples : rpSpellHitsSamples)
-          : null;
+        // Spell/runa: fração de cobertura observada do componente sobre os mobs vivos (não replay).
+        const useComponentCov = isPaladinSecond && rpMixActive;
+        const componentMagicCov = isRuneTurn ? paladinRuneCoverage : paladinSpellCoverage;
         const componentCoverage = coverageMode === 'rp_split' && flags.paladin
           ? (atkIdx === 0 ? paladinArrowCoverage : paladinSpellCoverage)
           : aoeCoverage;
-        const aoeHits = (compHitsSamples && compHitsSamples.length)
-          ? Math.max(0, Math.min(aliveLen, Math.round(compHitsSamples[Math.floor(rng() * compHitsSamples.length)] || 0)))
+        const aoeHits = useComponentCov
+          ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentMagicCov)
           : coverageMode === 'rp_split' && flags.paladin
           ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentCoverage)
           : turnAoeCoverage != null
@@ -1729,6 +1729,7 @@ function getInputs(simState = currentSimState) {
     boxVariance: state.boxVariance,
     paladinArrowCoverage: state.paladinArrowCoverage,
     paladinSpellCoverage: state.paladinSpellCoverage,
+    paladinRuneCoverage: state.paladinRuneCoverage,
     rpGrenadeMode: rpMode && specialAsThird,
     mageUeMode: mageMode && specialAsThird,
     rpGrenadeDmg: state.rpGrenadeDmg || (rpMode ? specialDmgFromInputs : 0),
@@ -2669,7 +2670,7 @@ const VALIDATOR_TURN_DURATION = 2.25;
 // Roda N sessões de simulação (inline, sem worker) e coleta a distribuição de
 // mobs acertados por turno — usado para sobrepor o histograma simulado ao do log real.
 function collectSimHitDistribution(config, nSessions) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneStartWithRune = true, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpRuneHitsSamples = [], rpSpellHitsSamples = [], mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed' } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneStartWithRune = true, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, paladinRuneCoverage = 1, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed' } = config;
   const CHARM_R = 0.1, CRIT_R = 0.1, TD = 2.25;
   const POST_WALK_WAVE_PCTS = [0, 0.30, 0.65, 1.00], UE_COOLDOWN_SECONDS = 4;
   const RP_GRENADE_DELAY_SECONDS = 3, RP_GRENADE_DEFAULT_INTERVAL_SECONDS = 24, MAGE_UE_DEFAULT_INTERVAL_SECONDS = 50;
@@ -3083,16 +3084,16 @@ function collectSimHitDistribution(config, nSessions) {
         }
         if (flags.var) base *= 0.8 + rng() * 0.4;
         if (rng() < CRIT_R) base *= critMult;
-        // Cobertura por componente: se há séries observadas, amostra o nº de hits da série
-        // do componente do turno (runa vs spell têm cobertura própria). Senão, comportamento antigo.
-        const compHitsSamples = (isPaladinSecond && useObservedMix)
-          ? (isRuneTurn ? rpRuneHitsSamples : rpSpellHitsSamples)
-          : null;
+        // Cobertura por componente: spell/runa derivam o nº de hits da FRAÇÃO de cobertura
+        // observada (paladinSpellCoverage/paladinRuneCoverage) sobre os mobs vivos da SIM —
+        // não mais replay da série do log (que tornava o histograma uma tautologia).
+        const useComponentCov = isPaladinSecond && useObservedMix;
+        const componentMagicCov = isRuneTurn ? paladinRuneCoverage : paladinSpellCoverage;
         const componentCoverage = coverageMode === 'rp_split' && flags.paladin
           ? (atkIdx === 0 ? paladinArrowCoverage : paladinSpellCoverage)
           : aoeCoverage;
-        const aoeHits = (compHitsSamples && compHitsSamples.length)
-          ? Math.max(0, Math.min(aliveLen, Math.round(compHitsSamples[Math.floor(rng() * compHitsSamples.length)] || 0)))
+        const aoeHits = useComponentCov
+          ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentMagicCov)
           : coverageMode === 'rp_split' && flags.paladin
           ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentCoverage)
           : turnAoeCoverage != null
