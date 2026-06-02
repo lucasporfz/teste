@@ -526,6 +526,42 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     const gShots = rpComponentSeries ? rpComponentSeries.grenadeHitsPerShot : [];
     grenadeHitsMean = gShots.length ? mean(gShots) : 0;
   }
+  // Trio com prey embutido (mesma base que a simulação usa) — card "DANOS RP (sim)".
+  let rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpGrenadeDmgSim = 0;
+  // Fração observada de turnos que usaram runa (vs spell) na rotação, e as séries de hits
+  // por componente — usados pela simulação p/ sortear rune/spell por turno com dano e
+  // cobertura próprios. rpRuneShare = nRune/(nRune+nSpell) contando só turnos da rotação
+  // (não-cast, não-rune-falso). Séries: nº de hits por turno de cada componente (sem zeros).
+  let rpRuneShare = 0;
+  let rpRuneHitsSamples = [], rpSpellHitsSamples = [];
+  // Transições da cadeia de Markov rune/spell (alternância): o jogador alterna rune↔spell
+  // quase sempre; o sorteio independente por turno gera repetições demais. Medimos a prob.
+  // condicional de runa dado o componente do turno anterior, e a simulação usa isso.
+  let rpRuneAfterRune = 0, rpRuneAfterSpell = 0;
+  if (isPaladin) {
+    rpSpellDmgSim = Math.round(rpSpellDmgAvg * preyEffectiveFactor);
+    rpRuneDmgSim = Math.round(rpRuneDmgAvg * preyEffectiveFactor);
+    rpGrenadeDmgSim = Math.round(rpGrenadeDmgAvg * preyEffectiveFactor);
+    rpSpellHitsSamples = (rpComponentSeries.spellHitsPerTurn || []).filter(v => v > 0);
+    rpRuneHitsSamples = (rpComponentSeries.runeHitsPerTurn || []).filter(v => v > 0);
+    const nSpellTurns = rpSpellHitsSamples.length, nRuneTurns = rpRuneHitsSamples.length;
+    rpRuneShare = (nSpellTurns + nRuneTurns) > 0 ? nRuneTurns / (nSpellTurns + nRuneTurns) : 0;
+    // Sequência ordenada de rótulos da rotação (turnos com componente mágico). Cast/arrow-only
+    // (spell=0) são transparentes — a alternância continua "por cima" deles.
+    const rotSeq = [];
+    for (const t of turnStats) {
+      if (t.rpTurnKind === 'rune') rotSeq.push('rune');
+      else if (((t.components && t.components.spell) || 0) > 0) rotSeq.push('spell');
+    }
+    let rr = 0, rTot = 0, sr = 0, sTot = 0;
+    for (let i = 1; i < rotSeq.length; i++) {
+      const cur = rotSeq[i] === 'rune';
+      if (rotSeq[i - 1] === 'rune') { rTot++; if (cur) rr++; }
+      else { sTot++; if (cur) sr++; }
+    }
+    rpRuneAfterRune = rTot > 0 ? rr / rTot : rpRuneShare;
+    rpRuneAfterSpell = sTot > 0 ? sr / sTot : rpRuneShare;
+  }
   const classifyRpTurnLines = (turn, stat, mark) => {
     if (!isPaladin || !turn || !stat) return [];
     return stat.rpComponentLines || buildRpClassifiedLines(turn, stat, mark, critMultObserved, rpElementalPreyMult);
@@ -733,7 +769,12 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     : dmgCycleRaw;
   const dmgCycle = dmgCycleRawForSimulation.map(d => Math.round(d * preyEffectiveFactor));
   const dmgCycleMixed = mixedCycleRaw.map(d => Math.round(d * preyEffectiveFactor));
-  const rpGrenadeDmg = isPaladin ? Math.round(specialBaseRaw * preyEffectiveFactor) : 0;
+  // Granada da simulação: usa o dano-base OBSERVADO dos hits de granada classificados
+  // (rpGrenadeDmgSim = média revertedDmg × prey). Fallback p/ pico do dmgCycle × prey
+  // quando não há granada classificada no log.
+  const rpGrenadeDmg = isPaladin
+    ? (rpGrenadeDmgSim > 0 ? rpGrenadeDmgSim : Math.round(specialBaseRaw * preyEffectiveFactor))
+    : 0;
   const mageUeDmg = mageUeDetected ? Math.round(specialBaseRaw * preyEffectiveFactor) : 0;
   const paladinArrowDmg = isPaladin ? Math.round((paladinSplit.arrowDmg || 0) * preyEffectiveFactor) : 0;
   const paladinDamageMethod = isPaladin ? (paladinSplit.method || 'fallback') : 'none';
@@ -875,7 +916,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     rpComponentSeries, rpComponentDebugExamples, rpComponentMonotonic, rpElementalCorrection,
     specialCastThreshold: Math.max(1, Math.round(boxSizeP95 || boxSizeEffective || 1)),
     aoeHitSamples, aoeCoverageMean, boxSizeEffective, spawnCurve,
-    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, paladinArrowCoverage, paladinSpellCoverage,
+    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, rpSpellDmgSim, rpRuneDmgSim, rpGrenadeDmgSim, rpRuneShare, rpRuneAfterRune, rpRuneAfterSpell, rpRuneHitsSamples, rpSpellHitsSamples, paladinArrowCoverage, paladinSpellCoverage,
     rpArrowCoverageObserved, rpSpellCoverageObserved, rpArrowCoverageUsed, rpSpellCoverageUsed,
     rpGrenadePairCount, rpGrenadeShare, rpGrenadeConfidence, rpGrenadeDetected: rpGrenadePairCount > 0,
     rpGrenadeDmg, rpGrenadeIntervalSeconds,

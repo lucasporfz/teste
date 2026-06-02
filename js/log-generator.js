@@ -30,6 +30,13 @@ function buildLogInputFromConfig(config) {
     rpGrenadeDelaySeconds: cfg.rpGrenadeDelaySeconds || 3,
     rpGrenadeIntervalSeconds: cfg.rpGrenadeIntervalSeconds || 24,
     rpRuneStartWithRune: cfg.rpRuneStartWithRune !== false,
+    rpRuneShare: cfg.rpRuneShare || 0,
+    rpRuneAfterRune: cfg.rpRuneAfterRune || 0,
+    rpRuneAfterSpell: cfg.rpRuneAfterSpell || 0,
+    rpSpellDmgSim: cfg.rpSpellDmgSim || 0,
+    rpRuneDmgSim: cfg.rpRuneDmgSim || 0,
+    rpRuneHitsSamples: cfg.rpRuneHitsSamples || [],
+    rpSpellHitsSamples: cfg.rpSpellHitsSamples || [],
     mageUeDmg: cfg.mageUeDmg || 0,
     mageUeIntervalSeconds: cfg.mageUeIntervalSeconds || 50,
     mageUeLockoutSeconds: cfg.mageUeLockoutSeconds || 4,
@@ -101,6 +108,12 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
   }
 
   function resolveLogAoeHits(aliveLen) {
+    // Cobertura própria do componente (mistura rune/spell): amostra o nº de hits da série
+    // observada do componente do turno, se disponível.
+    const compSamples = inp._currentComponentHitsSamples;
+    if (compSamples && compSamples.length) {
+      return Math.max(0, Math.min(aliveLen, Math.round(compSamples[Math.floor(rng() * compSamples.length)] || 0)));
+    }
     if (inp.coverageMode === 'rp_split') {
       const coverage = Math.max(0.05, Math.min(1, inp._currentComponentCoverage || 1));
       return Math.max(0, Math.min(aliveLen, Math.round(aliveLen * coverage + (rng() - 0.5))));
@@ -233,6 +246,7 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
   let pendingGrenade = 0;
   let pendingGrenadeTurns = 0;
   let rpSecondTurnIndex = inp.rpRuneStartWithRune ? 0 : 1;
+  let prevRpRuneTurn = null; // cadeia de Markov rune/spell: componente mágico do turno anterior
   const grenadeInterval = Math.max(14, inp.rpGrenadeIntervalSeconds || RP_GRENADE_DEFAULT_INTERVAL_SECONDS);
   const grenadeBaseDmg = inp.rpGrenadeDmg ? inp.rpGrenadeDmg + level : Math.max(...dmgs);
   const ueInterval = Math.max(36, inp.mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS);
@@ -594,13 +608,25 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
         if (grenadeReady) components.push({ label: 'grenade ready, aguardando pico', baseDmg: 0, varMul: 1, isCrit: false, finalDmg: 0, hits: 0, kills: 0, held: true, threshold: specialCastThreshold, reachable: mobHps.length, expectedHits: grenadeDecision.expectedHits, score: grenadeDecision.score, heldTurns: grenadeHeldTurns, reason: grenadeDecision.reason });
         if (mageUeReady && !isMageUeTurn) components.push({ label: 'UE ready, aguardando box', baseDmg: 0, varMul: 1, isCrit: false, finalDmg: 0, hits: 0, kills: 0, held: true, threshold: specialCastThreshold, reachable: mobHps.length });
         const forceSpellForGrenade = flags.paladin && pendingGrenade > 0 && pendingGrenadeTurns <= 0;
-        const isRuneTurn = flags.paladin && !forceSpellForGrenade && (rpSecondTurnIndex % 2 === 0);
+        // Mistura rune/spell observada (rpRuneShare>0): sorteia por turno, com dano (+level)
+        // e cobertura (série de hits) próprios. Senão, alternância antiga + dmgCycle.
+        const rpMixActive = flags.paladin && inp.rpRuneShare > 0 && inp.rpSpellDmgSim > 0;
+        // Cadeia de Markov: prob. de runa depende do componente do turno anterior (alternância).
+        const pRune = prevRpRuneTurn === null ? inp.rpRuneShare : (prevRpRuneTurn ? inp.rpRuneAfterRune : inp.rpRuneAfterSpell);
+        const isRuneTurn = flags.paladin && !forceSpellForGrenade &&
+          (rpMixActive ? (rng() < pRune) : (rpSecondTurnIndex % 2 === 0));
+        if (flags.paladin && rpMixActive) prevRpRuneTurn = isRuneTurn; // turno mágico resolveu
         const label = isMageUeTurn ? 'UE' : (flags.paladin ? (isRuneTurn ? 'rune' : 'spell') : 'spell AoE');
         const charm = rollCharm(label);
         charmHits.push(...charm.hits);
         charmKills += charm.kills;
         inp._currentComponentCoverage = flags.paladin ? (inp.paladinSpellCoverage || 1) : (inp.aoeCoverage || 1);
-        components.push(rollAttack(label, isMageUeTurn ? ueBaseDmg : dmgs[ac % 3], true));
+        inp._currentComponentHitsSamples = rpMixActive ? (isRuneTurn ? inp.rpRuneHitsSamples : inp.rpSpellHitsSamples) : null;
+        const spellDmgTurn = rpMixActive ? inp.rpSpellDmgSim + level : dmgs[ac % 3];
+        const runeDmgTurn = rpMixActive ? inp.rpRuneDmgSim + level : dmgs[ac % 3];
+        const secondDmg = isMageUeTurn ? ueBaseDmg : (flags.paladin && rpMixActive ? (isRuneTurn ? runeDmgTurn : spellDmgTurn) : dmgs[ac % 3]);
+        components.push(rollAttack(label, secondDmg, true));
+        inp._currentComponentHitsSamples = null;
         if (flags.paladin) rpSecondTurnIndex++;
       }
     }

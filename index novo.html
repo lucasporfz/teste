@@ -438,8 +438,10 @@ function resolveRpGrenadeResidualHits(aliveLen, flags, rng) {
 }
 
 
-function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
+function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, seconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds, rpMix) {
   const rng = makeRng(seed);
+  const rpMixShare = rpMix && rpMix.share > 0 && rpMix.spellDmg > 0 ? rpMix.share : 0;
+  const rpMixAfterRune = rpMix ? rpMix.runAfterRune : 0, rpMixAfterSpell = rpMix ? rpMix.runAfterSpell : 0;
 
   const boxFloor = Math.floor(boxSize);
   const boxFrac = boxSize - boxFloor;
@@ -480,6 +482,7 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladin
   let cooldownRemaining = 0;
   let pendingGrenade = 0;
   let pendingGrenadeTurns = 0;
+  let prevRpRuneTurn = null; // cadeia de Markov rune/spell: componente mágico do turno anterior
   const grenadeInterval = Math.max(14, rpGrenadeIntervalSeconds || RP_GRENADE_DEFAULT_INTERVAL_SECONDS);
   const grenadeBaseDmg = rpGrenadeDmg || Math.max(...dmgs);
   const ueInterval = Math.max(36, mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS);
@@ -832,8 +835,16 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladin
 
       // Dano base do ataque
       const shouldCastGrenade = atkIdx === 1 && grenadeDecision.cast;
+      // Mistura rune/spell observada (rpMixShare>0): 2º ataque do paladino sorteia runa vs
+      // spell, cada um com dano e cobertura (série de hits) próprios. Granada pendente força spell.
+      const isPaladinSecond = flags.paladin && splitPaladinDamage && atkIdx === 1;
+      const forceSpellForGrenade = isPaladinSecond && pendingGrenade > 0 && pendingGrenadeTurns <= 0;
+      // Cadeia de Markov: prob. de runa depende do componente do turno anterior.
+      const pRune = prevRpRuneTurn === null ? rpMixShare : (prevRpRuneTurn ? rpMixAfterRune : rpMixAfterSpell);
+      const isRuneTurn = isPaladinSecond && rpMixShare > 0 && !forceSpellForGrenade && rng() < pRune;
       let base = splitPaladinDamage
-        ? (atkIdx === 0 ? paladinArrowDmg : dmgs[ac % 3])
+        ? (atkIdx === 0 ? paladinArrowDmg
+           : (rpMixShare > 0 ? (isRuneTurn ? rpMix.runeDmg : rpMix.spellDmg) : dmgs[ac % 3]))
         : (isMageUeTurn ? ueBaseDmg : dmgs[ac % 3]);
       if (shouldCastGrenade) {
         pendingGrenade = grenadeBaseDmg;
@@ -844,13 +855,20 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladin
         recentReachablePeak = 0;
         continue;
       }
+      // Turno mágico resolveu (não foi cast de granada): atualiza o estado da cadeia.
+      if (isPaladinSecond && rpMixShare > 0) prevRpRuneTurn = isRuneTurn;
       if (flags.var) base *= 0.8 + rng() * 0.4;
       if (rng() < CRIT_RATE) base *= critMult;
 
+      const compHitsSamples = (isPaladinSecond && rpMixShare > 0)
+        ? (isRuneTurn ? rpMix.runeHits : rpMix.spellHits)
+        : null;
       const componentCoverage = coverageMode === 'rp_split' && flags.paladin
         ? (atkIdx === 0 ? paladinArrowCoverage : paladinSpellCoverage)
         : aoeCoverage;
-      const aoeHits = coverageMode === 'rp_split' && flags.paladin
+      const aoeHits = (compHitsSamples && compHitsSamples.length)
+        ? Math.max(0, Math.min(aliveLen, Math.round(compHitsSamples[Math.floor(rng() * compHitsSamples.length)] || 0)))
+        : coverageMode === 'rp_split' && flags.paladin
         ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentCoverage)
         : turnAoeCoverage != null
         ? Math.min(aliveLen, turnAoeCoverage)
@@ -926,7 +944,7 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladin
   return { xph, turnCounts: turnCountsBuf.subarray(0, turnCountsLen) };
 }
 
-function simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds) {
+function simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds, rpMix) {
   const counter = Object.create(null);
   let totalXph = 0;
   let totalBoxes = 0;
@@ -934,7 +952,7 @@ function simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArr
 
   for (let s = 0; s < nSessions; s++) {
     const sessionSeed = (Math.imul(levelSeed, 104729) + s * 7919) >>> 0;
-    const res = simSession(sessionSeed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds);
+    const res = simSession(sessionSeed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, rpGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, mageUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds, rpMix);
     totalXph += res.xph;
     const tc = res.turnCounts;
     totalBoxes += tc.length;
@@ -967,6 +985,7 @@ self.onmessage = function(e) {
     boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = SPAWN_CURVE, rpGrenadeMode = false, mageUeMode = false,
     rpGrenadeDmg = 0, rpGrenadeDelaySeconds = RP_GRENADE_DELAY_SECONDS, rpGrenadeIntervalSeconds = RP_GRENADE_DEFAULT_INTERVAL_SECONDS,
     mageUeDmg = 0, mageUeIntervalSeconds = MAGE_UE_DEFAULT_INTERVAL_SECONDS, mageUeLockoutSeconds = UE_COOLDOWN_SECONDS,
+    rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpRuneHitsSamples = [], rpSpellHitsSamples = [],
     runSeed, levels, nSessions, sessionSeconds
   } = cfg;
   const flags = { ...inputFlags, rpGrenadeMode: !!rpGrenadeMode, mageUeMode: !!mageUeMode };
@@ -981,7 +1000,9 @@ self.onmessage = function(e) {
     const levelSeed = (runSeed ^ (inc * 31337)) >>> 0;
     const levelGrenadeDmg = rpGrenadeDmg ? rpGrenadeDmg + inc : 0;
     const levelUeDmg = mageUeDmg ? mageUeDmg + inc : 0;
-    result[inc] = simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, levelGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, levelUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds);
+    // Mistura rune/spell observada, com dano por nível (+inc) e séries de cobertura próprias.
+    const rpMix = { share: rpRuneShare, runAfterRune: rpRuneAfterRune, runAfterSpell: rpRuneAfterSpell, spellDmg: rpSpellDmgSim ? rpSpellDmgSim + inc : 0, runeDmg: rpRuneDmgSim ? rpRuneDmgSim + inc : 0, runeHits: rpRuneHitsSamples, spellHits: rpSpellHitsSamples };
+    result[inc] = simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, levelGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, levelUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds, rpMix);
     self.postMessage({ type: 'progress', level: inc });
   }
   self.postMessage({ type: 'done', result });
@@ -1082,7 +1103,7 @@ function partitionLevels(nLevels, nWorkers) {
 // ========== Fallback: simulação inline (sem workers) ==========
 // Cópia da lógica do worker, rodando na main thread com yields pra não travar UI
 function runSimInline(config, onProgress) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpRuneHitsSamples = [], rpSpellHitsSamples = [], mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
   const flags = { ...inputFlags, rpGrenadeMode: !!rpGrenadeMode, mageUeMode: !!mageUeMode };
   const CHARM_RATE = 0.1, CRIT_RATE = 0.1, TURN_DURATION = 2.25;
   const POST_WALK_SPAWN_TURNS = 3, POST_WALK_SPAWN_CURVE = 2.2, UE_COOLDOWN_SECONDS = 4;
@@ -1137,6 +1158,7 @@ function runSimInline(config, onProgress) {
     let spawnLen = 0;
     let timeElapsed = 0, ac = 0, totalKills = 0, turnsThisBox = 0;
     let cooldownRemaining = 0, pendingGrenade = 0, pendingGrenadeTurns = 0;
+    let prevRpRuneTurn = null; // cadeia de Markov rune/spell: componente mágico do turno anterior
     const grenadeInterval = Math.max(14, rpGrenadeIntervalSeconds || RP_GRENADE_DEFAULT_INTERVAL_SECONDS);
     const levelDelta = dmgs[0] - baseDmgs[0];
     const grenadeBaseDmg = rpGrenadeDmg ? rpGrenadeDmg + levelDelta : Math.max(...dmgs);
@@ -1467,8 +1489,17 @@ function runSimInline(config, onProgress) {
           }
         }
         const shouldCastGrenade = atkIdx === 1 && grenadeDecision.cast;
+        // Mistura rune/spell observada (rpRuneShare>0): sorteia por turno, dano (+levelDelta)
+        // e cobertura (série de hits) próprios. Granada pendente força spell.
+        const rpMixActive = rpRuneShare > 0 && rpSpellDmgSim > 0;
+        const isPaladinSecond = flags.paladin && splitPaladinDamage && atkIdx === 1;
+        const forceSpellForGrenade = isPaladinSecond && pendingGrenade > 0 && pendingGrenadeTurns <= 0;
+        // Cadeia de Markov: prob. de runa depende do componente do turno anterior.
+        const pRune = prevRpRuneTurn === null ? rpRuneShare : (prevRpRuneTurn ? rpRuneAfterRune : rpRuneAfterSpell);
+        const isRuneTurn = isPaladinSecond && rpMixActive && !forceSpellForGrenade && rng() < pRune;
         let base = splitPaladinDamage
-          ? (atkIdx === 0 ? paladinArrowDmg : dmgs[ac % 3])
+          ? (atkIdx === 0 ? paladinArrowDmg
+             : (rpMixActive ? (isRuneTurn ? rpRuneDmgSim + levelDelta : rpSpellDmgSim + levelDelta) : dmgs[ac % 3]))
           : (isMageUeTurn ? ueBaseDmg : dmgs[ac % 3]);
         if (shouldCastGrenade) {
           pendingGrenade = grenadeBaseDmg;
@@ -1479,12 +1510,19 @@ function runSimInline(config, onProgress) {
           recentReachablePeak = 0;
           continue;
         }
+        // Turno mágico resolveu (não foi cast de granada): atualiza o estado da cadeia.
+        if (isPaladinSecond && rpMixActive) prevRpRuneTurn = isRuneTurn;
         if (flags.var) base *= 0.8 + rng() * 0.4;
         if (rng() < CRIT_RATE) base *= critMult;
+        const compHitsSamples = (isPaladinSecond && rpMixActive)
+          ? (isRuneTurn ? rpRuneHitsSamples : rpSpellHitsSamples)
+          : null;
         const componentCoverage = coverageMode === 'rp_split' && flags.paladin
           ? (atkIdx === 0 ? paladinArrowCoverage : paladinSpellCoverage)
           : aoeCoverage;
-        const aoeHits = coverageMode === 'rp_split' && flags.paladin
+        const aoeHits = (compHitsSamples && compHitsSamples.length)
+          ? Math.max(0, Math.min(aliveLen, Math.round(compHitsSamples[Math.floor(rng() * compHitsSamples.length)] || 0)))
+          : coverageMode === 'rp_split' && flags.paladin
           ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentCoverage)
           : turnAoeCoverage != null
           ? Math.min(aliveLen, turnAoeCoverage)
@@ -2280,6 +2318,11 @@ function renderValidatorExtracted(data) {
           sub: t('val_sub_rp_damages') }
       : { lbl: t('val_card_dmg_cycle'), val: '[' + data.dmgCycle.join(', ') + ']',
           sub: t('val_sub_atk_cycle').replace('{f}', data.preyEffectiveFactor.toFixed(3).replace('.', dec)) },
+    ...(data.isPaladin ? [{ lbl: t('val_card_rp_damages_sim'),
+          val: 'spell ' + Math.round(data.rpSpellDmgSim || 0)
+             + (data.rpRuneDmgSim ? ' · runa ' + Math.round(data.rpRuneDmgSim) : '')
+             + (data.rpGrenadeDmgSim ? ' · granada ' + Math.round(data.rpGrenadeDmgSim) : ''),
+          sub: t('val_sub_rp_damages_sim') }] : []),
     { lbl: t('val_card_pal_arrow'), val: Math.round(data.paladinArrowDmg || 0), sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_arrow')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_spell'), val: data.isPaladin ? '[' + data.dmgCycle.join(', ') + ']' : '—', sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_spell')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_split_method'), val: data.isPaladin ? ((data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : '—', sub: data.isPaladin ? (data.paladinSplitMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster de dano') : t('val_sub_pal_off') },
@@ -2626,7 +2669,7 @@ const VALIDATOR_TURN_DURATION = 2.25;
 // Roda N sessões de simulação (inline, sem worker) e coleta a distribuição de
 // mobs acertados por turno — usado para sobrepor o histograma simulado ao do log real.
 function collectSimHitDistribution(config, nSessions) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneStartWithRune = true, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed' } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneStartWithRune = true, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, rpRuneHitsSamples = [], rpSpellHitsSamples = [], mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed' } = config;
   const CHARM_R = 0.1, CRIT_R = 0.1, TD = 2.25;
   const POST_WALK_WAVE_PCTS = [0, 0.30, 0.65, 1.00], UE_COOLDOWN_SECONDS = 4;
   const RP_GRENADE_DELAY_SECONDS = 3, RP_GRENADE_DEFAULT_INTERVAL_SECONDS = 24, MAGE_UE_DEFAULT_INTERVAL_SECONDS = 50;
@@ -2678,6 +2721,7 @@ function collectSimHitDistribution(config, nSessions) {
     const spawnAge = new Float32Array(maxMobs);
     let spawnLen = 0;
     let timeElapsed = 0, ac = 0, spawnStep = 0, cooldownRemaining = 0, pendingGrenade = 0, pendingGrenadeTurns = 0, rpSecondTurnIndex = rpRuneStartWithRune ? 0 : 1;
+    let prevRpRuneTurn = null; // cadeia de Markov rune/spell: componente mágico do turno anterior (null no início)
     const grenadeInterval = Math.max(14, rpGrenadeIntervalSeconds || RP_GRENADE_DEFAULT_INTERVAL_SECONDS);
     const grenadeBaseDmg = rpGrenadeDmg || Math.max(...dmgs);
     const ueInterval = Math.max(36, mageUeIntervalSeconds || MAGE_UE_DEFAULT_INTERVAL_SECONDS);
@@ -3013,9 +3057,20 @@ function collectSimHitDistribution(config, nSessions) {
         const shouldCastGrenade = atkIdx === 1 && grenadeDecision.cast;
         const isPaladinSecond = flags.paladin && atkIdx === 1;
         const forceSpellForGrenade = isPaladinSecond && pendingGrenade > 0 && pendingGrenadeTurns <= 0;
-        const isRuneTurn = isPaladinSecond && !forceSpellForGrenade && (rpSecondTurnIndex % 2 === 0);
+        // Turno de runa vs spell: se há fração observada (rpRuneShare>0), sorteia por turno;
+        // senão cai na alternância determinística antiga (% 2). Runa/spell usam DANO próprio
+        // observado (rpRuneDmgSim/rpSpellDmgSim) e COBERTURA própria (amostra da série de hits
+        // do componente). Granada força spell no 2º ataque (forceSpellForGrenade).
+        const useObservedMix = rpRuneShare > 0 && rpSpellDmgSim > 0;
+        // Cadeia de Markov: prob. de runa depende do componente do turno anterior (alternância
+        // observada). 1º turno usa a fração marginal (rpRuneShare).
+        const pRune = prevRpRuneTurn === null ? rpRuneShare : (prevRpRuneTurn ? rpRuneAfterRune : rpRuneAfterSpell);
+        const isRuneTurn = isPaladinSecond && !forceSpellForGrenade &&
+          (useObservedMix ? (rng() < pRune) : (rpSecondTurnIndex % 2 === 0));
+        const spellDmgForTurn = rpSpellDmgSim > 0 ? rpSpellDmgSim : dmgs[ac % 3];
+        const runeDmgForTurn = rpRuneDmgSim > 0 ? rpRuneDmgSim : spellDmgForTurn;
         let base = splitPaladinDamage
-          ? (atkIdx === 0 ? paladinArrowDmg : dmgs[ac % 3])
+          ? (atkIdx === 0 ? paladinArrowDmg : (isRuneTurn ? runeDmgForTurn : spellDmgForTurn))
           : (isMageUeTurn ? ueBaseDmg : dmgs[ac % 3]);
         if (shouldCastGrenade) {
           pendingGrenade = grenadeBaseDmg;
@@ -3028,10 +3083,17 @@ function collectSimHitDistribution(config, nSessions) {
         }
         if (flags.var) base *= 0.8 + rng() * 0.4;
         if (rng() < CRIT_R) base *= critMult;
+        // Cobertura por componente: se há séries observadas, amostra o nº de hits da série
+        // do componente do turno (runa vs spell têm cobertura própria). Senão, comportamento antigo.
+        const compHitsSamples = (isPaladinSecond && useObservedMix)
+          ? (isRuneTurn ? rpRuneHitsSamples : rpSpellHitsSamples)
+          : null;
         const componentCoverage = coverageMode === 'rp_split' && flags.paladin
           ? (atkIdx === 0 ? paladinArrowCoverage : paladinSpellCoverage)
           : aoeCoverage;
-        const aoeHits = coverageMode === 'rp_split' && flags.paladin
+        const aoeHits = (compHitsSamples && compHitsSamples.length)
+          ? Math.max(0, Math.min(aliveLen, Math.round(compHitsSamples[Math.floor(rng() * compHitsSamples.length)] || 0)))
+          : coverageMode === 'rp_split' && flags.paladin
           ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, componentCoverage)
           : turnAoeCoverage != null
           ? Math.min(aliveLen, turnAoeCoverage)
@@ -3043,6 +3105,7 @@ function collectSimHitDistribution(config, nSessions) {
           else {
             if (isRuneTurn) turnComponentHits.rune = aoeHits;
             else turnComponentHits.spell = aoeHits;
+            if (useObservedMix) prevRpRuneTurn = isRuneTurn; // atualiza estado da cadeia (turno mágico resolvido)
             rpSecondTurnIndex++;
           }
         }
