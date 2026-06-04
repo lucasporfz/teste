@@ -2,6 +2,17 @@ function getMobElementMods(name) {
   return MOB_ELEMENT_MODS[(name || '').toLowerCase().trim()] || null;
 }
 
+// Onslaught: proc de +60% fixo, ADITIVO sobre a base (não multiplica com o crit).
+const ONSLAUGHT_MULT = 1.6;
+// Divisor de amplificação aditivo: base × (1 + (crit-1)? + 0.6?). Ex.: crit puro = critMult;
+// onslaught puro = 1.6; crit+onslaught = critMult+0.6 (≈2.32). Normal = 1.
+function rpAmplificationDivisor(ev, critMultObserved) {
+  let amp = 1;
+  if (ev && ev.realCrit && critMultObserved > 1) amp += critMultObserved - 1;
+  if (ev && ev.onslaught) amp += ONSLAUGHT_MULT - 1;
+  return amp > 0 ? amp : 1;
+}
+
 function normalizeRuneName(name) {
   return (name || '').toLowerCase().replace(/\s+/g, ' ').trim();
 }
@@ -22,7 +33,7 @@ function normalizeSeenDamageForElement(ev, elementKey, critMultObserved, preyMul
   const mods = getMobElementMods(ev.mob);
   if (!mods) return null;
   let dmg = ev.dmg || 0;
-  if (ev.type === 'crit' && critMultObserved > 0) dmg /= critMultObserved;
+  dmg /= rpAmplificationDivisor(ev, critMultObserved);
   if (ev.isPrey && preyMult > 1) dmg /= preyMult;
   const mod = mods[elementKey] || 1;
   return mod > 0 ? dmg / mod : dmg;
@@ -66,7 +77,7 @@ function findRpRuneAnchor(turn, runeEvents) {
 
 function normalizeRpBoundaryDamage(ev, critMultObserved, preyMult) {
   let dmg = ev && ev.dmg ? ev.dmg : 0;
-  if (ev && ev.type === 'crit' && critMultObserved > 0) dmg /= critMultObserved;
+  dmg /= rpAmplificationDivisor(ev, critMultObserved);
   if (ev && ev.isPrey && preyMult > 1) dmg /= preyMult;
   return dmg;
 }
@@ -323,7 +334,7 @@ function rpClassifyTurnByBands(lines, mark) {
   const n = lines.length;
   if (n === 0) return { arrowEnd: 0, spellEnd: 0, reason: 'bands_empty' };
   if (mark === 'cast') return { arrowEnd: n, spellEnd: n, reason: 'bands_cast' };
-  const EQ = 2;
+  const EQ = 0; // holy é determinístico: mesmo mob + mesma componente = dano cru EXATO (±0).
   const eq = (a, b) => Math.abs(a - b) <= EQ;
   const val = i => lines[i].dmg;
   const mobOf = i => lines[i].mob || '';
@@ -350,6 +361,28 @@ function rpClassifyTurnByBands(lines, mark) {
     for (const m in c) { const ds = c[m]; for (let a = 0; a < ds.length; a++) for (let b = a + 1; b < ds.length; b++) if (eq(ds[a], ds[b])) return true; }
     return false;
   }
+  // banda holy-constante cross-mob: spell/granada normalizam ao MESMO holyBase entre mobs.
+  // Tolerância APERTADA (~2%, holy é quase exato; cauda de arrow tem spread maior), mas tolera
+  // 1 mob com mod impreciso (liod/striker) exigindo só MAIORIA dos mobs concordando.
+  function holyConst(lo, hi) {
+    const byMob = Object.create(null);
+    for (let i = lo; i < hi; i++) { if (isOK(i)) continue; const h = lines[i].holyOriginal; if (!Number.isFinite(h) || h <= 0) continue; const m = mobOf(i); (byMob[m] = byMob[m] || []).push(h); }
+    const meds = []; for (const m in byMob) { const a = byMob[m].sort((x, y) => x - y); meds.push(a[a.length >> 1]); }
+    if (meds.length < 2) return false;
+    const c = meds.slice().sort((x, y) => x - y)[meds.length >> 1];
+    const tol = Math.max(12, c * 0.02);
+    const agree = meds.filter(v => Math.abs(v - c) <= tol).length;
+    return agree >= 2 && agree * 2 >= meds.length;
+  }
+  // banda holy REAL (consistência exata): (a) cada mob com ≥2 hits não-overkill tem dano cru
+  // IDÊNTICO (holy é determinístico; arrow varia) E (b) holyConst cross-mob. Cobre spell que
+  // acerta cada mob 1× (via b) e rejeita cauda de arrow que repete mas varia (via a, t99/t131).
+  function isHolyBand(lo, hi) {
+    const byMob = Object.create(null);
+    for (let i = lo; i < hi; i++) { if (isOK(i)) continue; const m = mobOf(i); (byMob[m] = byMob[m] || []).push(val(i)); }
+    for (const m in byMob) { const ds = byMob[m]; for (let k = 1; k < ds.length; k++) if (ds[k] !== ds[0]) return false; }
+    return holyConst(lo, hi);
+  }
 
   // segundo (timestamp) em que cada hit cai: 0 = mesmo segundo do 1º hit; ≥1 = depois.
   const t0ts = lines[0].ts;
@@ -363,6 +396,12 @@ function rpClassifyTurnByBands(lines, mark) {
     //  (b) prefixo = arrow, sufixo = spell+granada (mesma crit-state) — ex. t2.
     const c0 = critChanges[0];
     if (mark === 'explode') {
+      // (b') prefixo crit = arrow inteiro; sufixo não-crit = spell + granada (DUAS bandas holy).
+      const sg1 = bandStart(n);
+      const sg2 = sg1 > c0 ? bandStart(sg1) : c0;
+      if (sg2 >= c0 && sg1 > sg2 && sustained(sg2, sg1) && holyConst(sg2, sg1) && holyConst(sg1, n)) {
+        return { arrowEnd: c0, spellEnd: sg1, reason: 'crit_arrow_then_spell_grenade_bands' };
+      }
       const aEndPrefix = bandStart(c0);
       if (aEndPrefix < c0 && sustained(aEndPrefix, c0)) {
         // (a) prefixo splittável em arrow+spell; sufixo [c0,n) = granada.
@@ -380,36 +419,22 @@ function rpClassifyTurnByBands(lines, mark) {
   }
 
   const b1 = bandStart(n);
-  if (!sustained(b1, n)) return { arrowEnd: n, spellEnd: n, reason: 'bands_all_arrow' };
+  // banda final mágica = sustentada OU banda holy real (spell que acerta cada mob 1× — t34).
+  // Senão o fim é arrow → tudo arrow (t78, t155).
+  if (!sustained(b1, n) && !isHolyBand(b1, n)) return { arrowEnd: n, spellEnd: n, reason: 'bands_all_arrow' };
   const b2 = b1 > 0 ? bandStart(b1) : 0;
 
-  let arrowEnd, spellEnd;
-  if (mark === 'explode') {
-    // GRANADA só é declarada se existir DUAS bandas repetidas (a única garantia, regra do
-    // usuário): a banda final [b1,n) (spell ou granada) E uma banda anterior [b2,b1) também
-    // SUSTENTADA. Se a região anterior não repete (t83: [b2,b1) são hits soltos de arrow),
-    // há só UMA banda repetida = spell, sem granada → o bloco pós-arrow inteiro é spell.
-    const t0 = lines[0].ts; let sec = -1;
-    for (let i = 0; i < n; i++) if (Number.isFinite(lines[i].ts) && lines[i].ts > t0) { sec = i; break; }
-    const twoBands = b2 < b1 && sustained(b2, b1);
-    if (twoBands) {
-      spellEnd = b1; arrowEnd = b2;
-      // 2º segundo desambigua quando spell e granada têm dano-base ~igual (t99).
-      if (sec > 0 && sec > arrowEnd && sec <= n) {
-        const med = (lo, hi) => { const a = []; for (let i = lo; i < hi; i++) if (!isOK(i) && Number.isFinite(lines[i].holyOriginal)) a.push(lines[i].holyOriginal); a.sort((x, y) => x - y); return a.length ? a[a.length >> 1] : 0; };
-        const g = med(b1, n), s = med(b2, b1);
-        if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
-      }
-    } else {
-      // Falso explode (sem 2ª banda): arrow + spell, sem granada.
-      spellEnd = n; arrowEnd = b1;
-    }
-  } else {
-    spellEnd = n; arrowEnd = b1;
+  // GRANADA = DUAS bandas holy REAIS empilhadas (spell [b2,b1) + granada [b1,n)). A 2ª banda
+  // precisa: (i) sustained = algum mob repete (descarta cauda de arrow SEM repetição — t87/t26),
+  // E (ii) isHolyBand = mesmo mob com dano IDÊNTICO (descarta cauda que repete mas VARIA —
+  // t99 cyclursus 771≠772, t131). Prefixo arrow [0,b2). t47 (b2=0) → NÃO dispara. Vale p/ normal
+  // E explode, independente do segundo (granada pode cair no mesmo segundo — t16/t75).
+  if (b2 > 0 && sustained(b2, b1) && isHolyBand(b2, b1) && isHolyBand(b1, n)) {
+    return { arrowEnd: b2, spellEnd: b1, reason: 'bands_arrow_spell_grenade' };
   }
-  arrowEnd = Math.max(0, Math.min(arrowEnd, spellEnd, n));
-  spellEnd = Math.max(arrowEnd, Math.min(spellEnd, n));
-  return { arrowEnd, spellEnd, reason: mark === 'explode' ? 'bands_arrow_spell_grenade' : 'bands_arrow_spell' };
+
+  // Sem granada: arrow + spell (banda final = spell; resto = arrow).
+  return { arrowEnd: b1, spellEnd: n, reason: 'bands_arrow_spell' };
 }
 
 function classifyRpTurnComponents(turn, stat, mark, critMultObserved = 0, preyMult = 1, runeEvents = []) {
@@ -433,7 +458,7 @@ function classifyRpTurnComponents(turn, stat, mark, critMultObserved = 0, preyMu
   const seedSpellEnd = canExplode ? Math.max(0, total - grenadeCount) : total;
   const diag = { ambiguous: 0, missingMod: 0, total, turnKind, turnConflict };
   const lines = ordered.map((e, idx) => {
-    const ev = { mob: e.mob, dmg: e.dmg, type: e.type, isPrey: e.isPrey };
+    const ev = { mob: e.mob, dmg: e.dmg, type: e.type, isPrey: e.isPrey, realCrit: e.realCrit, onslaught: e.onslaught };
     const mods = getMobElementMods(e.mob);
     let revertedDmg = normalizeRpBoundaryDamage(e, critMultObserved, preyMult);
     const component = canExplode && idx >= seedSpellEnd ? 'grenade' : secondComponent;
@@ -566,6 +591,13 @@ function correctRpComponentsByElement(turns, turnStats, runeEvents, critMultObse
       else if (line.correctedComponent === 'rune') corrected.rune++;
       else corrected.spell++;
       if (line.correctedComponent !== line.beforeComponent) diag.retagged++;
+    }
+    // Granada detectada por banda (3 bandas, ou crit + 2 bandas holy) num turno que o detector
+    // por contagem de hits NÃO marcou explode: marca explode agora p/ os consumidores
+    // (grenadeHitsPerShot, cobertura de granada, contagem de explode) enxergarem.
+    if (corrected.grenade > 0 && stat.rpGrenade !== 'explode') {
+      stat.rpGrenade = 'explode';
+      if (!stat.rpTurnConflict) diag.turnTypes.explode = (diag.turnTypes.explode || 0) + 1;
     }
     if (stat.rpGrenade === 'explode') {
       const grenadeLine = lines.find(l => l.correctedComponent === 'grenade');

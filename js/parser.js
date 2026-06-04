@@ -78,12 +78,12 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     // Marca isPrey=true seja qual for a classificação final do hit.
     const isPreyEffective = isPrey || hasBountyTalisman;
 
-    // Crit-charms (low blow, savage blow) OU Onslaught: tratar como crit normal.
-    // Crit-charms já são capturados pelo isCrit do regex; Onslaught entra aqui
-    // mesmo quando a linha não diz "critical attack". Ambos entram na média
-    // ponderada de crit.
+    // Crit-charms (low blow, savage blow) OU Onslaught: hit "elevado" → type:'crit'
+    // (mantém a fronteira de crit-run do classificador). MAS o multiplicador difere:
+    // crit-charm = crit real (critMultObserved); Onslaught = +60% fixo (aditivo, ver
+    // rpAmplificationDivisor). Por isso marcamos onslaught/realCrit separadamente.
     if (hasCritCharm || hasOnslaught) {
-      events.push({ ts, type: 'crit', mob, dmg, isPrey: isPreyEffective });
+      events.push({ ts, type: 'crit', mob, dmg, isPrey: isPreyEffective, onslaught: hasOnslaught, realCrit: isCrit || hasCritCharm });
       continue;
     }
 
@@ -102,7 +102,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     // Ataque normal ou crit puro (sem charm)
     events.push({
       ts, type: isCrit ? 'crit' : 'normal',
-      mob, dmg, isPrey: isPreyEffective
+      mob, dmg, isPrey: isPreyEffective, onslaught: false, realCrit: isCrit
     });
   }
   events.forEach((e, idx) => { e.seq = idx; });
@@ -159,7 +159,9 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
 
   // Dano normal SEM prey, SEM charm, SEM crit — pra estimar dano base do ciclo
   const cleanNormals = attackEvents.filter(e => e.type === 'normal' && !e.isPrey).map(e => e.dmg);
-  const cleanCrits = attackEvents.filter(e => e.type === 'crit' && !e.isPrey).map(e => e.dmg);
+  // Onslaught (×1.6 fixo, aditivo) é excluído do pool de crit p/ não contaminar a média
+  // do multiplicador de crit nem a taxa de crit (é um proc separado, não um crítico).
+  const cleanCrits = attackEvents.filter(e => e.type === 'crit' && !e.isPrey && !e.onslaught).map(e => e.dmg);
   const allCharms = charmEvents.map(e => e.dmg);
 
   // Hits COM prey (pra calcular o multiplicador efetivo)
@@ -189,7 +191,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
 
   // Crit rate observado
   const totalAttacks = attackEvents.length;
-  const totalCrits = cleanCrits.length + attackEvents.filter(e => e.type === 'crit' && e.isPrey).length;
+  const totalCrits = cleanCrits.length + attackEvents.filter(e => e.type === 'crit' && e.isPrey && !e.onslaught).length;
   const critRateObserved = totalAttacks > 0 ? totalCrits / totalAttacks : 0;
   const critMultObserved = avgNormal > 0 && avgCrit > 0 ? avgCrit / avgNormal : 0;
 
@@ -311,7 +313,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const reflectByTurn = groupEventsByTurn(reflectEvents);
   const normalizeCombatDamage = e => {
     let dmg = e.dmg || 0;
-    if (e.type === 'crit' && critMultObserved > 0) dmg /= critMultObserved;
+    dmg /= rpAmplificationDivisor(e, critMultObserved); // crit/onslaught aditivos
     if (e.isPrey && preyMult > 1) dmg /= preyMult;
     return dmg;
   };
@@ -490,12 +492,11 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
   const autoNormalSamples = autoAttackEvents
     .filter(e => e.type === 'normal' && !e.isPrey)
     .map(e => e.dmg);
-  const autoCritSamples = autoAttackEvents
-    .filter(e => e.type === 'crit' && !e.isPrey)
-    .map(e => e.dmg);
+  const autoCritEvents = autoAttackEvents
+    .filter(e => e.type === 'crit' && !e.isPrey);
   const autoDmgSamples = autoNormalSamples.length > 0
     ? autoNormalSamples
-    : autoCritSamples.map(d => critMultObserved > 0 ? d / critMultObserved : d);
+    : autoCritEvents.map(e => e.dmg / rpAmplificationDivisor(e, critMultObserved));
   const autoDmg = isPaladin || autoDmgSamples.length === 0 ? 0 : mean(autoDmgSamples);
   const mobsHitPerTurn = turnStats.map(t => t.mobsHit);
   const rpComponentSeries = isPaladin ? {
@@ -721,7 +722,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     };
   }
   const dmgCycleRaw = isPaladin && paladinSplit.spellDmgs ? paladinSplit.spellDmgs : mixedCycleRaw;
-  let arrowHitsMean = 0, spellHitsMean = 0, runeHitsMean = 0, spellHitsMeanWhenUsed = 0, runeHitsMeanWhenUsed = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, paladinRuneCoverage = 1;
+  let arrowHitsMean = 0, spellHitsMean = 0, runeHitsMean = 0, spellHitsMeanWhenUsed = 0, runeHitsMeanWhenUsed = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, paladinRuneCoverage = 1, paladinGrenadeCoverage = 1;
   let rpArrowCoverageObserved = 1, rpSpellCoverageObserved = 1;
   let rpArrowCoverageUsed = 1, rpSpellCoverageUsed = 1;
   const coverageFromHits = hits => boxSizeP95 > 0 ? Math.max(0, Math.min(1, hits / boxSizeP95)) : 1;
@@ -759,6 +760,10 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     // Cobertura de runa: fração observada (hits sem zeros / box), análoga à de spell. Usada
     // pela simulação p/ derivar os hits de runa do nº de mobs vivos (não mais replay da série).
     paladinRuneCoverage = coverageFromHits(runeHitsMeanWhenUsed || runeHitsMean);
+    // Cobertura da granada: fração observada dos hits de explosão (grenadeHitsMean já é sem
+    // zeros) / box. A sim usa isso p/ a granada sair da própria cobertura observada — sem o
+    // piso ~90% do hybrid (que inflava) nem replay do log.
+    paladinGrenadeCoverage = grenadeHitsMean > 0 ? coverageFromHits(grenadeHitsMean) : paladinSpellCoverage;
   }
   // Aplicar fator efetivo do prey (média ponderada do dano com prey)
   function cycleWithoutSpecial(cycle) {
@@ -921,7 +926,7 @@ function parseServerLog(logText, isPaladin, combatProfile = null) {
     rpComponentSeries, rpComponentDebugExamples, rpComponentMonotonic, rpElementalCorrection,
     specialCastThreshold: Math.max(1, Math.round(boxSizeP95 || boxSizeEffective || 1)),
     aoeHitSamples, aoeCoverageMean, boxSizeEffective, spawnCurve,
-    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, rpSpellDmgSim, rpRuneDmgSim, rpGrenadeDmgSim, rpRuneShare, rpRuneAfterRune, rpRuneAfterSpell, paladinArrowCoverage, paladinSpellCoverage, paladinRuneCoverage,
+    arrowHitsMean, spellHitsMean, runeHitsMean, spellHitsMeanWhenUsed, grenadeHitsMean, rpSpellDmgAvg, rpRuneDmgAvg, rpGrenadeDmgAvg, rpSpellDmgSim, rpRuneDmgSim, rpGrenadeDmgSim, rpRuneShare, rpRuneAfterRune, rpRuneAfterSpell, paladinArrowCoverage, paladinSpellCoverage, paladinRuneCoverage, paladinGrenadeCoverage,
     rpArrowCoverageObserved, rpSpellCoverageObserved, rpArrowCoverageUsed, rpSpellCoverageUsed,
     rpGrenadePairCount, rpGrenadeShare, rpGrenadeConfidence, rpGrenadeDetected: rpGrenadePairCount > 0,
     rpGrenadeDmg, rpGrenadeIntervalSeconds,

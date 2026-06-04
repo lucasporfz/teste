@@ -24,8 +24,12 @@ function loadTurns(log) {
 // ranges: [arrowEnd, spellEnd] => arrow=[0,arrowEnd), spell=[arrowEnd,spellEnd), grenade=[spellEnd,n)
 const GAB = {
   'logs/rp ingol.txt': { 16:[8,17], 24:[8,16], 46:[8,17], 63:[6,12], 80:[7,13], 119:[4,10], 155:[12,12], 156:[13,26] },
-  'logs/mazzerin rp.txt': { 2:[10,22], 22:[7,7], 35:[4,12], 37:[9,19], 53:[6,15], 75:[10,20], 99:[11,22], 117:[10,21], 127:[6,10], 158:[10,14] },
-  'logs/server log rp.txt': { 15:[10,21], 26:[6,13], 69:[8,17], 78:[8,8], 83:[10,20], 85:[12,28], 87:[9,21], 89:[5,13], 91:[9,21], 93:[8,19] },
+  'logs/mazzerin rp.txt': { 2:[10,22], 22:[7,7], 35:[4,12], 37:[9,19], 47:[3,12], 53:[6,15], 75:[10,20], 99:[11,22], 117:[10,21], 127:[6,10], 158:[10,14] },
+  'logs/server log rp.txt': { 15:[10,21], 26:[6,13], 69:[8,17], 78:[8,8], 83:[10,20], 85:[12,28], 87:[9,21], 89:[5,13], 91:[9,21], 93:[8,19], 99:[9,20], 131:[6,16] },
+  'logs/agazi rp.txt': { 34:[7,15] },
+  'logs/dlc rp 1.txt': { 92:[12,26], 110:[8,24] },
+  'logs/dlc rp 2.txt': { 3:[9,22], 155:[10,23] },
+  'logs/dlc rp 3.txt': { 63:[9,18], 127:[10,21] },
 };
 
 // ===================== ALGORITMO CANDIDATO =====================
@@ -35,7 +39,7 @@ function rpClassifyTurn(hits, mark) {
   const n = hits.length;
   if (n === 0) return { arrowEnd: 0, spellEnd: 0 };
   if (mark === 'cast') return { arrowEnd: n, spellEnd: n };
-  const EQ = 2;
+  const EQ = 0; // holy é determinístico: mesmo mob + mesma componente = dano cru EXATO (±0).
   const eq = (a, b) => Math.abs(a - b) <= EQ;
   // valor usado pra comparar "mesmo mob, mesmo componente = mesmo dano EXATO" = o dano cru.
   const val = i => hits[i].dmg;
@@ -69,6 +73,31 @@ function rpClassifyTurn(hits, mark) {
     for (const m in c) { const ds = c[m]; for (let a = 0; a < ds.length; a++) for (let b = a+1; b < ds.length; b++) if (eq(ds[a], ds[b])) return true; }
     return false;
   }
+  // banda holy-constante cross-mob: spell e granada normalizam ao MESMO holyBase entre mobs
+  // distintos (≥2 mobs, todos dentro de ~6%). Arrow (físico) NÃO satisfaz. = "danos iguais".
+  function holyConst(lo, hi) {
+    const byMob = Object.create(null);
+    for (let i = lo; i < hi; i++) { if (hits[i].overkill) continue; const h = hits[i].holy; if (!Number.isFinite(h) || h <= 0) continue; const m = mobOf(i); (byMob[m] = byMob[m] || []).push(h); }
+    const meds = []; for (const m in byMob) { const a = byMob[m].sort((x, y) => x - y); meds.push(a[a.length >> 1]); }
+    if (meds.length < 2) return false;
+    const c = meds.slice().sort((x, y) => x - y)[meds.length >> 1];
+    // holyBase deve ser ~constante cross-mob com tolerância APERTADA (~2%): spell/granada reais
+    // são quase exatos; cauda de arrow tem spread maior (t155/t78). Tolera 1 mob com mod impreciso
+    // (liod/striker) exigindo só MAIORIA dos mobs concordando (não todos).
+    const tol = Math.max(12, c * 0.02);
+    const agree = meds.filter(v => Math.abs(v - c) <= tol).length;
+    return agree >= 2 && agree * 2 >= meds.length;
+  }
+
+  // banda holy REAL (consistência exata): (a) cada mob com ≥2 hits não-overkill tem dano cru
+  // IDÊNTICO (holy é determinístico; arrow varia → t99 cyclursus 771≠772 reprova) E (b) holyConst
+  // cross-mob (≥2 mobs no mesmo nível-base). Cobre spell-sem-repetição (t34, cada mob 1×) via (b).
+  function isHolyBand(lo, hi) {
+    const byMob = Object.create(null);
+    for (let i = lo; i < hi; i++) { if (hits[i].overkill) continue; const m = mobOf(i); (byMob[m] = byMob[m] || []).push(val(i)); }
+    for (const m in byMob) { const ds = byMob[m]; for (let k = 1; k < ds.length; k++) if (ds[k] !== ds[0]) return false; }
+    return holyConst(lo, hi);
+  }
 
   const t0ts = hits[0].ts;
   const secStartFrom = (lo) => { for (let i = lo; i < n; i++) if (Number.isFinite(hits[i].ts) && hits[i].ts > t0ts) return i; return -1; };
@@ -80,6 +109,12 @@ function rpClassifyTurn(hits, mark) {
   if (critChanges.length === 1) {
     const c0 = critChanges[0];
     if (mark === 'explode') {
+      // (b') prefixo crit = arrow inteiro; sufixo não-crit = spell + granada (DUAS bandas holy).
+      const sg1 = bandStart(n);
+      const sg2 = sg1 > c0 ? bandStart(sg1) : c0;
+      if (sg2 >= c0 && sg1 > sg2 && sustained(sg2, sg1) && holyConst(sg2, sg1) && holyConst(sg1, n)) {
+        return { arrowEnd: c0, spellEnd: sg1 };
+      }
       const aEndPrefix = bandStart(c0);
       if (aEndPrefix < c0 && sustained(aEndPrefix, c0)) {
         return { arrowEnd: aEndPrefix, spellEnd: c0 }; // (a) arrow+spell no prefixo, granada sufixo
@@ -93,37 +128,24 @@ function rpClassifyTurn(hits, mark) {
     return { arrowEnd: c0, spellEnd: n };
   }
 
-  // Banda 1 (do fim): candidata a granada (se explode) ou spell.
   const b1 = bandStart(n);
-  if (!sustained(b1, n)) {
-    // sem repetição sustentada no fim → não há spell/granada confiável: tudo arrow (t78, t155)
+  // banda final mágica = sustentada OU banda holy real (spell que acerta cada mob 1× — t34).
+  // Senão o fim é arrow → tudo arrow (t78, t155).
+  if (!sustained(b1, n) && !isHolyBand(b1, n)) {
     return { arrowEnd: n, spellEnd: n };
   }
-  // Banda 2 (anterior): candidata a spell (se banda1 for granada).
-  let b2 = b1 > 0 ? bandStart(b1) : 0;
+  const b2 = b1 > 0 ? bandStart(b1) : 0;
 
-  let arrowEnd, spellEnd;
-  if (mark === 'explode') {
-    // granada só se há 2 bandas sustentadas (banda anterior tb repete). Senão = falso explode (arrow+spell).
-    const twoBands = b2 < b1 && sustained(b2, b1);
-    const t0 = hits[0].ts; let sec = -1;
-    for (let i = 0; i < n; i++) if (hits[i].ts > t0) { sec = i; break; }
-    if (twoBands) {
-      spellEnd = b1; arrowEnd = b2;
-      if (sec > 0 && sec > arrowEnd && sec <= n) {
-        const med = (lo,hi) => { const a=[]; for(let i=lo;i<hi;i++) if(!hits[i].overkill) a.push(hits[i].holy); a.sort((x,y)=>x-y); return a.length?a[a.length>>1]:0; };
-        const g = med(b1, n), s = med(b2, b1);
-        if (s && g && Math.abs(g - s) <= Math.max(15, s * 0.05)) spellEnd = sec;
-      }
-    } else {
-      spellEnd = n; arrowEnd = b1; // falso explode: arrow + spell, sem granada
-    }
-  } else {
-    spellEnd = n; arrowEnd = b1;
+  // GRANADA = DUAS bandas holy REAIS empilhadas (spell [b2,b1) + granada [b1,n)). A 2ª banda
+  // precisa: (i) sustained = algum mob repete (descarta cauda de arrow SEM repetição — t87/t26/t89),
+  // E (ii) isHolyBand = mesmo mob com dano IDÊNTICO (descarta cauda de arrow que repete mas VARIA —
+  // t99 cyclursus 771≠772, t131 506≠507). Prefixo arrow [0,b2).
+  if (b2 > 0 && sustained(b2, b1) && isHolyBand(b2, b1) && isHolyBand(b1, n)) {
+    return { arrowEnd: b2, spellEnd: b1 };
   }
-  arrowEnd = Math.max(0, Math.min(arrowEnd, spellEnd, n));
-  spellEnd = Math.max(arrowEnd, Math.min(spellEnd, n));
-  return { arrowEnd, spellEnd };
+
+  // Sem granada: arrow + spell (banda final = spell; resto = arrow).
+  return { arrowEnd: b1, spellEnd: n };
 }
 // ===============================================================
 
