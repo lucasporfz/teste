@@ -1,0 +1,1725 @@
+08:31:48 During your absence you trained for 12 hours.
+08:31:48 Your Distance Fighting skill changed from level 133 and 5.42% to 5.72%.
+08:31:48 Your Shielding skill changed from level 113 and 16.59% to 17.35%.
+08:31:48 Your last visit in Tibia: 03. Jun 2026 22:37:41 CEST.
+08:31:48 Today's boosted creature: Rotworm
+08:31:48 Today's boosted boss: Mitmah Vanguard
+08:31:48 Due to your long-term loyalty to Tibia, you currently benefit from a 30% bonus on all of your skills.
+08:31:54 Poachers have slaughtered nearly all wild animals north of the Green Claw Swamp. But vengeful spirits show up there now!
+08:31:54 A sandstorm travels through Darama, leading to isles full of deadly creatures inside a nightmare. Avoid the northernmost coast!
+08:31:54 Nomads travel the eternal sands of Ankrahmun's desert. There must be a camp somewhere.
+08:31:54 The river south of the outlaw camp is flooding. A small island there should now be reachable safely.
+08:31:54 Bibby Bloodbath and her crew are roaming the lands, destroying everything in their path.
+08:31:54 Adventurers have told of a Spirit Gate in the Daramian mountains. Fight the restless undead!
+08:34:14 Bought 1201x great mana potion for 189758 gold.
+08:34:22 Bought 1001x spectral bolt for 70070 gold.
+08:34:53 Using the last adventurer's stone...
+08:34:56 Switched to hotkey preset 'USP NO SCROLL'.
+08:35:09 It is too early to use this again!
+08:35:39 Using the last rope...
+08:35:40 Using one of 1553 great mana potions...
+08:35:41 Using one of 1552 great mana potions...
+08:35:41 Using one of 1551 great mana potions...
+08:35:43 Using one of 1551 great mana potions...
+08:35:45 Using one of 1550 great mana potions...
+08:35:46 Using one of 1549 great mana potions...
+08:35:46 Using one of 1549 great mana potions...
+08:35:47 Using one of 1548 great mana potions...
+08:35:48 Using one of 1547 great mana potions...
+08:35:48 Using one of 1546 great mana potions...
+08:35:49 Using one of 1546 great mana potions...
+08:35:50 Using one of 1545 great mana potions...
+08:35:50 Using one of 1545 great mana potions...
+08:35:50 Using one of 1545 great mana potions...
+08:35:51 Using one of 1544 great mana potions...
+08:35:54 Using one of 1543 great mana potions...
+08:35:55 Using one of 1542 great mana potions...
+08:35:55 Using one of 1542 great mana potions...
+08:35:56 Using one of 1541 great mana potions...
+08:35:56 Using one of 1540 great mana potions...
+08:35:57 Using one of 1540 great mana potions...
+08:35:57 Using one of 1540 great mana potions...
+08:35:57 Using one of 1540 great mana potions...
+08:35:57 Using one of 1539 great mana potions...
+08:35:58 Using one of 1539 great mana potions...
+08:35:58 Using one of 1539 great mana potions...
+08:35:58 Using one of 1539 great mana potions...
+08:35:58 Using one of 1538 great mana potions...
+08:35:59 Using one of 1538 great mana potions...
+08:35:59 Using one of 1538 great mana potions...
+08:35:59 Using one of 1538 great mana potions...
+08:35:59 Using one of 1537 great mana potions...
+08:36:00 Using one of 1537 great mana potions...
+08:36:00 Using one of 1537 great mana potions...
+08:36:00 Using one of 1537 great mana potions...
+08:36:00 Using one of 1537 great mana potions...
+08:36:01 Using one of 1536 great mana potions...
+08:36:01 Using one of 1536 great mana potions...
+08:36:01 Using one of 1536 great mana potions...
+08:36:02 Using the last squeezing gear of girlpower...
+08:36:03 Using the last squeezing gear of girlpower...
+08:36:06 Using the last rope...
+08:36:08 Using the last squeezing gear of girlpower...
+08:36:09 Using one of 1535 great mana potions...
+08:36:14 Using one of 1534 great mana potions...
+08:36:15 Using one of 1533 great mana potions...
+08:36:16 Using one of 1532 great mana potions...
+08:36:16 Using one of 1531 great mana potions...
+08:36:17 Using one of 1531 great mana potions...
+08:36:17 Using one of 1531 great mana potions...
+08:36:18 Using one of 1530 great mana potions...
+08:36:18 Using one of 1530 great mana potions...
+08:36:18 Using one of 1530 great mana potions...
+08:36:18 Using one of 1530 great mana potions...
+08:36:19 Using one of 1529 great mana potions...
+08:36:19 Using one of 1529 great mana potions...
+08:36:19 Using one of 1529 great mana potions...
+08:36:19 Using one of 1529 great mana potions...
+08:36:20 Using one of 1528 great mana potions...
+08:36:20 Using one of 1528 great mana potions...
+08:36:20 Using one of 1528 great mana potions...
+08:36:20 Using one of 1528 great mana potions...
+08:36:21 Using one of 1528 great mana potions...
+08:36:21 Using one of 1527 great mana potions...
+08:36:21 Using one of 1527 great mana potions...
+08:36:21 Using one of 1527 great mana potions...
+08:36:22 Using one of 1527 great mana potions...
+08:36:22 Using one of 1526 great mana potions...
+08:36:22 Using one of 1526 great mana potions...
+08:36:22 Using one of 1526 great mana potions...
+08:36:23 Using one of 1526 great mana potions...
+08:36:23 Using one of 1525 great mana potions...
+08:36:23 Using one of 1525 great mana potions...
+08:36:23 Using one of 1525 great mana potions...
+08:36:24 Using one of 1524 great mana potions...
+08:36:24 Using one of 1524 great mana potions...
+08:36:24 Using one of 1524 great mana potions...
+08:36:26 Using one of 1523 great mana potions...
+08:36:27 Using one of 1523 great mana potions...
+08:36:27 Using one of 1522 great mana potions...
+08:36:28 Using one of 1522 great mana potions...
+08:36:28 Using one of 1522 great mana potions...
+08:36:28 Using one of 1521 great mana potions...
+08:36:28 Using one of 1521 great mana potions...
+08:36:29 Using one of 1521 great mana potions...
+08:36:29 Using one of 1521 great mana potions...
+08:36:29 Using one of 1520 great mana potions...
+08:36:30 Using one of 1520 great mana potions...
+08:36:30 Using one of 1520 great mana potions...
+08:36:30 Using one of 1520 great mana potions...
+08:36:30 Using one of 1519 great mana potions...
+08:36:31 Using one of 1519 great mana potions...
+08:36:31 Using one of 1519 great mana potions...
+08:36:31 Using one of 1519 great mana potions...
+08:36:31 Using one of 1518 great mana potions...
+08:36:32 Using one of 1518 great mana potions...
+08:36:32 Using one of 1518 great mana potions...
+08:36:32 Using one of 1518 great mana potions...
+08:36:32 Using one of 1517 great mana potions...
+08:36:33 Using one of 1517 great mana potions...
+08:36:37 Using one of 1516 great mana potions...
+08:36:37 Using one of 1515 great mana potions...
+08:36:38 Using one of 1515 great mana potions...
+08:36:39 Using one of 1514 great mana potions...
+08:36:39 Using one of 1513 great mana potions...
+08:36:40 Using one of 1513 great mana potions...
+08:36:46 Using the last rope...
+08:36:49 Using the last rope...
+08:37:01 Using one of 1512 great mana potions...
+08:37:01 Using one of 1511 great mana potions...
+08:37:02 Using one of 1511 great mana potions...
+08:37:02 Using one of 1510 great mana potions...
+08:37:03 Using one of 1510 great mana potions...
+08:37:03 Using one of 1509 great mana potions...
+08:37:04 Using one of 1508 great mana potions...
+08:37:05 Using one of 1508 great mana potions...
+08:37:05 Using one of 1507 great mana potions...
+08:37:05 Using one of 1507 great mana potions...
+08:37:06 Using one of 1507 great mana potions...
+08:37:06 Using one of 1506 great mana potions...
+08:37:06 Using one of 1506 great mana potions...
+08:37:07 Using one of 1506 great mana potions...
+08:37:07 Using one of 1506 great mana potions...
+08:37:07 Using one of 1505 great mana potions...
+08:37:07 Using one of 1505 great mana potions...
+08:37:08 Using one of 1505 great mana potions...
+08:37:08 Using one of 1504 great mana potions...
+08:37:13 Using the last squeezing gear of girlpower...
+08:37:13 Using one of 1503 great mana potions...
+08:37:14 Using one of 1502 great mana potions...
+08:37:15 Using one of 1501 great mana potions...
+08:37:15 Using one of 1501 great mana potions...
+08:37:15 Using one of 1501 great mana potions...
+08:37:16 Using one of 1500 great mana potions...
+08:37:16 Using one of 1500 great mana potions...
+08:37:16 Using one of 1500 great mana potions...
+08:37:17 Using one of 1499 great mana potions...
+08:37:17 Using one of 1499 great mana potions...
+08:37:17 Using one of 1499 great mana potions...
+08:37:18 Using one of 1499 great mana potions...
+08:37:18 Using one of 1498 great mana potions...
+08:37:18 Using one of 1498 great mana potions...
+08:37:19 Using one of 1498 great mana potions...
+08:37:19 Using one of 1497 great mana potions...
+08:37:20 Using one of 1497 great mana potions...
+08:37:21 Using one of 1496 great mana potions...
+08:37:21 Using one of 1496 great mana potions...
+08:37:21 Using one of 1495 great mana potions...
+08:37:22 Using one of 1495 great mana potions...
+08:37:22 Using one of 1495 great mana potions...
+08:37:22 Using one of 1494 great mana potions...
+08:37:23 Using one of 1494 great mana potions...
+08:37:23 Using one of 1494 great mana potions...
+08:37:23 Using one of 1493 great mana potions...
+08:37:23 Using one of 1493 great mana potions...
+08:37:24 Using one of 1493 great mana potions...
+08:37:24 Using one of 1492 great mana potions...
+08:37:25 Using one of 1492 great mana potions...
+08:37:26 Switched to hotkey preset 'USP SP'.
+08:37:26 Switched to hotkey preset 'full ultimate'.
+08:37:27 Switched to hotkey preset 'Drome'.
+08:37:27 Switched to hotkey preset 'Royal'Drone'.
+08:37:27 Switched to hotkey preset 'USP NO SCROLL'.
+08:37:28 Using one of 1491 great mana potions...
+08:37:31 Using one of 1490 great mana potions...
+08:37:33 You begin to feel the dark power of the rot.
+08:37:34 Using one of 1489 great mana potions...
+08:37:35 Using one of 1488 great mana potions...
+08:37:36 Using one of 1487 great mana potions...
+08:37:39 Using one of 1486 great mana potions...
+08:37:40 Using one of 1485 great mana potions...
+08:37:41 Using one of 1484 great mana potions...
+08:38:16 Momentum was triggered.
+08:42:34 Womolu invites you to his party.
+08:46:44 You have joined Womolu's party. Open the party channel to communicate with your companions.
+08:46:50 Using one of 1483 great mana potions...
+08:46:51 Using one of 1482 great mana potions...
+08:46:51 Using one of 1482 great mana potions...
+08:46:52 Using one of 1481 great mana potions...
+08:46:52 Using one of 1481 great mana potions...
+08:47:30 Izeekao has joined the party.
+08:47:48 Luszckyn has joined the party.
+08:48:46 Burkzin has joined the party.
+08:48:59 Using one of 1480 great mana potions...
+08:48:59 You gained 193 mana.
+08:48:59 Using one of 1479 great mana potions...
+08:49:00 Using one of 1479 great mana potions...
+08:49:00 You gained 234 mana.
+08:49:00 Using one of 1478 great mana potions...
+08:49:01 Using one of 1478 great mana potions...
+08:49:01 You gained 151 mana.
+08:49:01 Using one of 1477 great mana potions...
+08:49:02 You gained 163 mana.
+08:49:05 Using one of 1476 great mana potions...
+08:49:05 You gained 195 mana.
+08:49:05 Using one of 1475 great mana potions...
+08:49:05 You were healed by Luszckyn for 1936 hitpoints.
+08:49:06 Using one of 1475 great mana potions...
+08:49:06 You gained 157 mana.
+08:49:06 You were healed by Luszckyn for 1697 hitpoints.
+08:49:15 Using one of 1474 great mana potions...
+08:49:15 You gained 164 mana.
+08:49:20 Using one of 1473 great mana potions...
+08:49:20 You gained 250 mana.
+08:49:21 Using one of 1472 great mana potions...
+08:49:21 You lose 815 hitpoints due to an attack by an oozing corpus. 
+08:49:23 You healed yourself for 815 hitpoints.
+08:49:24 Using one of 1472 great mana potions...
+08:49:24 You gained 203 mana.
+08:49:25 Using one of 1471 great mana potions...
+08:49:25 You gained 205 mana.
+08:49:26 Using one of 1470 great mana potions...
+08:49:26 You lose 958 hitpoints due to an attack by a sopping corpus. 
+08:49:26 You gained 192 mana.
+08:49:26 You healed yourself for 958 hitpoints.
+08:49:26 You lose 1041 hitpoints due to an attack by a bloated man-maggot. 
+08:49:27 You lose 833 hitpoints due to an attack by an oozing corpus. 
+08:49:27 You healed yourself for 1172 hitpoints.
+08:49:28 Using one of 1469 great mana potions...
+08:49:28 You gained 167 mana.
+08:49:28 You healed yourself for 696 hitpoints.
+08:49:29 Using one of 1468 great mana potions...
+08:49:29 You gained 151 mana.
+08:49:29 You lose 737 hitpoints due to an attack by an oozing corpus. 
+08:49:30 You healed yourself for 737 hitpoints.
+08:49:30 Using one of 1467 great mana potions...
+08:49:31 You gained 211 mana.
+08:49:31 You lose 723 hitpoints due to an attack by a mycobiontic beetle. 
+08:49:31 Using one of 1466 great mana potions...
+08:49:32 You gained 218 mana.
+08:49:32 Momentum was triggered.
+08:49:32 Using one of 1465 great mana potions...
+08:49:34 You healed yourself for 717 hitpoints.
+08:49:34 Using one of 1465 great mana potions...
+08:49:34 You gained 204 mana.
+08:49:35 Using one of 1464 great mana potions...
+08:49:35 You lose 736 hitpoints due to an attack by an oozing corpus. 
+08:49:35 You gained 190 mana.
+08:49:35 Using one of 1463 great mana potions...
+08:49:36 Using one of 1463 great mana potions...
+08:49:36 Using one of 1463 great mana potions...
+08:49:36 You lose 839 hitpoints due to an attack by an oozing corpus. 
+08:49:36 You lose 308 hitpoints due to an attack by an oozing corpus. 
+08:49:36 You gained 176 mana.
+08:49:36 Using one of 1462 great mana potions...
+08:49:37 Using one of 1462 great mana potions...
+08:49:37 Using one of 1462 great mana potions...
+08:49:37 Using one of 1462 great mana potions...
+08:49:37 You gained 231 mana.
+08:49:38 You healed yourself for 1199 hitpoints.
+08:49:38 Using one of 1461 great mana potions...
+08:49:38 You lose 924 hitpoints due to an attack by a sopping corpus. 
+08:49:38 You gained 240 mana.
+08:49:39 You healed yourself for 1255 hitpoints.
+08:49:40 Using one of 1460 great mana potions...
+08:49:40 You gained 200 mana.
+08:49:40 You healed yourself for 341 hitpoints.
+08:49:41 You lose 708 hitpoints due to an attack by an oozing corpus. 
+08:49:41 Using one of 1459 great mana potions...
+08:49:41 You gained 197 mana.
+08:49:41 You lose 758 hitpoints due to an attack by a mycobiontic beetle. 
+08:49:41 You lose 457 hitpoints due to an attack by an oozing corpus. 
+08:49:41 You healed yourself for 1224 hitpoints.
+08:49:42 Using one of 1458 great mana potions...
+08:49:42 You lose 983 hitpoints due to an attack by a bloated man-maggot. 
+08:49:42 You gained 241 mana.
+08:49:42 You lose 734 hitpoints due to an attack by an oozing corpus. 
+08:49:42 You lose 377 hitpoints due to an attack by an oozing corpus. 
+08:49:42 You healed yourself for 1068 hitpoints.
+08:49:43 Using one of 1457 great mana potions...
+08:49:43 You healed yourself for 1336 hitpoints.
+08:49:44 Using one of 190 magic wall runes...
+08:49:45 You healed yourself for 383 hitpoints.
+08:49:45 You already exhausted this reservoir.
+08:49:46 Momentum was triggered.
+08:49:46 Using one of 1457 great mana potions...
+08:49:46 You gained 244 mana.
+08:49:47 Using one of 1456 great mana potions...
+08:49:47 You gained 188 mana.
+08:49:48 You lose 933 hitpoints due to an attack by a sopping corpus. 
+08:49:48 You healed yourself for 933 hitpoints.
+08:49:49 Using one of 1455 great mana potions...
+08:49:49 You gained 226 mana.
+08:49:49 You lose 938 hitpoints due to an attack by a bloated man-maggot. 
+08:49:50 You lose 946 hitpoints due to an attack by a bloated man-maggot. 
+08:49:50 You healed yourself for 1323 hitpoints.
+08:49:50 Using one of 1454 great mana potions...
+08:49:50 You gained 219 mana.
+08:49:50 You lose 907 hitpoints due to an attack by a bloated man-maggot. 
+08:49:50 You lose 932 hitpoints due to an attack by a bloated man-maggot. 
+08:49:50 You lose 841 hitpoints due to an attack by a bloated man-maggot. 
+08:49:51 You lose 597 hitpoints due to an attack by a bloated man-maggot. 
+08:49:51 You lose 478 hitpoints due to an attack by an oozing corpus. 
+08:49:51 You lose 246 hitpoints due to an attack by a bloated man-maggot. 
+08:49:51 You healed yourself for 1060 hitpoints.
+08:49:51 Using one of 1453 great mana potions...
+08:49:51 You gained 182 mana.
+08:49:52 You healed yourself for 1444 hitpoints.
+08:49:52 Using one of 1452 great mana potions...
+08:49:52 You gained 234 mana.
+08:49:53 You healed yourself for 1266 hitpoints.
+08:49:53 You lose 699 hitpoints due to an attack by an oozing corpus. 
+08:49:53 You lose 362 hitpoints due to an attack by an oozing corpus. 
+08:49:53 You lose 673 hitpoints due to an attack by an oozing corpus. 
+08:49:53 Using one of 1451 great mana potions...
+08:49:54 You gained 241 mana.
+08:49:54 You lose 769 hitpoints due to an attack by an oozing corpus. 
+08:49:54 You healed yourself for 1077 hitpoints.
+08:49:55 Using one of 1450 great mana potions...
+08:49:55 You gained 221 mana.
+08:49:55 You lose 1005 hitpoints due to an attack by a bloated man-maggot. 
+08:49:55 You lose 575 hitpoints due to an attack by a bloated man-maggot. 
+08:49:55 You lose 455 hitpoints due to an attack by an oozing corpus. 
+08:49:55 You lose 712 hitpoints due to an attack by an oozing corpus. 
+08:49:55 You lose 712 hitpoints due to an attack by an oozing corpus. 
+08:49:55 You healed yourself for 1419 hitpoints.
+08:49:56 Using one of 1449 great mana potions...
+08:49:56 You gained 193 mana.
+08:49:57 You healed yourself for 1032 hitpoints.
+08:49:57 You lose 917 hitpoints due to an attack by a bloated man-maggot. 
+08:49:57 Using one of 1448 great mana potions...
+08:49:57 You gained 225 mana.
+08:49:57 You lose 878 hitpoints due to an attack by a bloated man-maggot. 
+08:49:57 You lose 788 hitpoints due to an attack by an oozing corpus. 
+08:49:58 You lose 665 hitpoints due to an attack by a mycobiontic beetle. 
+08:49:58 You healed yourself for 1136 hitpoints.
+08:49:58 Using one of 1447 great mana potions...
+08:49:58 You gained 175 mana.
+08:49:59 You healed yourself for 1394 hitpoints.
+08:50:00 Using one of 1446 great mana potions...
+08:50:00 You gained 209 mana.
+08:50:00 Using one of 1445 great mana potions...
+08:50:01 You gained 207 mana.
+08:50:01 You lose 983 hitpoints due to an attack by a sopping corpus. 
+08:50:01 You lose 641 hitpoints due to an attack by a sopping corpus. 
+08:50:01 Using one of 1444 great mana potions...
+08:50:02 You gained 205 mana.
+08:50:02 You lose 491 hitpoints due to an attack by an oozing corpus. 
+08:50:02 You lose 747 hitpoints due to an attack by an oozing corpus. 
+08:50:02 You healed yourself for 1185 hitpoints.
+08:50:02 Using one of 1443 great mana potions...
+08:50:03 You lose 436 hitpoints due to an attack by a bloated man-maggot. 
+08:50:03 You gained 240 mana.
+08:50:03 You healed yourself for 1234 hitpoints.
+08:50:05 You healed yourself for 1004 hitpoints.
+08:50:05 Using one of 1442 great mana potions...
+08:50:06 You gained 223 mana.
+08:50:06 You healed yourself for 1038 hitpoints.
+08:50:06 You lose 861 hitpoints due to an attack by an oozing corpus. 
+08:50:07 Using one of 1441 great mana potions...
+08:50:07 You gained 243 mana.
+08:50:07 You lose 257 hitpoints due to an attack by a sopping corpus. 
+08:50:07 You healed yourself for 1077 hitpoints.
+08:50:08 Using one of 1440 great mana potions...
+08:50:08 You gained 180 mana.
+08:50:08 You lose 835 hitpoints due to an attack by a bloated man-maggot. 
+08:50:09 Using one of 1439 great mana potions...
+08:50:09 You gained 221 mana.
+08:50:09 You lose 683 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:10 You lose 942 hitpoints due to an attack by a sopping corpus. 
+08:50:10 You were healed by Luszckyn for 1461 hitpoints.
+08:50:11 Using one of 1438 great mana potions...
+08:50:11 You gained 214 mana.
+08:50:11 You lose 484 hitpoints due to an attack by an oozing corpus. 
+08:50:11 You lose 835 hitpoints due to an attack by an oozing corpus. 
+08:50:11 You lose 428 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:11 You lose 742 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:11 You were healed by Luszckyn for 1662 hitpoints.
+08:50:12 You healed yourself for 1014 hitpoints.
+08:50:12 Using one of 1437 great mana potions...
+08:50:12 You lose 454 hitpoints due to an attack by an oozing corpus. 
+08:50:12 You gained 217 mana.
+08:50:12 You were healed by Luszckyn for 1873 hitpoints.
+08:50:13 You healed yourself for 1342 hitpoints.
+08:50:13 Using one of 1436 great mana potions...
+08:50:14 You were healed by Luszckyn for 837 hitpoints.
+08:50:14 You gained 189 mana.
+08:50:14 You lose 612 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:14 You lose 736 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:14 You healed yourself for 1212 hitpoints.
+08:50:15 Using one of 1435 great mana potions...
+08:50:15 You were healed by Luszckyn for 136 hitpoints.
+08:50:15 You gained 170 mana.
+08:50:16 Using one of 1434 great mana potions...
+08:50:16 You gained 154 mana.
+08:50:16 You lose 999 hitpoints due to an attack by a bloated man-maggot. 
+08:50:16 You lose 853 hitpoints due to an attack by a bloated man-maggot. 
+08:50:16 You lose 243 hitpoints due to an attack by a bloated man-maggot. 
+08:50:17 You lose 801 hitpoints due to an attack by a sopping corpus. 
+08:50:17 You lose 733 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:18 You healed yourself for 1243 hitpoints.
+08:50:19 You lose 631 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:19 You healed yourself for 1112 hitpoints.
+08:50:19 You lose 924 hitpoints due to an attack by a bloated man-maggot. 
+08:50:19 You lose 477 hitpoints due to an attack by a bloated man-maggot. 
+08:50:20 You healed yourself for 1012 hitpoints.
+08:50:20 You lose 791 hitpoints due to an attack by an oozing corpus. 
+08:50:21 You lose 335 hitpoints due to an attack by a bloated man-maggot. 
+08:50:21 You lose 933 hitpoints due to an attack by a bloated man-maggot. 
+08:50:22 You healed yourself for 1137 hitpoints.
+08:50:22 You lose 484 hitpoints due to an attack by an oozing corpus. 
+08:50:23 You healed yourself for 1185 hitpoints.
+08:50:23 You lose 956 hitpoints due to an attack by a sopping corpus. 
+08:50:23 You lose 868 hitpoints due to an attack by a sopping corpus. 
+08:50:23 You lose 768 hitpoints due to an attack by a sopping corpus. 
+08:50:23 You lose 452 hitpoints due to an attack by a sopping corpus. 
+08:50:23 You lose 720 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:23 You lose 693 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:23 Using one of 1433 great mana potions...
+08:50:23 You gained 179 mana.
+08:50:24 You lose 452 hitpoints due to an attack by a sopping corpus. 
+08:50:24 You healed yourself for 1261 hitpoints.
+08:50:24 You lose 819 hitpoints due to an attack by an oozing corpus. 
+08:50:24 You lose 740 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:24 You lose 613 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:24 Using one of 1432 great mana potions...
+08:50:24 You gained 246 mana.
+08:50:24 You lose 231 hitpoints due to an attack by a bloated man-maggot. 
+08:50:24 You lose 1094 hitpoints due to an attack by a bloated man-maggot. 
+08:50:24 You lose 384 hitpoints due to an attack by an oozing corpus. 
+08:50:25 You healed yourself for 1030 hitpoints.
+08:50:25 You lose 362 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:25 Using one of 1431 great mana potions...
+08:50:25 You gained 250 mana.
+08:50:25 You lose 733 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:26 You healed yourself for 1056 hitpoints.
+08:50:26 Using one of 1430 great mana potions...
+08:50:26 You gained 174 mana.
+08:50:27 You lose 710 hitpoints due to an attack by an oozing corpus. 
+08:50:27 You healed yourself for 1066 hitpoints.
+08:50:27 You lose 698 hitpoints due to an attack by an oozing corpus. 
+08:50:27 Using one of 1429 great mana potions...
+08:50:27 You gained 159 mana.
+08:50:28 You healed yourself for 1364 hitpoints.
+08:50:29 You were healed by Luszckyn for 1553 hitpoints.
+08:50:29 You healed yourself for 1362 hitpoints.
+08:50:30 You lose 731 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:30 Using one of 1428 great mana potions...
+08:50:30 You gained 202 mana.
+08:50:30 You lose 608 hitpoints due to an attack by an oozing corpus. 
+08:50:30 You lose 840 hitpoints due to an attack by an oozing corpus. 
+08:50:31 You healed yourself for 1138 hitpoints.
+08:50:31 You lose 770 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:31 You lose 683 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:31 You lose 741 hitpoints due to an attack by an oozing corpus. 
+08:50:31 You lose 330 hitpoints due to an attack by an oozing corpus. 
+08:50:31 You lose 606 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:31 Using one of 1427 great mana potions...
+08:50:31 You gained 244 mana.
+08:50:32 You healed yourself for 1112 hitpoints.
+08:50:32 Using one of 1426 great mana potions...
+08:50:32 You gained 237 mana.
+08:50:32 You lose 237 hitpoints due to an attack by a bloated man-maggot. 
+08:50:33 You lose 1024 hitpoints due to an attack by a sopping corpus. 
+08:50:33 You lose 673 hitpoints due to an attack by an oozing corpus. 
+08:50:33 You healed yourself for 1437 hitpoints.
+08:50:33 Using one of 1425 great mana potions...
+08:50:33 You lose 426 hitpoints due to an attack by a bloated man-maggot. 
+08:50:33 You gained 242 mana.
+08:50:33 You lose 775 hitpoints due to an attack by an oozing corpus. 
+08:50:34 You healed yourself for 1305 hitpoints.
+08:50:34 You lose 832 hitpoints due to an attack by a bloated man-maggot. 
+08:50:34 Using one of 1424 great mana potions...
+08:50:34 You gained 183 mana.
+08:50:34 You were healed by Luszckyn for 2048 hitpoints.
+08:50:35 You healed yourself for 1401 hitpoints.
+08:50:35 You were healed by Luszckyn for 1742 hitpoints.
+08:50:35 Using one of 1423 great mana potions...
+08:50:35 You gained 174 mana.
+08:50:36 You healed yourself for 1375 hitpoints.
+08:50:36 You were healed by Luszckyn for 2236 hitpoints.
+08:50:36 You lose 536 hitpoints due to an attack by an oozing corpus. 
+08:50:37 You lose 855 hitpoints due to an attack by a bloated man-maggot. 
+08:50:37 You lose 763 hitpoints due to an attack by an oozing corpus. 
+08:50:37 You lose 816 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:37 You healed yourself for 1183 hitpoints.
+08:50:37 You lose 904 hitpoints due to an attack by a sopping corpus. 
+08:50:37 You lose 900 hitpoints due to an attack by a sopping corpus. 
+08:50:37 You lose 710 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:38 You lose 828 hitpoints due to an attack by an oozing corpus. 
+08:50:38 You lose 515 hitpoints due to an attack by an oozing corpus. 
+08:50:38 You lose 837 hitpoints due to an attack by an oozing corpus. 
+08:50:38 You were healed by Luszckyn for 2092 hitpoints.
+08:50:38 You lose 710 hitpoints due to an attack by an oozing corpus. 
+08:50:38 You healed yourself for 1121 hitpoints.
+08:50:39 You lose 658 hitpoints due to an attack by a bloated man-maggot. 
+08:50:39 You lose 826 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:39 You were healed by Luszckyn for 2231 hitpoints.
+08:50:39 You healed yourself for 1129 hitpoints.
+08:50:40 Using one of 1422 great mana potions...
+08:50:40 You gained 230 mana.
+08:50:40 You were healed by Luszckyn for 1614 hitpoints.
+08:50:40 You healed yourself for 1050 hitpoints.
+08:50:42 You already exhausted this reservoir.
+08:50:43 The rot has permeated the very roots of your body and hardened your core... you are ready.
+08:50:44 Using one of 1421 great mana potions...
+08:50:44 You lose 983 hitpoints due to an attack by a sopping corpus. 
+08:50:44 You gained 173 mana.
+08:50:45 You healed yourself for 977 hitpoints.
+08:50:45 Using one of 1420 great mana potions...
+08:50:45 You gained 199 mana.
+08:50:45 You lose 295 hitpoints due to an attack by a bloated man-maggot. 
+08:50:45 You lose 837 hitpoints due to an attack by an oozing corpus. 
+08:50:45 You lose 480 hitpoints due to an attack by an oozing corpus. 
+08:50:46 You healed yourself for 1359 hitpoints.
+08:50:46 Using one of 1419 great mana potions...
+08:50:46 You gained 166 mana.
+08:50:47 You lose 740 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:47 You healed yourself for 993 hitpoints.
+08:50:47 You lose 882 hitpoints due to an attack by a sopping corpus. 
+08:50:47 Using one of 1418 great mana potions...
+08:50:47 You gained 180 mana.
+08:50:47 You lose 575 hitpoints due to an attack by a sopping corpus. 
+08:50:47 You lose 819 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:48 You healed yourself for 1110 hitpoints.
+08:50:48 You lose 862 hitpoints due to an attack by a sopping corpus. 
+08:50:48 You lose 930 hitpoints due to an attack by a bloated man-maggot. 
+08:50:48 You lose 1108 hitpoints due to an attack by a sopping corpus. 
+08:50:48 You lose 872 hitpoints due to an attack by a sopping corpus. 
+08:50:48 Using one of 1417 great mana potions...
+08:50:48 You lose 375 hitpoints due to an attack by a sopping corpus. 
+08:50:48 You gained 194 mana.
+08:50:48 You lose 830 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:48 You lose 624 hitpoints due to an attack by a mycobiontic beetle. 
+08:50:49 You healed yourself for 1449 hitpoints.
+08:50:49 You were healed by Luszckyn for 1842 hitpoints.
+08:50:50 Using one of 1416 great mana potions...
+08:50:50 You gained 224 mana.
+08:50:50 You healed yourself for 1125 hitpoints.
+08:50:50 You were healed by Luszckyn for 2136 hitpoints.
+08:50:51 Using one of 1415 great mana potions...
+08:50:51 You gained 200 mana.
+08:50:52 You were healed by Luszckyn for 203 hitpoints.
+08:50:53 The dark rot has left your body.
+08:51:05 Using one of 1414 great mana potions...
+08:51:05 You gained 235 mana.
+08:51:05 Using one of 1413 great mana potions...
+08:51:06 Using one of 1413 great mana potions...
+08:51:06 You gained 172 mana.
+08:51:06 Using one of 1412 great mana potions...
+08:51:06 Using one of 1412 great mana potions...
+08:51:07 You gained 155 mana.
+08:51:12 Using one of 1411 great mana potions...
+08:51:12 You gained 250 mana.
+08:51:12 Using one of 1410 great mana potions...
+08:51:12 Using one of 1410 great mana potions...
+08:51:13 You gained 167 mana.
+08:51:13 Using one of 1409 great mana potions...
+08:51:13 Using one of 1409 great mana potions...
+08:51:13 Using one of 1409 great mana potions...
+08:51:14 You gained 215 mana.
+08:51:14 Using one of 1408 great mana potions...
+08:51:14 Using one of 1408 great mana potions...
+08:51:14 Using one of 1408 great mana potions...
+08:51:15 You gained 234 mana.
+08:51:15 Using one of 1407 great mana potions...
+08:51:15 Using one of 1407 great mana potions...
+08:51:15 Using one of 1407 great mana potions...
+08:51:16 You gained 202 mana.
+08:51:16 Using one of 1406 great mana potions...
+08:51:16 Using one of 1406 great mana potions...
+08:51:17 You gained 215 mana.
+08:51:17 Using one of 1405 great mana potions...
+08:51:17 Using one of 1405 great mana potions...
+08:51:18 You gained 248 mana.
+08:51:19 Murcion loses 700 hitpoints due to your attack. 
+08:51:19 You gained 109 mana.
+08:51:19 Murcion loses 1417 hitpoints due to your attack. 
+08:51:19 You gained 221 mana.
+08:51:20 You lose 220 hitpoints due to an attack by Murcion. 
+08:51:20 You lose 898 hitpoints due to an attack by Murcion. 
+08:51:20 Momentum was triggered.
+08:51:21 You lose 1337 hitpoints due to an attack by a Mushroom. 
+08:51:22 Murcion loses 530 hitpoints due to your attack. 
+08:51:22 You were healed for 262 hitpoints.
+08:51:22 You gained 83 mana.
+08:51:22 You lose 2358 hitpoints due to an attack by Murcion. 
+08:51:24 Murcion loses 444 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:24 You were healed for 220 hitpoints.
+08:51:24 You gained 70 mana.
+08:51:24 Murcion loses 735 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:24 You were healed for 363 hitpoints.
+08:51:24 You gained 115 mana.
+08:51:24 You lose 731 hitpoints due to an attack by Murcion. 
+08:51:24 You lose 606 mana due to an attack by Murcion. 
+08:51:24 You lose 911 hitpoints due to an attack by Murcion. 
+08:51:26 Murcion loses 734 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:26 You were healed for 362 hitpoints.
+08:51:26 You gained 115 mana.
+08:51:26 Murcion loses 1462 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:26 You were healed for 721 hitpoints.
+08:51:26 You gained 228 mana.
+08:51:26 You lose 1096 hitpoints due to an attack by Murcion. 
+08:51:28 Murcion loses 1120 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:51:28 You were healed for 543 hitpoints.
+08:51:28 You gained 171 mana.
+08:51:28 Murcion loses 679 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:28 You were healed for 335 hitpoints.
+08:51:28 You gained 106 mana.
+08:51:30 You were healed by Burkzin for 1869 hitpoints.
+08:51:31 Murcion loses 725 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:31 You were healed for 358 hitpoints.
+08:51:31 You gained 113 mana.
+08:51:31 You lose 806 hitpoints due to an attack by Murcion. 
+08:51:31 You lose 837 mana due to an attack by Murcion. 
+08:51:31 Murcion loses 913 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:51:31 You were healed for 451 hitpoints.
+08:51:31 You gained 142 mana.
+08:51:31 You were healed by Burkzin for 2466 hitpoints.
+08:51:33 You lose 165 hitpoints due to an attack by Murcion. 
+08:51:33 You lose 444 mana due to an attack by Murcion. 
+08:51:33 Murcion loses 827 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:33 You were healed for 378 hitpoints.
+08:51:33 You gained 120 mana.
+08:51:33 Murcion loses 1658 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:33 You were healed for 170 hitpoints.
+08:51:33 You gained 239 mana.
+08:51:33 You lose 1585 hitpoints due to an attack by Murcion. 
+08:51:33 You were healed by Burkzin for 1585 hitpoints.
+08:51:35 Murcion loses 833 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:51:35 You gained 127 mana.
+08:51:35 Murcion loses 681 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:35 You gained 106 mana.
+08:51:37 Murcion loses 2769 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:51:37 You gained 431 mana.
+08:51:37 Murcion loses 504 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:37 You gained 79 mana.
+08:51:39 You lose 1765 hitpoints due to an attack by Murcion. 
+08:51:39 You were healed by Burkzin for 1765 hitpoints.
+08:51:39 Murcion loses 822 hitpoints due to your critical attack. 
+08:51:39 You gained 128 mana.
+08:51:40 Murcion loses 822 hitpoints due to your critical attack. 
+08:51:40 You gained 128 mana.
+08:51:41 You lose 191 hitpoints due to an attack by Murcion. 
+08:51:41 You lose 793 mana due to an attack by Murcion. 
+08:51:42 Murcion loses 295 hitpoints due to your attack. 
+08:51:42 You were healed for 146 hitpoints.
+08:51:42 You gained 46 mana.
+08:51:42 Murcion loses 647 hitpoints due to your attack. 
+08:51:42 You were healed for 45 hitpoints.
+08:51:42 You gained 41 mana.
+08:51:44 Murcion loses 379 hitpoints due to your attack. (perfect shot)
+08:51:44 You gained 56 mana.
+08:51:44 Murcion loses 467 hitpoints due to your attack. 
+08:51:44 You gained 73 mana.
+08:51:46 You lose 177 hitpoints due to an attack by Murcion. 
+08:51:46 Murcion loses 874 hitpoints due to your attack. (perfect shot)
+08:51:46 You were healed for 177 hitpoints.
+08:51:46 You gained 133 mana.
+08:51:46 Murcion loses 1337 hitpoints due to your attack. 
+08:51:46 You gained 208 mana.
+08:51:48 You lose 289 hitpoints due to an attack by Murcion. 
+08:51:48 Murcion loses 1261 hitpoints due to your attack. 
+08:51:48 You were healed for 289 hitpoints.
+08:51:48 You gained 196 mana.
+08:51:49 Murcion loses 715 hitpoints due to your attack. 
+08:51:49 You gained 62 mana.
+08:51:49 You lose 737 hitpoints due to an attack by Murcion. 
+08:51:51 Murcion loses 1356 hitpoints due to your attack. 
+08:51:51 You were healed for 669 hitpoints.
+08:51:51 You gained 211 mana.
+08:51:51 You lose 518 hitpoints due to an attack by Murcion. 
+08:51:51 Murcion loses 487 hitpoints due to your attack. 
+08:51:51 You were healed for 241 hitpoints.
+08:51:51 You gained 76 mana.
+08:51:51 You were healed by Burkzin for 345 hitpoints.
+08:51:52 You lose 1284 hitpoints due to an attack by a Mushroom. 
+08:51:52 You were healed by Burkzin for 1278 hitpoints.
+08:51:53 Murcion loses 960 hitpoints due to your attack. (perfect shot)
+08:51:53 You gained 147 mana.
+08:51:53 Murcion loses 1303 hitpoints due to your attack. 
+08:51:53 You gained 203 mana.
+08:51:55 Murcion loses 722 hitpoints due to your attack. (perfect shot)
+08:51:55 You gained 110 mana.
+08:51:55 Murcion loses 694 hitpoints due to your attack. 
+08:51:55 You gained 108 mana.
+08:51:57 You lose 1661 hitpoints due to an attack by Murcion. 
+08:51:57 Murcion loses 2084 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:51:57 You were healed for 1028 hitpoints.
+08:51:57 You gained 324 mana.
+08:51:58 Murcion loses 551 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:51:58 You were healed for 272 hitpoints.
+08:51:58 You gained 86 mana.
+08:51:59 You lose 652 hitpoints due to an attack by Murcion. 
+08:51:59 You were healed by Burkzin for 1013 hitpoints.
+08:52:00 Murcion loses 1319 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:00 You gained 205 mana.
+08:52:00 Murcion loses 530 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:00 You gained 83 mana.
+08:52:02 You lose 2916 hitpoints due to an attack by Murcion. 
+08:52:02 You were healed by Burkzin for 2573 hitpoints.
+08:52:02 Murcion loses 1026 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:02 You were healed for 343 hitpoints.
+08:52:02 You gained 160 mana.
+08:52:02 Murcion loses 767 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:02 You gained 48 mana.
+08:52:04 You lose 643 hitpoints due to an attack by Murcion. 
+08:52:04 You lose 496 mana due to an attack by Murcion. 
+08:52:04 Murcion loses 1360 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:04 You were healed for 643 hitpoints.
+08:52:04 You gained 212 mana.
+08:52:04 Murcion loses 2649 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:52:04 You gained 412 mana.
+08:52:05 You lose 1002 hitpoints due to an attack by Murcion. 
+08:52:06 Murcion loses 644 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:06 You were healed for 308 hitpoints.
+08:52:06 You gained 97 mana.
+08:52:07 Murcion loses 730 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:07 You were healed for 360 hitpoints.
+08:52:07 You gained 114 mana.
+08:52:07 You lose 634 hitpoints due to an attack by Murcion. 
+08:52:07 You lose 762 mana due to an attack by Murcion. 
+08:52:08 You were healed by Burkzin for 962 hitpoints.
+08:52:09 Murcion loses 1563 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:09 You gained 243 mana.
+08:52:09 Murcion loses 497 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:09 You gained 78 mana.
+08:52:09 You lose 1280 hitpoints due to an attack by Murcion. 
+08:52:11 Murcion loses 2659 hitpoints due to your critical attack. (perfect shot, increased damage by Expose Weakness)
+08:52:11 You were healed for 1280 hitpoints.
+08:52:11 You gained 411 mana.
+08:52:11 Murcion loses 1527 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:11 You gained 238 mana.
+08:52:13 You lose 1371 hitpoints due to an attack by a Mushroom. 
+08:52:13 You were healed by Burkzin for 1371 hitpoints.
+08:52:13 Murcion loses 1310 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:13 You gained 204 mana.
+08:52:13 Murcion loses 770 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:13 You gained 120 mana.
+08:52:13 You lose 1072 hitpoints due to an attack by Murcion. 
+08:52:14 Momentum was triggered.
+08:52:15 You were healed by Burkzin for 1072 hitpoints.
+08:52:15 You lose 803 hitpoints due to an attack by Murcion. 
+08:52:15 You lose 196 hitpoints due to an attack by Murcion. 
+08:52:15 You lose 291 mana due to an attack by Murcion. 
+08:52:15 Murcion loses 1086 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:15 You were healed for 536 hitpoints.
+08:52:15 You gained 169 mana.
+08:52:16 Murcion loses 1600 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:16 You were healed for 463 hitpoints.
+08:52:16 You gained 249 mana.
+08:52:18 You lose 153 hitpoints due to an attack by Murcion. 
+08:52:18 Murcion loses 744 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:18 You were healed for 153 hitpoints.
+08:52:18 You gained 113 mana.
+08:52:18 Murcion loses 752 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:18 You gained 47 mana.
+08:52:19 You lose 1364 hitpoints due to an attack by Murcion. 
+08:52:19 You were healed by Burkzin for 1364 hitpoints.
+08:52:20 Murcion loses 722 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:20 You gained 113 mana.
+08:52:20 Murcion loses 538 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:20 You gained 84 mana.
+08:52:22 Murcion loses 928 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:22 You gained 142 mana.
+08:52:22 Murcion loses 1595 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:22 You gained 248 mana.
+08:52:24 Murcion loses 800 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:24 You gained 125 mana.
+08:52:25 Murcion loses 671 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:25 You gained 105 mana.
+08:52:27 Murcion loses 2792 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:52:27 You gained 434 mana.
+08:52:27 Murcion loses 537 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:27 You gained 84 mana.
+08:52:27 You lose 1020 hitpoints due to an attack by Murcion. 
+08:52:28 You were healed by Burkzin for 1014 hitpoints.
+08:52:29 Murcion loses 766 hitpoints due to your attack. (perfect shot)
+08:52:29 You gained 116 mana.
+08:52:29 Murcion loses 1369 hitpoints due to your attack. 
+08:52:29 You gained 213 mana.
+08:52:29 You lose 478 hitpoints due to an attack by Murcion. 
+08:52:30 You were healed by Burkzin for 478 hitpoints.
+08:52:31 You lose 1328 hitpoints due to an attack by a Mushroom. 
+08:52:31 Murcion loses 3010 hitpoints due to your critical attack. (perfect shot, increased damage by Expose Weakness)
+08:52:31 You were healed for 1328 hitpoints.
+08:52:31 You gained 465 mana.
+08:52:31 Murcion loses 544 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:31 You gained 85 mana.
+08:52:32 You lose 548 hitpoints due to an attack by Murcion. 
+08:52:32 You lose 3401 hitpoints due to an attack by Murcion. 
+08:52:33 Murcion loses 804 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:33 You were healed for 397 hitpoints.
+08:52:33 You gained 125 mana.
+08:52:33 Murcion loses 767 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:33 You were healed for 379 hitpoints.
+08:52:33 You gained 120 mana.
+08:52:34 You were healed by Burkzin for 2602 hitpoints.
+08:52:35 Murcion loses 613 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:35 You were healed for 303 hitpoints.
+08:52:35 You gained 96 mana.
+08:52:35 Murcion loses 1484 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:35 You were healed for 268 hitpoints.
+08:52:35 You gained 231 mana.
+08:52:35 You lose 667 hitpoints due to an attack by Murcion. 
+08:52:36 You were healed by Burkzin for 667 hitpoints.
+08:52:37 Murcion loses 989 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:37 You gained 151 mana.
+08:52:38 You lose 480 mana due to an attack by Murcion. 
+08:52:38 Murcion loses 843 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:52:38 You gained 132 mana.
+08:52:40 Murcion loses 1274 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:40 You gained 198 mana.
+08:52:40 Murcion loses 673 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:40 You gained 105 mana.
+08:52:40 You lose 682 hitpoints due to an attack by Murcion. 
+08:52:40 You lose 1039 hitpoints due to an attack by Murcion. 
+08:52:42 Momentum was triggered.
+08:52:42 Murcion loses 2659 hitpoints due to your critical attack. (perfect shot, increased damage by Expose Weakness)
+08:52:42 You were healed for 1301 hitpoints.
+08:52:42 You gained 411 mana.
+08:52:42 You lose 740 hitpoints due to an attack by Murcion. 
+08:52:42 You lose 697 mana due to an attack by Murcion. 
+08:52:42 Murcion loses 1543 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:42 You were healed for 761 hitpoints.
+08:52:42 You gained 240 mana.
+08:52:42 You were healed by Burkzin for 399 hitpoints.
+08:52:42 You lose 2344 hitpoints due to your own attack. 
+08:52:44 You lose 1336 hitpoints due to an attack by a Mushroom. 
+08:52:44 You were healed by Burkzin for 2645 hitpoints.
+08:52:44 You lose 530 hitpoints due to an attack by Murcion. 
+08:52:44 You lose 796 hitpoints due to an attack by Murcion. 
+08:52:44 Murcion loses 1410 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:44 You were healed for 695 hitpoints.
+08:52:44 You gained 220 mana.
+08:52:45 You lose 1211 hitpoints due to an attack by a Mushroom. 
+08:52:45 You lose 1339 hitpoints due to an attack by a Mushroom. 
+08:52:45 Murcion loses 695 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:45 You were healed for 189 hitpoints.
+08:52:45 You gained 60 mana.
+08:52:45 You were healed by Burkzin for 2494 hitpoints.
+08:52:46 You lose 568 hitpoints due to an attack by Murcion. 
+08:52:46 You lose 606 mana due to an attack by Murcion. 
+08:52:47 Murcion loses 957 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:47 You were healed for 472 hitpoints.
+08:52:47 You gained 149 mana.
+08:52:47 Murcion loses 525 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:47 You were healed for 259 hitpoints.
+08:52:47 You gained 82 mana.
+08:52:47 You were healed by Burkzin for 1364 hitpoints.
+08:52:48 You lose 1470 hitpoints due to an attack by Murcion. 
+08:52:49 Murcion loses 996 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:49 You were healed for 482 hitpoints.
+08:52:49 You gained 152 mana.
+08:52:49 Murcion loses 1589 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:49 You were healed for 784 hitpoints.
+08:52:49 You gained 247 mana.
+08:52:50 You lose 682 hitpoints due to an attack by Murcion. 
+08:52:51 Murcion loses 701 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:51 You were healed for 346 hitpoints.
+08:52:51 You gained 109 mana.
+08:52:51 Murcion loses 1268 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:52:51 You were healed for 540 hitpoints.
+08:52:51 You gained 198 mana.
+08:52:51 You lose 757 hitpoints due to an attack by Murcion. 
+08:52:53 Murcion loses 1613 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:53 You were healed for 751 hitpoints.
+08:52:53 You gained 248 mana.
+08:52:53 Murcion loses 547 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:53 You gained 86 mana.
+08:52:54 Momentum was triggered.
+08:52:54 You lose 345 hitpoints due to an attack by Murcion. 
+08:52:55 Murcion loses 1070 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:52:55 You were healed for 345 hitpoints.
+08:52:55 You gained 164 mana.
+08:52:56 Murcion loses 1461 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:56 You gained 228 mana.
+08:52:57 You lose 517 mana due to an attack by Murcion. 
+08:52:58 Murcion loses 900 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:58 You gained 140 mana.
+08:52:58 Murcion loses 710 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:52:58 You gained 111 mana.
+08:52:58 You lose 1543 hitpoints due to an attack by Murcion. 
+08:53:00 Murcion loses 1079 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:00 You were healed for 523 hitpoints.
+08:53:00 You gained 165 mana.
+08:53:00 Murcion loses 491 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:00 You were healed for 243 hitpoints.
+08:53:00 You gained 77 mana.
+08:53:00 You lose 325 hitpoints due to an attack by Murcion. 
+08:53:01 You were healed by Burkzin for 1096 hitpoints.
+08:53:02 Murcion loses 817 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:02 You gained 128 mana.
+08:53:02 Murcion loses 1520 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:02 You gained 237 mana.
+08:53:04 Murcion loses 2148 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:04 You gained 334 mana.
+08:53:04 Murcion loses 690 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:04 You gained 108 mana.
+08:53:05 You lose 200 hitpoints due to an attack by Murcion. 
+08:53:06 Murcion loses 791 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:06 You were healed for 200 hitpoints.
+08:53:06 You gained 123 mana.
+08:53:07 Murcion loses 860 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:07 You gained 134 mana.
+08:53:08 You lose 504 hitpoints due to an attack by Murcion. 
+08:53:09 Murcion loses 1090 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:09 You were healed for 498 hitpoints.
+08:53:09 You gained 167 mana.
+08:53:09 Murcion loses 1480 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:09 You gained 230 mana.
+08:53:10 You lose 590 mana due to an attack by Murcion. 
+08:53:11 You lose 995 hitpoints due to an attack by Murcion. 
+08:53:11 You were healed by Burkzin for 995 hitpoints.
+08:53:11 Murcion loses 691 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:11 You gained 105 mana.
+08:53:11 Murcion loses 719 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:11 You gained 112 mana.
+08:53:13 Murcion loses 847 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:13 You gained 129 mana.
+08:53:13 Murcion loses 913 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:13 You gained 142 mana.
+08:53:13 You lose 658 hitpoints due to an attack by Murcion. 
+08:53:15 Murcion loses 2733 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:15 You were healed for 658 hitpoints.
+08:53:15 You gained 425 mana.
+08:53:15 Murcion loses 1961 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:15 You gained 305 mana.
+08:53:16 You lose 1310 hitpoints due to an attack by a Mushroom. 
+08:53:16 You lose 319 hitpoints due to an attack by Murcion. 
+08:53:17 You were healed by Burkzin for 1623 hitpoints.
+08:53:18 Murcion loses 1041 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:18 You gained 159 mana.
+08:53:18 Murcion loses 730 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:18 You gained 114 mana.
+08:53:19 You lose 418 hitpoints due to an attack by Murcion. 
+08:53:19 You were healed by Burkzin for 418 hitpoints.
+08:53:20 Murcion loses 1078 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:20 You gained 168 mana.
+08:53:20 Murcion loses 534 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:20 You gained 84 mana.
+08:53:21 You dodged an attack. (Ruse)
+08:53:22 Momentum was triggered.
+08:53:22 Murcion loses 797 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:22 You gained 121 mana.
+08:53:22 Murcion loses 1545 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:22 You gained 240 mana.
+08:53:23 You lose 1223 hitpoints due to an attack by a Mushroom. 
+08:53:24 You lose 716 hitpoints due to an attack by Murcion. 
+08:53:24 Murcion loses 1193 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:24 You were healed for 579 hitpoints.
+08:53:24 You gained 183 mana.
+08:53:24 Murcion loses 736 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:24 You were healed for 363 hitpoints.
+08:53:24 You gained 115 mana.
+08:53:25 You were healed by Burkzin for 991 hitpoints.
+08:53:26 Momentum was triggered.
+08:53:26 You lose 723 hitpoints due to an attack by Murcion. 
+08:53:26 You lose 927 mana due to an attack by Murcion. 
+08:53:26 Murcion loses 843 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:26 You were healed for 416 hitpoints.
+08:53:26 You gained 132 mana.
+08:53:26 Murcion loses 494 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:26 You were healed for 244 hitpoints.
+08:53:26 You gained 77 mana.
+08:53:27 You lose 1376 hitpoints due to an attack by a Mushroom. 
+08:53:27 You lose 1274 hitpoints due to an attack by a Mushroom. 
+08:53:27 You lose 1267 hitpoints due to an attack by a Mushroom. 
+08:53:28 You were healed by Burkzin for 1921 hitpoints.
+08:53:28 You lose 798 hitpoints due to an attack by Murcion. 
+08:53:28 You lose 194 hitpoints due to an attack by Murcion. 
+08:53:28 Murcion loses 775 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:28 You were healed for 355 hitpoints.
+08:53:28 You gained 112 mana.
+08:53:28 Murcion loses 1621 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:28 You were healed for 740 hitpoints.
+08:53:28 You gained 234 mana.
+08:53:30 Murcion loses 729 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:30 You were healed for 360 hitpoints.
+08:53:30 You gained 114 mana.
+08:53:31 Murcion loses 750 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:31 You were healed for 204 hitpoints.
+08:53:31 You gained 65 mana.
+08:53:32 Momentum was triggered.
+08:53:33 Murcion loses 780 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:33 You were healed for 385 hitpoints.
+08:53:33 You gained 122 mana.
+08:53:33 Murcion loses 2545 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:33 You were healed for 995 hitpoints.
+08:53:33 You gained 396 mana.
+08:53:34 You lose 1349 hitpoints due to an attack by a Mushroom. 
+08:53:35 Murcion loses 907 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:35 You were healed for 448 hitpoints.
+08:53:35 You gained 141 mana.
+08:53:35 Murcion loses 713 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:35 You were healed for 352 hitpoints.
+08:53:35 You gained 111 mana.
+08:53:35 You lose 415 hitpoints due to an attack by Murcion. 
+08:53:36 You lose 772 hitpoints due to an attack by Murcion. 
+08:53:37 You were healed by Burkzin for 1730 hitpoints.
+08:53:37 Murcion loses 1223 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:37 You gained 187 mana.
+08:53:37 Murcion loses 533 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:37 You gained 83 mana.
+08:53:38 You lose 660 hitpoints due to an attack by Murcion. 
+08:53:39 Murcion loses 1316 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:39 You were healed for 649 hitpoints.
+08:53:39 You gained 205 mana.
+08:53:39 Murcion loses 1557 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:39 You were healed for 11 hitpoints.
+08:53:39 You gained 242 mana.
+08:53:39 You lose 1552 hitpoints due to an attack by Murcion. 
+08:53:40 You were healed by Burkzin for 1546 hitpoints.
+08:53:41 Murcion loses 2733 hitpoints due to your critical attack. (perfect shot, increased damage by Expose Weakness)
+08:53:41 You gained 422 mana.
+08:53:41 Murcion loses 710 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:41 You gained 111 mana.
+08:53:43 Murcion loses 780 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:43 You gained 122 mana.
+08:53:44 You lose 802 hitpoints due to an attack by Murcion. 
+08:53:44 You lose 309 hitpoints due to an attack by Murcion. 
+08:53:44 Murcion loses 851 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:44 You were healed for 420 hitpoints.
+08:53:44 You gained 133 mana.
+08:53:44 You were healed by Burkzin for 685 hitpoints.
+08:53:46 You lose 3352 hitpoints due to an attack by Murcion. 
+08:53:46 Murcion loses 1726 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:53:46 You were healed for 841 hitpoints.
+08:53:46 You gained 266 mana.
+08:53:46 Murcion loses 1568 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:46 You were healed for 773 hitpoints.
+08:53:46 You gained 244 mana.
+08:53:46 You were healed by Burkzin for 1738 hitpoints.
+08:53:48 You lose 1193 hitpoints due to an attack by a Mushroom. 
+08:53:48 You lose 670 hitpoints due to an attack by Murcion. 
+08:53:48 You lose 2864 hitpoints due to an attack by Murcion. 
+08:53:50 Murcion loses 1091 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:50 You were healed for 538 hitpoints.
+08:53:50 You gained 170 mana.
+08:53:50 You lose 478 mana due to an attack by Murcion. 
+08:53:50 Murcion loses 679 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:50 You were healed for 94 hitpoints.
+08:53:50 You gained 30 mana.
+08:53:50 You lose 1450 hitpoints due to an attack by Murcion. 
+08:53:51 You were healed by Burkzin for 1863 hitpoints.
+08:53:52 Murcion loses 2786 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:52 You were healed for 1373 hitpoints.
+08:53:52 You gained 433 mana.
+08:53:52 Murcion loses 1500 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:52 You were healed for 740 hitpoints.
+08:53:52 You gained 234 mana.
+08:53:52 You lose 1265 hitpoints due to an attack by Murcion. 
+08:53:52 You lose 627 hitpoints due to an attack by Murcion. 
+08:53:53 You were healed by Burkzin for 2215 hitpoints.
+08:53:54 You lose 1409 hitpoints due to an attack by a Mushroom. 
+08:53:54 You lose 1342 hitpoints due to an attack by a Mushroom. 
+08:53:54 You were healed by Burkzin for 2566 hitpoints.
+08:53:54 Murcion loses 1389 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:54 You were healed for 685 hitpoints.
+08:53:54 You gained 216 mana.
+08:53:55 You lose 521 hitpoints due to an attack by Murcion. 
+08:53:55 Murcion loses 754 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:55 You were healed for 149 hitpoints.
+08:53:55 You gained 48 mana.
+08:53:55 You lose 1505 hitpoints due to an attack by Murcion. 
+08:53:56 You were healed by Burkzin for 2611 hitpoints.
+08:53:56 Momentum was triggered.
+08:53:57 Murcion loses 1025 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:57 You gained 160 mana.
+08:53:57 Murcion loses 2899 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:53:57 You gained 418 mana.
+08:53:57 You lose 734 hitpoints due to an attack by Murcion. 
+08:53:59 You were healed by Burkzin for 734 hitpoints.
+08:53:59 Murcion loses 2577 hitpoints due to your critical attack. (perfect shot, increased damage by Expose Weakness)
+08:53:59 You gained 398 mana.
+08:53:59 Murcion loses 762 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:53:59 You gained 119 mana.
+08:54:01 Murcion loses 842 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:01 You gained 131 mana.
+08:54:01 Murcion loses 522 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:01 You gained 82 mana.
+08:54:02 You lose 572 hitpoints due to an attack by Murcion. 
+08:54:03 Murcion loses 843 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:03 You were healed for 416 hitpoints.
+08:54:03 You gained 132 mana.
+08:54:04 Murcion loses 2641 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:04 You were healed for 156 hitpoints.
+08:54:04 You gained 411 mana.
+08:54:04 You lose 2040 hitpoints due to an attack by Murcion. 
+08:54:04 You were healed by Burkzin for 2034 hitpoints.
+08:54:06 Murcion loses 2630 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:06 You gained 409 mana.
+08:54:06 Momentum was triggered.
+08:54:06 Murcion loses 719 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:06 You gained 32 mana.
+08:54:07 You lose 1165 hitpoints due to an attack by Murcion. 
+08:54:07 You were healed by Burkzin for 1165 hitpoints.
+08:54:08 Murcion loses 830 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:08 You gained 129 mana.
+08:54:08 Murcion loses 488 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:08 You gained 76 mana.
+08:54:09 You lose 460 hitpoints due to an attack by an elder bloodjaw. 
+08:54:10 You were healed by Burkzin for 460 hitpoints.
+08:54:10 Murcion loses 2920 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:10 You gained 454 mana.
+08:54:10 Murcion loses 1521 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:10 You gained 237 mana.
+08:54:10 You lose 935 hitpoints due to an attack by Murcion. 
+08:54:12 Murcion loses 735 hitpoints due to your attack. 
+08:54:12 You were healed for 363 hitpoints.
+08:54:12 You gained 115 mana.
+08:54:13 Murcion loses 669 hitpoints due to your attack. 
+08:54:13 You were healed for 330 hitpoints.
+08:54:13 You gained 104 mana.
+08:54:13 You lose 643 hitpoints due to an attack by Murcion. 
+08:54:13 You lose 954 mana due to an attack by Murcion. 
+08:54:13 You lose 1386 hitpoints due to an attack by Murcion. 
+08:54:15 Murcion loses 731 hitpoints due to your attack. (perfect shot)
+08:54:15 You were healed for 351 hitpoints.
+08:54:15 You gained 111 mana.
+08:54:15 Murcion loses 476 hitpoints due to your attack. 
+08:54:15 You were healed for 235 hitpoints.
+08:54:15 You gained 75 mana.
+08:54:15 You were healed by Burkzin for 1679 hitpoints.
+08:54:17 Murcion loses 731 hitpoints due to your attack. (perfect shot)
+08:54:17 You gained 111 mana.
+08:54:17 Murcion loses 1434 hitpoints due to your attack. 
+08:54:17 You gained 223 mana.
+08:54:17 You lose 669 hitpoints due to an attack by Murcion. 
+08:54:17 You lose 621 mana due to an attack by Murcion. 
+08:54:19 Murcion loses 905 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:19 You were healed for 447 hitpoints.
+08:54:19 You gained 141 mana.
+08:54:19 Murcion loses 696 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:19 You were healed for 138 hitpoints.
+08:54:19 You gained 44 mana.
+08:54:19 You lose 555 hitpoints due to an attack by Murcion. 
+08:54:19 You lose 684 mana due to an attack by Murcion. 
+08:54:19 You were healed by Burkzin for 639 hitpoints.
+08:54:19 You lose 713 hitpoints due to an attack by Murcion. 
+08:54:20 You lose 1263 hitpoints due to an attack by a Mushroom. 
+08:54:20 Momentum was triggered.
+08:54:21 You lose 1235 hitpoints due to an attack by a Mushroom. 
+08:54:21 You were healed by Burkzin for 2179 hitpoints.
+08:54:21 Murcion loses 871 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:21 You were healed for 430 hitpoints.
+08:54:21 You gained 136 mana.
+08:54:21 Murcion loses 1484 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:21 You were healed for 596 hitpoints.
+08:54:21 You gained 231 mana.
+08:54:22 You lose 1454 hitpoints due to an attack by Murcion. 
+08:54:23 Murcion loses 1359 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:23 You were healed for 670 hitpoints.
+08:54:23 You gained 212 mana.
+08:54:24 You were healed by Burkzin for 778 hitpoints.
+08:54:24 You lose 423 hitpoints due to an attack by Murcion. 
+08:54:25 You were healed by Burkzin for 423 hitpoints.
+08:54:25 You lose 970 hitpoints due to an attack by Murcion. 
+08:54:26 Murcion loses 2750 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:26 You were healed for 970 hitpoints.
+08:54:26 You gained 428 mana.
+08:54:26 Murcion loses 949 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:26 You gained 148 mana.
+08:54:28 Murcion loses 1431 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:28 You gained 223 mana.
+08:54:30 You lose 520 hitpoints due to an attack by Murcion. 
+08:54:30 You lose 138 mana due to an attack by Murcion. 
+08:54:30 You lose 913 hitpoints due to an attack by Murcion. 
+08:54:30 Murcion loses 1221 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:30 You were healed for 602 hitpoints.
+08:54:30 You gained 190 mana.
+08:54:30 Murcion loses 710 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:30 You were healed for 115 hitpoints.
+08:54:30 You gained 37 mana.
+08:54:31 You were healed by Burkzin for 716 hitpoints.
+08:54:32 You lose 538 mana due to an attack by Murcion. 
+08:54:32 Murcion loses 1238 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:32 You gained 193 mana.
+08:54:32 Murcion loses 542 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:32 You gained 85 mana.
+08:54:34 Momentum was triggered.
+08:54:34 Murcion loses 1313 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:34 You gained 204 mana.
+08:54:35 Murcion loses 1516 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:35 You gained 236 mana.
+08:54:35 You lose 191 hitpoints due to an attack by Murcion. 
+08:54:36 Using one of 133 bullseye potions...
+08:54:36 You lose 1177 hitpoints due to an attack by Murcion. 
+08:54:37 Murcion loses 740 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:37 You were healed for 365 hitpoints.
+08:54:37 You gained 116 mana.
+08:54:37 Murcion loses 758 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:37 You were healed for 374 hitpoints.
+08:54:37 You gained 118 mana.
+08:54:37 You were healed by Burkzin for 623 hitpoints.
+08:54:38 You lose 3221 hitpoints due to an attack by Murcion. 
+08:54:39 Murcion loses 2268 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:39 You were healed for 1118 hitpoints.
+08:54:39 You gained 353 mana.
+08:54:39 Murcion loses 488 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:39 You were healed for 241 hitpoints.
+08:54:39 You gained 76 mana.
+08:54:41 You were healed by Luszckyn for 1692 hitpoints.
+08:54:41 Murcion loses 1270 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:54:41 You were healed for 164 hitpoints.
+08:54:41 You gained 195 mana.
+08:54:41 You lose 654 hitpoints due to an attack by Murcion. 
+08:54:41 You lose 575 mana due to an attack by Murcion. 
+08:54:41 Murcion loses 1478 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:41 You were healed for 654 hitpoints.
+08:54:41 You gained 230 mana.
+08:54:42 You lose 1464 hitpoints due to an attack by Murcion. 
+08:54:43 You were healed by Burkzin for 1464 hitpoints.
+08:54:43 Murcion loses 1271 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:43 You gained 198 mana.
+08:54:43 Murcion loses 699 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:43 You gained 109 mana.
+08:54:45 You lose 597 hitpoints due to an attack by Murcion. 
+08:54:45 You were healed by Burkzin for 597 hitpoints.
+08:54:45 Murcion loses 751 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:45 You gained 117 mana.
+08:54:45 Murcion loses 913 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:45 You gained 142 mana.
+08:54:47 You lose 384 hitpoints due to an attack by Murcion. 
+08:54:47 You lose 524 mana due to an attack by Murcion. 
+08:54:47 Murcion loses 705 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:47 You were healed for 348 hitpoints.
+08:54:47 You gained 110 mana.
+08:54:48 Murcion loses 1460 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:48 You were healed for 36 hitpoints.
+08:54:48 You gained 227 mana.
+08:54:49 You lose 1017 hitpoints due to an attack by Murcion. 
+08:54:49 You were healed by Burkzin for 1017 hitpoints.
+08:54:50 Murcion loses 2602 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:50 You gained 405 mana.
+08:54:50 Murcion loses 779 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:50 You gained 122 mana.
+08:54:51 You lose 494 mana due to an attack by Murcion. 
+08:54:52 You lose 1414 hitpoints due to an attack by a Mushroom. 
+08:54:52 You lose 1199 hitpoints due to an attack by a Mushroom. 
+08:54:52 Murcion loses 1393 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:52 You were healed for 687 hitpoints.
+08:54:52 You gained 217 mana.
+08:54:52 You were healed by Burkzin for 1920 hitpoints.
+08:54:52 Murcion loses 497 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:52 You gained 78 mana.
+08:54:52 You lose 818 hitpoints due to an attack by Murcion. 
+08:54:53 You lose 1248 hitpoints due to an attack by a Mushroom. 
+08:54:53 You lose 1407 hitpoints due to an attack by a Mushroom. 
+08:54:54 Murcion loses 1022 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:54 You were healed for 504 hitpoints.
+08:54:54 You gained 159 mana.
+08:54:54 You lose 949 hitpoints due to an attack by Murcion. 
+08:54:54 You lose 663 hitpoints due to an attack by Murcion. 
+08:54:54 Murcion loses 1477 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:54 You were healed for 728 hitpoints.
+08:54:54 You gained 230 mana.
+08:54:57 Murcion loses 1751 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:54:57 You were healed for 854 hitpoints.
+08:54:57 You gained 269 mana.
+08:54:57 Murcion loses 778 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:57 You were healed for 384 hitpoints.
+08:54:57 You gained 121 mana.
+08:54:57 You lose 493 hitpoints due to an attack by Murcion. 
+08:54:58 You lose 1355 hitpoints due to an attack by Murcion. 
+08:54:58 Using one of 132 bullseye potions...
+08:54:59 Murcion loses 2306 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:54:59 You were healed for 1137 hitpoints.
+08:54:59 You gained 359 mana.
+08:54:59 You were healed by Burkzin for 2444 hitpoints.
+08:54:59 Murcion loses 553 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:54:59 You were healed for 273 hitpoints.
+08:54:59 You gained 86 mana.
+08:55:00 You lose 615 mana due to an attack by Murcion. 
+08:55:00 You were healed by Burkzin for 597 hitpoints.
+08:55:00 You lose 838 hitpoints due to an attack by Murcion. 
+08:55:01 You lose 1205 hitpoints due to an attack by a Mushroom. 
+08:55:01 Murcion loses 806 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:01 You were healed for 369 hitpoints.
+08:55:01 You gained 117 mana.
+08:55:01 You were healed by Burkzin for 1674 hitpoints.
+08:55:01 Murcion loses 1287 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:01 You gained 186 mana.
+08:55:03 Murcion loses 447 hitpoints due to your attack. (perfect shot)
+08:55:03 You gained 67 mana.
+08:55:04 You lose 1426 hitpoints due to an attack by Murcion. 
+08:55:04 Murcion loses 529 hitpoints due to your attack. 
+08:55:04 You were healed for 261 hitpoints.
+08:55:04 You gained 83 mana.
+08:55:05 You were healed by Burkzin for 1159 hitpoints.
+08:55:06 Murcion loses 1506 hitpoints due to your attack. 
+08:55:06 You gained 235 mana.
+08:55:06 Murcion loses 656 hitpoints due to your attack. 
+08:55:06 You gained 102 mana.
+08:55:06 You lose 872 hitpoints due to an attack by Murcion. 
+08:55:08 Murcion loses 1246 hitpoints due to your attack. 
+08:55:08 You were healed for 615 hitpoints.
+08:55:08 You gained 194 mana.
+08:55:08 Murcion loses 1391 hitpoints due to your attack. 
+08:55:08 You were healed for 251 hitpoints.
+08:55:08 You gained 217 mana.
+08:55:09 You lose 754 hitpoints due to an attack by Murcion. 
+08:55:09 You lose 256 mana due to an attack by Murcion. 
+08:55:10 Murcion loses 1382 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:10 You were healed for 682 hitpoints.
+08:55:10 You gained 215 mana.
+08:55:10 Murcion loses 764 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:10 You were healed for 72 hitpoints.
+08:55:10 You gained 48 mana.
+08:55:12 Murcion loses 806 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:12 You gained 123 mana.
+08:55:13 Murcion loses 843 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:55:13 You gained 132 mana.
+08:55:14 You lose 711 hitpoints due to an attack by Murcion. 
+08:55:14 You lose 2761 hitpoints due to an attack by Murcion. 
+08:55:15 You lose 1304 hitpoints due to an attack by a Mushroom. 
+08:55:15 Murcion loses 1175 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:15 You were healed for 570 hitpoints.
+08:55:15 You gained 180 mana.
+08:55:15 Murcion loses 1478 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:15 You were healed for 729 hitpoints.
+08:55:15 You gained 230 mana.
+08:55:15 You were healed by Burkzin for 2860 hitpoints.
+08:55:17 Murcion loses 889 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:17 You were healed for 439 hitpoints.
+08:55:17 You gained 139 mana.
+08:55:17 You lose 746 hitpoints due to an attack by Murcion. 
+08:55:17 You lose 798 mana due to an attack by Murcion. 
+08:55:17 You lose 1201 hitpoints due to an attack by Murcion. 
+08:55:17 Murcion loses 544 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:17 You were healed for 269 hitpoints.
+08:55:17 You gained 85 mana.
+08:55:19 Murcion loses 1320 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:19 You were healed for 641 hitpoints.
+08:55:19 You gained 203 mana.
+08:55:19 Murcion loses 767 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:19 You were healed for 379 hitpoints.
+08:55:19 You gained 120 mana.
+08:55:21 Murcion loses 1043 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:21 You were healed for 515 hitpoints.
+08:55:21 You gained 163 mana.
+08:55:22 Murcion loses 1538 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:22 You were healed for 309 hitpoints.
+08:55:22 You gained 240 mana.
+08:55:24 Murcion loses 1233 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:24 You gained 189 mana.
+08:55:24 Murcion loses 673 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:24 You gained 105 mana.
+08:55:24 You lose 159 hitpoints due to an attack by Murcion. 
+08:55:24 You lose 553 mana due to an attack by Murcion. 
+08:55:24 You were healed by Burkzin for 159 hitpoints.
+08:55:25 You lose 742 hitpoints due to an attack by Murcion. 
+08:55:25 You lose 2344 hitpoints due to your own attack. 
+08:55:26 Murcion loses 1124 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:26 You were healed for 545 hitpoints.
+08:55:26 You gained 172 mana.
+08:55:26 Murcion loses 553 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:26 You were healed for 273 hitpoints.
+08:55:26 You gained 86 mana.
+08:55:26 You were healed by Burkzin for 2179 hitpoints.
+08:55:27 You lose 654 mana due to an attack by Murcion. 
+08:55:28 Murcion loses 750 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:28 You were healed for 83 hitpoints.
+08:55:28 You gained 117 mana.
+08:55:28 Murcion loses 1429 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:28 You gained 223 mana.
+08:55:30 You lose 1281 hitpoints due to an attack by a Mushroom. 
+08:55:30 You lose 434 hitpoints due to an attack by Murcion. 
+08:55:30 You were healed by Burkzin for 1715 hitpoints.
+08:55:31 You lose 1302 hitpoints due to an attack by a Mushroom. 
+08:55:31 You were healed by Burkzin for 1302 hitpoints.
+08:55:32 Murcion loses 1060 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:32 You gained 162 mana.
+08:55:32 Murcion loses 533 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:32 You gained 83 mana.
+08:55:32 You lose 641 hitpoints due to an attack by Murcion. 
+08:55:32 You lose 443 mana due to an attack by Murcion. 
+08:55:34 You were healed by Burkzin for 641 hitpoints.
+08:55:34 Murcion loses 920 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:34 You gained 140 mana.
+08:55:34 Murcion loses 2623 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:55:34 You gained 408 mana.
+08:55:35 You lose 172 hitpoints due to an attack by Murcion. 
+08:55:36 You were healed by Burkzin for 172 hitpoints.
+08:55:36 Momentum was triggered.
+08:55:36 Using one of 131 bullseye potions...
+08:55:37 Murcion loses 2225 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:55:37 You gained 346 mana.
+08:55:37 You lose 959 hitpoints due to an attack by Murcion. 
+08:55:37 Murcion loses 702 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:37 You were healed for 347 hitpoints.
+08:55:37 You gained 110 mana.
+08:55:37 You were healed by Burkzin for 612 hitpoints.
+08:55:39 You lose 444 hitpoints due to an attack by Murcion. 
+08:55:39 You lose 2709 hitpoints due to an attack by Murcion. 
+08:55:39 Murcion loses 1216 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:39 You were healed for 590 hitpoints.
+08:55:39 You gained 186 mana.
+08:55:39 Murcion loses 2592 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:55:39 You were healed for 1278 hitpoints.
+08:55:39 You gained 403 mana.
+08:55:41 You lose 470 hitpoints due to an attack by Murcion. 
+08:55:41 You lose 839 mana due to an attack by Murcion. 
+08:55:41 Murcion loses 1039 hitpoints due to your attack. 
+08:55:41 You were healed for 513 hitpoints.
+08:55:41 You gained 162 mana.
+08:55:41 Murcion loses 494 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:41 You were healed for 244 hitpoints.
+08:55:41 You gained 77 mana.
+08:55:41 You were healed by Burkzin for 992 hitpoints.
+08:55:41 You lose 613 hitpoints due to an attack by Murcion. 
+08:55:43 Murcion loses 1057 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:43 You were healed for 512 hitpoints.
+08:55:43 You gained 162 mana.
+08:55:43 You were healed by Burkzin for 101 hitpoints.
+08:55:44 You lose 726 hitpoints due to an attack by Murcion. 
+08:55:44 You lose 403 hitpoints due to an attack by Murcion. 
+08:55:44 Murcion loses 507 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:44 You were healed for 251 hitpoints.
+08:55:44 You gained 79 mana.
+08:55:45 You were healed by Burkzin for 872 hitpoints.
+08:55:46 Murcion loses 1491 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:46 You gained 232 mana.
+08:55:46 You lose 783 hitpoints due to an attack by Murcion. 
+08:55:47 You were healed by Burkzin for 783 hitpoints.
+08:55:48 Murcion loses 1014 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:55:48 You gained 155 mana.
+08:55:48 Murcion loses 679 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:48 You gained 106 mana.
+08:55:48 You lose 380 hitpoints due to an attack by Murcion. 
+08:55:49 You lose 941 hitpoints due to an attack by Murcion. 
+08:55:50 You were healed by Burkzin for 1321 hitpoints.
+08:55:50 Murcion loses 900 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:50 You gained 140 mana.
+08:55:50 Murcion loses 482 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:50 You gained 75 mana.
+08:55:51 You lose 741 hitpoints due to an attack by Murcion. 
+08:55:51 You were healed by Burkzin for 741 hitpoints.
+08:55:52 Murcion loses 1232 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:52 You gained 192 mana.
+08:55:53 You lose 1179 hitpoints due to an attack by Murcion. 
+08:55:53 You were healed by Burkzin for 1179 hitpoints.
+08:55:55 Murcion loses 1527 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:55 You gained 238 mana.
+08:55:55 You lose 786 hitpoints due to an attack by Murcion. 
+08:55:55 Murcion loses 1614 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:55:55 You were healed for 737 hitpoints.
+08:55:55 You gained 233 mana.
+08:55:57 You were healed by Burkzin for 43 hitpoints.
+08:55:57 You lose 494 hitpoints due to an attack by Murcion. 
+08:55:57 You lose 655 mana due to an attack by Murcion. 
+08:55:57 You lose 1304 hitpoints due to an attack by Murcion. 
+08:55:57 Murcion loses 735 hitpoints due to your attack. 
+08:55:57 You were healed for 363 hitpoints.
+08:55:57 You gained 115 mana.
+08:55:57 Murcion loses 715 hitpoints due to your attack. 
+08:55:57 You were healed for 353 hitpoints.
+08:55:57 You gained 112 mana.
+08:55:59 You lose 322 hitpoints due to an attack by Murcion. 
+08:55:59 You were healed by Burkzin for 1404 hitpoints.
+08:55:59 Murcion loses 491 hitpoints due to your attack. (perfect shot)
+08:55:59 You gained 74 mana.
+08:55:59 Murcion loses 521 hitpoints due to your attack. 
+08:55:59 You gained 81 mana.
+08:56:01 You lose 996 hitpoints due to an attack by Murcion. 
+08:56:01 Murcion loses 467 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:01 You were healed for 231 hitpoints.
+08:56:01 You gained 73 mana.
+08:56:02 You were healed by Burkzin for 765 hitpoints.
+08:56:02 Using one of 130 bullseye potions...
+08:56:02 Murcion loses 1202 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:02 You gained 187 mana.
+08:56:03 You lose 1348 hitpoints due to an attack by a Mushroom. 
+08:56:03 You lose 1190 hitpoints due to an attack by a Mushroom. 
+08:56:03 You lose 1275 hitpoints due to an attack by a Mushroom. 
+08:56:03 You were healed by Burkzin for 1720 hitpoints.
+08:56:03 You lose 705 hitpoints due to an attack by Murcion. 
+08:56:03 You lose 403 mana due to an attack by Murcion. 
+08:56:04 Murcion loses 1108 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:04 You were healed for 547 hitpoints.
+08:56:04 You gained 173 mana.
+08:56:04 Murcion loses 713 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:04 You were healed for 352 hitpoints.
+08:56:04 You gained 111 mana.
+08:56:06 You lose 481 hitpoints due to an attack by Murcion. 
+08:56:06 Murcion loses 1012 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:06 You were healed for 499 hitpoints.
+08:56:06 You gained 158 mana.
+08:56:07 Murcion loses 504 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:07 You were healed for 249 hitpoints.
+08:56:07 You gained 79 mana.
+08:56:08 You lose 670 hitpoints due to an attack by Murcion. 
+08:56:09 Murcion loses 1230 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:09 You were healed for 607 hitpoints.
+08:56:09 You gained 192 mana.
+08:56:09 Murcion loses 1470 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:09 You were healed for 725 hitpoints.
+08:56:09 You gained 229 mana.
+08:56:10 You lose 503 hitpoints due to an attack by Murcion. 
+08:56:11 You were healed by Burkzin for 1461 hitpoints.
+08:56:11 Murcion loses 682 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:11 You gained 103 mana.
+08:56:11 Murcion loses 690 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:11 You gained 44 mana.
+08:56:13 You lose 494 hitpoints due to an attack by Murcion. 
+08:56:13 Murcion loses 1293 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:13 You were healed for 494 hitpoints.
+08:56:13 You gained 198 mana.
+08:56:13 Murcion loses 935 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:56:13 You gained 146 mana.
+08:56:14 Momentum was triggered.
+08:56:15 Murcion loses 946 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:15 You gained 148 mana.
+08:56:16 Murcion loses 1543 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:16 You gained 240 mana.
+08:56:16 You lose 254 mana due to an attack by Murcion. 
+08:56:16 You lose 925 hitpoints due to an attack by Murcion. 
+08:56:18 Murcion loses 2812 hitpoints due to your critical attack. (perfect shot)
+08:56:18 You were healed for 919 hitpoints.
+08:56:18 You gained 434 mana.
+08:56:18 You lose 373 hitpoints due to an attack by Murcion. 
+08:56:18 Murcion loses 719 hitpoints due to your attack. 
+08:56:18 You were healed for 116 hitpoints.
+08:56:18 You gained 37 mana.
+08:56:20 Murcion loses 832 hitpoints due to your attack. (perfect shot)
+08:56:20 You were healed for 251 hitpoints.
+08:56:20 You gained 127 mana.
+08:56:20 You lose 303 hitpoints due to an attack by Murcion. 
+08:56:20 You lose 935 mana due to an attack by Murcion. 
+08:56:20 Murcion loses 531 hitpoints due to your attack. 
+08:56:20 You were healed for 262 hitpoints.
+08:56:20 You gained 83 mana.
+08:56:21 You lose 1262 hitpoints due to an attack by Murcion. 
+08:56:22 Murcion loses 2807 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:56:22 You were healed for 1303 hitpoints.
+08:56:22 You gained 437 mana.
+08:56:22 Murcion loses 2656 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:56:22 You gained 413 mana.
+08:56:23 You lose 510 hitpoints due to an attack by Murcion. 
+08:56:23 You lose 709 mana due to an attack by Murcion. 
+08:56:24 You were healed by Burkzin for 504 hitpoints.
+08:56:24 Murcion loses 779 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:24 You gained 122 mana.
+08:56:24 Murcion loses 704 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:24 You gained 110 mana.
+08:56:25 You lose 968 mana due to an attack by Murcion. 
+08:56:26 Murcion loses 816 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:26 You gained 127 mana.
+08:56:27 Murcion loses 935 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:56:27 You gained 146 mana.
+08:56:28 You lose 704 hitpoints due to an attack by Murcion. 
+08:56:28 You lose 708 mana due to an attack by Murcion. 
+08:56:29 You were healed by Burkzin for 704 hitpoints.
+08:56:29 Murcion loses 1109 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:29 You gained 170 mana.
+08:56:29 Murcion loses 1560 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:29 You gained 243 mana.
+08:56:31 Murcion loses 837 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:31 You gained 131 mana.
+08:56:31 Murcion loses 724 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:31 You gained 113 mana.
+08:56:31 You lose 983 hitpoints due to an attack by Murcion. 
+08:56:32 You were healed by Burkzin for 977 hitpoints.
+08:56:33 Murcion loses 1246 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:33 You gained 191 mana.
+08:56:33 Murcion loses 520 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:33 You gained 81 mana.
+08:56:35 Murcion loses 806 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:35 You gained 126 mana.
+08:56:36 Murcion loses 1433 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:36 You gained 223 mana.
+08:56:36 You lose 1862 hitpoints due to an attack by Murcion. 
+08:56:36 You lose 685 mana due to an attack by Murcion. 
+08:56:37 You were healed by Burkzin for 1862 hitpoints.
+08:56:38 Murcion loses 1218 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:38 You gained 187 mana.
+08:56:38 Murcion loses 551 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:38 You gained 86 mana.
+08:56:40 Murcion loses 1101 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:40 You gained 168 mana.
+08:56:40 Murcion loses 758 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:40 You gained 118 mana.
+08:56:41 You lose 510 hitpoints due to an attack by Murcion. 
+08:56:42 Murcion loses 1488 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:42 You were healed for 510 hitpoints.
+08:56:42 You gained 232 mana.
+08:56:42 You lose 923 hitpoints due to an attack by Murcion. 
+08:56:42 Murcion loses 1585 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:42 You were healed for 782 hitpoints.
+08:56:42 You gained 247 mana.
+08:56:44 You were healed by Burkzin for 135 hitpoints.
+08:56:44 Murcion loses 986 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:44 You gained 154 mana.
+08:56:44 You lose 435 hitpoints due to an attack by Murcion. 
+08:56:44 Murcion loses 735 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:44 You were healed for 363 hitpoints.
+08:56:44 You gained 115 mana.
+08:56:45 You lose 745 hitpoints due to an attack by Murcion. 
+08:56:46 You were healed by Burkzin for 817 hitpoints.
+08:56:47 Murcion loses 928 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:47 You gained 134 mana.
+08:56:47 You lose 602 hitpoints due to an attack by Murcion. 
+08:56:47 You lose 395 mana due to an attack by Murcion. 
+08:56:47 Murcion loses 527 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:47 You were healed for 241 hitpoints.
+08:56:47 You gained 76 mana.
+08:56:47 You were healed by Burkzin for 361 hitpoints.
+08:56:48 You lose 1262 hitpoints due to an attack by Murcion. 
+08:56:49 Murcion loses 957 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:49 You were healed for 462 hitpoints.
+08:56:49 You gained 146 mana.
+08:56:49 You were healed by Burkzin for 794 hitpoints.
+08:56:49 Murcion loses 2636 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:56:49 You gained 410 mana.
+08:56:50 You lose 527 hitpoints due to an attack by Murcion. 
+08:56:50 You lose 667 mana due to an attack by Murcion. 
+08:56:51 Murcion loses 796 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:51 You were healed for 393 hitpoints.
+08:56:51 You gained 124 mana.
+08:56:51 You were healed by Burkzin for 134 hitpoints.
+08:56:51 Murcion loses 760 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:51 You gained 119 mana.
+08:56:52 Momentum was triggered.
+08:56:53 Murcion loses 1538 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:53 You gained 240 mana.
+08:56:55 You lose 678 hitpoints due to an attack by Murcion. 
+08:56:55 You lose 730 hitpoints due to an attack by Murcion. 
+08:56:55 You were healed by Burkzin for 1408 hitpoints.
+08:56:55 Murcion loses 426 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:56:55 You gained 64 mana.
+08:56:56 Murcion loses 1352 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:56:56 You gained 117 mana.
+08:56:57 You lose 1408 hitpoints due to an attack by a Mushroom. 
+08:56:57 You lose 320 hitpoints due to an attack by Murcion. 
+08:56:58 Murcion loses 788 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:58 You were healed for 389 hitpoints.
+08:56:58 You gained 123 mana.
+08:56:58 Murcion loses 504 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:56:58 You were healed for 249 hitpoints.
+08:56:58 You gained 79 mana.
+08:57:00 You lose 658 hitpoints due to an attack by Murcion. 
+08:57:00 Murcion loses 708 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:00 You were healed for 350 hitpoints.
+08:57:00 You gained 111 mana.
+08:57:00 Murcion loses 1479 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:00 You were healed for 729 hitpoints.
+08:57:00 You gained 230 mana.
+08:57:01 You lose 866 hitpoints due to an attack by Murcion. 
+08:57:02 Murcion loses 1226 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:02 You were healed for 605 hitpoints.
+08:57:02 You gained 191 mana.
+08:57:02 Murcion loses 679 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:02 You were healed for 335 hitpoints.
+08:57:02 You gained 106 mana.
+08:57:03 You lose 538 hitpoints due to an attack by Murcion. 
+08:57:04 You lose 1287 hitpoints due to an attack by a Mushroom. 
+08:57:04 Murcion loses 2504 hitpoints due to your critical attack. (perfect shot)
+08:57:04 You were healed for 1225 hitpoints.
+08:57:04 You gained 386 mana.
+08:57:04 Murcion loses 470 hitpoints due to your attack. 
+08:57:04 You were healed for 232 hitpoints.
+08:57:04 You gained 74 mana.
+08:57:04 You were healed by Burkzin for 951 hitpoints.
+08:57:06 You lose 1195 hitpoints due to an attack by a Mushroom. 
+08:57:06 You lose 484 hitpoints due to an attack by Murcion. 
+08:57:06 You were healed by Burkzin for 1679 hitpoints.
+08:57:06 Murcion loses 732 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:57:06 You gained 111 mana.
+08:57:07 Murcion loses 1514 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:07 You gained 236 mana.
+08:57:08 You lose 600 hitpoints due to an attack by Murcion. 
+08:57:09 Murcion loses 1298 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:09 You were healed for 600 hitpoints.
+08:57:09 You gained 202 mana.
+08:57:09 Murcion loses 1194 hitpoints due to your critical attack. (increased damage by Expose Weakness)
+08:57:09 You gained 186 mana.
+08:57:09 You lose 910 hitpoints due to an attack by Murcion. 
+08:57:11 Murcion loses 822 hitpoints due to your attack. (perfect shot, increased damage by Expose Weakness)
+08:57:11 You were healed for 396 hitpoints.
+08:57:11 You gained 125 mana.
+08:57:11 Murcion loses 491 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:11 You were healed for 243 hitpoints.
+08:57:11 You gained 77 mana.
+08:57:13 Murcion loses 833 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:13 You were healed for 265 hitpoints.
+08:57:13 You gained 130 mana.
+08:57:13 Murcion loses 1474 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:13 You gained 230 mana.
+08:57:15 Murcion loses 869 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:15 You gained 136 mana.
+08:57:15 Murcion loses 731 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:15 You gained 114 mana.
+08:57:16 You lose 700 hitpoints due to an attack by Murcion. 
+08:57:17 You were healed by Burkzin for 700 hitpoints.
+08:57:17 Murcion loses 1011 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:17 You gained 158 mana.
+08:57:17 Murcion loses 490 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:17 You gained 77 mana.
+08:57:17 You lose 1253 hitpoints due to an attack by Murcion. 
+08:57:19 Murcion loses 758 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:19 You were healed for 347 hitpoints.
+08:57:19 You gained 110 mana.
+08:57:20 Murcion loses 1655 hitpoints due to your attack. (increased damage by Expose Weakness)
+08:57:20 You were healed for 756 hitpoints.
+08:57:20 You gained 239 mana.
+08:57:20 You lose 404 hitpoints due to an attack by Murcion. 
+08:57:20 Momentum was triggered.
+08:57:21 You gained 2925000 experience points.
+08:57:21 You were healed by Burkzin for 548 hitpoints.
+08:57:24 You lose 2344 hitpoints due to your own attack. 
+08:57:24 You begin to feel the dark power of the rot.
+08:57:24 You healed yourself for 1085 hitpoints.
+08:57:27 You healed yourself for 1169 hitpoints.
+08:57:33 You begin to feel the dark power of the rot.
+08:58:00 Momentum was triggered.
+08:58:12 You were healed by Izzy The Beast for 18 hitpoints.

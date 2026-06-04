@@ -1,0 +1,3164 @@
+Channel Server Log saved Thu Jun 04 09:22:04 2026
+09:13:39 Using one of 1337 great mana potions...
+09:13:39 You gained 240 mana.
+09:13:39 Using one of 1336 great mana potions...
+09:13:40 You gained 183 mana.
+09:13:43 Using one of 1335 great mana potions...
+09:13:43 You gained 173 mana.
+09:13:43 Using one of 1334 great mana potions...
+09:13:44 Using one of 1334 great mana potions...
+09:13:44 Using one of 1333 great mana potions...
+09:14:04 You lose 837 hitpoints due to an attack by a walking pillar. 
+09:14:05 You lose 498 hitpoints due to an attack by a darklight striker. 
+09:14:05 You lose 583 hitpoints due to an attack by a darklight striker. 
+09:14:05 You healed yourself for 1102 hitpoints.
+09:14:06 You lose 929 hitpoints due to an attack by a darklight source. 
+09:14:07 A darklight source loses 788 hitpoints due to your attack. 
+09:14:07 You were healed for 130 hitpoints.
+09:14:07 You gained 42 mana.
+09:14:07 A darklight source loses 788 hitpoints due to your attack. 
+09:14:07 You were healed for 130 hitpoints.
+09:14:07 You gained 42 mana.
+09:14:07 A darklight striker loses 617 hitpoints due to your attack. 
+09:14:07 You were healed for 103 hitpoints.
+09:14:07 You gained 33 mana.
+09:14:07 A walking pillar loses 778 hitpoints due to your attack. 
+09:14:07 You were healed for 129 hitpoints.
+09:14:07 You gained 41 mana.
+09:14:08 A darklight source loses 604 hitpoints due to your attack. 
+09:14:08 You were healed for 86 hitpoints.
+09:14:08 You gained 28 mana.
+09:14:08 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:14:08 A darklight striker loses 544 hitpoints due to your attack. 
+09:14:08 You were healed for 78 hitpoints.
+09:14:08 You gained 25 mana.
+09:14:08 A darklight source loses 604 hitpoints due to your attack. 
+09:14:08 You were healed for 86 hitpoints.
+09:14:08 You gained 28 mana.
+09:14:08 A walking pillar loses 606 hitpoints due to your attack. 
+09:14:08 You were healed for 87 hitpoints.
+09:14:08 You gained 28 mana.
+09:14:08 A darklight striker loses 544 hitpoints due to your attack. 
+09:14:08 You were healed for 78 hitpoints.
+09:14:08 You gained 25 mana.
+09:14:08 You healed yourself for 832 hitpoints.
+09:14:08 You lose 680 hitpoints due to an attack by a walking pillar. 
+09:14:08 You lose 673 hitpoints due to an attack by a darklight matter. 
+09:14:09 You were healed by Burkzin for 1353 hitpoints.
+09:14:10 A darklight source loses 673 hitpoints due to your attack. 
+09:14:10 You gained 31 mana.
+09:14:10 A darklight source loses 635 hitpoints due to your attack. 
+09:14:10 You gained 29 mana.
+09:14:10 A darklight striker loses 494 hitpoints due to your attack. 
+09:14:10 You gained 23 mana.
+09:14:10 A walking pillar loses 632 hitpoints due to your attack. 
+09:14:10 You gained 29 mana.
+09:14:10 A darklight matter loses 673 hitpoints due to your attack. 
+09:14:10 You gained 31 mana.
+09:14:10 You lose 446 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:14:10 You healed yourself for 446 hitpoints.
+09:14:10 You lose 1011 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:14:10 You lose 485 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:14:11 You were healed by Burkzin for 1496 hitpoints.
+09:14:12 You lose 548 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:14:12 A darklight source loses 581 hitpoints due to your attack. (perfect shot)
+09:14:12 You were healed for 80 hitpoints.
+09:14:12 You gained 26 mana.
+09:14:12 A darklight striker loses 454 hitpoints due to your attack. 
+09:14:12 You were healed for 65 hitpoints.
+09:14:12 You gained 21 mana.
+09:14:12 A darklight source loses 540 hitpoints due to your attack. 
+09:14:12 You were healed for 77 hitpoints.
+09:14:12 You gained 25 mana.
+09:14:12 A walking pillar loses 548 hitpoints due to your attack. 
+09:14:12 You were healed for 79 hitpoints.
+09:14:12 You gained 25 mana.
+09:14:12 A darklight matter loses 578 hitpoints due to your attack. 
+09:14:12 You were healed for 83 hitpoints.
+09:14:12 You gained 27 mana.
+09:14:12 A darklight matter loses 594 hitpoints due to your attack. 
+09:14:12 You were healed for 76 hitpoints.
+09:14:12 You gained 24 mana.
+09:14:12 A darklight striker loses 536 hitpoints due to your attack. 
+09:14:12 You were healed for 69 hitpoints.
+09:14:12 You gained 22 mana.
+09:14:12 A darklight striker loses 536 hitpoints due to your attack. 
+09:14:12 You were healed for 13 hitpoints.
+09:14:12 You gained 22 mana.
+09:14:12 A darklight source loses 595 hitpoints due to your attack. 
+09:14:12 You gained 24 mana.
+09:14:12 A darklight source loses 595 hitpoints due to your attack. 
+09:14:12 You gained 24 mana.
+09:14:12 A darklight matter loses 594 hitpoints due to your attack. 
+09:14:12 You gained 24 mana.
+09:14:13 A darklight source loses 848 hitpoints due to your attack. 
+09:14:13 You gained 34 mana.
+09:14:13 A darklight striker loses 763 hitpoints due to your attack. 
+09:14:13 You gained 31 mana.
+09:14:13 A darklight source loses 848 hitpoints due to your attack. 
+09:14:13 You gained 34 mana.
+09:14:13 A walking pillar loses 851 hitpoints due to your attack. 
+09:14:13 You gained 35 mana.
+09:14:13 A darklight matter loses 847 hitpoints due to your attack. 
+09:14:13 You gained 34 mana.
+09:14:13 A darklight matter loses 847 hitpoints due to your attack. 
+09:14:13 You gained 34 mana.
+09:14:14 A darklight source loses 498 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A darklight source loses 488 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A darklight striker loses 375 hitpoints due to your attack. 
+09:14:14 You gained 13 mana.
+09:14:14 A darklight matter loses 521 hitpoints due to your attack. 
+09:14:14 You gained 18 mana.
+09:14:14 A walking pillar loses 509 hitpoints due to your attack. 
+09:14:14 You gained 18 mana.
+09:14:14 A darklight matter loses 503 hitpoints due to your attack. 
+09:14:14 You gained 18 mana.
+09:14:14 A darklight striker loses 393 hitpoints due to your attack. 
+09:14:14 You gained 14 mana.
+09:14:14 A darklight matter loses 475 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 Using one of 464 great fireball runes...
+09:14:14 A darklight source loses 452 hitpoints due to your attack. 
+09:14:14 You gained 16 mana.
+09:14:14 A darklight matter loses 491 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A darklight matter loses 491 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A darklight striker loses 492 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A darklight source loses 452 hitpoints due to your attack. 
+09:14:14 You gained 16 mana.
+09:14:14 A darklight matter loses 491 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A darklight striker loses 492 hitpoints due to your attack. 
+09:14:14 You gained 17 mana.
+09:14:14 A walking pillar loses 454 hitpoints due to your attack. 
+09:14:14 You gained 16 mana.
+09:14:16 You lose 665 hitpoints due to an attack by a darklight striker. 
+09:14:16 You lose 937 hitpoints. 
+09:14:16 You lose 420 hitpoints due to an attack by a darklight striker. 
+09:14:16 A darklight striker loses 405 hitpoints due to your attack. 
+09:14:16 You were healed for 114 hitpoints.
+09:14:16 You gained 36 mana.
+09:14:16 A darklight source loses 501 hitpoints due to your attack. 
+09:14:16 You were healed for 141 hitpoints.
+09:14:16 You gained 45 mana.
+09:14:16 You lose 375 hitpoints. 
+09:14:17 A darklight striker loses 1067 hitpoints due to your attack. 
+09:14:17 You were healed for 542 hitpoints.
+09:14:17 You gained 171 mana.
+09:14:17 You lose 685 hitpoints due to an attack by a darklight source. 
+09:14:17 You lose 798 hitpoints due to an attack by a darklight source. 
+09:14:17 You lose 375 hitpoints. 
+09:14:17 You healed yourself for 1462 hitpoints.
+09:14:18 You lose 375 hitpoints. 
+09:14:19 You lose 857 hitpoints due to an attack by a darklight source. 
+09:14:19 A darklight striker loses 458 hitpoints due to your attack. 
+09:14:19 You were healed for 129 hitpoints.
+09:14:19 You gained 41 mana.
+09:14:19 A darklight source loses 569 hitpoints due to your attack. 
+09:14:19 You were healed for 159 hitpoints.
+09:14:19 You gained 51 mana.
+09:14:19 You lose 342 hitpoints due to an attack by a darklight striker. 
+09:14:19 A darklight source loses 1194 hitpoints due to your critical attack. 
+09:14:19 You were healed for 334 hitpoints.
+09:14:19 You gained 106 mana.
+09:14:19 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:14:19 A darklight striker loses 1075 hitpoints due to your critical attack. 
+09:14:19 You were healed for 301 hitpoints.
+09:14:19 You gained 95 mana.
+09:14:19 You lose 375 hitpoints. 
+09:14:19 You healed yourself for 1261 hitpoints.
+09:14:20 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:14:20 You lose 375 hitpoints. 
+09:14:21 A darklight striker loses 471 hitpoints due to your attack. (perfect shot)
+09:14:21 You were healed for 126 hitpoints.
+09:14:21 You gained 41 mana.
+09:14:21 A darklight source loses 582 hitpoints due to your attack. 
+09:14:21 You were healed for 163 hitpoints.
+09:14:21 You gained 52 mana.
+09:14:21 You lose 595 hitpoints due to an attack by a darklight striker. 
+09:14:21 You lose 375 hitpoints. 
+09:14:21 You lose 962 hitpoints due to an attack by a darklight source. 
+09:14:22 Using one of 463 great fireball runes...
+09:14:22 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:14:22 A darklight striker loses 499 hitpoints due to your attack. 
+09:14:22 You were healed for 140 hitpoints.
+09:14:22 You gained 44 mana.
+09:14:22 A darklight source loses 459 hitpoints due to your attack. 
+09:14:22 You were healed for 129 hitpoints.
+09:14:22 You gained 41 mana.
+09:14:22 You healed yourself for 1355 hitpoints.
+09:14:22 You lose 375 hitpoints. 
+09:14:23 You gained 23074 experience points (Bakragore's tribute).
+09:14:23 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:14:23 You lose 375 hitpoints. 
+09:14:24 A darklight matter loses 702 hitpoints due to your attack. 
+09:14:24 You were healed for 100 hitpoints.
+09:14:24 You gained 32 mana.
+09:14:24 A darklight source loses 693 hitpoints due to your attack. 
+09:14:24 You were healed for 99 hitpoints.
+09:14:24 You gained 32 mana.
+09:14:24 A darklight matter loses 706 hitpoints due to your attack. 
+09:14:24 You were healed for 101 hitpoints.
+09:14:24 You gained 32 mana.
+09:14:24 A darklight matter loses 697 hitpoints due to your attack. 
+09:14:24 You were healed for 100 hitpoints.
+09:14:24 You gained 32 mana.
+09:14:24 A darklight striker loses 532 hitpoints due to your attack. 
+09:14:24 You were healed for 76 hitpoints.
+09:14:24 You gained 25 mana.
+09:14:24 Using one of 462 great fireball runes...
+09:14:24 A darklight matter loses 921 hitpoints due to your critical attack. 
+09:14:24 You were healed for 117 hitpoints.
+09:14:24 You gained 37 mana.
+09:14:24 A darklight source loses 848 hitpoints due to your critical attack. 
+09:14:24 You were healed for 108 hitpoints.
+09:14:24 You gained 34 mana.
+09:14:24 A darklight matter loses 921 hitpoints due to your critical attack. 
+09:14:24 You were healed for 117 hitpoints.
+09:14:24 You gained 37 mana.
+09:14:24 A darklight matter loses 921 hitpoints due to your critical attack. 
+09:14:24 You were healed for 117 hitpoints.
+09:14:24 You gained 37 mana.
+09:14:24 A darklight striker loses 923 hitpoints due to your critical attack. 
+09:14:24 You were healed for 118 hitpoints.
+09:14:24 You gained 37 mana.
+09:14:24 A walking pillar loses 852 hitpoints due to your critical attack. 
+09:14:24 You were healed for 109 hitpoints.
+09:14:24 You gained 35 mana.
+09:14:24 You healed yourself for 1036 hitpoints.
+09:14:24 You lose 375 hitpoints. 
+09:14:24 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:14:25 You gained 23074 experience points (Bakragore's tribute).
+09:14:25 You lose 375 hitpoints. 
+09:14:26 You lose 498 hitpoints due to an attack by a darklight matter. 
+09:14:26 You gained 24957 experience points (Bakragore's tribute).
+09:14:26 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:14:26 A darklight matter loses 562 hitpoints due to your attack. 
+09:14:26 You were healed for 158 hitpoints.
+09:14:26 You gained 50 mana.
+09:14:26 A darklight matter loses 582 hitpoints due to your attack. 
+09:14:26 You were healed for 163 hitpoints.
+09:14:26 You gained 52 mana.
+09:14:26 A darklight matter loses 1212 hitpoints due to your critical attack. 
+09:14:26 You were healed for 339 hitpoints.
+09:14:26 You gained 107 mana.
+09:14:26 A darklight matter loses 1212 hitpoints due to your critical attack. 
+09:14:26 You were healed for 339 hitpoints.
+09:14:26 You gained 107 mana.
+09:14:26 You lose 937 hitpoints. 
+09:14:26 You lose 560 hitpoints due to an attack by a darklight matter. 
+09:14:26 You lose 375 hitpoints. 
+09:14:26 You healed yourself for 1427 hitpoints.
+09:14:27 You lose 937 hitpoints. 
+09:14:27 You lose 375 hitpoints. 
+09:14:27 You healed yourself for 1408 hitpoints.
+09:14:28 You lose 512 hitpoints due to an attack by a darklight striker. 
+09:14:28 You lose 443 hitpoints due to an attack by a darklight source. 
+09:14:28 A darklight matter loses 568 hitpoints due to your attack. 
+09:14:28 You were healed for 116 hitpoints.
+09:14:28 You gained 37 mana.
+09:14:28 A darklight matter loses 548 hitpoints due to your attack. 
+09:14:28 You were healed for 116 hitpoints.
+09:14:28 You gained 37 mana.
+09:14:28 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:14:28 A darklight source loses 583 hitpoints due to your attack. 
+09:14:28 You were healed for 119 hitpoints.
+09:14:28 You gained 38 mana.
+09:14:28 Using one of 461 great fireball runes...
+09:14:28 A darklight source loses 450 hitpoints due to your attack. 
+09:14:28 You were healed for 92 hitpoints.
+09:14:28 You gained 29 mana.
+09:14:28 A darklight matter loses 488 hitpoints due to your attack. 
+09:14:28 You were healed for 100 hitpoints.
+09:14:28 You gained 32 mana.
+09:14:28 A darklight striker loses 489 hitpoints due to your attack. 
+09:14:28 You were healed for 100 hitpoints.
+09:14:28 You gained 32 mana.
+09:14:28 You lose 375 hitpoints. 
+09:14:29 You healed yourself for 1046 hitpoints.
+09:14:29 You lose 321 hitpoints due to an attack by a darklight striker. 
+09:14:29 You lose 375 hitpoints. 
+09:14:30 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:14:30 You lose 937 hitpoints. 
+09:14:30 A darklight source loses 1081 hitpoints due to your critical attack. 
+09:14:30 You were healed for 302 hitpoints.
+09:14:30 You gained 96 mana.
+09:14:30 A darklight striker loses 879 hitpoints due to your critical attack. 
+09:14:30 You were healed for 246 hitpoints.
+09:14:30 You gained 78 mana.
+09:14:30 You lose 375 hitpoints. 
+09:14:30 A darklight striker loses 576 hitpoints due to your attack. 
+09:14:30 You were healed for 162 hitpoints.
+09:14:30 You gained 52 mana.
+09:14:30 A darklight source loses 639 hitpoints due to your attack. 
+09:14:30 You were healed for 179 hitpoints.
+09:14:30 You gained 57 mana.
+09:14:31 You lose 937 hitpoints. 
+09:14:31 You lose 937 hitpoints. 
+09:14:31 You lose 375 hitpoints. 
+09:14:32 You lose 511 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:14:32 You lose 937 hitpoints. 
+09:14:32 You lose 375 hitpoints. 
+09:14:32 A darklight source loses 1005 hitpoints due to your critical attack. 
+09:14:32 You were healed for 282 hitpoints.
+09:14:32 You gained 89 mana.
+09:14:32 A darklight striker loses 849 hitpoints due to your critical attack. 
+09:14:32 You were healed for 238 hitpoints.
+09:14:32 You gained 75 mana.
+09:14:33 You lose 375 hitpoints. 
+09:14:34 You lose 375 hitpoints. 
+09:14:34 A darklight source loses 1597 hitpoints due to your critical attack. 
+09:14:34 You were healed for 414 hitpoints.
+09:14:34 You gained 131 mana.
+09:14:34 A darklight striker loses 1275 hitpoints due to your critical attack. 
+09:14:34 You were healed for 330 hitpoints.
+09:14:34 You gained 104 mana.
+09:14:35 A darklight striker loses 586 hitpoints due to your attack. 
+09:14:35 You were healed for 152 hitpoints.
+09:14:35 You gained 48 mana.
+09:14:35 A darklight source loses 651 hitpoints due to your attack. 
+09:14:35 You were healed for 169 hitpoints.
+09:14:35 You gained 54 mana.
+09:14:35 You lose 477 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:14:35 You were healed by Luszckyn for 1947 hitpoints.
+09:14:35 You lose 375 hitpoints. 
+09:14:36 A darklight source loses 876 hitpoints due to your attack. 
+09:14:36 You were healed for 228 hitpoints.
+09:14:36 You gained 72 mana.
+09:14:36 A darklight striker loses 789 hitpoints due to your attack. 
+09:14:36 You were healed for 205 hitpoints.
+09:14:36 You gained 65 mana.
+09:14:36 You lose 375 hitpoints. 
+09:14:37 A darklight source loses 776 hitpoints due to your attack. 
+09:14:37 You were healed for 201 hitpoints.
+09:14:37 You gained 64 mana.
+09:14:37 A darklight striker loses 652 hitpoints due to your attack. 
+09:14:37 You were healed for 169 hitpoints.
+09:14:37 You gained 54 mana.
+09:14:37 A darklight source loses 1940 hitpoints due to your attack. 
+09:14:37 You were healed for 912 hitpoints.
+09:14:37 You gained 288 mana.
+09:14:37 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:14:37 You gained 23074 experience points (Bakragore's tribute).
+09:14:37 You lose 375 hitpoints. 
+09:14:38 You lose 375 hitpoints. 
+09:14:39 You lose 937 hitpoints. 
+09:14:39 You were healed by Luszckyn for 1817 hitpoints.
+09:14:39 You lose 375 hitpoints. 
+09:14:40 You healed yourself for 1345 hitpoints.
+09:14:40 You lose 375 hitpoints. 
+09:14:40 You were healed by Burkzin for 2012 hitpoints.
+09:14:41 You lose 375 hitpoints. 
+09:14:41 You healed yourself for 469 hitpoints.
+09:14:42 You lose 375 hitpoints. 
+09:14:43 You lose 375 hitpoints. 
+09:14:44 You lose 375 hitpoints. 
+09:14:45 You lose 375 hitpoints. 
+09:14:46 Momentum was triggered.
+09:14:46 You lose 375 hitpoints. 
+09:14:47 You lose 375 hitpoints. 
+09:14:48 You were healed by Luszckyn for 1752 hitpoints.
+09:14:48 You lose 375 hitpoints. 
+09:14:49 You lose 375 hitpoints. 
+09:14:57 You healed yourself for 1224 hitpoints.
+09:15:12 Momentum was triggered.
+09:15:22 A darklight striker loses 526 hitpoints due to your attack. 
+09:15:22 You gained 85 mana.
+09:15:22 Using one of 460 great fireball runes...
+09:15:22 A darklight striker loses 498 hitpoints due to your attack. 
+09:15:22 You gained 80 mana.
+09:15:22 You lose 680 hitpoints due to an attack by a walking pillar. 
+09:15:24 A darklight striker loses 520 hitpoints due to your attack. 
+09:15:24 You were healed for 264 hitpoints.
+09:15:24 You gained 84 mana.
+09:15:24 Using one of 459 great fireball runes...
+09:15:24 A walking pillar loses 503 hitpoints due to your attack. 
+09:15:24 You were healed for 103 hitpoints.
+09:15:24 You gained 33 mana.
+09:15:24 A darklight striker loses 545 hitpoints due to your attack. 
+09:15:24 You were healed for 111 hitpoints.
+09:15:24 You gained 36 mana.
+09:15:24 A darklight matter loses 544 hitpoints due to your attack. 
+09:15:24 You were healed for 111 hitpoints.
+09:15:24 You gained 36 mana.
+09:15:26 Using one of 458 great fireball runes...
+09:15:26 A darklight matter loses 568 hitpoints due to your attack. 
+09:15:26 You were healed for 85 hitpoints.
+09:15:26 You gained 30 mana.
+09:15:26 A darklight source loses 523 hitpoints due to your attack. 
+09:15:26 You gained 28 mana.
+09:15:26 A walking pillar loses 526 hitpoints due to your attack. 
+09:15:26 You gained 28 mana.
+09:15:26 A darklight striker loses 569 hitpoints due to your attack. 
+09:15:26 You gained 30 mana.
+09:15:28 A darklight source loses 960 hitpoints due to your critical attack. 
+09:15:28 You gained 62 mana.
+09:15:28 A walking pillar loses 1012 hitpoints due to your critical attack. 
+09:15:28 You gained 65 mana.
+09:15:28 A darklight matter loses 1000 hitpoints due to your critical attack. 
+09:15:28 You gained 64 mana.
+09:15:29 Using one of 457 great fireball runes...
+09:15:29 A darklight source loses 488 hitpoints due to your attack. 
+09:15:29 You gained 32 mana.
+09:15:29 A walking pillar loses 491 hitpoints due to your attack. 
+09:15:29 You gained 32 mana.
+09:15:29 A darklight matter loses 530 hitpoints due to your attack. 
+09:15:29 You gained 34 mana.
+09:15:31 A darklight source loses 838 hitpoints due to your attack. (perfect shot)
+09:15:31 You gained 43 mana.
+09:15:31 A walking pillar loses 847 hitpoints due to your attack. 
+09:15:31 You gained 45 mana.
+09:15:31 A darklight matter loses 861 hitpoints due to your attack. 
+09:15:31 You gained 45 mana.
+09:15:31 A darklight source loses 832 hitpoints due to your attack. 
+09:15:31 You gained 44 mana.
+09:15:31 Transcendence was triggered.
+09:15:31 Using one of 456 great fireball runes...
+09:15:31 A darklight matter loses 940 hitpoints due to your critical attack. 
+09:15:31 You gained 50 mana.
+09:15:31 A darklight source loses 865 hitpoints due to your critical attack. 
+09:15:31 You gained 46 mana.
+09:15:31 A darklight matter loses 940 hitpoints due to your critical attack. 
+09:15:31 You gained 50 mana.
+09:15:31 A darklight source loses 865 hitpoints due to your critical attack. 
+09:15:31 You gained 46 mana.
+09:15:31 You lose 606 hitpoints due to an attack by a darklight striker. 
+09:15:31 You were healed by Burkzin for 606 hitpoints.
+09:15:31 You lose 561 hitpoints due to an attack by a darklight source. 
+09:15:33 A darklight source loses 1168 hitpoints due to your critical attack. (perfect shot)
+09:15:33 You were healed for 164 hitpoints.
+09:15:33 You gained 52 mana.
+09:15:33 A darklight matter loses 1080 hitpoints due to your critical attack. 
+09:15:33 You were healed for 154 hitpoints.
+09:15:33 You gained 49 mana.
+09:15:33 A darklight matter loses 1087 hitpoints due to your critical attack. 
+09:15:33 You were healed for 155 hitpoints.
+09:15:33 You gained 49 mana.
+09:15:33 A darklight source loses 1065 hitpoints due to your critical attack. 
+09:15:33 You were healed for 82 hitpoints.
+09:15:33 You gained 48 mana.
+09:15:33 A darklight matter loses 1135 hitpoints due to your critical attack. 
+09:15:33 You gained 51 mana.
+09:15:33 You lose 514 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:15:33 You lose 352 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:15:35 You lose 521 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:15:35 A darklight source loses 1169 hitpoints due to your critical attack. 
+09:15:35 You were healed for 138 hitpoints.
+09:15:35 You gained 44 mana.
+09:15:35 A darklight matter loses 1161 hitpoints due to your critical attack. 
+09:15:35 You were healed for 137 hitpoints.
+09:15:35 You gained 43 mana.
+09:15:35 A walking pillar loses 1083 hitpoints due to your critical attack. 
+09:15:35 You were healed for 128 hitpoints.
+09:15:35 You gained 41 mana.
+09:15:35 A darklight striker loses 849 hitpoints due to your critical attack. 
+09:15:35 You were healed for 100 hitpoints.
+09:15:35 You gained 32 mana.
+09:15:35 A darklight matter loses 1176 hitpoints due to your critical attack. 
+09:15:35 You were healed for 139 hitpoints.
+09:15:35 You gained 44 mana.
+09:15:35 A darklight source loses 1101 hitpoints due to your critical attack. 
+09:15:35 You were healed for 130 hitpoints.
+09:15:35 You gained 41 mana.
+09:15:35 A darklight source loses 1326 hitpoints due to your critical attack. 
+09:15:35 You were healed for 175 hitpoints.
+09:15:35 You gained 56 mana.
+09:15:35 A darklight matter loses 1325 hitpoints due to your critical attack. 
+09:15:35 You were healed for 175 hitpoints.
+09:15:35 You gained 56 mana.
+09:15:35 A darklight matter loses 1325 hitpoints due to your critical attack. 
+09:15:35 You were healed for 175 hitpoints.
+09:15:35 You gained 56 mana.
+09:15:35 A darklight source loses 1326 hitpoints due to your critical attack. 
+09:15:35 You were healed for 90 hitpoints.
+09:15:35 You gained 56 mana.
+09:15:35 A darklight matter loses 1325 hitpoints due to your critical attack. 
+09:15:35 You gained 56 mana.
+09:15:35 You lose 421 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:15:36 A darklight source loses 1722 hitpoints due to your critical attack. 
+09:15:36 You were healed for 203 hitpoints.
+09:15:36 You gained 64 mana.
+09:15:36 A darklight matter loses 1720 hitpoints due to your critical attack. 
+09:15:36 You were healed for 203 hitpoints.
+09:15:36 You gained 64 mana.
+09:15:36 A walking pillar loses 1730 hitpoints due to your critical attack. 
+09:15:36 You were healed for 15 hitpoints.
+09:15:36 You gained 65 mana.
+09:15:36 A darklight striker loses 1551 hitpoints due to your critical attack. 
+09:15:36 You gained 58 mana.
+09:15:36 A darklight matter loses 1720 hitpoints due to your critical attack. 
+09:15:36 You gained 64 mana.
+09:15:36 A darklight source loses 1722 hitpoints due to your critical attack. 
+09:15:36 You gained 64 mana.
+09:15:36 You lose 393 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:15:37 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:15:37 You lose 574 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:15:37 A darklight source loses 788 hitpoints due to your attack. (perfect shot)
+09:15:37 You were healed for 118 hitpoints.
+09:15:37 You gained 38 mana.
+09:15:37 A darklight striker loses 610 hitpoints due to your attack. 
+09:15:37 You were healed for 94 hitpoints.
+09:15:37 You gained 30 mana.
+09:15:37 A walking pillar loses 789 hitpoints due to your attack. 
+09:15:37 You were healed for 121 hitpoints.
+09:15:37 You gained 39 mana.
+09:15:37 A darklight matter loses 779 hitpoints due to your attack. 
+09:15:37 You were healed for 120 hitpoints.
+09:15:37 You gained 38 mana.
+09:15:38 Using one of 455 great fireball runes...
+09:15:38 A darklight source loses 486 hitpoints due to your attack. 
+09:15:38 You were healed for 53 hitpoints.
+09:15:38 You gained 17 mana.
+09:15:38 A walking pillar loses 488 hitpoints due to your attack. 
+09:15:38 You were healed for 53 hitpoints.
+09:15:38 You gained 6 mana.
+09:15:38 A darklight striker loses 528 hitpoints due to your attack. 
+09:15:38 You were healed for 57 hitpoints.
+09:15:38 A darklight matter loses 527 hitpoints due to your attack. 
+09:15:38 You were healed for 57 hitpoints.
+09:15:38 A darklight source loses 486 hitpoints due to your attack. 
+09:15:38 You were healed for 53 hitpoints.
+09:15:38 A darklight matter loses 527 hitpoints due to your attack. 
+09:15:38 You were healed for 57 hitpoints.
+09:15:38 A darklight matter loses 527 hitpoints due to your attack. 
+09:15:38 You were healed for 57 hitpoints.
+09:15:38 You lose 546 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:15:39 You lose 559 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:15:40 A darklight source loses 518 hitpoints due to your attack. 
+09:15:40 You were healed for 74 hitpoints.
+09:15:40 A darklight matter loses 510 hitpoints due to your attack. 
+09:15:40 You were healed for 73 hitpoints.
+09:15:40 A darklight source loses 312 hitpoints due to your attack. 
+09:15:40 You were healed for 69 hitpoints.
+09:15:40 You gained 23074 experience points (Bakragore's tribute).
+09:15:40 A darklight striker loses 401 hitpoints due to your attack. 
+09:15:40 You were healed for 58 hitpoints.
+09:15:40 A darklight matter loses 493 hitpoints due to your attack. 
+09:15:40 You were healed for 71 hitpoints.
+09:15:40 You gained 23074 experience points (Bakragore's tribute).
+09:15:40 A darklight striker loses 539 hitpoints due to your attack. 
+09:15:40 You were healed for 77 hitpoints.
+09:15:40 You gained 25 mana.
+09:15:40 A darklight matter loses 598 hitpoints due to your attack. 
+09:15:40 You were healed for 86 hitpoints.
+09:15:40 You gained 27 mana.
+09:15:40 A darklight matter loses 598 hitpoints due to your attack. 
+09:15:40 You were healed for 86 hitpoints.
+09:15:40 You gained 27 mana.
+09:15:40 A darklight matter loses 598 hitpoints due to your attack. 
+09:15:40 You were healed for 86 hitpoints.
+09:15:40 You gained 27 mana.
+09:15:40 A walking pillar loses 601 hitpoints due to your attack. 
+09:15:40 You were healed for 86 hitpoints.
+09:15:40 You gained 28 mana.
+09:15:40 You lose 491 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:15:41 You lose 608 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:15:42 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:15:42 A walking pillar loses 1114 hitpoints due to your critical attack. 
+09:15:42 You were healed for 184 hitpoints.
+09:15:42 You gained 59 mana.
+09:15:42 A darklight matter loses 1085 hitpoints due to your critical attack. 
+09:15:42 You were healed for 180 hitpoints.
+09:15:42 You gained 57 mana.
+09:15:42 A darklight matter loses 1085 hitpoints due to your critical attack. 
+09:15:42 You were healed for 180 hitpoints.
+09:15:42 You gained 57 mana.
+09:15:42 A bloodjaw loses 941 hitpoints due to your critical attack. 
+09:15:42 You were healed for 156 hitpoints.
+09:15:42 You gained 50 mana.
+09:15:42 Using one of 454 great fireball runes...
+09:15:42 A walking pillar loses 493 hitpoints due to your attack. 
+09:15:42 You were healed for 82 hitpoints.
+09:15:42 You gained 26 mana.
+09:15:42 A darklight matter loses 532 hitpoints due to your attack. 
+09:15:42 You were healed for 88 hitpoints.
+09:15:42 You gained 28 mana.
+09:15:42 A bloodjaw loses 425 hitpoints due to your attack. 
+09:15:42 You were healed for 71 hitpoints.
+09:15:42 You gained 23 mana.
+09:15:42 A darklight matter loses 532 hitpoints due to your attack. 
+09:15:42 You were healed for 88 hitpoints.
+09:15:42 You gained 28 mana.
+09:15:43 You lose 423 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:15:43 You lose 461 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:15:44 A darklight matter loses 1069 hitpoints due to your attack. 
+09:15:44 You were healed for 153 hitpoints.
+09:15:44 You gained 49 mana.
+09:15:44 A darklight matter loses 1076 hitpoints due to your attack. 
+09:15:44 You were healed for 154 hitpoints.
+09:15:44 You gained 49 mana.
+09:15:44 A walking pillar loses 622 hitpoints due to your attack. 
+09:15:44 You were healed for 151 hitpoints.
+09:15:44 You gained 26 mana.
+09:15:44 You gained 24957 experience points (Bakragore's tribute).
+09:15:44 A bloodjaw loses 919 hitpoints due to your attack. 
+09:15:44 You were healed for 131 hitpoints.
+09:15:44 A darklight matter loses 1083 hitpoints due to your attack. 
+09:15:44 You were healed for 154 hitpoints.
+09:15:44 A darklight matter loses 672 hitpoints due to your attack. 
+09:15:44 You were healed for 112 hitpoints.
+09:15:44 You gained 36 mana.
+09:15:44 A darklight matter loses 672 hitpoints due to your attack. 
+09:15:44 You were healed for 112 hitpoints.
+09:15:44 You gained 36 mana.
+09:15:44 A darklight matter loses 672 hitpoints due to your attack. 
+09:15:44 You were healed for 112 hitpoints.
+09:15:44 You gained 36 mana.
+09:15:44 A bloodjaw loses 670 hitpoints due to your attack. 
+09:15:44 You were healed for 111 hitpoints.
+09:15:44 You gained 32 mana.
+09:15:46 You lose 718 hitpoints due to an attack by a bloodjaw. 
+09:15:46 A bloodjaw loses 686 hitpoints due to your attack. (perfect shot)
+09:15:46 You were healed for 110 hitpoints.
+09:15:46 A darklight matter loses 762 hitpoints due to your attack. 
+09:15:46 You were healed for 126 hitpoints.
+09:15:46 A darklight matter loses 421 hitpoints due to your attack. 
+09:15:46 You were healed for 127 hitpoints.
+09:15:46 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:15:46 A darklight matter loses 778 hitpoints due to your attack. 
+09:15:46 You were healed for 129 hitpoints.
+09:15:46 Using one of 453 great fireball runes...
+09:15:46 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:15:46 A darklight matter loses 483 hitpoints due to your attack. 
+09:15:46 You were healed for 136 hitpoints.
+09:15:46 A bloodjaw loses 386 hitpoints due to your attack. 
+09:15:46 You were healed for 108 hitpoints.
+09:15:46 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:15:48 A bloodjaw loses 748 hitpoints due to your attack. (perfect shot)
+09:15:48 You were healed for 194 hitpoints.
+09:15:48 You gained 117 mana.
+09:15:49 A bloodjaw loses 1124 hitpoints due to your critical attack. 
+09:15:49 You gained 180 mana.
+09:15:50 You lose 912 hitpoints due to an attack by a bloodjaw. 
+09:15:51 A bloodjaw loses 466 hitpoints due to your attack. (perfect shot)
+09:15:51 You were healed for 227 hitpoints.
+09:15:51 You gained 72 mana.
+09:15:51 A bloodjaw loses 1659 hitpoints due to your attack. 
+09:15:51 You were healed for 685 hitpoints.
+09:15:51 You gained 266 mana.
+09:15:52 You lose 937 hitpoints. 
+09:15:53 A bloodjaw loses 673 hitpoints due to your attack. 
+09:15:53 You were healed for 342 hitpoints.
+09:15:53 You gained 6 mana.
+09:15:53 A bloodjaw loses 675 hitpoints due to your attack. 
+09:15:53 You were healed for 343 hitpoints.
+09:15:53 You gained 108 mana.
+09:15:53 You were healed by Luszckyn for 252 hitpoints.
+09:15:53 You lose 375 hitpoints. 
+09:15:54 You lose 937 hitpoints. 
+09:15:54 You lose 375 hitpoints. 
+09:15:55 A bloodjaw loses 726 hitpoints due to your attack. 
+09:15:55 You were healed for 369 hitpoints.
+09:15:55 You gained 28 mana.
+09:15:55 You lose 375 hitpoints. 
+09:15:56 You lose 1953 hitpoints due to a critical attack by a bloodjaw. 
+09:15:56 You gained 22801 experience points (Bakragore's tribute).
+09:15:56 You lose 375 hitpoints. 
+09:15:57 You lose 375 hitpoints. 
+09:15:58 You lose 375 hitpoints. 
+09:15:59 You healed yourself for 1169 hitpoints.
+09:15:59 You lose 375 hitpoints. 
+09:16:00 You healed yourself for 1193 hitpoints.
+09:16:00 A darklight source loses 723 hitpoints due to your attack. 
+09:16:00 You were healed for 367 hitpoints.
+09:16:00 You gained 116 mana.
+09:16:00 A darklight source loses 622 hitpoints due to your attack. 
+09:16:00 You were healed for 316 hitpoints.
+09:16:00 You gained 100 mana.
+09:16:00 You lose 375 hitpoints. 
+09:16:01 You healed yourself for 1267 hitpoints.
+09:16:01 You lose 375 hitpoints. 
+09:16:02 A darklight striker loses 634 hitpoints due to your attack. (perfect shot)
+09:16:02 You were healed for 172 hitpoints.
+09:16:02 You gained 55 mana.
+09:16:02 A darklight matter loses 771 hitpoints due to your attack. 
+09:16:02 You were healed for 216 hitpoints.
+09:16:02 You gained 69 mana.
+09:16:02 You lose 375 hitpoints. 
+09:16:02 Using one of 452 great fireball runes...
+09:16:02 A darklight striker loses 477 hitpoints due to your attack. 
+09:16:02 You were healed for 98 hitpoints.
+09:16:02 You gained 31 mana.
+09:16:02 A darklight matter loses 476 hitpoints due to your attack. 
+09:16:02 You were healed for 97 hitpoints.
+09:16:02 You gained 31 mana.
+09:16:02 A darklight striker loses 477 hitpoints due to your attack. 
+09:16:02 You were healed for 98 hitpoints.
+09:16:02 You gained 31 mana.
+09:16:03 You lose 961 hitpoints due to an attack by a darklight source. 
+09:16:03 You lose 937 hitpoints. 
+09:16:03 You lose 375 hitpoints. 
+09:16:04 You lose 375 hitpoints. 
+09:16:05 A darklight striker loses 477 hitpoints due to your attack. 
+09:16:05 You were healed for 98 hitpoints.
+09:16:05 You gained 31 mana.
+09:16:05 A darklight matter loses 618 hitpoints due to your attack. 
+09:16:05 You were healed for 126 hitpoints.
+09:16:05 You gained 40 mana.
+09:16:05 A darklight striker loses 480 hitpoints due to your attack. 
+09:16:05 You were healed for 98 hitpoints.
+09:16:05 You gained 31 mana.
+09:16:05 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:16:05 A darklight striker loses 610 hitpoints due to your attack. 
+09:16:05 You were healed for 124 hitpoints.
+09:16:05 You gained 40 mana.
+09:16:05 A darklight matter loses 677 hitpoints due to your attack. 
+09:16:05 You were healed for 138 hitpoints.
+09:16:05 You gained 44 mana.
+09:16:05 A darklight striker loses 610 hitpoints due to your attack. 
+09:16:05 You were healed for 124 hitpoints.
+09:16:05 You gained 40 mana.
+09:16:05 You lose 631 hitpoints due to an attack by a darklight source. 
+09:16:05 You lose 375 hitpoints. 
+09:16:06 You lose 585 hitpoints due to an attack by a darklight striker. 
+09:16:06 You lose 375 hitpoints. 
+09:16:06 You lose 1172 hitpoints due to an attack by a walking pillar. 
+09:16:07 A darklight matter loses 712 hitpoints due to your attack. 
+09:16:07 You were healed for 118 hitpoints.
+09:16:07 You gained 38 mana.
+09:16:07 A darklight striker loses 548 hitpoints due to your attack. 
+09:16:07 You were healed for 91 hitpoints.
+09:16:07 You gained 29 mana.
+09:16:07 A darklight striker loses 570 hitpoints due to your attack. 
+09:16:07 You were healed for 95 hitpoints.
+09:16:07 You gained 30 mana.
+09:16:07 A darklight source loses 685 hitpoints due to your attack. 
+09:16:07 You were healed for 114 hitpoints.
+09:16:07 You gained 36 mana.
+09:16:07 You lose 453 hitpoints due to an attack by a darklight matter. 
+09:16:07 You lose 375 hitpoints. 
+09:16:08 You lose 515 hitpoints due to an attack by a darklight striker. 
+09:16:08 You lose 575 hitpoints due to an attack by a darklight striker. 
+09:16:08 You lose 375 hitpoints. 
+09:16:08 You were healed by Burkzin for 2339 hitpoints.
+09:16:09 You lose 633 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:09 A darklight matter loses 871 hitpoints due to your attack. (perfect shot)
+09:16:09 You were healed for 130 hitpoints.
+09:16:09 You gained 42 mana.
+09:16:09 A darklight striker loses 630 hitpoints due to your attack. 
+09:16:09 You were healed for 97 hitpoints.
+09:16:09 You gained 31 mana.
+09:16:09 A darklight striker loses 650 hitpoints due to your attack. 
+09:16:09 You were healed for 100 hitpoints.
+09:16:09 You gained 32 mana.
+09:16:09 A darklight source loses 807 hitpoints due to your attack. 
+09:16:09 You were healed for 124 hitpoints.
+09:16:09 You gained 39 mana.
+09:16:09 A darklight striker loses 654 hitpoints due to your attack. 
+09:16:09 You were healed for 77 hitpoints.
+09:16:09 You gained 25 mana.
+09:16:09 A walking pillar loses 729 hitpoints due to your attack. 
+09:16:09 You were healed for 86 hitpoints.
+09:16:09 You gained 27 mana.
+09:16:09 A darklight source loses 725 hitpoints due to your attack. 
+09:16:09 You were healed for 86 hitpoints.
+09:16:09 You gained 27 mana.
+09:16:09 A darklight striker loses 654 hitpoints due to your attack. 
+09:16:09 You were healed for 77 hitpoints.
+09:16:09 You gained 25 mana.
+09:16:09 A darklight matter loses 725 hitpoints due to your attack. 
+09:16:09 You were healed for 86 hitpoints.
+09:16:09 You gained 27 mana.
+09:16:09 A darklight striker loses 654 hitpoints due to your attack. 
+09:16:09 You were healed for 77 hitpoints.
+09:16:09 You gained 25 mana.
+09:16:09 You lose 483 hitpoints due to an attack by a darklight matter. 
+09:16:09 You lose 375 hitpoints. 
+09:16:10 A darklight matter loses 884 hitpoints due to your attack. 
+09:16:10 You were healed for 96 hitpoints.
+09:16:10 You gained 31 mana.
+09:16:10 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:16:10 A darklight striker loses 797 hitpoints due to your attack. 
+09:16:10 You were healed for 86 hitpoints.
+09:16:10 You gained 28 mana.
+09:16:10 A darklight striker loses 797 hitpoints due to your attack. 
+09:16:10 You were healed for 86 hitpoints.
+09:16:10 You gained 28 mana.
+09:16:10 A darklight source loses 884 hitpoints due to your attack. 
+09:16:10 You were healed for 96 hitpoints.
+09:16:10 You gained 31 mana.
+09:16:10 A darklight striker loses 797 hitpoints due to your attack. 
+09:16:10 You were healed for 86 hitpoints.
+09:16:10 You gained 28 mana.
+09:16:10 A walking pillar loses 888 hitpoints due to your attack. 
+09:16:10 You were healed for 96 hitpoints.
+09:16:10 You gained 31 mana.
+09:16:10 A darklight source loses 884 hitpoints due to your attack. 
+09:16:10 You were healed for 96 hitpoints.
+09:16:10 You gained 31 mana.
+09:16:10 You lose 375 hitpoints. 
+09:16:11 You lose 506 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:11 You lose 650 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:16:11 A walking pillar loses 597 hitpoints due to your attack. 
+09:16:11 You were healed for 79 hitpoints.
+09:16:11 You gained 25 mana.
+09:16:11 A darklight striker loses 497 hitpoints due to your attack. 
+09:16:11 You were healed for 66 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:11 A darklight source loses 631 hitpoints due to your attack. 
+09:16:11 You were healed for 84 hitpoints.
+09:16:11 You gained 27 mana.
+09:16:11 A darklight matter loses 605 hitpoints due to your attack. 
+09:16:11 You were healed for 80 hitpoints.
+09:16:11 You gained 26 mana.
+09:16:11 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:16:11 A darklight striker loses 501 hitpoints due to your attack. 
+09:16:11 You were healed for 67 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:11 You lose 375 hitpoints. 
+09:16:11 Using one of 451 great fireball runes...
+09:16:11 A darklight source loses 555 hitpoints due to your attack. 
+09:16:11 You were healed for 60 hitpoints.
+09:16:11 You gained 19 mana.
+09:16:11 A darklight matter loses 603 hitpoints due to your attack. 
+09:16:11 You were healed for 65 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:11 A darklight striker loses 604 hitpoints due to your attack. 
+09:16:11 You were healed for 66 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:11 A darklight striker loses 604 hitpoints due to your attack. 
+09:16:11 You were healed for 66 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:11 A walking pillar loses 557 hitpoints due to your attack. 
+09:16:11 You were healed for 60 hitpoints.
+09:16:11 You gained 19 mana.
+09:16:11 A darklight striker loses 604 hitpoints due to your attack. 
+09:16:11 You were healed for 66 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:11 A darklight matter loses 603 hitpoints due to your attack. 
+09:16:11 You were healed for 65 hitpoints.
+09:16:11 You gained 21 mana.
+09:16:12 You healed yourself for 1475 hitpoints.
+09:16:12 You lose 468 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:12 You lose 375 hitpoints. 
+09:16:13 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:16:13 You lose 501 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:13 You lose 692 hitpoints due to an attack by a bloodjaw. 
+09:16:13 You lose 544 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:16:13 You were healed by Burkzin for 2492 hitpoints.
+09:16:13 You lose 504 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:16:13 A walking pillar loses 573 hitpoints due to your attack. 
+09:16:13 You were healed for 76 hitpoints.
+09:16:13 You gained 24 mana.
+09:16:13 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:16:13 A darklight striker loses 488 hitpoints due to your attack. 
+09:16:13 You were healed for 65 hitpoints.
+09:16:13 You gained 21 mana.
+09:16:13 A darklight source loses 584 hitpoints due to your attack. 
+09:16:13 You were healed for 77 hitpoints.
+09:16:13 You gained 25 mana.
+09:16:13 A darklight matter loses 595 hitpoints due to your attack. 
+09:16:13 You were healed for 79 hitpoints.
+09:16:13 You gained 25 mana.
+09:16:13 A bloodjaw loses 518 hitpoints due to your attack. 
+09:16:13 You were healed for 69 hitpoints.
+09:16:13 You gained 22 mana.
+09:16:14 A darklight striker loses 604 hitpoints due to your attack. 
+09:16:14 You were healed for 72 hitpoints.
+09:16:14 You gained 23 mana.
+09:16:14 A walking pillar loses 673 hitpoints due to your attack. 
+09:16:14 You were healed for 80 hitpoints.
+09:16:14 You gained 25 mana.
+09:16:14 A darklight source loses 670 hitpoints due to your attack. 
+09:16:14 You were healed for 79 hitpoints.
+09:16:14 You gained 25 mana.
+09:16:14 A darklight striker loses 604 hitpoints due to your attack. 
+09:16:14 You were healed for 72 hitpoints.
+09:16:14 You gained 23 mana.
+09:16:14 A darklight matter loses 669 hitpoints due to your attack. 
+09:16:14 You were healed for 79 hitpoints.
+09:16:14 You gained 25 mana.
+09:16:14 A bloodjaw loses 668 hitpoints due to your attack. 
+09:16:14 You were healed for 79 hitpoints.
+09:16:14 You gained 25 mana.
+09:16:14 You healed yourself for 1378 hitpoints.
+09:16:15 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:16:15 You lose 666 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:15 You lose 910 hitpoints due to an attack by a bloodjaw. 
+09:16:15 You lose 551 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:16:15 You lose 605 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:16:15 You were healed by Burkzin for 1928 hitpoints.
+09:16:15 You lose 657 hitpoints due to an attack by a darklight striker. 
+09:16:16 A walking pillar loses 547 hitpoints due to your attack. 
+09:16:16 You were healed for 70 hitpoints.
+09:16:16 You gained 22 mana.
+09:16:16 A darklight striker loses 441 hitpoints due to your attack. 
+09:16:16 You were healed for 56 hitpoints.
+09:16:16 You gained 18 mana.
+09:16:16 A darklight source loses 543 hitpoints due to your attack. 
+09:16:16 You were healed for 69 hitpoints.
+09:16:16 You gained 22 mana.
+09:16:16 A darklight source loses 528 hitpoints due to your attack. 
+09:16:16 You were healed for 67 hitpoints.
+09:16:16 You gained 22 mana.
+09:16:16 A bloodjaw loses 491 hitpoints due to your attack. 
+09:16:16 You were healed for 63 hitpoints.
+09:16:16 You gained 20 mana.
+09:16:16 A bloodjaw loses 480 hitpoints due to your attack. 
+09:16:16 You were healed for 61 hitpoints.
+09:16:16 You gained 20 mana.
+09:16:16 Using one of 450 great fireball runes...
+09:16:16 A darklight source loses 454 hitpoints due to your attack. 
+09:16:16 You were healed for 50 hitpoints.
+09:16:16 You gained 16 mana.
+09:16:16 A darklight striker loses 495 hitpoints due to your attack. 
+09:16:16 You were healed for 54 hitpoints.
+09:16:16 You gained 17 mana.
+09:16:16 A bloodjaw loses 394 hitpoints due to your attack. 
+09:16:16 You were healed for 43 hitpoints.
+09:16:16 You gained 14 mana.
+09:16:16 A darklight striker loses 82 hitpoints due to your attack. 
+09:16:16 You were healed for 54 hitpoints.
+09:16:16 You gained 17 mana.
+09:16:16 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:16:16 A walking pillar loses 457 hitpoints due to your attack. 
+09:16:16 You were healed for 50 hitpoints.
+09:16:16 You gained 16 mana.
+09:16:16 A bloodjaw loses 394 hitpoints due to your attack. 
+09:16:16 You were healed for 43 hitpoints.
+09:16:16 You gained 14 mana.
+09:16:16 A darklight source loses 454 hitpoints due to your attack. 
+09:16:16 You were healed for 50 hitpoints.
+09:16:16 You gained 16 mana.
+09:16:16 A darklight matter loses 494 hitpoints due to your attack. 
+09:16:16 You were healed for 54 hitpoints.
+09:16:16 You gained 17 mana.
+09:16:16 Momentum was triggered.
+09:16:16 You healed yourself for 1484 hitpoints.
+09:16:17 You lose 445 hitpoints due to an attack by a darklight matter. 
+09:16:17 You lose 471 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:16:17 You gained 23074 experience points (Bakragore's tribute).
+09:16:18 A walking pillar loses 483 hitpoints due to your attack. 
+09:16:18 You were healed for 69 hitpoints.
+09:16:18 You gained 22 mana.
+09:16:18 A bloodjaw loses 439 hitpoints due to your attack. 
+09:16:18 You were healed for 63 hitpoints.
+09:16:18 You gained 20 mana.
+09:16:18 A darklight striker loses 397 hitpoints due to your attack. 
+09:16:18 You were healed for 57 hitpoints.
+09:16:18 You gained 18 mana.
+09:16:18 A darklight source loses 500 hitpoints due to your attack. 
+09:16:18 You were healed for 72 hitpoints.
+09:16:18 You gained 23 mana.
+09:16:18 A bloodjaw loses 463 hitpoints due to your attack. 
+09:16:18 You were healed for 66 hitpoints.
+09:16:18 You gained 21 mana.
+09:16:18 A bloodjaw loses 678 hitpoints due to your attack. 
+09:16:18 You were healed for 87 hitpoints.
+09:16:18 You gained 28 mana.
+09:16:18 A bloodjaw loses 678 hitpoints due to your attack. 
+09:16:18 You were healed for 87 hitpoints.
+09:16:18 You gained 28 mana.
+09:16:18 A darklight matter loses 679 hitpoints due to your attack. 
+09:16:18 You were healed for 87 hitpoints.
+09:16:18 You gained 28 mana.
+09:16:18 A walking pillar loses 683 hitpoints due to your attack. 
+09:16:18 You were healed for 87 hitpoints.
+09:16:18 You gained 28 mana.
+09:16:18 A darklight source loses 680 hitpoints due to your attack. 
+09:16:18 You were healed for 87 hitpoints.
+09:16:18 You gained 28 mana.
+09:16:18 A darklight striker loses 613 hitpoints due to your attack. 
+09:16:18 You were healed for 78 hitpoints.
+09:16:18 You gained 25 mana.
+09:16:18 You healed yourself for 1150 hitpoints.
+09:16:19 You lose 530 hitpoints due to an attack by a darklight matter. 
+09:16:19 You lose 1149 hitpoints due to an attack by a bloodjaw. 
+09:16:20 A darklight matter loses 873 hitpoints due to your attack. 
+09:16:20 You were healed for 178 hitpoints.
+09:16:20 You gained 56 mana.
+09:16:20 A bloodjaw loses 767 hitpoints due to your attack. 
+09:16:20 You were healed for 156 hitpoints.
+09:16:20 You gained 50 mana.
+09:16:20 A bloodjaw loses 731 hitpoints due to your attack. 
+09:16:20 You were healed for 149 hitpoints.
+09:16:20 You gained 47 mana.
+09:16:20 Using one of 449 great fireball runes...
+09:16:20 A bloodjaw loses 431 hitpoints due to your attack. 
+09:16:20 You were healed for 55 hitpoints.
+09:16:20 You gained 18 mana.
+09:16:20 A bloodjaw loses 431 hitpoints due to your attack. 
+09:16:20 You were healed for 55 hitpoints.
+09:16:20 You gained 18 mana.
+09:16:20 A darklight matter loses 540 hitpoints due to your attack. 
+09:16:20 You were healed for 69 hitpoints.
+09:16:20 You gained 22 mana.
+09:16:20 A darklight source loses 497 hitpoints due to your attack. 
+09:16:20 You were healed for 64 hitpoints.
+09:16:20 You gained 20 mana.
+09:16:20 A darklight striker loses 541 hitpoints due to your attack. 
+09:16:20 You were healed for 69 hitpoints.
+09:16:20 You gained 22 mana.
+09:16:20 A walking pillar loses 499 hitpoints due to your attack. 
+09:16:20 You were healed for 64 hitpoints.
+09:16:20 You gained 20 mana.
+09:16:21 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:16:21 You lose 734 hitpoints due to an attack by a darklight matter. 
+09:16:21 You lose 819 hitpoints due to an attack by a darklight matter. 
+09:16:21 You were healed by Luszckyn for 1979 hitpoints.
+09:16:22 You gained 24957 experience points (Bakragore's tribute).
+09:16:22 A darklight matter loses 871 hitpoints due to your attack. 
+09:16:22 You were healed for 144 hitpoints.
+09:16:22 You gained 46 mana.
+09:16:22 A bloodjaw loses 754 hitpoints due to your attack. 
+09:16:22 You were healed for 125 hitpoints.
+09:16:22 You gained 40 mana.
+09:16:22 A darklight source loses 810 hitpoints due to your attack. 
+09:16:22 You were healed for 134 hitpoints.
+09:16:22 You gained 43 mana.
+09:16:22 A bloodjaw loses 769 hitpoints due to your attack. 
+09:16:22 You were healed for 128 hitpoints.
+09:16:22 You gained 41 mana.
+09:16:22 A bloodjaw loses 611 hitpoints due to your attack. 
+09:16:22 You were healed for 102 hitpoints.
+09:16:22 You gained 32 mana.
+09:16:22 A darklight matter loses 613 hitpoints due to your attack. 
+09:16:22 You were healed for 102 hitpoints.
+09:16:22 You gained 33 mana.
+09:16:22 A bloodjaw loses 611 hitpoints due to your attack. 
+09:16:22 You were healed for 102 hitpoints.
+09:16:22 You gained 32 mana.
+09:16:22 A darklight source loses 613 hitpoints due to your attack. 
+09:16:22 You were healed for 102 hitpoints.
+09:16:22 You gained 33 mana.
+09:16:23 You lose 734 hitpoints due to an attack by a darklight matter. 
+09:16:23 You lose 940 hitpoints due to an attack by a bloodjaw. 
+09:16:23 You lose 1125 hitpoints due to an attack by a darklight source. 
+09:16:24 You gained 23074 experience points (Bakragore's tribute).
+09:16:24 A bloodjaw loses 537 hitpoints due to your attack. 
+09:16:24 You were healed for 110 hitpoints.
+09:16:24 You gained 35 mana.
+09:16:24 A bloodjaw loses 548 hitpoints due to your attack. 
+09:16:24 You were healed for 112 hitpoints.
+09:16:24 You gained 36 mana.
+09:16:24 A darklight matter loses 660 hitpoints due to your attack. 
+09:16:24 You were healed for 134 hitpoints.
+09:16:24 You gained 43 mana.
+09:16:25 Using one of 448 great fireball runes...
+09:16:25 A bloodjaw loses 412 hitpoints due to your attack. 
+09:16:25 You were healed for 84 hitpoints.
+09:16:25 You gained 27 mana.
+09:16:25 A bloodjaw loses 412 hitpoints due to your attack. 
+09:16:25 You were healed for 84 hitpoints.
+09:16:25 You gained 27 mana.
+09:16:25 A darklight matter loses 516 hitpoints due to your attack. 
+09:16:25 You were healed for 105 hitpoints.
+09:16:25 You gained 34 mana.
+09:16:26 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:16:26 You lose 1026 hitpoints due to an attack by a darklight source. 
+09:16:26 You were healed by Luszckyn for 1725 hitpoints.
+09:16:27 A bloodjaw loses 663 hitpoints due to your attack. (perfect shot)
+09:16:27 You were healed for 131 hitpoints.
+09:16:27 You gained 42 mana.
+09:16:27 A darklight source loses 737 hitpoints due to your attack. 
+09:16:27 You were healed for 150 hitpoints.
+09:16:27 You gained 48 mana.
+09:16:27 A bloodjaw loses 650 hitpoints due to your attack. 
+09:16:27 You were healed for 132 hitpoints.
+09:16:27 You gained 42 mana.
+09:16:27 A bloodjaw loses 634 hitpoints due to your attack. 
+09:16:27 You were healed for 129 hitpoints.
+09:16:27 You gained 41 mana.
+09:16:27 A darklight source loses 636 hitpoints due to your attack. 
+09:16:27 You were healed for 130 hitpoints.
+09:16:27 You gained 41 mana.
+09:16:27 A bloodjaw loses 634 hitpoints due to your attack. 
+09:16:27 You were healed for 129 hitpoints.
+09:16:27 You gained 41 mana.
+09:16:28 You lose 592 hitpoints due to an attack by a darklight source. 
+09:16:29 A darklight source loses 614 hitpoints due to your attack. (perfect shot)
+09:16:29 You were healed for 121 hitpoints.
+09:16:29 You gained 39 mana.
+09:16:29 A bloodjaw loses 496 hitpoints due to your attack. 
+09:16:29 You were healed for 101 hitpoints.
+09:16:29 You gained 32 mana.
+09:16:29 A bloodjaw loses 488 hitpoints due to your attack. 
+09:16:29 You were healed for 100 hitpoints.
+09:16:29 You gained 32 mana.
+09:16:29 Using one of 447 great fireball runes...
+09:16:29 A bloodjaw loses 453 hitpoints due to your attack. 
+09:16:29 You were healed for 92 hitpoints.
+09:16:29 You gained 30 mana.
+09:16:29 A darklight source loses 523 hitpoints due to your attack. 
+09:16:29 You were healed for 107 hitpoints.
+09:16:29 You gained 34 mana.
+09:16:29 A bloodjaw loses 453 hitpoints due to your attack. 
+09:16:29 You were healed for 92 hitpoints.
+09:16:29 You gained 30 mana.
+09:16:30 You were healed by Burkzin for 1723 hitpoints.
+09:16:31 You lose 937 hitpoints. 
+09:16:31 You gained 22801 experience points (Bakragore's tribute).
+09:16:31 A darklight source loses 953 hitpoints due to your critical attack. 
+09:16:31 You were healed for 267 hitpoints.
+09:16:31 You gained 85 mana.
+09:16:31 A bloodjaw loses 773 hitpoints due to your critical attack. 
+09:16:31 You were healed for 217 hitpoints.
+09:16:31 You gained 69 mana.
+09:16:31 You lose 375 hitpoints. 
+09:16:31 A darklight source loses 605 hitpoints due to your attack. 
+09:16:31 You were healed for 170 hitpoints.
+09:16:31 You gained 54 mana.
+09:16:31 A bloodjaw loses 603 hitpoints due to your attack. 
+09:16:31 You were healed for 169 hitpoints.
+09:16:31 You gained 54 mana.
+09:16:32 You lose 565 hitpoints due to an attack by a darklight source. 
+09:16:32 You gained 22801 experience points (Bakragore's tribute).
+09:16:32 You lose 375 hitpoints. 
+09:16:33 You lose 375 hitpoints. 
+09:16:33 A darklight source loses 731 hitpoints due to your attack. (perfect shot)
+09:16:33 You were healed for 361 hitpoints.
+09:16:33 You gained 114 mana.
+09:16:33 A darklight source loses 1681 hitpoints due to your attack. 
+09:16:33 You were healed for 854 hitpoints.
+09:16:33 You gained 269 mana.
+09:16:34 You lose 375 hitpoints. 
+09:16:35 You lose 937 hitpoints. 
+09:16:35 You lose 375 hitpoints. 
+09:16:35 A darklight source loses 780 hitpoints due to your attack. 
+09:16:35 You were healed for 396 hitpoints.
+09:16:35 You gained 125 mana.
+09:16:36 You lose 937 hitpoints. 
+09:16:36 A darklight source loses 597 hitpoints due to your attack. 
+09:16:36 You were healed for 303 hitpoints.
+09:16:36 You gained 96 mana.
+09:16:36 You lose 937 hitpoints. 
+09:16:36 You lose 375 hitpoints. 
+09:16:37 You lose 375 hitpoints. 
+09:16:38 You lose 567 hitpoints due to an attack by a darklight source. 
+09:16:38 You gained 23074 experience points (Bakragore's tribute).
+09:16:38 You lose 375 hitpoints. 
+09:16:39 You lose 937 hitpoints. 
+09:16:39 You lose 937 hitpoints. 
+09:16:39 You lose 375 hitpoints. 
+09:16:39 You lose 937 hitpoints. 
+09:16:40 You lose 375 hitpoints. 
+09:16:41 You lose 375 hitpoints. 
+09:16:41 You were healed by Burkzin for 2986 hitpoints.
+09:16:42 You lose 375 hitpoints. 
+09:16:42 You were healed by Burkzin for 2345 hitpoints.
+09:16:43 A darklight striker loses 857 hitpoints due to your attack. (perfect shot)
+09:16:43 You were healed for 425 hitpoints.
+09:16:43 You gained 134 mana.
+09:16:43 You lose 375 hitpoints. 
+09:16:44 You lose 375 hitpoints. 
+09:16:45 A darklight striker loses 369 hitpoints due to your attack. 
+09:16:45 You were healed for 104 hitpoints.
+09:16:45 You gained 33 mana.
+09:16:45 A darklight striker loses 370 hitpoints due to your attack. 
+09:16:45 You were healed for 104 hitpoints.
+09:16:45 You gained 33 mana.
+09:16:45 Using one of 446 great fireball runes...
+09:16:45 You lose 375 hitpoints. 
+09:16:45 A darklight striker loses 469 hitpoints due to your attack. 
+09:16:45 You were healed for 132 hitpoints.
+09:16:45 You gained 42 mana.
+09:16:45 A darklight striker loses 469 hitpoints due to your attack. 
+09:16:45 You were healed for 132 hitpoints.
+09:16:45 You gained 42 mana.
+09:16:46 You healed yourself for 1062 hitpoints.
+09:16:46 You lose 375 hitpoints. 
+09:16:47 You were healed by Burkzin for 1864 hitpoints.
+09:16:47 You lose 375 hitpoints. 
+09:16:47 A darklight striker loses 421 hitpoints due to your attack. (perfect shot)
+09:16:47 You were healed for 113 hitpoints.
+09:16:47 You gained 36 mana.
+09:16:47 A darklight striker loses 447 hitpoints due to your attack. 
+09:16:47 You were healed for 125 hitpoints.
+09:16:47 You gained 40 mana.
+09:16:47 A darklight striker loses 537 hitpoints due to your attack. 
+09:16:47 You were healed for 151 hitpoints.
+09:16:47 You gained 48 mana.
+09:16:47 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:16:47 A darklight striker loses 537 hitpoints due to your attack. 
+09:16:47 You were healed for 151 hitpoints.
+09:16:47 You gained 48 mana.
+09:16:48 You lose 523 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:48 You lose 375 hitpoints. 
+09:16:49 You were healed by Luszckyn for 2413 hitpoints.
+09:16:49 You lose 375 hitpoints. 
+09:16:49 A darklight striker loses 503 hitpoints due to your attack. 
+09:16:49 You were healed for 141 hitpoints.
+09:16:49 You gained 45 mana.
+09:16:49 A darklight striker loses 536 hitpoints due to your attack. 
+09:16:49 You were healed for 151 hitpoints.
+09:16:49 You gained 48 mana.
+09:16:50 You lose 446 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:16:50 You lose 665 hitpoints due to an attack by a darklight striker. 
+09:16:52 A darklight striker loses 523 hitpoints due to your attack. 
+09:16:52 You were healed for 99 hitpoints.
+09:16:52 You gained 32 mana.
+09:16:52 A darklight striker loses 490 hitpoints due to your attack. 
+09:16:52 You were healed for 93 hitpoints.
+09:16:52 You gained 30 mana.
+09:16:52 A darklight striker loses 497 hitpoints due to your attack. 
+09:16:52 You were healed for 94 hitpoints.
+09:16:52 You gained 30 mana.
+09:16:52 A darklight striker loses 1189 hitpoints due to your critical attack. 
+09:16:52 You were healed for 224 hitpoints.
+09:16:52 You gained 71 mana.
+09:16:52 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:16:52 A darklight striker loses 1189 hitpoints due to your critical attack. 
+09:16:52 You were healed for 224 hitpoints.
+09:16:52 You gained 71 mana.
+09:16:52 A darklight striker loses 1189 hitpoints due to your critical attack. 
+09:16:52 You were healed for 224 hitpoints.
+09:16:52 You gained 71 mana.
+09:16:52 You lose 533 hitpoints due to an attack by a darklight striker. 
+09:16:52 You lose 763 hitpoints due to an attack by a darklight striker. 
+09:16:53 A darklight striker loses 825 hitpoints due to your attack. 
+09:16:53 You were healed for 156 hitpoints.
+09:16:53 You gained 50 mana.
+09:16:53 A darklight striker loses 825 hitpoints due to your attack. 
+09:16:53 You were healed for 156 hitpoints.
+09:16:53 You gained 50 mana.
+09:16:53 A darklight striker loses 825 hitpoints due to your attack. 
+09:16:53 You were healed for 156 hitpoints.
+09:16:53 You gained 50 mana.
+09:16:53 You lose 937 hitpoints. 
+09:16:53 You lose 937 hitpoints. 
+09:16:53 You lose 375 hitpoints. 
+09:16:53 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:16:54 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:16:54 A darklight striker loses 1182 hitpoints due to your critical attack. 
+09:16:54 You were healed for 330 hitpoints.
+09:16:54 You gained 105 mana.
+09:16:54 A darklight striker loses 1265 hitpoints due to your critical attack. 
+09:16:54 You were healed for 354 hitpoints.
+09:16:54 You gained 112 mana.
+09:16:54 Using one of 445 great fireball runes...
+09:16:54 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:16:54 A darklight striker loses 474 hitpoints due to your attack. 
+09:16:54 You were healed for 133 hitpoints.
+09:16:54 You gained 42 mana.
+09:16:54 A darklight striker loses 474 hitpoints due to your attack. 
+09:16:54 You were healed for 133 hitpoints.
+09:16:54 You gained 42 mana.
+09:16:54 You lose 375 hitpoints. 
+09:16:55 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:16:55 You lose 375 hitpoints. 
+09:16:56 A darklight striker loses 549 hitpoints due to your attack. 
+09:16:56 You were healed for 279 hitpoints.
+09:16:56 You gained 88 mana.
+09:16:56 A darklight striker loses 588 hitpoints due to your attack. 
+09:16:56 You were healed for 299 hitpoints.
+09:16:56 You gained 95 mana.
+09:16:56 You lose 501 hitpoints due to an attack by a darklight striker. 
+09:16:56 You lose 375 hitpoints. 
+09:16:57 You lose 375 hitpoints. 
+09:16:58 A darklight striker loses 1129 hitpoints due to your attack. 
+09:16:58 You were healed for 573 hitpoints.
+09:16:58 You gained 181 mana.
+09:16:58 You lose 375 hitpoints. 
+09:16:59 You lose 375 hitpoints. 
+09:17:00 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:17:00 You lose 375 hitpoints. 
+09:17:01 You lose 1063 hitpoints due to an attack by a walking pillar. 
+09:17:01 You lose 375 hitpoints. 
+09:17:02 You lose 375 hitpoints. 
+09:17:03 You lose 375 hitpoints. 
+09:17:05 You healed yourself for 1220 hitpoints.
+09:17:07 A walking pillar loses 697 hitpoints due to your attack. (perfect shot)
+09:17:07 You were healed for 344 hitpoints.
+09:17:07 You gained 109 mana.
+09:17:07 You healed yourself for 1189 hitpoints.
+09:17:08 You lose 945 hitpoints due to an attack by a walking pillar. 
+09:17:09 A walking pillar loses 474 hitpoints due to your attack. (perfect shot)
+09:17:09 You were healed for 231 hitpoints.
+09:17:09 You gained 73 mana.
+09:17:09 Using one of 444 great fireball runes...
+09:17:09 A walking pillar loses 466 hitpoints due to your attack. 
+09:17:09 You were healed for 237 hitpoints.
+09:17:09 You gained 75 mana.
+09:17:10 You healed yourself for 1339 hitpoints.
+09:17:11 A walking pillar loses 762 hitpoints due to your attack. 
+09:17:11 You were healed for 387 hitpoints.
+09:17:11 You gained 122 mana.
+09:17:11 A walking pillar loses 605 hitpoints due to your attack. 
+09:17:11 You were healed for 308 hitpoints.
+09:17:11 You gained 97 mana.
+09:17:12 You lose 950 hitpoints due to an attack by a walking pillar. 
+09:17:13 A walking pillar loses 549 hitpoints due to your attack. (perfect shot)
+09:17:13 You were healed for 269 hitpoints.
+09:17:13 You gained 85 mana.
+09:17:15 You gained 24957 experience points (Bakragore's tribute).
+09:17:18 You were healed by Luszckyn for 2335 hitpoints.
+09:17:20 You were healed by Luszckyn for 845 hitpoints.
+09:17:36 Momentum was triggered.
+09:17:41 You lose 698 hitpoints due to an attack by a walking pillar. 
+09:17:41 You lose 811 hitpoints due to an attack by a darklight matter. 
+09:17:43 You lose 653 hitpoints due to an attack by a darklight source. 
+09:17:43 You lose 680 hitpoints due to an attack by a walking pillar. 
+09:17:43 You lose 601 hitpoints due to an attack by a walking pillar. 
+09:17:44 You healed yourself for 1339 hitpoints.
+09:17:44 You lose 478 hitpoints due to an attack by a darklight matter. 
+09:17:45 You lose 478 hitpoints due to an attack by a darklight striker. 
+09:17:45 You lose 593 hitpoints due to an attack by a darklight striker. 
+09:17:45 You healed yourself for 1302 hitpoints.
+09:17:45 You lose 365 hitpoints due to an attack by a darklight striker. 
+09:17:46 You healed yourself for 1191 hitpoints.
+09:17:46 You lose 559 hitpoints due to an attack by a darklight striker. 
+09:17:46 You lose 958 hitpoints due to an attack by a darklight source. 
+09:17:47 You healed yourself for 1054 hitpoints.
+09:17:47 You lose 680 hitpoints due to an attack by a walking pillar. 
+09:17:47 You lose 1035 hitpoints due to an attack by a darklight striker. 
+09:17:47 You lose 937 hitpoints. 
+09:17:47 You lose 468 hitpoints due to an attack by a darklight striker. 
+09:17:48 You healed yourself for 1141 hitpoints.
+09:17:48 You lose 375 hitpoints. 
+09:17:49 You healed yourself for 1216 hitpoints.
+09:17:49 You lose 375 hitpoints. 
+09:17:50 You lose 375 hitpoints. 
+09:17:51 You lose 557 hitpoints due to an attack by a darklight striker. 
+09:17:51 You lose 375 hitpoints. 
+09:17:52 You lose 375 hitpoints. 
+09:17:53 A darklight striker loses 420 hitpoints due to your attack. 
+09:17:53 You were healed for 86 hitpoints.
+09:17:53 You gained 28 mana.
+09:17:53 A walking pillar loses 572 hitpoints due to your attack. 
+09:17:53 You were healed for 117 hitpoints.
+09:17:53 You gained 37 mana.
+09:17:53 A darklight matter loses 562 hitpoints due to your attack. 
+09:17:53 You were healed for 115 hitpoints.
+09:17:53 You gained 36 mana.
+09:17:53 Using one of 443 great fireball runes...
+09:17:53 A darklight striker loses 541 hitpoints due to your attack. 
+09:17:53 You were healed for 110 hitpoints.
+09:17:53 You gained 35 mana.
+09:17:53 A walking pillar loses 499 hitpoints due to your attack. 
+09:17:53 You were healed for 102 hitpoints.
+09:17:53 You gained 32 mana.
+09:17:53 A darklight matter loses 540 hitpoints due to your attack. 
+09:17:53 You were healed for 110 hitpoints.
+09:17:53 You gained 35 mana.
+09:17:53 You lose 375 hitpoints. 
+09:17:54 You lose 375 hitpoints. 
+09:17:55 A darklight striker loses 1155 hitpoints due to your critical attack. 
+09:17:55 You were healed for 323 hitpoints.
+09:17:55 You gained 102 mana.
+09:17:55 A walking pillar loses 1404 hitpoints due to your critical attack. 
+09:17:55 You were healed for 393 hitpoints.
+09:17:55 You gained 124 mana.
+09:17:55 Using one of 442 great fireball runes...
+09:17:55 A darklight matter loses 523 hitpoints due to your attack. 
+09:17:55 You were healed for 75 hitpoints.
+09:17:55 You gained 24 mana.
+09:17:55 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:17:55 A darklight striker loses 524 hitpoints due to your attack. 
+09:17:55 You were healed for 75 hitpoints.
+09:17:55 You gained 24 mana.
+09:17:55 A walking pillar loses 484 hitpoints due to your attack. 
+09:17:55 You were healed for 69 hitpoints.
+09:17:55 You gained 22 mana.
+09:17:55 A darklight striker loses 524 hitpoints due to your attack. 
+09:17:55 You were healed for 75 hitpoints.
+09:17:55 You gained 24 mana.
+09:17:55 A darklight striker loses 524 hitpoints due to your attack. 
+09:17:55 You were healed for 75 hitpoints.
+09:17:55 You gained 24 mana.
+09:17:55 You lose 375 hitpoints. 
+09:17:56 You lose 547 hitpoints due to an attack by a darklight striker. 
+09:17:56 You lose 375 hitpoints. 
+09:17:57 You lose 708 hitpoints due to an attack by a walking pillar. 
+09:17:57 You lose 519 hitpoints due to an attack by a darklight matter. 
+09:17:57 You lose 502 hitpoints due to an attack by a darklight striker. 
+09:17:57 You lose 375 hitpoints. 
+09:17:58 A darklight striker loses 560 hitpoints due to your attack. 
+09:17:58 You were healed for 93 hitpoints.
+09:17:58 You gained 30 mana.
+09:17:58 A darklight striker loses 560 hitpoints due to your attack. 
+09:17:58 You were healed for 93 hitpoints.
+09:17:58 You gained 30 mana.
+09:17:58 A walking pillar loses 624 hitpoints due to your attack. 
+09:17:58 You were healed for 104 hitpoints.
+09:17:58 You gained 33 mana.
+09:17:58 A walking pillar loses 624 hitpoints due to your attack. 
+09:17:58 You were healed for 104 hitpoints.
+09:17:58 You gained 33 mana.
+09:17:59 You lose 720 hitpoints due to an attack by a darklight matter. 
+09:18:00 A walking pillar loses 878 hitpoints due to your critical attack. 
+09:18:00 You were healed for 112 hitpoints.
+09:18:00 You gained 36 mana.
+09:18:00 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:18:00 A darklight striker loses 728 hitpoints due to your critical attack. 
+09:18:00 You were healed for 93 hitpoints.
+09:18:00 You gained 30 mana.
+09:18:00 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:18:00 A darklight striker loses 730 hitpoints due to your critical attack. 
+09:18:00 You were healed for 93 hitpoints.
+09:18:00 You gained 30 mana.
+09:18:00 A darklight striker loses 749 hitpoints due to your critical attack. 
+09:18:00 You were healed for 96 hitpoints.
+09:18:00 You gained 30 mana.
+09:18:00 A darklight striker loses 733 hitpoints due to your critical attack. 
+09:18:00 You were healed for 93 hitpoints.
+09:18:00 You gained 30 mana.
+09:18:00 A walking pillar loses 883 hitpoints due to your critical attack. 
+09:18:00 You were healed for 113 hitpoints.
+09:18:00 You gained 36 mana.
+09:18:00 Momentum was triggered.
+09:18:00 You lose 760 hitpoints due to an attack by a walking pillar. 
+09:18:00 You lose 561 hitpoints due to an attack by a darklight striker. 
+09:18:01 You were healed by Burkzin for 2154 hitpoints.
+09:18:02 A walking pillar loses 1040 hitpoints due to your attack. 
+09:18:02 You were healed for 112 hitpoints.
+09:18:02 You gained 36 mana.
+09:18:02 A darklight striker loses 804 hitpoints due to your attack. 
+09:18:02 You were healed for 87 hitpoints.
+09:18:02 You gained 28 mana.
+09:18:02 A darklight striker loses 856 hitpoints due to your attack. 
+09:18:02 You were healed for 93 hitpoints.
+09:18:02 You gained 30 mana.
+09:18:02 A darklight striker loses 842 hitpoints due to your attack. 
+09:18:02 You were healed for 91 hitpoints.
+09:18:02 You gained 29 mana.
+09:18:02 A darklight striker loses 815 hitpoints due to your attack. 
+09:18:02 You were healed for 88 hitpoints.
+09:18:02 You gained 28 mana.
+09:18:02 A walking pillar loses 1020 hitpoints due to your attack. 
+09:18:02 You were healed for 110 hitpoints.
+09:18:02 You gained 35 mana.
+09:18:02 A darklight matter loses 1018 hitpoints due to your attack. 
+09:18:02 You were healed for 110 hitpoints.
+09:18:02 You gained 35 mana.
+09:18:02 Momentum was triggered.
+09:18:02 A walking pillar loses 651 hitpoints due to your attack. 
+09:18:02 You were healed for 71 hitpoints.
+09:18:02 You gained 23 mana.
+09:18:02 A darklight striker loses 584 hitpoints due to your attack. 
+09:18:02 You were healed for 63 hitpoints.
+09:18:02 You gained 20 mana.
+09:18:02 A darklight striker loses 584 hitpoints due to your attack. 
+09:18:02 You were healed for 63 hitpoints.
+09:18:02 You gained 20 mana.
+09:18:02 A darklight striker loses 584 hitpoints due to your attack. 
+09:18:02 You were healed for 63 hitpoints.
+09:18:02 You gained 20 mana.
+09:18:02 A darklight matter loses 648 hitpoints due to your attack. 
+09:18:02 You were healed for 70 hitpoints.
+09:18:02 You gained 22 mana.
+09:18:02 A darklight striker loses 584 hitpoints due to your attack. 
+09:18:02 You were healed for 63 hitpoints.
+09:18:02 You gained 20 mana.
+09:18:02 A walking pillar loses 651 hitpoints due to your attack. 
+09:18:02 You were healed for 71 hitpoints.
+09:18:02 You gained 23 mana.
+09:18:02 You lose 817 hitpoints due to an attack by a walking pillar. 
+09:18:02 You lose 685 hitpoints due to an attack by a darklight striker. 
+09:18:03 A walking pillar loses 1005 hitpoints due to your attack. 
+09:18:03 You were healed for 109 hitpoints.
+09:18:03 You gained 35 mana.
+09:18:03 A darklight striker loses 901 hitpoints due to your attack. 
+09:18:03 You were healed for 97 hitpoints.
+09:18:03 You gained 31 mana.
+09:18:03 A darklight striker loses 901 hitpoints due to your attack. 
+09:18:03 You were healed for 97 hitpoints.
+09:18:03 You gained 31 mana.
+09:18:03 A darklight striker loses 901 hitpoints due to your attack. 
+09:18:03 You were healed for 97 hitpoints.
+09:18:03 You gained 31 mana.
+09:18:03 A darklight striker loses 901 hitpoints due to your attack. 
+09:18:03 You were healed for 97 hitpoints.
+09:18:03 You gained 31 mana.
+09:18:03 A walking pillar loses 1005 hitpoints due to your attack. 
+09:18:03 You were healed for 109 hitpoints.
+09:18:03 You gained 35 mana.
+09:18:03 A darklight matter loses 1000 hitpoints due to your attack. 
+09:18:03 You were healed for 108 hitpoints.
+09:18:03 You gained 35 mana.
+09:18:03 You lose 980 hitpoints due to an attack by a walking pillar. 
+09:18:03 You were healed by Luszckyn for 1682 hitpoints.
+09:18:04 You lose 635 hitpoints due to an attack by a darklight striker. 
+09:18:04 Using one of 441 great fireball runes...
+09:18:04 A walking pillar loses 484 hitpoints due to your attack. 
+09:18:04 You were healed for 53 hitpoints.
+09:18:04 You gained 17 mana.
+09:18:04 A darklight striker loses 525 hitpoints due to your attack. 
+09:18:04 You were healed for 57 hitpoints.
+09:18:04 You gained 18 mana.
+09:18:04 A walking pillar loses 484 hitpoints due to your attack. 
+09:18:04 You were healed for 53 hitpoints.
+09:18:04 You gained 17 mana.
+09:18:04 A darklight striker loses 525 hitpoints due to your attack. 
+09:18:04 You were healed for 57 hitpoints.
+09:18:04 You gained 18 mana.
+09:18:04 A darklight matter loses 524 hitpoints due to your attack. 
+09:18:04 You were healed for 57 hitpoints.
+09:18:04 You gained 18 mana.
+09:18:04 A darklight striker loses 525 hitpoints due to your attack. 
+09:18:04 You were healed for 57 hitpoints.
+09:18:04 You gained 18 mana.
+09:18:04 A darklight striker loses 525 hitpoints due to your attack. 
+09:18:04 You were healed for 57 hitpoints.
+09:18:04 You gained 18 mana.
+09:18:04 You lose 794 hitpoints due to an attack by a walking pillar. 
+09:18:04 You lose 680 hitpoints due to an attack by a walking pillar. 
+09:18:04 You lose 525 hitpoints due to an attack by a darklight striker. 
+09:18:04 You healed yourself for 1185 hitpoints.
+09:18:04 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:18:04 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:18:04 You lose 673 hitpoints due to an attack by a darklight striker. 
+09:18:05 You lose 742 hitpoints due to an attack by a darklight matter. 
+09:18:06 A walking pillar loses 989 hitpoints due to your critical attack. (perfect shot)
+09:18:06 You were healed for 128 hitpoints.
+09:18:06 You gained 41 mana.
+09:18:06 A darklight matter loses 1008 hitpoints due to your critical attack. 
+09:18:06 You were healed for 133 hitpoints.
+09:18:06 You gained 42 mana.
+09:18:06 A darklight striker loses 747 hitpoints due to your critical attack. 
+09:18:06 You were healed for 99 hitpoints.
+09:18:06 You gained 32 mana.
+09:18:06 A walking pillar loses 976 hitpoints due to your critical attack. 
+09:18:06 You were healed for 129 hitpoints.
+09:18:06 You gained 41 mana.
+09:18:06 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:18:06 A darklight striker loses 805 hitpoints due to your critical attack. 
+09:18:06 You were healed for 107 hitpoints.
+09:18:06 You gained 34 mana.
+09:18:06 You were healed by Burkzin for 2994 hitpoints.
+09:18:06 A walking pillar loses 716 hitpoints due to your attack. 
+09:18:06 You were healed for 95 hitpoints.
+09:18:06 You gained 30 mana.
+09:18:06 A darklight striker loses 641 hitpoints due to your attack. 
+09:18:06 You were healed for 85 hitpoints.
+09:18:06 You gained 27 mana.
+09:18:06 A darklight striker loses 641 hitpoints due to your attack. 
+09:18:06 You were healed for 85 hitpoints.
+09:18:06 You gained 27 mana.
+09:18:06 A walking pillar loses 716 hitpoints due to your attack. 
+09:18:06 You were healed for 95 hitpoints.
+09:18:06 You gained 30 mana.
+09:18:06 A darklight matter loses 711 hitpoints due to your attack. 
+09:18:06 You were healed for 94 hitpoints.
+09:18:06 You gained 30 mana.
+09:18:06 You healed yourself for 1456 hitpoints.
+09:18:06 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:18:06 You gained 24957 experience points (Bakragore's tribute).
+09:18:07 You lose 680 hitpoints due to an attack by a walking pillar. 
+09:18:07 You lose 734 hitpoints due to an attack by a darklight matter. 
+09:18:07 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:18:07 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:18:07 You lose 770 hitpoints due to an attack by a bloodjaw. 
+09:18:07 You lose 956 hitpoints due to an attack by a bloodjaw. 
+09:18:08 A walking pillar loses 1115 hitpoints due to your critical attack. 
+09:18:08 You were healed for 312 hitpoints.
+09:18:08 You gained 99 mana.
+09:18:08 A bloodjaw loses 985 hitpoints due to your critical attack. 
+09:18:08 You were healed for 275 hitpoints.
+09:18:08 You gained 87 mana.
+09:18:08 Using one of 440 great fireball runes...
+09:18:08 A walking pillar loses 507 hitpoints due to your attack. 
+09:18:08 You were healed for 142 hitpoints.
+09:18:08 You gained 46 mana.
+09:18:08 A bloodjaw loses 438 hitpoints due to your attack. 
+09:18:08 You were healed for 123 hitpoints.
+09:18:08 You gained 40 mana.
+09:18:08 You healed yourself for 1352 hitpoints.
+09:18:09 You lose 1229 hitpoints due to an attack by a walking pillar. 
+09:18:09 You lose 536 hitpoints due to an attack by a bloodjaw. 
+09:18:10 A bloodjaw loses 599 hitpoints due to your attack. 
+09:18:10 You were healed for 168 hitpoints.
+09:18:10 You gained 53 mana.
+09:18:10 A walking pillar loses 631 hitpoints due to your attack. 
+09:18:10 You were healed for 183 hitpoints.
+09:18:10 You gained 58 mana.
+09:18:10 You gained 24957 experience points (Bakragore's tribute).
+09:18:10 A bloodjaw loses 616 hitpoints due to your attack. 
+09:18:10 You were healed for 313 hitpoints.
+09:18:10 You gained 99 mana.
+09:18:11 You lose 753 hitpoints due to an attack by a bloodjaw. 
+09:18:12 You lose 937 hitpoints. 
+09:18:12 You were healed by Luszckyn for 1760 hitpoints.
+09:18:12 You lose 375 hitpoints. 
+09:18:12 You lose 722 hitpoints due to an attack by a walking pillar. 
+09:18:13 You lose 937 hitpoints. 
+09:18:13 A bloodjaw loses 450 hitpoints due to your attack. 
+09:18:13 You were healed for 229 hitpoints.
+09:18:13 You gained 72 mana.
+09:18:13 A bloodjaw loses 1567 hitpoints due to your attack. 
+09:18:13 You were healed for 796 hitpoints.
+09:18:13 You gained 251 mana.
+09:18:13 You were healed by Luszckyn for 1590 hitpoints.
+09:18:13 You lose 375 hitpoints. 
+09:18:14 You lose 375 hitpoints. 
+09:18:15 A walking pillar loses 658 hitpoints due to your attack. 
+09:18:15 You were healed for 184 hitpoints.
+09:18:15 You gained 59 mana.
+09:18:15 A bloodjaw loses 578 hitpoints due to your attack. 
+09:18:15 You were healed for 162 hitpoints.
+09:18:15 You gained 52 mana.
+09:18:15 A walking pillar loses 618 hitpoints due to your attack. 
+09:18:15 You were healed for 173 hitpoints.
+09:18:15 You gained 55 mana.
+09:18:15 A bloodjaw loses 613 hitpoints due to your attack. 
+09:18:15 You were healed for 172 hitpoints.
+09:18:15 You gained 55 mana.
+09:18:15 You lose 375 hitpoints. 
+09:18:16 You lose 375 hitpoints. 
+09:18:17 You were healed by Luszckyn for 2362 hitpoints.
+09:18:17 A walking pillar loses 684 hitpoints due to your attack. 
+09:18:17 You were healed for 192 hitpoints.
+09:18:17 You gained 61 mana.
+09:18:17 A bloodjaw loses 609 hitpoints due to your attack. 
+09:18:17 You were healed for 171 hitpoints.
+09:18:17 You gained 54 mana.
+09:18:17 You lose 375 hitpoints. 
+09:18:18 You lose 375 hitpoints. 
+09:18:19 You were healed by Luszckyn for 2083 hitpoints.
+09:18:19 A walking pillar loses 855 hitpoints due to your attack. 
+09:18:19 You were healed for 239 hitpoints.
+09:18:19 You gained 76 mana.
+09:18:19 A bloodjaw loses 718 hitpoints due to your attack. 
+09:18:19 You were healed for 201 hitpoints.
+09:18:19 You gained 64 mana.
+09:18:19 You lose 375 hitpoints. 
+09:18:19 A bloodjaw loses 672 hitpoints due to your attack. 
+09:18:19 You were healed for 189 hitpoints.
+09:18:19 You gained 60 mana.
+09:18:19 A walking pillar loses 677 hitpoints due to your attack. 
+09:18:19 You were healed for 190 hitpoints.
+09:18:19 You gained 60 mana.
+09:18:20 You lose 375 hitpoints. 
+09:18:21 A walking pillar loses 984 hitpoints due to your attack. 
+09:18:21 You were healed for 275 hitpoints.
+09:18:21 You gained 87 mana.
+09:18:21 A bloodjaw loses 976 hitpoints due to your attack. 
+09:18:21 You were healed for 139 hitpoints.
+09:18:21 You gained 87 mana.
+09:18:21 You lose 375 hitpoints. 
+09:18:21 A walking pillar loses 816 hitpoints due to your attack. 
+09:18:21 You were healed for 229 hitpoints.
+09:18:21 You gained 73 mana.
+09:18:21 A bloodjaw loses 704 hitpoints due to your attack. 
+09:18:21 You were healed for 146 hitpoints.
+09:18:21 You gained 63 mana.
+09:18:22 A walking pillar loses 2880 hitpoints due to your critical attack. 
+09:18:22 You gained 461 mana.
+09:18:22 You lose 375 hitpoints. 
+09:18:23 You lose 375 hitpoints. 
+09:18:23 You gained 22801 experience points (Bakragore's tribute).
+09:18:24 A walking pillar loses 746 hitpoints due to your attack. 
+09:18:24 You were healed for 379 hitpoints.
+09:18:24 You gained 120 mana.
+09:18:24 A walking pillar loses 1181 hitpoints due to your critical attack. 
+09:18:24 You were healed for 371 hitpoints.
+09:18:24 You gained 189 mana.
+09:18:24 You lose 1162 hitpoints due to an attack by a walking pillar. 
+09:18:24 You lose 375 hitpoints. 
+09:18:25 You lose 375 hitpoints. 
+09:18:26 A walking pillar loses 198 hitpoints due to your attack. 
+09:18:26 You were healed for 310 hitpoints.
+09:18:26 You gained 98 mana.
+09:18:26 You gained 24957 experience points (Bakragore's tribute).
+09:18:26 You lose 375 hitpoints. 
+09:18:27 You lose 375 hitpoints. 
+09:18:28 You already cracked this obelisk.
+09:18:28 Momentum was triggered.
+09:18:28 You lose 375 hitpoints. 
+09:18:28 You healed yourself for 1077 hitpoints.
+09:18:29 You lose 375 hitpoints. 
+09:18:30 Switched to hotkey preset 'USP SP'.
+09:18:30 Switched to hotkey preset 'full ultimate'.
+09:18:30 You lose 375 hitpoints. 
+09:18:30 You healed yourself for 1329 hitpoints.
+09:18:31 You lose 375 hitpoints. 
+09:18:32 You lose 375 hitpoints. 
+09:18:33 You lose 375 hitpoints. 
+09:18:34 You lose 375 hitpoints. 
+09:18:38 You were healed by Burkzin for 1667 hitpoints.
+09:18:43 You were healed by Burkzin for 874 hitpoints.
+09:18:47 Using one of 1966 ultimate spirit potions...
+09:18:47 You gained 230 mana.
+09:18:48 Using one of 1965 ultimate spirit potions...
+09:18:48 Using one of 1965 ultimate spirit potions...
+09:18:49 You gained 180 mana.
+09:18:49 Using one of 1964 ultimate spirit potions...
+09:18:49 You lose 520 hitpoints due to an attack by a darklight striker. 
+09:18:49 Using one of 1964 ultimate spirit potions...
+09:18:50 You gained 187 mana.
+09:18:50 You healed yourself for 497 hitpoints.
+09:18:50 Using one of 1963 ultimate spirit potions...
+09:18:50 Using one of 1963 ultimate spirit potions...
+09:18:51 You gained 234 mana.
+09:18:51 You healed yourself for 23 hitpoints.
+09:18:51 You lose 590 hitpoints due to an attack by a darklight striker. 
+09:18:51 You lose 525 hitpoints due to an attack by a darklight striker. 
+09:18:51 You lose 937 hitpoints. 
+09:18:51 Using one of 1962 ultimate spirit potions...
+09:18:51 You lose 695 hitpoints due to an attack by a walking pillar. 
+09:18:51 You lose 375 hitpoints. 
+09:18:52 Using one of 1962 ultimate spirit potions...
+09:18:52 You gained 158 mana.
+09:18:52 You healed yourself for 573 hitpoints.
+09:18:52 Using one of 1961 ultimate spirit potions...
+09:18:52 You lose 375 hitpoints. 
+09:18:53 Using one of 1961 ultimate spirit potions...
+09:18:53 You gained 154 mana.
+09:18:53 You healed yourself for 540 hitpoints.
+09:18:53 You lose 340 hitpoints due to an attack by a darklight striker. 
+09:18:53 Using one of 1960 ultimate spirit potions...
+09:18:53 You lose 375 hitpoints. 
+09:18:53 Using one of 1960 ultimate spirit potions...
+09:18:54 You gained 180 mana.
+09:18:54 You healed yourself for 471 hitpoints.
+09:18:54 You healed yourself for 1086 hitpoints.
+09:18:54 You lose 256 hitpoints due to an attack by a walking pillar. 
+09:18:54 You lose 418 hitpoints due to an attack by a darklight source. 
+09:18:54 Using one of 1959 ultimate spirit potions...
+09:18:54 You lose 497 hitpoints due to an attack by a darklight source. 
+09:18:54 You lose 375 hitpoints. 
+09:18:55 You gained 153 mana.
+09:18:55 You healed yourself for 476 hitpoints.
+09:18:55 You healed yourself for 1322 hitpoints.
+09:18:55 Using one of 1958 ultimate spirit potions...
+09:18:55 You lose 375 hitpoints. 
+09:18:56 You gained 223 mana.
+09:18:56 You healed yourself for 574 hitpoints.
+09:18:56 You healed yourself for 1085 hitpoints.
+09:18:56 Using one of 1957 ultimate spirit potions...
+09:18:56 You lose 610 hitpoints due to an attack by a walking pillar. 
+09:18:56 You lose 375 hitpoints. 
+09:18:57 You gained 173 mana.
+09:18:57 You healed yourself for 567 hitpoints.
+09:18:57 You healed yourself for 418 hitpoints.
+09:18:57 You lose 559 hitpoints due to an attack by a darklight striker. 
+09:18:57 Using one of 1956 ultimate spirit potions...
+09:18:57 You lose 507 hitpoints due to an attack by a darklight source. 
+09:18:57 You lose 375 hitpoints. 
+09:18:57 You lose 555 hitpoints due to an attack by a darklight matter. 
+09:18:57 You lose 937 hitpoints. 
+09:18:58 You lose 937 hitpoints. 
+09:18:58 You healed yourself for 1391 hitpoints.
+09:18:58 Using one of 1956 ultimate spirit potions...
+09:18:58 You lose 489 hitpoints due to an attack by a darklight striker. 
+09:18:58 You lose 375 hitpoints. 
+09:18:58 You gained 205 mana.
+09:18:58 You healed yourself for 493 hitpoints.
+09:18:59 You healed yourself for 1235 hitpoints.
+09:18:59 Using one of 1955 ultimate spirit potions...
+09:18:59 You lose 375 hitpoints. 
+09:18:59 You gained 175 mana.
+09:18:59 You healed yourself for 496 hitpoints.
+09:18:59 You lose 298 hitpoints due to an attack by a darklight striker. 
+09:19:00 You lose 570 hitpoints due to an attack by a darklight striker. 
+09:19:00 You lose 937 hitpoints. 
+09:19:00 You lose 1138 hitpoints due to an attack by a darklight source. 
+09:19:00 You healed yourself for 1382 hitpoints.
+09:19:00 Using one of 1954 ultimate spirit potions...
+09:19:00 You lose 375 hitpoints. 
+09:19:00 You gained 166 mana.
+09:19:00 You healed yourself for 442 hitpoints.
+09:19:01 You lose 827 hitpoints due to an attack by a darklight matter. 
+09:19:01 You lose 581 hitpoints due to an attack by a darklight source. 
+09:19:01 You lose 509 hitpoints due to an attack by a darklight striker. 
+09:19:01 You healed yourself for 1102 hitpoints.
+09:19:01 You lose 375 hitpoints. 
+09:19:01 Using one of 1953 ultimate spirit potions...
+09:19:01 You lose 331 hitpoints due to an attack by a darklight source. 
+09:19:01 You gained 247 mana.
+09:19:01 You healed yourself for 435 hitpoints.
+09:19:01 You lose 511 hitpoints due to an attack by a darklight striker. 
+09:19:01 You lose 490 hitpoints due to an attack by a darklight striker. 
+09:19:02 You lose 621 hitpoints due to an attack by a darklight matter. 
+09:19:02 You healed yourself for 1126 hitpoints.
+09:19:02 You lose 375 hitpoints. 
+09:19:02 Using one of 1952 ultimate spirit potions...
+09:19:03 You gained 166 mana.
+09:19:03 You healed yourself for 572 hitpoints.
+09:19:03 You lose 490 hitpoints due to an attack by a darklight striker. 
+09:19:03 You lose 937 hitpoints. 
+09:19:03 You lose 396 hitpoints due to an attack by a darklight source. 
+09:19:03 You lose 375 hitpoints. 
+09:19:03 You healed yourself for 1386 hitpoints.
+09:19:03 You lose 1059 hitpoints due to an attack by a darklight source. 
+09:19:03 You lose 937 hitpoints. 
+09:19:04 Using one of 1951 ultimate spirit potions...
+09:19:04 You gained 154 mana.
+09:19:04 You healed yourself for 484 hitpoints.
+09:19:04 You lose 937 hitpoints. 
+09:19:04 You lose 599 hitpoints due to an attack by a darklight matter. 
+09:19:04 You lose 375 hitpoints. 
+09:19:04 You healed yourself for 1074 hitpoints.
+09:19:05 You lose 481 hitpoints due to an attack by a darklight striker. 
+09:19:05 Using one of 1950 ultimate spirit potions...
+09:19:05 You gained 152 mana.
+09:19:05 You healed yourself for 500 hitpoints.
+09:19:05 You lose 579 hitpoints due to an attack by a darklight striker. 
+09:19:05 You lose 630 hitpoints due to an attack by a darklight striker. 
+09:19:05 You lose 375 hitpoints. 
+09:19:06 You healed yourself for 1337 hitpoints.
+09:19:06 Using one of 1949 ultimate spirit potions...
+09:19:06 You gained 248 mana.
+09:19:06 You healed yourself for 450 hitpoints.
+09:19:06 You lose 375 hitpoints. 
+09:19:07 You healed yourself for 1114 hitpoints.
+09:19:07 You lose 642 hitpoints due to an attack by a darklight matter. 
+09:19:07 You lose 1072 hitpoints due to an attack by a walking pillar. 
+09:19:07 Using one of 1948 ultimate spirit potions...
+09:19:07 You gained 170 mana.
+09:19:07 You healed yourself for 507 hitpoints.
+09:19:07 You lose 530 hitpoints due to an attack by a darklight source. 
+09:19:07 You lose 375 hitpoints. 
+09:19:07 You lose 527 hitpoints due to an attack by a darklight striker. 
+09:19:07 You lose 937 hitpoints. 
+09:19:08 You lose 540 hitpoints due to an attack by a darklight striker. 
+09:19:08 You healed yourself for 1124 hitpoints.
+09:19:08 You lose 647 hitpoints due to an attack by a darklight matter. 
+09:19:08 You lose 375 mana. 
+09:19:08 You lose 713 mana due to an attack by a darklight matter. 
+09:19:09 You healed yourself for 1082 hitpoints.
+09:19:09 You lose 1220 mana due to an attack by a walking pillar. 
+09:19:09 You lose 344 mana due to an attack by a walking pillar. 
+09:19:09 Using one of 1947 ultimate spirit potions...
+09:19:09 You lose 601 mana due to an attack by a darklight striker. 
+09:19:09 You gained 216 mana.
+09:19:09 You healed yourself for 437 hitpoints.
+09:19:09 You lose 375 mana. 
+09:19:09 You lose 802 mana due to an attack by a walking pillar. 
+09:19:10 You lose 1188 mana due to an attack by a walking pillar. 
+09:19:10 You lose 474 mana due to an attack by a walking pillar. 
+09:19:10 You lose 704 mana due to an attack by a darklight striker. 
+09:19:10 You healed yourself for 1393 hitpoints.
+09:19:10 You lose 375 mana. 
+09:19:10 Using one of 1946 ultimate spirit potions...
+09:19:10 You gained 220 mana.
+09:19:10 You healed yourself for 494 hitpoints.
+09:19:11 You lose 375 hitpoints. 
+09:19:11 You healed yourself for 1331 hitpoints.
+09:19:12 Using one of 1945 ultimate spirit potions...
+09:19:12 You gained 219 mana.
+09:19:12 You healed yourself for 446 hitpoints.
+09:19:12 You lose 375 hitpoints. 
+09:19:13 You healed yourself for 1050 hitpoints.
+09:19:13 Using one of 1944 ultimate spirit potions...
+09:19:13 You gained 176 mana.
+09:19:13 You healed yourself for 484 hitpoints.
+09:19:13 You lose 566 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:19:13 You lose 375 hitpoints. 
+09:19:13 A darklight striker loses 473 hitpoints due to your attack. 
+09:19:13 You were healed for 79 hitpoints.
+09:19:13 You gained 25 mana.
+09:19:13 A darklight matter loses 644 hitpoints due to your attack. 
+09:19:13 You were healed for 107 hitpoints.
+09:19:13 You gained 34 mana.
+09:19:13 A darklight striker loses 461 hitpoints due to your attack. 
+09:19:13 You were healed for 77 hitpoints.
+09:19:13 You gained 25 mana.
+09:19:13 A darklight striker loses 493 hitpoints due to your attack. 
+09:19:13 You were healed for 82 hitpoints.
+09:19:13 You gained 26 mana.
+09:19:14 A darklight striker loses 1030 hitpoints due to your critical attack. 
+09:19:14 You were healed for 170 hitpoints.
+09:19:14 You gained 54 mana.
+09:19:14 A darklight striker loses 1030 hitpoints due to your critical attack. 
+09:19:14 You were healed for 170 hitpoints.
+09:19:14 You gained 54 mana.
+09:19:14 A darklight matter loses 1141 hitpoints due to your critical attack. 
+09:19:14 You were healed for 189 hitpoints.
+09:19:14 You gained 60 mana.
+09:19:14 A darklight striker loses 1030 hitpoints due to your critical attack. 
+09:19:14 You were healed for 170 hitpoints.
+09:19:14 You gained 54 mana.
+09:19:14 You healed yourself for 1299 hitpoints.
+09:19:14 You lose 375 hitpoints. 
+09:19:14 You were healed by Burkzin for 1815 hitpoints.
+09:19:15 You healed yourself for 1122 hitpoints.
+09:19:15 You lose 375 hitpoints. 
+09:19:16 A darklight matter loses 1179 hitpoints due to your critical attack. (perfect shot)
+09:19:16 You were healed for 192 hitpoints.
+09:19:16 You gained 61 mana.
+09:19:16 A darklight striker loses 953 hitpoints due to your critical attack. 
+09:19:16 You were healed for 158 hitpoints.
+09:19:16 You gained 50 mana.
+09:19:16 A darklight striker loses 959 hitpoints due to your critical attack. 
+09:19:16 You were healed for 159 hitpoints.
+09:19:16 You gained 51 mana.
+09:19:16 A darklight striker loses 967 hitpoints due to your critical attack. 
+09:19:16 You were healed for 123 hitpoints.
+09:19:16 You gained 51 mana.
+09:19:16 You lose 375 hitpoints. 
+09:19:17 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:19:17 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:19:17 You lose 509 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:19:17 You lose 375 hitpoints. 
+09:19:18 A darklight matter loses 1106 hitpoints due to your critical attack. (perfect shot)
+09:19:18 You were healed for 304 hitpoints.
+09:19:18 You gained 96 mana.
+09:19:18 A darklight striker loses 874 hitpoints due to your critical attack. 
+09:19:18 You were healed for 245 hitpoints.
+09:19:18 You gained 77 mana.
+09:19:18 A darklight matter loses 616 hitpoints due to your attack. 
+09:19:18 You were healed for 173 hitpoints.
+09:19:18 You gained 55 mana.
+09:19:18 A darklight striker loses 555 hitpoints due to your attack. 
+09:19:18 You were healed for 156 hitpoints.
+09:19:18 You gained 49 mana.
+09:19:18 Using one of 1943 ultimate spirit potions...
+09:19:18 You gained 237 mana.
+09:19:18 You healed yourself for 381 hitpoints.
+09:19:18 You lose 602 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:19:19 A darklight matter loses 866 hitpoints due to your attack. 
+09:19:19 You were healed for 242 hitpoints.
+09:19:19 You gained 77 mana.
+09:19:19 A darklight striker loses 780 hitpoints due to your attack. 
+09:19:19 You were healed for 218 hitpoints.
+09:19:19 You gained 69 mana.
+09:19:19 You lose 514 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:19:19 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:19:20 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:19:20 A bloodjaw loses 414 hitpoints due to your attack. (perfect shot)
+09:19:20 You were healed for 200 hitpoints.
+09:19:20 You gained 64 mana.
+09:19:21 A bloodjaw loses 1203 hitpoints due to your attack. 
+09:19:21 You were healed for 450 hitpoints.
+09:19:21 You gained 193 mana.
+09:19:22 You lose 821 hitpoints due to an attack by a walking pillar. 
+09:19:23 A bloodjaw loses 574 hitpoints due to your attack. (perfect shot)
+09:19:23 You were healed for 156 hitpoints.
+09:19:23 You gained 49 mana.
+09:19:23 A walking pillar loses 648 hitpoints due to your attack. 
+09:19:23 You were healed for 181 hitpoints.
+09:19:23 You gained 58 mana.
+09:19:23 A bloodjaw loses 642 hitpoints due to your attack. 
+09:19:23 You were healed for 326 hitpoints.
+09:19:23 You gained 103 mana.
+09:19:25 A bloodjaw loses 739 hitpoints due to your attack. (perfect shot)
+09:19:25 You were healed for 152 hitpoints.
+09:19:25 You gained 64 mana.
+09:19:25 A walking pillar loses 837 hitpoints due to your attack. 
+09:19:25 You gained 74 mana.
+09:19:25 Using one of 439 great fireball runes...
+09:19:25 A bloodjaw loses 373 hitpoints due to your attack. 
+09:19:25 You gained 33 mana.
+09:19:25 A walking pillar loses 432 hitpoints due to your attack. 
+09:19:25 You gained 39 mana.
+09:19:26 You lose 1005 hitpoints due to an attack by a bloodjaw. 
+09:19:27 A bloodjaw loses 1158 hitpoints due to your critical attack. (perfect shot)
+09:19:27 You were healed for 318 hitpoints.
+09:19:27 You gained 101 mana.
+09:19:27 A walking pillar loses 1295 hitpoints due to your critical attack. 
+09:19:27 You were healed for 362 hitpoints.
+09:19:27 You gained 115 mana.
+09:19:27 A bloodjaw loses 576 hitpoints due to your attack. 
+09:19:27 You were healed for 293 hitpoints.
+09:19:27 You gained 93 mana.
+09:19:28 You lose 853 hitpoints due to an attack by a bloodjaw. 
+09:19:29 You lose 653 hitpoints due to an attack by a walking pillar. 
+09:19:29 A walking pillar loses 857 hitpoints due to your attack. 
+09:19:29 You were healed for 240 hitpoints.
+09:19:29 You gained 76 mana.
+09:19:29 A bloodjaw loses 772 hitpoints due to your attack. 
+09:19:29 You were healed for 216 hitpoints.
+09:19:29 You gained 69 mana.
+09:19:29 Using one of 438 great fireball runes...
+09:19:29 A bloodjaw loses 406 hitpoints due to your attack. 
+09:19:29 You were healed for 114 hitpoints.
+09:19:29 You gained 36 mana.
+09:19:29 A walking pillar loses 470 hitpoints due to your attack. 
+09:19:29 You were healed for 132 hitpoints.
+09:19:29 You gained 42 mana.
+09:19:31 A walking pillar loses 589 hitpoints due to your attack. 
+09:19:31 You were healed for 299 hitpoints.
+09:19:31 You gained 95 mana.
+09:19:32 You lose 903 hitpoints due to an attack by a bloodjaw. 
+09:19:32 You lose 1337 hitpoints due to an attack by a bloodjaw. 
+09:19:32 A walking pillar loses 626 hitpoints due to your attack. 
+09:19:32 You were healed for 128 hitpoints.
+09:19:32 You gained 41 mana.
+09:19:32 A walking pillar loses 626 hitpoints due to your attack. 
+09:19:32 You were healed for 128 hitpoints.
+09:19:32 You gained 41 mana.
+09:19:32 A bloodjaw loses 621 hitpoints due to your attack. 
+09:19:32 You were healed for 127 hitpoints.
+09:19:32 You gained 40 mana.
+09:19:33 You were healed by Burkzin for 1780 hitpoints.
+09:19:34 You lose 839 hitpoints due to an attack by a bloodjaw. (-11% damage reduction by Sap Strength)
+09:19:34 You lose 1237 hitpoints due to an attack by a bloodjaw. (-11% damage reduction by Sap Strength)
+09:19:34 A walking pillar loses 672 hitpoints due to your attack. 
+09:19:34 You were healed for 137 hitpoints.
+09:19:34 You gained 44 mana.
+09:19:34 A bloodjaw loses 608 hitpoints due to your attack. 
+09:19:34 You were healed for 124 hitpoints.
+09:19:34 You gained 40 mana.
+09:19:34 A walking pillar loses 692 hitpoints due to your attack. 
+09:19:34 You were healed for 141 hitpoints.
+09:19:34 You gained 45 mana.
+09:19:35 You lose 882 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:19:36 A walking pillar loses 631 hitpoints due to your attack. 
+09:19:36 You were healed for 119 hitpoints.
+09:19:36 You gained 38 mana.
+09:19:36 A bloodjaw loses 534 hitpoints due to your attack. 
+09:19:36 You were healed for 101 hitpoints.
+09:19:36 You gained 32 mana.
+09:19:36 A walking pillar loses 595 hitpoints due to your attack. 
+09:19:36 You were healed for 112 hitpoints.
+09:19:36 You gained 36 mana.
+09:19:36 A walking pillar loses 669 hitpoints due to your attack. 
+09:19:36 You were healed for 126 hitpoints.
+09:19:36 You gained 40 mana.
+09:19:36 A walking pillar loses 669 hitpoints due to your attack. 
+09:19:36 You were healed for 126 hitpoints.
+09:19:36 You gained 40 mana.
+09:19:36 A bloodjaw loses 664 hitpoints due to your attack. 
+09:19:36 You were healed for 126 hitpoints.
+09:19:36 You gained 40 mana.
+09:19:37 A walking pillar loses 859 hitpoints due to your attack. 
+09:19:37 You were healed for 162 hitpoints.
+09:19:37 You gained 52 mana.
+09:19:37 A bloodjaw loses 853 hitpoints due to your attack. 
+09:19:37 You were healed for 161 hitpoints.
+09:19:37 You gained 51 mana.
+09:19:37 A walking pillar loses 859 hitpoints due to your attack. 
+09:19:37 You were healed for 162 hitpoints.
+09:19:37 You gained 52 mana.
+09:19:37 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:19:37 You gained 22801 experience points (Bakragore's tribute).
+09:19:37 You lose 914 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:19:38 A walking pillar loses 1327 hitpoints due to your critical attack. 
+09:19:38 You were healed for 344 hitpoints.
+09:19:38 You gained 109 mana.
+09:19:38 A walking pillar loses 1291 hitpoints due to your critical attack. 
+09:19:38 You were healed for 334 hitpoints.
+09:19:38 You gained 106 mana.
+09:19:38 Using one of 437 great fireball runes...
+09:19:38 A walking pillar loses 471 hitpoints due to your attack. 
+09:19:38 You were healed for 123 hitpoints.
+09:19:38 You gained 39 mana.
+09:19:38 A walking pillar loses 471 hitpoints due to your attack. 
+09:19:38 You were healed for 123 hitpoints.
+09:19:38 You gained 39 mana.
+09:19:39 You lose 873 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:19:40 You lose 565 hitpoints due to an attack by a darklight source. 
+09:19:40 You gained 24957 experience points (Bakragore's tribute).
+09:19:40 A darklight source loses 627 hitpoints due to your attack. 
+09:19:40 You were healed for 163 hitpoints.
+09:19:40 You gained 52 mana.
+09:19:40 A darklight source loses 662 hitpoints due to your attack. 
+09:19:40 You were healed for 172 hitpoints.
+09:19:40 You gained 55 mana.
+09:19:41 A darklight source loses 649 hitpoints due to your attack. 
+09:19:41 You were healed for 132 hitpoints.
+09:19:41 You gained 42 mana.
+09:19:41 A darklight source loses 649 hitpoints due to your attack. 
+09:19:41 You were healed for 132 hitpoints.
+09:19:41 You gained 42 mana.
+09:19:41 A walking pillar loses 652 hitpoints due to your attack. 
+09:19:41 You were healed for 133 hitpoints.
+09:19:41 You gained 42 mana.
+09:19:41 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:19:41 You lose 937 hitpoints. 
+09:19:42 You were healed by Burkzin for 1942 hitpoints.
+09:19:42 You lose 375 hitpoints. 
+09:19:43 A darklight source loses 487 hitpoints due to your attack. 
+09:19:43 You were healed for 100 hitpoints.
+09:19:43 You gained 32 mana.
+09:19:43 A darklight source loses 458 hitpoints due to your attack. 
+09:19:43 You were healed for 94 hitpoints.
+09:19:43 You gained 30 mana.
+09:19:43 A walking pillar loses 445 hitpoints due to your attack. 
+09:19:43 You were healed for 91 hitpoints.
+09:19:43 You gained 29 mana.
+09:19:43 Using one of 436 great fireball runes...
+09:19:43 A darklight source loses 446 hitpoints due to your attack. 
+09:19:43 You were healed for 91 hitpoints.
+09:19:43 You gained 29 mana.
+09:19:43 A darklight source loses 446 hitpoints due to your attack. 
+09:19:43 You were healed for 91 hitpoints.
+09:19:43 You gained 29 mana.
+09:19:43 A walking pillar loses 448 hitpoints due to your attack. 
+09:19:43 You were healed for 92 hitpoints.
+09:19:43 You gained 29 mana.
+09:19:43 You lose 375 hitpoints. 
+09:19:43 You lose 541 hitpoints due to an attack by a darklight source. 
+09:19:44 You lose 375 hitpoints. 
+09:19:45 You lose 643 hitpoints due to an attack by a darklight striker. 
+09:19:45 A darklight source loses 791 hitpoints due to your attack. 
+09:19:45 You were healed for 161 hitpoints.
+09:19:45 You gained 51 mana.
+09:19:45 A darklight source loses 812 hitpoints due to your attack. 
+09:19:45 You were healed for 166 hitpoints.
+09:19:45 You gained 52 mana.
+09:19:45 A walking pillar loses 824 hitpoints due to your attack. 
+09:19:45 You were healed for 168 hitpoints.
+09:19:45 You gained 53 mana.
+09:19:45 A darklight source loses 609 hitpoints due to your attack. 
+09:19:45 You were healed for 124 hitpoints.
+09:19:45 You gained 40 mana.
+09:19:45 A walking pillar loses 612 hitpoints due to your attack. 
+09:19:45 You were healed for 125 hitpoints.
+09:19:45 You gained 40 mana.
+09:19:45 A darklight source loses 609 hitpoints due to your attack. 
+09:19:45 You were healed for 124 hitpoints.
+09:19:45 You gained 40 mana.
+09:19:45 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:19:45 You lose 375 hitpoints. 
+09:19:46 You lose 375 hitpoints. 
+09:19:47 You lose 555 hitpoints due to an attack by a darklight source. 
+09:19:47 A darklight source loses 1415 hitpoints due to your critical attack. 
+09:19:47 You were healed for 288 hitpoints.
+09:19:47 You gained 91 mana.
+09:19:47 A darklight source loses 1425 hitpoints due to your critical attack. 
+09:19:47 You were healed for 290 hitpoints.
+09:19:47 You gained 92 mana.
+09:19:47 A walking pillar loses 1003 hitpoints due to your critical attack. 
+09:19:47 You were healed for 282 hitpoints.
+09:19:47 You gained 89 mana.
+09:19:47 You gained 24957 experience points (Bakragore's tribute).
+09:19:47 Using one of 435 great fireball runes...
+09:19:47 You lose 375 hitpoints. 
+09:19:47 A darklight source loses 504 hitpoints due to your attack. 
+09:19:47 You were healed for 141 hitpoints.
+09:19:47 You gained 45 mana.
+09:19:47 A darklight source loses 504 hitpoints due to your attack. 
+09:19:47 You were healed for 141 hitpoints.
+09:19:47 You gained 45 mana.
+09:19:48 You lose 375 hitpoints. 
+09:19:49 You lose 937 hitpoints. 
+09:19:49 You lose 492 hitpoints due to an attack by a darklight striker. 
+09:19:49 You lose 375 hitpoints. 
+09:19:49 A darklight source loses 800 hitpoints due to your attack. 
+09:19:49 You were healed for 163 hitpoints.
+09:19:49 You gained 52 mana.
+09:19:49 A darklight source loses 800 hitpoints due to your attack. 
+09:19:49 You were healed for 163 hitpoints.
+09:19:49 You gained 52 mana.
+09:19:49 A darklight striker loses 653 hitpoints due to your attack. 
+09:19:49 You were healed for 133 hitpoints.
+09:19:49 You gained 42 mana.
+09:19:49 You lose 588 hitpoints due to an attack by a darklight source. 
+09:19:50 A darklight source loses 658 hitpoints due to your attack. 
+09:19:50 You were healed for 134 hitpoints.
+09:19:50 You gained 43 mana.
+09:19:50 A darklight source loses 658 hitpoints due to your attack. 
+09:19:50 You were healed for 134 hitpoints.
+09:19:50 You gained 43 mana.
+09:19:50 A darklight striker loses 593 hitpoints due to your attack. 
+09:19:50 You were healed for 121 hitpoints.
+09:19:50 You gained 38 mana.
+09:19:50 Momentum was triggered.
+09:19:50 You lose 375 hitpoints. 
+09:19:51 You lose 572 hitpoints due to an attack by a darklight source. 
+09:19:51 You lose 937 hitpoints. 
+09:19:51 You lose 614 hitpoints due to an attack by a darklight striker. 
+09:19:51 You lose 375 hitpoints. 
+09:19:52 A darklight striker loses 529 hitpoints due to your attack. 
+09:19:52 You were healed for 108 hitpoints.
+09:19:52 You gained 34 mana.
+09:19:52 A darklight source loses 644 hitpoints due to your attack. 
+09:19:52 You were healed for 131 hitpoints.
+09:19:52 You gained 42 mana.
+09:19:52 A darklight source loses 676 hitpoints due to your attack. 
+09:19:52 You were healed for 138 hitpoints.
+09:19:52 You gained 44 mana.
+09:19:52 A darklight source loses 611 hitpoints due to your attack. 
+09:19:52 You were healed for 125 hitpoints.
+09:19:52 You gained 40 mana.
+09:19:52 A darklight source loses 611 hitpoints due to your attack. 
+09:19:52 You were healed for 125 hitpoints.
+09:19:52 You gained 40 mana.
+09:19:52 A darklight striker loses 551 hitpoints due to your attack. 
+09:19:52 You were healed for 112 hitpoints.
+09:19:52 You gained 36 mana.
+09:19:52 You lose 375 hitpoints. 
+09:19:53 You lose 554 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:19:53 You lose 511 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:19:53 You lose 572 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:19:53 You lose 375 hitpoints. 
+09:19:54 You gained 23026 experience points (Bakragore's tribute).
+09:19:54 You gained 23049 experience points (Bakragore's tribute).
+09:19:54 A darklight striker loses 633 hitpoints due to your attack. 
+09:19:54 You were healed for 322 hitpoints.
+09:19:54 You gained 102 mana.
+09:19:54 You were healed by Burkzin for 1824 hitpoints.
+09:19:54 You lose 375 hitpoints. 
+09:19:55 You were healed by Lynuux for 2411 hitpoints.
+09:19:55 You lose 607 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:19:55 You were healed by Burkzin for 3263 hitpoints.
+09:19:55 You lose 375 hitpoints. 
+09:19:55 You lose 937 hitpoints. 
+09:19:56 A darklight striker loses 690 hitpoints due to your attack. 
+09:19:56 You were healed for 351 hitpoints.
+09:19:56 You gained 111 mana.
+09:19:56 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:19:56 A darklight striker loses 554 hitpoints due to your attack. 
+09:19:56 You were healed for 282 hitpoints.
+09:19:56 You gained 89 mana.
+09:19:56 You lose 375 hitpoints. 
+09:19:57 A darklight striker loses 1341 hitpoints due to your critical attack. 
+09:19:57 You were healed for 681 hitpoints.
+09:19:57 You gained 215 mana.
+09:19:57 You already cracked this obelisk.
+09:19:57 You were healed by Luszckyn for 2057 hitpoints.
+09:19:57 You lose 375 hitpoints. 
+09:19:58 A darklight striker loses 552 hitpoints due to your attack. (perfect shot)
+09:19:58 You were healed for 270 hitpoints.
+09:19:58 You gained 86 mana.
+09:19:58 You lose 375 hitpoints. 
+09:19:58 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:19:59 You lose 375 hitpoints. 
+09:20:00 A bloodjaw loses 753 hitpoints due to your attack. 
+09:20:00 You were healed for 383 hitpoints.
+09:20:00 You gained 121 mana.
+09:20:00 You lose 375 hitpoints. 
+09:20:00 A bloodjaw loses 1215 hitpoints due to your attack. 
+09:20:00 You were healed for 617 hitpoints.
+09:20:00 You gained 195 mana.
+09:20:01 You lose 375 hitpoints. 
+09:20:01 You were healed by Burkzin for 2090 hitpoints.
+09:20:02 You lose 375 hitpoints. 
+09:20:02 A bloodjaw loses 469 hitpoints due to your attack. 
+09:20:02 You were healed for 239 hitpoints.
+09:20:02 You gained 76 mana.
+09:20:02 You lose 930 hitpoints due to an attack by a bloodjaw. 
+09:20:02 You lose 1144 hitpoints due to an attack by a bloodjaw. 
+09:20:03 A bloodjaw loses 633 hitpoints due to your attack. 
+09:20:03 You were healed for 322 hitpoints.
+09:20:03 You gained 102 mana.
+09:20:03 You were healed by Luszckyn for 1493 hitpoints.
+09:20:03 You lose 375 hitpoints. 
+09:20:04 You lose 375 hitpoints. 
+09:20:04 You lose 1742 hitpoints due to a critical attack by a bloodjaw. 
+09:20:05 A bloodjaw loses 935 hitpoints due to your critical attack. 
+09:20:05 You were healed for 475 hitpoints.
+09:20:05 You gained 150 mana.
+09:20:05 A bloodjaw loses 432 hitpoints due to your attack. 
+09:20:05 You were healed for 220 hitpoints.
+09:20:05 You gained 70 mana.
+09:20:05 You lose 375 hitpoints. 
+09:20:07 A bloodjaw loses 675 hitpoints due to your attack. 
+09:20:07 You were healed for 343 hitpoints.
+09:20:07 You gained 108 mana.
+09:20:07 A bloodjaw loses 1523 hitpoints due to your attack. 
+09:20:07 You were healed for 773 hitpoints.
+09:20:07 You gained 244 mana.
+09:20:09 A bloodjaw loses 541 hitpoints due to your attack. 
+09:20:09 You were healed for 275 hitpoints.
+09:20:09 You gained 87 mana.
+09:20:09 A bloodjaw loses 611 hitpoints due to your attack. 
+09:20:09 You were healed for 311 hitpoints.
+09:20:09 You gained 98 mana.
+09:20:10 You were healed by Burkzin for 1484 hitpoints.
+09:20:10 Using one of 1942 ultimate spirit potions...
+09:20:10 You gained 176 mana.
+09:20:10 You healed yourself for 442 hitpoints.
+09:20:10 You lose 892 hitpoints due to an attack by a bloodjaw. 
+09:20:11 A bloodjaw loses 616 hitpoints due to your attack. 
+09:20:11 You were healed for 313 hitpoints.
+09:20:11 You gained 99 mana.
+09:20:12 A bloodjaw loses 461 hitpoints due to your attack. 
+09:20:12 You were healed for 234 hitpoints.
+09:20:12 You gained 74 mana.
+09:20:12 You lose 937 hitpoints. 
+09:20:12 You gained 22801 experience points (Bakragore's tribute).
+09:20:12 Using one of 1941 ultimate spirit potions...
+09:20:12 You gained 188 mana.
+09:20:12 You healed yourself for 443 hitpoints.
+09:20:12 You lose 375 hitpoints. 
+09:20:13 You lose 937 hitpoints. 
+09:20:13 You lose 937 hitpoints. 
+09:20:13 You lose 375 hitpoints. 
+09:20:14 You lose 375 hitpoints. 
+09:20:15 You lose 746 hitpoints due to an attack by a walking pillar. 
+09:20:15 You lose 520 hitpoints due to an attack by a darklight striker. 
+09:20:15 You lose 375 hitpoints. 
+09:20:16 Using one of 1940 ultimate spirit potions...
+09:20:16 You gained 250 mana.
+09:20:16 You healed yourself for 480 hitpoints.
+09:20:16 Using one of 1939 ultimate spirit potions...
+09:20:16 You lose 375 hitpoints. 
+09:20:17 Using one of 1939 ultimate spirit potions...
+09:20:17 You gained 166 mana.
+09:20:17 You healed yourself for 439 hitpoints.
+09:20:17 You lose 375 hitpoints. 
+09:20:18 You were healed by Burkzin for 1674 hitpoints.
+09:20:18 Using one of 1938 ultimate spirit potions...
+09:20:18 You lose 479 hitpoints due to an attack by a darklight striker. 
+09:20:18 You lose 506 hitpoints due to an attack by a darklight striker. 
+09:20:18 You gained 228 mana.
+09:20:18 You healed yourself for 526 hitpoints.
+09:20:18 You healed yourself for 1291 hitpoints.
+09:20:18 You lose 375 hitpoints. 
+09:20:19 Using one of 1937 ultimate spirit potions...
+09:20:19 You lose 565 hitpoints due to an attack by a darklight matter. 
+09:20:19 You healed yourself for 1403 hitpoints.
+09:20:19 You lose 375 hitpoints. 
+09:20:19 You lose 1110 hitpoints due to an attack by a walking pillar. 
+09:20:20 Using one of 1937 ultimate spirit potions...
+09:20:20 You gained 181 mana.
+09:20:20 You healed yourself for 510 hitpoints.
+09:20:20 You lose 278 hitpoints due to an attack by a walking pillar. 
+09:20:20 You healed yourself for 1281 hitpoints.
+09:20:20 You lose 375 hitpoints. 
+09:20:21 Using one of 1936 ultimate spirit potions...
+09:20:21 You gained 206 mana.
+09:20:21 You healed yourself for 432 hitpoints.
+09:20:21 You lose 491 hitpoints due to an attack by a darklight striker. 
+09:20:21 You healed yourself for 1377 hitpoints.
+09:20:21 You lose 375 hitpoints. 
+09:20:21 You lose 607 hitpoints due to an attack by a darklight source. 
+09:20:22 Using one of 1935 ultimate spirit potions...
+09:20:22 You gained 183 mana.
+09:20:22 You healed yourself for 508 hitpoints.
+09:20:22 You lose 375 hitpoints. 
+09:20:22 You healed yourself for 1079 hitpoints.
+09:20:23 Using one of 1934 ultimate spirit potions...
+09:20:23 You gained 223 mana.
+09:20:23 You healed yourself for 580 hitpoints.
+09:20:23 You lose 529 hitpoints due to an attack by a darklight striker. 
+09:20:23 You healed yourself for 1206 hitpoints.
+09:20:23 You lose 332 hitpoints due to an attack by a walking pillar. 
+09:20:25 You healed yourself for 326 hitpoints.
+09:20:25 Using one of 1933 ultimate spirit potions...
+09:20:25 You gained 164 mana.
+09:20:25 You lose 545 hitpoints due to an attack by a darklight matter. 
+09:20:25 You lose 659 hitpoints due to an attack by a walking pillar. 
+09:20:25 You lose 479 hitpoints due to an attack by a darklight striker. 
+09:20:25 You lose 425 hitpoints due to an attack by a walking pillar. 
+09:20:26 You healed yourself for 1284 hitpoints.
+09:20:26 Using one of 1932 ultimate spirit potions...
+09:20:26 You gained 225 mana.
+09:20:26 You healed yourself for 448 hitpoints.
+09:20:27 You healed yourself for 376 hitpoints.
+09:20:27 Using one of 1931 ultimate spirit potions...
+09:20:27 You lose 440 hitpoints due to an attack by a darklight matter. 
+09:20:27 You lose 743 hitpoints due to an attack by a darklight matter. 
+09:20:27 You lose 419 hitpoints due to an attack by a darklight matter. 
+09:20:27 You were healed by Burkzin for 1602 hitpoints.
+09:20:27 You lose 888 hitpoints due to an attack by a walking pillar. 
+09:20:27 You lose 614 hitpoints due to an attack by a darklight striker. 
+09:20:27 You gained 187 mana.
+09:20:27 You healed yourself for 527 hitpoints.
+09:20:28 You lose 749 hitpoints due to an attack by a walking pillar. 
+09:20:28 You lose 653 hitpoints due to an attack by a walking pillar. 
+09:20:28 You lose 730 hitpoints due to an attack by a darklight matter. 
+09:20:28 You lose 578 hitpoints due to an attack by a darklight matter. 
+09:20:28 You lose 425 hitpoints due to an attack by a darklight matter. 
+09:20:28 Using one of 1930 ultimate spirit potions...
+09:20:28 You lose 937 hitpoints. 
+09:20:28 You gained 248 mana.
+09:20:28 You healed yourself for 551 hitpoints.
+09:20:28 You lose 1116 hitpoints due to an attack by a darklight source. 
+09:20:28 You lose 937 hitpoints. 
+09:20:28 You lose 375 hitpoints. 
+09:20:28 You lose 937 hitpoints. 
+09:20:29 You healed yourself for 1315 hitpoints.
+09:20:29 Using one of 1929 ultimate spirit potions...
+09:20:29 You gained 246 mana.
+09:20:29 You healed yourself for 440 hitpoints.
+09:20:29 You lose 375 hitpoints. 
+09:20:29 You lose 1093 hitpoints due to an attack by a walking pillar. 
+09:20:30 You healed yourself for 1388 hitpoints.
+09:20:30 You lose 701 hitpoints due to an attack by a walking pillar. 
+09:20:30 Using one of 1928 ultimate spirit potions...
+09:20:30 You gained 223 mana.
+09:20:30 You healed yourself for 505 hitpoints.
+09:20:30 You lose 375 hitpoints. 
+09:20:31 You lose 386 hitpoints due to an attack by a darklight source. 
+09:20:31 You healed yourself for 1054 hitpoints.
+09:20:31 You lose 836 hitpoints due to an attack by a darklight source. 
+09:20:31 You lose 657 hitpoints due to an attack by a darklight source. 
+09:20:31 Using one of 1927 ultimate spirit potions...
+09:20:31 You gained 238 mana.
+09:20:31 You healed yourself for 575 hitpoints.
+09:20:31 You lose 527 hitpoints due to an attack by a walking pillar. 
+09:20:31 You lose 375 hitpoints. 
+09:20:32 You lose 711 hitpoints due to an attack by a walking pillar. 
+09:20:32 You healed yourself for 1235 hitpoints.
+09:20:32 You lose 710 hitpoints due to an attack by a walking pillar. 
+09:20:32 Using one of 1926 ultimate spirit potions...
+09:20:32 You lose 375 hitpoints. 
+09:20:32 You gained 183 mana.
+09:20:32 You healed yourself for 426 hitpoints.
+09:20:33 You healed yourself for 1269 hitpoints.
+09:20:33 You lose 375 hitpoints. 
+09:20:34 You lose 1121 hitpoints due to an attack by a darklight source. 
+09:20:34 You lose 1125 hitpoints due to an attack by a walking pillar. 
+09:20:34 You lose 615 hitpoints due to an attack by a darklight striker. 
+09:20:34 You lose 365 hitpoints due to an attack by a darklight striker. 
+09:20:34 You lose 375 hitpoints. 
+09:20:34 You healed yourself for 1313 hitpoints.
+09:20:35 You lose 685 hitpoints due to an attack by a walking pillar. 
+09:20:35 Using one of 1925 ultimate spirit potions...
+09:20:35 You gained 244 mana.
+09:20:35 You healed yourself for 530 hitpoints.
+09:20:35 You lose 462 hitpoints due to an attack by a darklight matter. 
+09:20:35 You lose 375 hitpoints. 
+09:20:35 You healed yourself for 1208 hitpoints.
+09:20:36 Using one of 1924 ultimate spirit potions...
+09:20:36 You lose 433 hitpoints due to an attack by a darklight striker. 
+09:20:36 You gained 201 mana.
+09:20:36 You healed yourself for 482 hitpoints.
+09:20:36 You lose 375 hitpoints. 
+09:20:36 You healed yourself for 1431 hitpoints.
+09:20:37 Using one of 1923 ultimate spirit potions...
+09:20:37 You gained 207 mana.
+09:20:37 You healed yourself for 479 hitpoints.
+09:20:37 You lose 375 hitpoints. 
+09:20:37 You lose 488 hitpoints due to an attack by a darklight matter. 
+09:20:38 You healed yourself for 1168 hitpoints.
+09:20:38 You lose 937 hitpoints. 
+09:20:38 You were healed by Luszckyn for 1681 hitpoints.
+09:20:38 You lose 375 hitpoints. 
+09:20:38 You lose 1158 hitpoints due to an attack by a darklight source. 
+09:20:39 A darklight matter loses 500 hitpoints due to your attack. 
+09:20:39 You were healed for 59 hitpoints.
+09:20:39 You gained 19 mana.
+09:20:39 A darklight matter loses 542 hitpoints due to your attack. 
+09:20:39 You were healed for 64 hitpoints.
+09:20:39 You gained 20 mana.
+09:20:39 A darklight matter loses 499 hitpoints due to your attack. 
+09:20:39 You were healed for 59 hitpoints.
+09:20:39 You gained 19 mana.
+09:20:39 A darklight source loses 494 hitpoints due to your attack. 
+09:20:39 You were healed for 58 hitpoints.
+09:20:39 You gained 19 mana.
+09:20:39 A darklight striker loses 386 hitpoints due to your attack. 
+09:20:39 You were healed for 45 hitpoints.
+09:20:39 You gained 15 mana.
+09:20:39 A walking pillar loses 523 hitpoints due to your attack. 
+09:20:39 You were healed for 61 hitpoints.
+09:20:39 You gained 20 mana.
+09:20:39 A darklight source loses 526 hitpoints due to your attack. 
+09:20:39 You were healed for 62 hitpoints.
+09:20:39 You gained 20 mana.
+09:20:39 A darklight matter loses 666 hitpoints due to your attack. 
+09:20:39 You were healed for 78 hitpoints.
+09:20:39 You gained 25 mana.
+09:20:39 A walking pillar loses 670 hitpoints due to your attack. 
+09:20:39 You were healed for 78 hitpoints.
+09:20:39 You gained 25 mana.
+09:20:39 A darklight matter loses 666 hitpoints due to your attack. 
+09:20:39 You were healed for 78 hitpoints.
+09:20:39 You gained 25 mana.
+09:20:39 A darklight matter loses 666 hitpoints due to your attack. 
+09:20:39 You were healed for 78 hitpoints.
+09:20:39 You gained 25 mana.
+09:20:39 A darklight striker loses 600 hitpoints due to your attack. 
+09:20:39 You were healed for 70 hitpoints.
+09:20:39 You gained 22 mana.
+09:20:39 A darklight source loses 667 hitpoints due to your attack. 
+09:20:39 You were healed for 78 hitpoints.
+09:20:39 You gained 25 mana.
+09:20:39 A darklight source loses 667 hitpoints due to your attack. 
+09:20:39 You were healed for 78 hitpoints.
+09:20:39 You gained 25 mana.
+09:20:39 You healed yourself for 1205 hitpoints.
+09:20:39 You lose 375 hitpoints. 
+09:20:40 You healed yourself for 1303 hitpoints.
+09:20:40 You lose 375 hitpoints. 
+09:20:40 You lose 534 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:20:40 You lose 979 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:20:40 You were healed by Luszckyn for 2203 hitpoints.
+09:20:41 You lose 952 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:41 You lose 587 hitpoints due to an attack by a darklight striker. 
+09:20:41 A darklight striker loses 493 hitpoints due to your attack. 
+09:20:41 You were healed for 63 hitpoints.
+09:20:41 You gained 20 mana.
+09:20:41 A darklight matter loses 629 hitpoints due to your attack. 
+09:20:41 You were healed for 80 hitpoints.
+09:20:41 You gained 26 mana.
+09:20:41 A darklight source loses 604 hitpoints due to your attack. 
+09:20:41 You were healed for 77 hitpoints.
+09:20:41 You gained 25 mana.
+09:20:41 A darklight matter loses 605 hitpoints due to your attack. 
+09:20:41 You were healed for 77 hitpoints.
+09:20:41 You gained 25 mana.
+09:20:41 A darklight matter loses 608 hitpoints due to your attack. 
+09:20:41 You were healed for 78 hitpoints.
+09:20:41 You gained 25 mana.
+09:20:41 A darklight source loses 608 hitpoints due to your attack. 
+09:20:41 You were healed for 78 hitpoints.
+09:20:41 You gained 25 mana.
+09:20:41 You were healed by Burkzin for 2175 hitpoints.
+09:20:41 You healed yourself for 1292 hitpoints.
+09:20:41 You lose 375 hitpoints. 
+09:20:41 You lose 409 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:20:42 Using one of 1922 ultimate spirit potions...
+09:20:42 You gained 182 mana.
+09:20:42 You healed yourself for 489 hitpoints.
+09:20:42 You lose 468 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:20:42 You healed yourself for 1205 hitpoints.
+09:20:42 You lose 375 hitpoints. 
+09:20:42 You lose 536 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:20:43 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:20:43 A darklight striker loses 456 hitpoints due to your attack. 
+09:20:43 You were healed for 54 hitpoints.
+09:20:43 You gained 17 mana.
+09:20:43 A darklight matter loses 595 hitpoints due to your attack. 
+09:20:43 You were healed for 70 hitpoints.
+09:20:43 You gained 23 mana.
+09:20:43 A darklight source loses 614 hitpoints due to your attack. 
+09:20:43 You were healed for 73 hitpoints.
+09:20:43 You gained 23 mana.
+09:20:43 A darklight matter loses 623 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 A darklight matter loses 615 hitpoints due to your attack. 
+09:20:43 You were healed for 73 hitpoints.
+09:20:43 You gained 23 mana.
+09:20:43 A darklight source loses 581 hitpoints due to your attack. 
+09:20:43 You were healed for 69 hitpoints.
+09:20:43 You gained 22 mana.
+09:20:43 A darklight matter loses 682 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 A darklight striker loses 615 hitpoints due to your attack. 
+09:20:43 You were healed for 67 hitpoints.
+09:20:43 You gained 22 mana.
+09:20:43 A darklight matter loses 682 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 A darklight source loses 683 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 A walking pillar loses 686 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 A darklight matter loses 682 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 A darklight source loses 683 hitpoints due to your attack. 
+09:20:43 You were healed for 74 hitpoints.
+09:20:43 You gained 24 mana.
+09:20:43 You lose 375 hitpoints. 
+09:20:43 You lose 454 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:20:43 You healed yourself for 1460 hitpoints.
+09:20:43 You were healed by Burkzin for 1237 hitpoints.
+09:20:44 A darklight striker loses 915 hitpoints due to your attack. 
+09:20:44 You gained 34 mana.
+09:20:44 A darklight matter loses 1016 hitpoints due to your attack. 
+09:20:44 You gained 38 mana.
+09:20:44 A darklight source loses 1016 hitpoints due to your attack. 
+09:20:44 You gained 38 mana.
+09:20:44 A darklight matter loses 1016 hitpoints due to your attack. 
+09:20:44 You gained 38 mana.
+09:20:44 A darklight matter loses 1016 hitpoints due to your attack. 
+09:20:44 You gained 38 mana.
+09:20:44 A darklight source loses 1016 hitpoints due to your attack. 
+09:20:44 You gained 38 mana.
+09:20:44 You lose 451 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:20:44 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:20:44 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:20:44 You lose 375 hitpoints. 
+09:20:45 You healed yourself for 820 hitpoints.
+09:20:45 A darklight striker loses 1941 hitpoints due to your attack. (enflame charm)
+09:20:45 A darklight striker loses 556 hitpoints due to your attack. 
+09:20:45 You gained 24 mana.
+09:20:45 A darklight source loses 712 hitpoints due to your attack. 
+09:20:45 You gained 30 mana.
+09:20:45 A walking pillar loses 695 hitpoints due to your attack. 
+09:20:45 You gained 30 mana.
+09:20:45 A darklight matter loses 185 hitpoints due to your attack. 
+09:20:45 You gained 30 mana.
+09:20:45 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:20:45 A darklight source loses 724 hitpoints due to your attack. 
+09:20:45 You gained 31 mana.
+09:20:45 You lose 375 hitpoints. 
+09:20:45 Using one of 434 great fireball runes...
+09:20:45 A walking pillar loses 551 hitpoints due to your attack. 
+09:20:45 You were healed for 73 hitpoints.
+09:20:45 You gained 23 mana.
+09:20:45 A darklight striker loses 597 hitpoints due to your attack. 
+09:20:45 You were healed for 79 hitpoints.
+09:20:45 You gained 25 mana.
+09:20:45 A darklight source loses 549 hitpoints due to your attack. 
+09:20:45 You were healed for 73 hitpoints.
+09:20:45 You gained 23 mana.
+09:20:45 A darklight striker loses 597 hitpoints due to your attack. 
+09:20:45 You were healed for 79 hitpoints.
+09:20:45 You gained 25 mana.
+09:20:45 A darklight source loses 549 hitpoints due to your attack. 
+09:20:45 You were healed for 71 hitpoints.
+09:20:45 You gained 23 mana.
+09:20:45 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:20:46 You lose 607 hitpoints due to an attack by a darklight striker. 
+09:20:46 You gained 23074 experience points (Bakragore's tribute).
+09:20:46 You lose 696 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:46 You lose 375 hitpoints. 
+09:20:46 You lose 935 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:20:47 You healed yourself for 1138 hitpoints.
+09:20:47 You lose 375 hitpoints. 
+09:20:47 A walking pillar loses 734 hitpoints due to your attack. 
+09:20:47 You were healed for 113 hitpoints.
+09:20:47 You gained 36 mana.
+09:20:47 A walking pillar loses 740 hitpoints due to your attack. 
+09:20:47 You were healed for 114 hitpoints.
+09:20:47 You gained 36 mana.
+09:20:47 A darklight striker loses 602 hitpoints due to your attack. 
+09:20:47 You were healed for 93 hitpoints.
+09:20:47 You gained 30 mana.
+09:20:47 A darklight source loses 697 hitpoints due to your attack. 
+09:20:47 You were healed for 113 hitpoints.
+09:20:47 You gained 36 mana.
+09:20:47 You gained 23074 experience points (Bakragore's tribute).
+09:20:48 A walking pillar loses 619 hitpoints due to your attack. 
+09:20:48 You were healed for 126 hitpoints.
+09:20:48 You gained 40 mana.
+09:20:48 A walking pillar loses 619 hitpoints due to your attack. 
+09:20:48 You were healed for 126 hitpoints.
+09:20:48 You gained 40 mana.
+09:20:48 A darklight striker loses 555 hitpoints due to your attack. 
+09:20:48 You were healed for 113 hitpoints.
+09:20:48 You gained 36 mana.
+09:20:48 You healed yourself for 1046 hitpoints.
+09:20:48 You lose 601 hitpoints due to an attack by a walking pillar. 
+09:20:48 You lose 572 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:49 You lose 237 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:50 A walking pillar loses 921 hitpoints due to your attack. 
+09:20:50 You were healed for 153 hitpoints.
+09:20:50 You gained 49 mana.
+09:20:50 A darklight striker loses 696 hitpoints due to your attack. 
+09:20:50 You were healed for 116 hitpoints.
+09:20:50 You gained 37 mana.
+09:20:50 A walking pillar loses 868 hitpoints due to your attack. 
+09:20:50 You were healed for 144 hitpoints.
+09:20:50 You gained 46 mana.
+09:20:50 A walking pillar loses 912 hitpoints due to your attack. 
+09:20:50 You were healed for 151 hitpoints.
+09:20:50 You gained 48 mana.
+09:20:50 Using one of 433 great fireball runes...
+09:20:50 A walking pillar loses 450 hitpoints due to your attack. 
+09:20:50 You were healed for 75 hitpoints.
+09:20:50 You gained 24 mana.
+09:20:50 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:20:50 A darklight striker loses 488 hitpoints due to your attack. 
+09:20:50 You were healed for 81 hitpoints.
+09:20:50 You gained 26 mana.
+09:20:50 A walking pillar loses 450 hitpoints due to your attack. 
+09:20:50 You were healed for 75 hitpoints.
+09:20:50 You gained 24 mana.
+09:20:50 A walking pillar loses 450 hitpoints due to your attack. 
+09:20:50 You were healed for 75 hitpoints.
+09:20:50 You gained 24 mana.
+09:20:50 You healed yourself for 540 hitpoints.
+09:20:50 You lose 517 hitpoints due to an attack by a darklight striker. 
+09:20:50 You lose 937 hitpoints. 
+09:20:50 You lose 375 hitpoints. 
+09:20:51 You lose 375 hitpoints. 
+09:20:52 You lose 715 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:52 A walking pillar loses 814 hitpoints due to your critical attack. 
+09:20:52 You were healed for 166 hitpoints.
+09:20:52 You gained 53 mana.
+09:20:52 A darklight striker loses 665 hitpoints due to your critical attack. 
+09:20:52 You were healed for 136 hitpoints.
+09:20:52 You gained 43 mana.
+09:20:52 A walking pillar loses 821 hitpoints due to your critical attack. 
+09:20:52 You were healed for 167 hitpoints.
+09:20:52 You gained 53 mana.
+09:20:52 You lose 503 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:52 You lose 554 hitpoints due to an attack by a darklight striker. 
+09:20:52 A walking pillar loses 1124 hitpoints due to your critical attack. 
+09:20:52 You were healed for 186 hitpoints.
+09:20:52 You gained 59 mana.
+09:20:52 A walking pillar loses 1124 hitpoints due to your critical attack. 
+09:20:52 You were healed for 186 hitpoints.
+09:20:52 You gained 59 mana.
+09:20:52 A darklight striker loses 1007 hitpoints due to your critical attack. 
+09:20:52 You were healed for 167 hitpoints.
+09:20:52 You gained 53 mana.
+09:20:52 A walking pillar loses 1124 hitpoints due to your critical attack. 
+09:20:52 You were healed for 186 hitpoints.
+09:20:52 You gained 59 mana.
+09:20:52 You lose 375 hitpoints. 
+09:20:52 You lose 937 hitpoints. 
+09:20:52 You lose 848 hitpoints due to an attack by a walking pillar. 
+09:20:53 You lose 375 hitpoints. 
+09:20:54 You were healed by Burkzin for 1547 hitpoints.
+09:20:54 You lose 305 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:54 You lose 684 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:54 You lose 847 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:54 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:20:54 You lose 571 hitpoints due to an attack by a darklight striker. 
+09:20:54 A walking pillar loses 478 hitpoints due to your attack. 
+09:20:54 You were healed for 98 hitpoints.
+09:20:54 You gained 31 mana.
+09:20:54 A walking pillar loses 179 hitpoints due to your attack. 
+09:20:54 You were healed for 91 hitpoints.
+09:20:54 You gained 29 mana.
+09:20:54 You gained 24957 experience points (Bakragore's tribute).
+09:20:54 A darklight striker loses 394 hitpoints due to your attack. 
+09:20:54 You were healed for 80 hitpoints.
+09:20:54 You gained 26 mana.
+09:20:54 Using one of 432 great fireball runes...
+09:20:54 You lose 375 hitpoints. 
+09:20:54 A walking pillar loses 781 hitpoints due to your critical attack. 
+09:20:54 You were healed for 219 hitpoints.
+09:20:54 You gained 69 mana.
+09:20:54 A darklight striker loses 846 hitpoints due to your critical attack. 
+09:20:54 You were healed for 237 hitpoints.
+09:20:54 You gained 75 mana.
+09:20:54 You were healed by Luszckyn for 2467 hitpoints.
+09:20:55 You lose 653 hitpoints due to an attack by a walking pillar. 
+09:20:55 You lose 375 hitpoints. 
+09:20:56 Automatic Bonus Reroll for prey slot 3 successfully applied.
+09:20:56 There are 18 Wildcards left.
+09:20:56 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:20:56 You lose 1069 hitpoints due to an attack by a darklight source. 
+09:20:56 You were healed by Burkzin for 1688 hitpoints.
+09:20:56 You lose 375 hitpoints. 
+09:20:56 A walking pillar loses 563 hitpoints due to your attack. 
+09:20:56 You were healed for 158 hitpoints.
+09:20:56 You gained 51 mana.
+09:20:56 A walking pillar loses 574 hitpoints due to your attack. 
+09:20:56 You were healed for 161 hitpoints.
+09:20:56 You gained 51 mana.
+09:20:57 A walking pillar loses 675 hitpoints due to your attack. 
+09:20:57 You were healed for 189 hitpoints.
+09:20:57 You gained 60 mana.
+09:20:57 A walking pillar loses 675 hitpoints due to your attack. 
+09:20:57 You were healed for 189 hitpoints.
+09:20:57 You gained 60 mana.
+09:20:57 You lose 937 hitpoints. 
+09:20:57 You lose 375 hitpoints. 
+09:20:58 You lose 375 hitpoints. 
+09:20:59 A walking pillar loses 770 hitpoints due to your attack. 
+09:20:59 You were healed for 216 hitpoints.
+09:20:59 You gained 69 mana.
+09:20:59 A darklight source loses 774 hitpoints due to your attack. 
+09:20:59 You were healed for 217 hitpoints.
+09:20:59 You gained 69 mana.
+09:20:59 Using one of 431 great fireball runes...
+09:20:59 A darklight source loses 504 hitpoints due to your attack. 
+09:20:59 You were healed for 103 hitpoints.
+09:20:59 You gained 33 mana.
+09:20:59 A walking pillar loses 506 hitpoints due to your attack. 
+09:20:59 You were healed for 103 hitpoints.
+09:20:59 You gained 33 mana.
+09:20:59 A walking pillar loses 506 hitpoints due to your attack. 
+09:20:59 You were healed for 103 hitpoints.
+09:20:59 You gained 33 mana.
+09:20:59 You lose 937 hitpoints. 
+09:20:59 You were healed by Burkzin for 2161 hitpoints.
+09:20:59 You lose 377 hitpoints due to an attack by a walking pillar. 
+09:20:59 You lose 375 hitpoints. 
+09:21:00 You were healed by Burkzin for 1767 hitpoints.
+09:21:00 You lose 375 hitpoints. 
+09:21:01 A darklight source loses 714 hitpoints due to your attack. 
+09:21:01 You were healed for 200 hitpoints.
+09:21:01 You gained 64 mana.
+09:21:01 A walking pillar loses 702 hitpoints due to your attack. 
+09:21:01 You were healed for 197 hitpoints.
+09:21:01 You gained 63 mana.
+09:21:01 A walking pillar loses 639 hitpoints due to your attack. 
+09:21:01 You were healed for 130 hitpoints.
+09:21:01 You gained 42 mana.
+09:21:01 A walking pillar loses 639 hitpoints due to your attack. 
+09:21:01 You were healed for 130 hitpoints.
+09:21:01 You gained 42 mana.
+09:21:01 A darklight source loses 636 hitpoints due to your attack. 
+09:21:01 You were healed for 130 hitpoints.
+09:21:01 You gained 41 mana.
+09:21:01 You lose 476 hitpoints due to an attack by a walking pillar. 
+09:21:01 You lose 375 hitpoints. 
+09:21:01 You gained 24957 experience points (Bakragore's tribute).
+09:21:02 You lose 563 hitpoints due to an attack by a darklight source. 
+09:21:02 You lose 375 hitpoints. 
+09:21:03 A walking pillar loses 621 hitpoints due to your attack. 
+09:21:03 You were healed for 174 hitpoints.
+09:21:03 You gained 55 mana.
+09:21:03 A darklight source loses 581 hitpoints due to your attack. 
+09:21:03 You were healed for 163 hitpoints.
+09:21:03 You gained 52 mana.
+09:21:03 Using one of 430 great fireball runes...
+09:21:03 You lose 415 hitpoints due to an attack by a walking pillar. 
+09:21:03 A darklight source loses 480 hitpoints due to your attack. 
+09:21:03 You were healed for 135 hitpoints.
+09:21:03 You gained 43 mana.
+09:21:03 A walking pillar loses 482 hitpoints due to your attack. 
+09:21:03 You were healed for 135 hitpoints.
+09:21:03 You gained 43 mana.
+09:21:03 You lose 375 hitpoints. 
+09:21:04 You lose 521 hitpoints due to an attack by a darklight source. 
+09:21:04 You lose 375 hitpoints. 
+09:21:05 A walking pillar loses 896 hitpoints due to your attack. 
+09:21:05 You were healed for 251 hitpoints.
+09:21:05 You gained 80 mana.
+09:21:05 A darklight source loses 864 hitpoints due to your attack. 
+09:21:05 You were healed for 242 hitpoints.
+09:21:05 You gained 77 mana.
+09:21:05 You lose 375 hitpoints. 
+09:21:05 A walking pillar loses 622 hitpoints due to your attack. 
+09:21:05 You were healed for 174 hitpoints.
+09:21:05 You gained 55 mana.
+09:21:05 A darklight source loses 619 hitpoints due to your attack. 
+09:21:05 You were healed for 174 hitpoints.
+09:21:05 You gained 55 mana.
+09:21:05 You were healed by Burkzin for 2273 hitpoints.
+09:21:06 Switched to hotkey preset 'Drome'.
+09:21:06 Switched to hotkey preset 'Royal'Drone'.
+09:21:06 Switched to hotkey preset 'USP NO SCROLL'.
+09:21:06 You lose 375 hitpoints. 
+09:21:07 You lose 1033 hitpoints due to an attack by a walking pillar. 
+09:21:07 You lose 375 hitpoints. 
+09:21:07 A walking pillar loses 610 hitpoints due to your attack. 
+09:21:07 You were healed for 171 hitpoints.
+09:21:07 You gained 54 mana.
+09:21:07 A darklight source loses 626 hitpoints due to your attack. 
+09:21:07 You were healed for 175 hitpoints.
+09:21:07 You gained 56 mana.
+09:21:08 Using one of 429 great fireball runes...
+09:21:08 You were healed by Burkzin for 2302 hitpoints.
+09:21:08 A darklight source loses 506 hitpoints due to your attack. 
+09:21:08 You were healed for 142 hitpoints.
+09:21:08 You gained 45 mana.
+09:21:08 A walking pillar loses 508 hitpoints due to your attack. 
+09:21:08 You were healed for 142 hitpoints.
+09:21:08 You gained 46 mana.
+09:21:08 Using one of 1332 great mana potions...
+09:21:08 You lose 375 hitpoints. 
+09:21:09 Using one of 1332 great mana potions...
+09:21:09 You gained 181 mana.
+09:21:09 You gained 24957 experience points (Bakragore's tribute).
+09:21:09 You lose 375 hitpoints. 
+09:21:10 A darklight source loses 554 hitpoints due to your attack. 
+09:21:10 You were healed for 282 hitpoints.
+09:21:10 You gained 89 mana.
+09:21:10 A darklight source loses 175 hitpoints due to your attack. 
+09:21:10 You were healed for 866 hitpoints.
+09:21:10 You gained 273 mana.
+09:21:10 You gained 23074 experience points (Bakragore's tribute).
+09:21:11 You lose 937 hitpoints. 
+09:21:11 Using one of 1331 great mana potions...
+09:21:11 You gained 193 mana.
+09:21:11 You lose 375 hitpoints. 
+09:21:12 Using one of 1330 great mana potions...
+09:21:12 You gained 207 mana.
+09:21:12 Using one of 1329 great mana potions...
+09:21:12 You lose 375 hitpoints. 
+09:21:13 Using one of 1329 great mana potions...
+09:21:13 Using one of 1329 great mana potions...
+09:21:13 You gained 245 mana.
+09:21:13 Using one of 1328 great mana potions...
+09:21:13 You lose 375 hitpoints. 
+09:21:14 Using one of 1328 great mana potions...
+09:21:14 Using one of 1328 great mana potions...
+09:21:14 Momentum was triggered.
+09:21:14 Using one of 1328 great mana potions...
+09:21:14 You gained 213 mana.
+09:21:14 You lose 375 hitpoints. 
+09:21:14 Using one of 1327 great mana potions...
+09:21:15 Using one of 1327 great mana potions...
+09:21:15 Using one of 1327 great mana potions...
+09:21:15 You gained 204 mana.
+09:21:15 You lose 375 hitpoints. 
+09:21:15 Using one of 1326 great mana potions...
+09:21:16 Using one of 1326 great mana potions...
+09:21:16 Using one of 1326 great mana potions...
+09:21:16 You gained 219 mana.
+09:21:16 You lose 375 hitpoints. 
+09:21:16 You were healed by Luszckyn for 1719 hitpoints.
+09:21:17 Using one of 1325 great mana potions...
+09:21:17 You lose 375 hitpoints. 
+09:21:17 A walking pillar loses 520 hitpoints due to your attack. 
+09:21:17 You were healed for 146 hitpoints.
+09:21:17 You gained 47 mana.
+09:21:17 A darklight source loses 480 hitpoints due to your attack. 
+09:21:17 You were healed for 135 hitpoints.
+09:21:17 You gained 43 mana.
+09:21:18 Using one of 428 great fireball runes...
+09:21:18 A darklight source loses 814 hitpoints due to your critical attack. 
+09:21:18 You were healed for 116 hitpoints.
+09:21:18 You gained 37 mana.
+09:21:18 A darklight matter loses 883 hitpoints due to your critical attack. 
+09:21:18 You were healed for 126 hitpoints.
+09:21:18 You gained 40 mana.
+09:21:18 A darklight striker loses 885 hitpoints due to your critical attack. 
+09:21:18 You were healed for 126 hitpoints.
+09:21:18 You gained 40 mana.
+09:21:18 A walking pillar loses 817 hitpoints due to your critical attack. 
+09:21:18 You were healed for 117 hitpoints.
+09:21:18 You gained 37 mana.
+09:21:18 A walking pillar loses 817 hitpoints due to your critical attack. 
+09:21:18 You were healed for 117 hitpoints.
+09:21:18 You gained 37 mana.
+09:21:18 You healed yourself for 1062 hitpoints.
+09:21:18 You lose 375 hitpoints. 
+09:21:18 Using one of 1325 great mana potions...
+09:21:19 You lose 684 hitpoints due to an attack by a walking pillar. 
+09:21:19 You lose 653 hitpoints due to an attack by a walking pillar. 
+09:21:19 You lose 375 hitpoints. 
+09:21:20 A walking pillar loses 755 hitpoints due to your attack. (perfect shot)
+09:21:20 You were healed for 150 hitpoints.
+09:21:20 You gained 48 mana.
+09:21:20 A darklight source loses 776 hitpoints due to your attack. 
+09:21:20 You were healed for 158 hitpoints.
+09:21:20 You gained 50 mana.
+09:21:20 A darklight striker loses 589 hitpoints due to your attack. 
+09:21:20 You were healed for 120 hitpoints.
+09:21:20 You gained 38 mana.
+09:21:20 Momentum was triggered.
+09:21:20 Using one of 427 great fireball runes...
+09:21:20 A darklight source loses 466 hitpoints due to your attack. 
+09:21:20 You were healed for 78 hitpoints.
+09:21:20 You gained 25 mana.
+09:21:20 A walking pillar loses 468 hitpoints due to your attack. 
+09:21:20 You were healed for 78 hitpoints.
+09:21:20 You gained 25 mana.
+09:21:20 A darklight striker loses 507 hitpoints due to your attack. 
+09:21:20 You were healed for 84 hitpoints.
+09:21:20 You gained 27 mana.
+09:21:20 A darklight matter loses 506 hitpoints due to your attack. 
+09:21:20 You were healed for 84 hitpoints.
+09:21:20 You gained 27 mana.
+09:21:20 You healed yourself for 1176 hitpoints.
+09:21:20 You lose 375 hitpoints. 
+09:21:21 Using one of 1325 great mana potions...
+09:21:21 You gained 220 mana.
+09:21:21 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:21 You lose 375 hitpoints. 
+09:21:22 You lose 448 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:21:22 A walking pillar loses 431 hitpoints due to your attack. 
+09:21:22 You were healed for 88 hitpoints.
+09:21:22 You gained 28 mana.
+09:21:22 A darklight source loses 461 hitpoints due to your attack. 
+09:21:22 You were healed for 94 hitpoints.
+09:21:22 You gained 30 mana.
+09:21:22 A darklight striker loses 365 hitpoints due to your attack. 
+09:21:22 You were healed for 75 hitpoints.
+09:21:22 You gained 24 mana.
+09:21:22 A darklight striker loses 579 hitpoints due to your attack. 
+09:21:22 You were healed for 118 hitpoints.
+09:21:22 You gained 38 mana.
+09:21:22 A walking pillar loses 645 hitpoints due to your attack. 
+09:21:22 You were healed for 132 hitpoints.
+09:21:22 You gained 42 mana.
+09:21:22 A darklight source loses 642 hitpoints due to your attack. 
+09:21:22 You were healed for 131 hitpoints.
+09:21:22 You gained 42 mana.
+09:21:23 You healed yourself for 1148 hitpoints.
+09:21:23 You lose 553 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:21:23 You lose 736 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:23 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:24 You lose 463 hitpoints due to an attack by a darklight striker. (-11% damage reduction by Sap Strength)
+09:21:24 A walking pillar loses 1118 hitpoints due to your attack. 
+09:21:24 You were healed for 228 hitpoints.
+09:21:24 You gained 72 mana.
+09:21:24 A darklight source loses 1138 hitpoints due to your attack. 
+09:21:24 You were healed for 232 hitpoints.
+09:21:24 You gained 74 mana.
+09:21:24 A darklight striker loses 895 hitpoints due to your attack. 
+09:21:24 You were healed for 182 hitpoints.
+09:21:24 You gained 58 mana.
+09:21:24 Using one of 426 great fireball runes...
+09:21:25 A darklight source loses 482 hitpoints due to your attack. 
+09:21:25 You were healed for 98 hitpoints.
+09:21:25 You gained 32 mana.
+09:21:25 A darklight striker loses 524 hitpoints due to your attack. 
+09:21:25 You were healed for 107 hitpoints.
+09:21:25 You gained 34 mana.
+09:21:25 A walking pillar loses 484 hitpoints due to your attack. 
+09:21:25 You were healed for 99 hitpoints.
+09:21:25 You gained 32 mana.
+09:21:27 A walking pillar loses 601 hitpoints due to your attack. 
+09:21:27 You were healed for 100 hitpoints.
+09:21:27 You gained 32 mana.
+09:21:27 A darklight matter loses 597 hitpoints due to your attack. 
+09:21:27 You were healed for 99 hitpoints.
+09:21:27 You gained 32 mana.
+09:21:27 A darklight striker loses 453 hitpoints due to your attack. 
+09:21:27 You were healed for 75 hitpoints.
+09:21:27 You gained 24 mana.
+09:21:27 A darklight source loses 582 hitpoints due to your attack. 
+09:21:27 You were healed for 97 hitpoints.
+09:21:27 You gained 31 mana.
+09:21:28 You lose 937 hitpoints. 
+09:21:29 A walking pillar loses 870 hitpoints due to your attack. 
+09:21:29 You were healed for 124 hitpoints.
+09:21:29 You gained 40 mana.
+09:21:29 A darklight matter loses 876 hitpoints due to your attack. 
+09:21:29 You were healed for 125 hitpoints.
+09:21:29 You gained 40 mana.
+09:21:29 A darklight striker loses 1798 hitpoints due to your attack. (enflame charm)
+09:21:29 A darklight striker loses 702 hitpoints due to your attack. 
+09:21:29 You were healed for 100 hitpoints.
+09:21:29 You gained 32 mana.
+09:21:29 A walking pillar loses 882 hitpoints due to your attack. 
+09:21:29 You were healed for 126 hitpoints.
+09:21:29 You gained 40 mana.
+09:21:29 A darklight source loses 877 hitpoints due to your attack. 
+09:21:29 You were healed for 125 hitpoints.
+09:21:29 You gained 40 mana.
+09:21:29 A walking pillar loses 636 hitpoints due to your attack. 
+09:21:29 You were healed for 91 hitpoints.
+09:21:29 You gained 29 mana.
+09:21:29 A darklight striker loses 570 hitpoints due to your attack. 
+09:21:29 You were healed for 82 hitpoints.
+09:21:29 You gained 26 mana.
+09:21:29 A darklight matter loses 632 hitpoints due to your attack. 
+09:21:29 You were healed for 90 hitpoints.
+09:21:29 You gained 29 mana.
+09:21:29 A darklight source loses 633 hitpoints due to your attack. 
+09:21:29 You were healed for 91 hitpoints.
+09:21:29 You gained 29 mana.
+09:21:29 A walking pillar loses 636 hitpoints due to your attack. 
+09:21:29 You were healed for 91 hitpoints.
+09:21:29 You gained 29 mana.
+09:21:29 You lose 909 hitpoints due to an attack by a darklight source. (-11% damage reduction by Sap Strength)
+09:21:29 You lose 754 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:29 You lose 375 hitpoints. 
+09:21:30 You lose 640 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:30 You were healed by Burkzin for 1723 hitpoints.
+09:21:30 You lose 485 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:21:30 You lose 375 hitpoints. 
+09:21:31 You gained 23713 experience points (Animus mastery, Bakragore's tribute).
+09:21:31 A darklight matter loses 806 hitpoints due to your attack. (perfect shot)
+09:21:31 You were healed for 130 hitpoints.
+09:21:31 You gained 41 mana.
+09:21:31 A walking pillar loses 762 hitpoints due to your attack. 
+09:21:31 You were healed for 126 hitpoints.
+09:21:31 You gained 40 mana.
+09:21:31 A walking pillar loses 766 hitpoints due to your attack. 
+09:21:31 You were healed for 127 hitpoints.
+09:21:31 You gained 40 mana.
+09:21:31 A darklight source loses 764 hitpoints due to your attack. 
+09:21:31 You were healed for 127 hitpoints.
+09:21:31 You gained 40 mana.
+09:21:31 You lose 581 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:31 You lose 375 hitpoints. 
+09:21:32 You gained 23074 experience points (Bakragore's tribute).
+09:21:32 You lose 602 hitpoints due to an attack by a darklight matter. (-11% damage reduction by Sap Strength)
+09:21:32 You lose 375 hitpoints. 
+09:21:33 You were healed by Burkzin for 1639 hitpoints.
+09:21:33 A darklight matter loses 1160 hitpoints due to your attack. (perfect shot)
+09:21:33 You were healed for 215 hitpoints.
+09:21:33 You gained 68 mana.
+09:21:33 A walking pillar loses 1115 hitpoints due to your attack. 
+09:21:33 You were healed for 210 hitpoints.
+09:21:33 You gained 67 mana.
+09:21:33 A walking pillar loses 1156 hitpoints due to your attack. 
+09:21:33 You were healed for 218 hitpoints.
+09:21:33 You gained 69 mana.
+09:21:33 A walking pillar loses 671 hitpoints due to your attack. 
+09:21:33 You were healed for 127 hitpoints.
+09:21:33 You gained 40 mana.
+09:21:33 A darklight matter loses 667 hitpoints due to your attack. 
+09:21:33 You were healed for 126 hitpoints.
+09:21:33 You gained 40 mana.
+09:21:33 A walking pillar loses 671 hitpoints due to your attack. 
+09:21:33 You were healed for 127 hitpoints.
+09:21:33 You gained 40 mana.
+09:21:33 You lose 375 hitpoints. 
+09:21:34 A darklight matter loses 792 hitpoints due to your attack. 
+09:21:34 You were healed for 150 hitpoints.
+09:21:34 You gained 48 mana.
+09:21:34 A walking pillar loses 797 hitpoints due to your attack. 
+09:21:34 You were healed for 150 hitpoints.
+09:21:34 You gained 48 mana.
+09:21:34 A walking pillar loses 797 hitpoints due to your attack. 
+09:21:34 You were healed for 150 hitpoints.
+09:21:34 You gained 48 mana.
+09:21:34 You lose 573 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:34 You lose 598 hitpoints due to an attack by a walking pillar. (-11% damage reduction by Sap Strength)
+09:21:34 You lose 375 hitpoints. 
+09:21:35 You gained 24957 experience points (Bakragore's tribute).
+09:21:35 You lose 586 hitpoints due to an attack by a darklight source. 
+09:21:35 A walking pillar loses 745 hitpoints due to your attack. 
+09:21:35 You were healed for 141 hitpoints.
+09:21:35 You gained 45 mana.
+09:21:35 A darklight matter loses 776 hitpoints due to your attack. 
+09:21:35 You were healed for 146 hitpoints.
+09:21:35 You gained 47 mana.
+09:21:35 A darklight source loses 752 hitpoints due to your attack. 
+09:21:35 You were healed for 142 hitpoints.
+09:21:35 You gained 45 mana.
+09:21:35 You lose 375 hitpoints. 
+09:21:35 Using one of 425 great fireball runes...
+09:21:36 Momentum was triggered.
+09:21:36 You lose 937 hitpoints. 
+09:21:36 You gained 23767 experience points (Animus mastery, Bakragore's tribute).
+09:21:36 You lose 937 hitpoints. 
+09:21:36 You lose 375 hitpoints. 
+09:21:37 A darklight source loses 687 hitpoints due to your attack. 
+09:21:37 You were healed for 192 hitpoints.
+09:21:37 You gained 61 mana.
+09:21:37 A walking pillar loses 704 hitpoints due to your attack. 
+09:21:37 You were healed for 197 hitpoints.
+09:21:37 You gained 63 mana.
+09:21:37 You lose 375 hitpoints. 
+09:21:37 A walking pillar loses 588 hitpoints due to your attack. 
+09:21:37 You were healed for 165 hitpoints.
+09:21:37 You gained 53 mana.
+09:21:37 A darklight source loses 585 hitpoints due to your attack. 
+09:21:37 You were healed for 164 hitpoints.
+09:21:37 You gained 52 mana.
+09:21:38 Momentum was triggered.
+09:21:38 You lose 375 hitpoints. 
+09:21:39 You lose 375 hitpoints. 
+09:21:40 A darklight source loses 562 hitpoints due to your attack. 
+09:21:40 You were healed for 286 hitpoints.
+09:21:40 You gained 90 mana.
+09:21:40 You lose 937 hitpoints. 
+09:21:40 You lose 375 hitpoints. 
+09:21:40 You lose 937 hitpoints. 
+09:21:41 You were healed by Burkzin for 2431 hitpoints.
+09:21:41 You lose 659 hitpoints due to an attack by a darklight source. 
+09:21:41 You lose 375 hitpoints. 
+09:21:42 A darklight source loses 493 hitpoints due to your attack. 
+09:21:42 You were healed for 139 hitpoints.
+09:21:42 You gained 44 mana.
+09:21:42 A walking pillar loses 499 hitpoints due to your attack. 
+09:21:42 You were healed for 140 hitpoints.
+09:21:42 You gained 44 mana.
+09:21:42 You lose 673 hitpoints due to an attack by a walking pillar. 
+09:21:42 A darklight source loses 613 hitpoints due to your attack. 
+09:21:42 You were healed for 172 hitpoints.
+09:21:42 You gained 55 mana.
+09:21:42 A walking pillar loses 616 hitpoints due to your attack. 
+09:21:42 You were healed for 173 hitpoints.
+09:21:42 You gained 55 mana.
+09:21:42 You healed yourself for 1443 hitpoints.
+09:21:42 You lose 375 hitpoints. 
+09:21:43 Using one of 1324 great mana potions...
+09:21:43 You gained 246 mana.
+09:21:43 You healed yourself for 1090 hitpoints.
+09:21:43 You lose 541 hitpoints due to an attack by a darklight source. 
+09:21:43 You lose 375 hitpoints. 
+09:21:43 Using one of 1323 great mana potions...
+09:21:43 You were healed by Burkzin for 2005 hitpoints.
+09:21:44 You lose 653 hitpoints due to an attack by a walking pillar. 
+09:21:44 You gained 209 mana.
+09:21:44 A darklight source loses 823 hitpoints due to your critical attack. 
+09:21:44 You were healed for 230 hitpoints.
+09:21:44 You gained 73 mana.
+09:21:44 A walking pillar loses 786 hitpoints due to your critical attack. 
+09:21:44 You were healed for 220 hitpoints.
+09:21:44 You gained 70 mana.
+09:21:44 A darklight source loses 1333 hitpoints due to your attack. 
+09:21:44 You were healed for 677 hitpoints.
+09:21:44 You gained 214 mana.
+09:21:44 You healed yourself for 1107 hitpoints.
+09:21:44 You lose 375 hitpoints. 
+09:21:45 Using one of 1322 great mana potions...
+09:21:45 You gained 222 mana.
+09:21:45 You gained 24957 experience points (Bakragore's tribute).
+09:21:45 You gained 23074 experience points (Bakragore's tribute).
+09:21:45 You healed yourself for 1379 hitpoints.
+09:21:45 You lose 375 hitpoints. 
+09:21:46 You lose 375 hitpoints. 
+09:21:46 You healed yourself for 1329 hitpoints.
+09:21:47 You lose 375 hitpoints. 
+09:21:47 You were healed by Burkzin for 1592 hitpoints.
+09:21:48 You lose 375 hitpoints. 
+09:21:49 You healed yourself for 375 hitpoints.
+09:21:49 You lose 375 hitpoints. 
+09:21:50 You lose 375 hitpoints. 
+09:21:51 You lose 375 hitpoints. 
+09:21:52 Momentum was triggered.
+09:21:52 You lose 375 hitpoints. 
+09:21:53 You were healed by Burkzin for 1494 hitpoints.
+09:21:53 You lose 375 hitpoints. 
+09:21:54 You lose 375 hitpoints. 
+09:21:55 You lose 375 hitpoints. 
+09:21:56 You lose 375 hitpoints. 
+09:21:57 Using one of 1321 great mana potions...
+09:21:57 You gained 188 mana.
+09:21:57 You lose 375 hitpoints. 
+09:21:58 You lose 375 hitpoints. 
+09:21:59 You lose 375 hitpoints. 
+09:22:00 You lose 375 hitpoints. 
+09:22:01 You lose 375 hitpoints. 
+09:22:02 You lose 375 hitpoints. 
+09:22:03 You lose 375 hitpoints. 

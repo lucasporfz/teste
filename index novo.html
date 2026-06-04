@@ -17,6 +17,7 @@
   <div class="header-actions">
     <button id="btnGuide" class="guide-btn" data-i18n="btn_guide">guia</button>
     <button id="btnValidator" class="guide-btn" data-i18n="btn_validator" style="border-color:var(--blue);color:var(--blue)">validador</button>
+    <button id="btnClassifier" class="guide-btn" data-i18n="btn_classifier" style="border-color:var(--accent);color:var(--accent)">classificador</button>
     <button id="btnLog" class="guide-btn" data-i18n="btn_log" style="border-color:var(--blue);color:var(--blue)">ver log de hunt</button>
     <div class="lang-toggle">
       <button id="langPt" class="active">PT</button>
@@ -184,6 +185,42 @@
       </div>
       <div id="benchResults"></div>
     </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="classifierModal">
+  <div class="modal modal-log">
+    <button class="modal-close" id="closeClassifierModal" aria-label="Fechar">×</button>
+    <h2 style="font-size:20px;font-weight:500;margin:0 0 8px" data-i18n="cls_title">Classificador — hits e dano por componente, detalhado por spell</h2>
+    <p style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin:0 0 16px" data-i18n="cls_desc">
+      Cole o <strong>server log</strong> e o <strong>local chat</strong> da mesma hunt. O local chat informa qual
+      spell foi lançada em cada turno, permitindo separar o componente "spell" por incantação (ex.: Divine Caldera).
+      É só leitura dos dois logs — não há simulação.
+    </p>
+
+    <div class="val-controls" style="margin-bottom:10px">
+      <button id="btnClsLocalFile" style="background:var(--blue);color:#fff" data-i18n="cls_load_local">abrir local chat .txt</button>
+      <input type="file" id="clsLocalFileInput" accept=".txt,.log" style="display:none">
+      <button id="btnClsServerFile" style="background:var(--blue);color:#fff" data-i18n="cls_load_server">abrir server log .txt</button>
+      <input type="file" id="clsServerFileInput" accept=".txt,.log" style="display:none">
+      <button id="btnClassify" style="background:var(--accent)" data-i18n="cls_run">classificar</button>
+      <span id="clsStatus" class="sim-status" data-i18n="cls_status_ready">cole os dois logs abaixo</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div>
+        <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px" data-i18n="cls_local_label">local chat</label>
+        <textarea id="clsLocalInput" data-i18n-placeholder="cls_local_ph" placeholder="Cole aqui o local chat..."
+          style="width:100%;height:140px;background:var(--bg-surface);border:0.5px solid var(--border);border-radius:6px;padding:10px;color:var(--text);font-family:'Menlo','Consolas',monospace;font-size:11px;resize:vertical"></textarea>
+      </div>
+      <div>
+        <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px" data-i18n="cls_server_label">server log</label>
+        <textarea id="clsServerInput" data-i18n-placeholder="cls_server_ph" placeholder="Cole aqui o server log..."
+          style="width:100%;height:140px;background:var(--bg-surface);border:0.5px solid var(--border);border-radius:6px;padding:10px;color:var(--text);font-family:'Menlo','Consolas',monospace;font-size:11px;resize:vertical"></textarea>
+      </div>
+    </div>
+
+    <div id="clsResults" style="display:none"></div>
   </div>
 </div>
 
@@ -1019,6 +1056,8 @@ self.onmessage = function(e) {
 <script src="js/log-generator.js"></script>
 <script src="js/histogram.js"></script>
 <script src="js/validator-comparison.js"></script>
+<script src="js/classifier-parser.js"></script>
+<script src="js/classifier.js"></script>
 <script>
 // ========== Constantes (expostas pro código UI) ==========
 const CRIT_BASE = 1.72;
@@ -4420,6 +4459,89 @@ $('closeValidatorModal').addEventListener('click', closeValidator);
 const valModalBackdrop = $('validatorModal');
 valModalBackdrop.addEventListener('click', (e) => {
   if (e.target === valModalBackdrop) closeValidator();
+});
+
+// ===== Classificador (paralelo ao validador; usa server log + local chat) =====
+function openClassifier() {
+  $('classifierModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeClassifier() {
+  $('classifierModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function clsLoadFile(inputId, targetId) {
+  const file = $(inputId).files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => { $(targetId).value = ev.target.result; };
+  reader.readAsText(file);
+}
+function renderClassifier(res) {
+  const box = $('clsResults');
+  if (!res || res.error) {
+    box.style.display = 'block';
+    box.innerHTML = '<p style="color:var(--danger)">' + t('cls_no_turns') + '</p>';
+    return;
+  }
+  const f2 = x => x.toFixed(2);
+  const rowsHtml = res.rows.map(r =>
+    '<tr><td>' + r.label + '</td><td style="text-align:right">' + r.turns +
+    '</td><td style="text-align:right">' + f2(r.hitsMean) + '</td><td style="text-align:right">' + r.dmgMean + '</td></tr>'
+  ).join('');
+  const kindLabel = { spell: t('cls_kind_spell'), grenade: t('cls_kind_grenade') };
+  const detRows = res.ranked.slice(0, 8).map(g => {
+    const isDmg = g.speaker === res.player && (g.kind === 'spell' || g.kind === 'grenade');
+    return '<tr style="' + (isDmg ? 'color:var(--accent)' : 'color:var(--text-muted)') + '"><td>' +
+      g.speaker + ': ' + g.text + '</td><td style="text-align:right">' + g.covered +
+      '</td><td style="text-align:right">' + (g.recall * 100).toFixed(0) + '%</td><td style="text-align:right">' +
+      (isFinite(g.overcast) ? g.overcast.toFixed(2) : '∞') + '</td><td style="text-align:right">' + g.total +
+      '</td><td>' + (isDmg ? '✔ ' + (kindLabel[g.kind] || '') : '') + '</td></tr>';
+  }).join('');
+  const dmgSummary = res.damageSpells.map(clsSpellNameSafe)
+    .concat((res.grenadeSpells || []).map(x => clsSpellNameSafe(x) + ' (' + t('cls_kind_grenade') + ')'));
+
+  box.style.display = 'block';
+  box.innerHTML =
+    '<p style="font-size:12.5px;margin:6px 0 14px"><strong>' + t('cls_player') + ':</strong> ' +
+      (res.player || '—') + ' &nbsp;·&nbsp; <strong>' + t('cls_dmg_spell') + ':</strong> ' +
+      (dmgSummary.join(', ') || '—') + '</p>' +
+    '<h3 style="font-size:14px;font-weight:500;margin:18px 0 8px;color:var(--accent)">' + t('cls_h_rotation') + '</h3>' +
+    '<table class="cls-table"><thead><tr><th>' + t('cls_th_comp') + '</th><th style="text-align:right">' + t('cls_th_turns') +
+      '</th><th style="text-align:right">' + t('cls_th_hits') + '</th><th style="text-align:right">' + t('cls_th_dmg') +
+      '</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+    '<p style="font-size:11.5px;color:var(--text-muted);margin:6px 0 0">' +
+      t('cls_unmatched').replace('{u}', res.excludedTurns).replace('{n}', res.totalTurns) + '</p>' +
+    '<h3 style="font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--accent)">' + t('cls_h_detection') + '</h3>' +
+    '<table class="cls-table"><thead><tr><th>' + t('cls_th_incant') + '</th><th style="text-align:right">' + t('cls_th_covered') +
+      '</th><th style="text-align:right">recall</th><th style="text-align:right">overcast</th><th style="text-align:right">' +
+      t('cls_th_total') + '</th><th></th></tr></thead><tbody>' + detRows + '</tbody></table>';
+}
+function clsSpellNameSafe(text) {
+  return typeof clsSpellLabel === 'function' ? clsSpellLabel(text) : text;
+}
+
+$('btnClassifier').addEventListener('click', openClassifier);
+$('closeClassifierModal').addEventListener('click', closeClassifier);
+const clsModalBackdrop = $('classifierModal');
+clsModalBackdrop.addEventListener('click', (e) => { if (e.target === clsModalBackdrop) closeClassifier(); });
+$('btnClsServerFile').addEventListener('click', () => $('clsServerFileInput').click());
+$('btnClsLocalFile').addEventListener('click', () => $('clsLocalFileInput').click());
+$('clsServerFileInput').addEventListener('change', () => clsLoadFile('clsServerFileInput', 'clsServerInput'));
+$('clsLocalFileInput').addEventListener('change', () => clsLoadFile('clsLocalFileInput', 'clsLocalInput'));
+$('btnClassify').addEventListener('click', () => {
+  const sv = $('clsServerInput').value.trim();
+  const lc = $('clsLocalInput').value.trim();
+  if (!sv || !lc) { $('clsStatus').textContent = t('cls_status_need_both'); return; }
+  $('clsStatus').textContent = t('cls_status_running');
+  try {
+    const res = classifyWithLocalChat(sv, lc);
+    renderClassifier(res);
+    $('clsStatus').textContent = t('cls_status_done');
+  } catch (err) {
+    $('clsStatus').textContent = 'erro: ' + err.message;
+    console.error(err);
+  }
 });
 
 $('btnLoadFile').addEventListener('click', () => $('valFileInput').click());
