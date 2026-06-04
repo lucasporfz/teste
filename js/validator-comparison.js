@@ -38,6 +38,7 @@ function runValidatorComparison(data) {
     paladinArrowCoverage: data.paladinArrowCoverage || 1,
     paladinSpellCoverage: data.paladinSpellCoverage || 1,
     paladinRuneCoverage: data.paladinRuneCoverage || 1,
+    paladinGrenadeCoverage: data.paladinGrenadeCoverage || 1,
     spawnCurve: 2.0,
     rpGrenadeDmg: data.rpGrenadeDmg || 0,
     rpGrenadeIntervalSeconds: data.rpGrenadeIntervalSeconds || 24,
@@ -105,6 +106,7 @@ function runValidatorComparison(data) {
     paladinArrowCoverage: data.paladinArrowCoverage || 1,
     paladinSpellCoverage: data.paladinSpellCoverage || 1,
     paladinRuneCoverage: data.paladinRuneCoverage || 1,
+    paladinGrenadeCoverage: data.paladinGrenadeCoverage || 1,
     rpGrenadeMode: data.isPaladin,
     mageUeMode: data.isMage && data.mageUeDetected,
     rpGrenadeDmg: data.rpGrenadeDmg || Math.max(...data.dmgCycle),
@@ -263,7 +265,6 @@ function runValidatorComparison(data) {
   const rpCycleFillDiag = extractObservedBoxTransitions(data.temporalSeries || [], data.exitP5, data.boxSizeP95);
   const rpCycleFillTime = rpCycleFillDiag.observedBoxTime || data.boxChangeTime;
   const rpCadenceProfile = buildRpCadenceProfile();
-  const rpGrenadeCycleConfig = withRpCycleFlags(rpGrenadeCycleBase, { cycleTime: rpCycleTime, mobBudget: rpCycleMobBudget, fillTime: rpCycleFillTime });
   const rpGrenadeCycleHybridConfig = withRpCycleFlags(rpSplitConfig, { cycleTime: rpCycleTime, mobBudget: rpCycleMobBudget, fillTime: rpCycleFillTime, anchor: 'grenade_cycle_hybrid' });
   const rpTwoPhaseCycleConfig = withRpCycleFlags(rpSplitConfig, { cycleTime: rpCycleTime, mobBudget: rpCycleMobBudget, fillTime: Math.min(rpCycleFillTime, Math.max(2.25, rpCycleTime * 0.35)), twoPhase: true, anchor: 'grenade_cycle_two_phase' });
   const rpMultiPulseCycleConfig = withRpCycleFlags(rpSplitConfig, {
@@ -513,7 +514,6 @@ function runValidatorComparison(data) {
     });
     if (data.isPaladin) {
       candidates = [
-        { key: 'rp_coverage', label: t('val_rp_model_coverage'), cfg: rpSplitConfig, sim: rpSplitResult[0], pref: 1, strength: Math.round((rpSplitConfig.paladinArrowCoverage + rpSplitConfig.paladinSpellCoverage) * 50) },
         ...(intelOn ? [{ key: 'flow_no_time', label: t('val_model_flow_no_time'), cfg: flowConfig, sim: flowResult[0], pref: 2, strength: 100 }] : []),
         { key: 'rp_split', label: t('val_model_rp_split'), cfg: rpSplitConfig, sim: rpSplitResult[0], pref: 6, strength: Math.round((rpSplitConfig.paladinArrowCoverage + rpSplitConfig.paladinSpellCoverage) * 50) },
         { key: 'rp_grenade_cycle_hybrid', label: t('val_model_rp_grenade_cycle_hybrid'), cfg: rpGrenadeCycleHybridConfig, sim: rpGrenadeCycleHybridResult[0], pref: 6.6, strength: Math.round((rpGrenadeCycleHybridConfig.paladinArrowCoverage + rpGrenadeCycleHybridConfig.paladinSpellCoverage) * 50) || 100 },
@@ -561,7 +561,12 @@ function runValidatorComparison(data) {
     for (const c of candidates) {
       if (Number.isFinite(c.diagnosticScore)) c.score = c.diagnosticScore - c.pref * 0.05;
     }
-    const passable = candidates.filter(c => c.passXp);
+    // Modelos de artifício (forçam o número por construção: box inflado p/ alvo de hits,
+    // replay da granada, orçamento latente por heurística) ficam fora do 'auto' — continuam
+    // selecionáveis na mão e na tabela de diagnóstico, mas não vencem a escolha automática.
+    const DIAGNOSTIC_ONLY = new Set(['rp_hit_target_coverage', 'rp_hit_target_cycle', 'rp_grenade_peak_residual', 'rp_visible_latent_budget']);
+    candidates.forEach(c => { c.diagnosticOnly = DIAGNOSTIC_ONLY.has(c.key); });
+    const passable = candidates.filter(c => c.passXp && !c.diagnosticOnly);
     passable.sort((a, b) => a.score - b.score);
     const selectedModel = ($('valModelSelect') && $('valModelSelect').value) || 'auto';
     const findCandidate = key => candidates.find(c => c.key === key) || null;
@@ -574,7 +579,6 @@ function runValidatorComparison(data) {
       selectedModel === 'flow_no_time' ? findCandidate('flow_no_time') :
       selectedModel === 'rp_avg' ? bestBy(c => c.key.indexOf('rp_distribution_') === 0) :
       selectedModel === 'rp_split' ? findCandidate('rp_split') :
-      selectedModel === 'rp_grenade_cycle' ? findCandidate('rp_grenade_cycle') :
       selectedModel === 'rp_grenade_cycle_hybrid' ? findCandidate('rp_grenade_cycle_hybrid') :
       selectedModel === 'rp_two_phase_cycle' ? findCandidate('rp_two_phase_cycle') :
       selectedModel === 'rp_multi_pulse_cycle' ? findCandidate('rp_multi_pulse_cycle') :
@@ -606,6 +610,8 @@ function runValidatorComparison(data) {
       boxVariance: chosen.cfg.boxVariance || 0,
       paladinArrowCoverage: chosen.cfg.paladinArrowCoverage || 1,
       paladinSpellCoverage: chosen.cfg.paladinSpellCoverage || 1,
+      paladinRuneCoverage: chosen.cfg.paladinRuneCoverage || 1,
+      paladinGrenadeCoverage: chosen.cfg.paladinGrenadeCoverage || 1,
       rpGrenadeMode: !!chosen.cfg.rpGrenadeMode,
       mageUeMode: !!chosen.cfg.mageUeMode,
       rpGrenadeDmg: chosen.cfg.rpGrenadeDmg || 0,

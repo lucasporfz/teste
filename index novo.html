@@ -910,10 +910,11 @@ function simSession(seed, dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladin
       if (flags.var) base *= 0.8 + rng() * 0.4;
       if (rng() < CRIT_RATE) base *= critMult;
         const residualHits = resolveRpGrenadeResidualHits(aliveLen, flags, rng);
+        const grenadeCov = rpMix && rpMix.grenadeCoverage > 0 ? rpMix.grenadeCoverage : (coverageMode === 'rp_split' ? paladinSpellCoverage : 0);
         const aoeHits = residualHits != null
           ? residualHits
-          : coverageMode === 'rp_split'
-          ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, paladinSpellCoverage)
+          : flags.paladin && grenadeCov > 0
+          ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, grenadeCov)
           : resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode, aoeBoxP90, exitThreshold, aoeCoverage);
       shuffleAoeTargets(aliveHp, aliveLen, aoeHits, rng);
       let writeIdx = 0;
@@ -982,7 +983,7 @@ self.onmessage = function(e) {
   const cfg = e.data;
   const {
     baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp,
-    boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, paladinRuneCoverage = 1, spawnCurve = SPAWN_CURVE, rpGrenadeMode = false, mageUeMode = false,
+    boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, paladinRuneCoverage = 1, paladinGrenadeCoverage = 1, spawnCurve = SPAWN_CURVE, rpGrenadeMode = false, mageUeMode = false,
     rpGrenadeDmg = 0, rpGrenadeDelaySeconds = RP_GRENADE_DELAY_SECONDS, rpGrenadeIntervalSeconds = RP_GRENADE_DEFAULT_INTERVAL_SECONDS,
     mageUeDmg = 0, mageUeIntervalSeconds = MAGE_UE_DEFAULT_INTERVAL_SECONDS, mageUeLockoutSeconds = UE_COOLDOWN_SECONDS,
     rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0,
@@ -1001,7 +1002,7 @@ self.onmessage = function(e) {
     const levelGrenadeDmg = rpGrenadeDmg ? rpGrenadeDmg + inc : 0;
     const levelUeDmg = mageUeDmg ? mageUeDmg + inc : 0;
     // Mistura rune/spell observada, com dano por nível (+inc) e séries de cobertura próprias.
-    const rpMix = { share: rpRuneShare, runAfterRune: rpRuneAfterRune, runAfterSpell: rpRuneAfterSpell, spellDmg: rpSpellDmgSim ? rpSpellDmgSim + inc : 0, runeDmg: rpRuneDmgSim ? rpRuneDmgSim + inc : 0, spellCoverage: paladinSpellCoverage, runeCoverage: paladinRuneCoverage };
+    const rpMix = { share: rpRuneShare, runAfterRune: rpRuneAfterRune, runAfterSpell: rpRuneAfterSpell, spellDmg: rpSpellDmgSim ? rpSpellDmgSim + inc : 0, runeDmg: rpRuneDmgSim ? rpRuneDmgSim + inc : 0, spellCoverage: paladinSpellCoverage, runeCoverage: paladinRuneCoverage, grenadeCoverage: paladinGrenadeCoverage };
     result[inc] = simulateLevel(dmgs, charmDmg, critMult, autoDmg, reflectDmg, paladinArrowDmg, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags, levelSeed, nSessions, sessionSeconds, presentTbl, postWalkTbl, aoeHitSamples, coverageMode, aoeBoxP90, aoeCoverage, boxVariance, paladinArrowCoverage, paladinSpellCoverage, levelGrenadeDmg, rpGrenadeDelaySeconds, rpGrenadeIntervalSeconds, levelUeDmg, mageUeIntervalSeconds, mageUeLockoutSeconds, rpMix);
     self.postMessage({ type: 'progress', level: inc });
   }
@@ -1103,7 +1104,7 @@ function partitionLevels(nLevels, nWorkers) {
 // ========== Fallback: simulação inline (sem workers) ==========
 // Cópia da lógica do worker, rodando na main thread com yields pra não travar UI
 function runSimInline(config, onProgress) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, paladinRuneCoverage = 1, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, mobXp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, levels = null, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, paladinRuneCoverage = 1, paladinGrenadeCoverage = 1, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed', nSessions = N_SESSIONS, sessionSeconds = SESSION_SECONDS } = config;
   const flags = { ...inputFlags, rpGrenadeMode: !!rpGrenadeMode, mageUeMode: !!mageUeMode };
   const CHARM_RATE = 0.1, CRIT_RATE = 0.1, TURN_DURATION = 2.25;
   const POST_WALK_SPAWN_TURNS = 3, POST_WALK_SPAWN_CURVE = 2.2, UE_COOLDOWN_SECONDS = 4;
@@ -1557,6 +1558,8 @@ function runSimInline(config, onProgress) {
         const residualHits = resolveRpGrenadeResidualHits(aliveLen, flags, rng);
         const aoeHits = residualHits != null
           ? residualHits
+          : flags.paladin && paladinGrenadeCoverage > 0
+          ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, paladinGrenadeCoverage)
           : coverageMode === 'rp_split'
           ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, paladinSpellCoverage)
           : resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode, aoeBoxP90, exitThreshold, aoeCoverage);
@@ -1730,6 +1733,7 @@ function getInputs(simState = currentSimState) {
     paladinArrowCoverage: state.paladinArrowCoverage,
     paladinSpellCoverage: state.paladinSpellCoverage,
     paladinRuneCoverage: state.paladinRuneCoverage,
+    paladinGrenadeCoverage: state.paladinGrenadeCoverage,
     rpGrenadeMode: rpMode && specialAsThird,
     mageUeMode: mageMode && specialAsThird,
     rpGrenadeDmg: state.rpGrenadeDmg || (rpMode ? specialDmgFromInputs : 0),
@@ -2283,7 +2287,6 @@ function renderValidatorExtracted(data) {
         .replace('{unr}', ((rawDiag.unresolvedRate || 0) * 100).toFixed(1).replace('.', dec));
 
   const cards = [
-    { lbl: t('val_card_vocation'), val: data.isMage ? t('voc_mage') : (data.isPaladin ? t('voc_rp') : t('voc_ek')), sub: data.isMage ? t('val_sub_mage_ue') : (data.isPaladin ? t('val_sub_pal_on') : t('val_sub_pal_off')) },
     { lbl: t('val_card_duration'), val: durStr,
       sub: t('val_sub_events_turns').replace('{n}', data.eventCount).replace('{t}', data.nTurns) },
     { lbl: t('val_card_xph'), val: fmtNum(data.xphReal) + ' XP/h',
@@ -2325,7 +2328,6 @@ function renderValidatorExtracted(data) {
              + (data.rpGrenadeDmgSim ? ' · granada ' + Math.round(data.rpGrenadeDmgSim) : ''),
           sub: t('val_sub_rp_damages_sim') }] : []),
     { lbl: t('val_card_pal_arrow'), val: Math.round(data.paladinArrowDmg || 0), sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_arrow')) : t('val_sub_pal_off') },
-    { lbl: t('val_card_pal_spell'), val: data.isPaladin ? '[' + data.dmgCycle.join(', ') + ']' : '—', sub: data.isPaladin ? (data.paladinSplitConfidence === 'none' ? '<span style="color:var(--amber)">' + t('val_sub_pal_split_low') + '</span>' : t('val_sub_pal_spell')) : t('val_sub_pal_off') },
     { lbl: t('val_card_pal_split_method'), val: data.isPaladin ? ((data.paladinSplitMethod || 'none') + ' · ' + (data.paladinSplitConfidence || 'none')) : '—', sub: data.isPaladin ? (data.paladinSplitMethod === 'order' ? 'arrow vem antes da spell no turno' : 'fallback por cluster de dano') : t('val_sub_pal_off') },
     { lbl: t('val_card_auto_dmg'), val: Math.round(data.autoDmg || 0), sub: data.isPaladin ? t('val_sub_pal_off') : t('val_sub_auto_dmg') },
     { lbl: t('val_card_reflect_dmg'), val: data.reflectDmg ? Math.round(data.reflectDmg) : '—', sub: data.reflectDmg ? t('val_sub_reflect_dmg') + ' · ' + (data.reflectHitCount || 0) + ' hits' : t('val_sub_pal_off') },
@@ -2405,13 +2407,13 @@ function renderValidatorExtracted(data) {
     if (data.isPaladin && c.lbl === t('val_card_dmg_cycle')) return false;
     if (c.lbl === t('val_card_reflect_dmg') && !data.reflectDmg) return false;
     if (!data.isPaladin && !data.isMage && [
-      t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'), t('val_card_arrow_hits'),
+      t('val_card_pal_arrow'), t('val_card_pal_split_method'), t('val_card_arrow_hits'),
       t('val_card_spell_hits'), t('val_card_rune_hits'), t('val_card_grenade_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
       t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
     if (data.isPaladin && [t('val_card_auto_dmg'), t('val_card_reflect_dmg'), t('val_card_mage_ue'), t('val_card_ue_cooldown'), t('val_card_mage_box_target'), t('val_card_post_walk_spawn'), t('val_card_paladin'), t('val_card_pal_split_method')].includes(c.lbl)) return false;
     if (data.isMage && [
-      t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_spell'), t('val_card_pal_split_method'),
+      t('val_card_reflect_dmg'), t('val_card_pal_arrow'), t('val_card_pal_split_method'),
       t('val_card_arrow_hits'), t('val_card_spell_hits'), t('val_card_rune_hits'), t('val_card_grenade_hits'), t('val_card_arrow_coverage'), t('val_card_spell_coverage'),
       t('val_card_post_walk_spawn'), t('val_card_paladin')
     ].includes(c.lbl)) return false;
@@ -2670,7 +2672,7 @@ const VALIDATOR_TURN_DURATION = 2.25;
 // Roda N sessões de simulação (inline, sem worker) e coleta a distribuição de
 // mobs acertados por turno — usado para sobrepor o histograma simulado ao do log real.
 function collectSimHitDistribution(config, nSessions) {
-  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneStartWithRune = true, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, paladinRuneCoverage = 1, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed' } = config;
+  const { baseDmgs, charmDmg, critMult, autoDmg = 0, reflectDmg = 0, paladinArrowDmg = 0, mobHp, boxSize, exitThreshold, boxChangeTime, flags: inputFlags = {}, runSeed, aoeHitSamples = [], coverageMode = 'none', aoeBoxP90 = 0, aoeCoverage = 1, boxVariance = 0, paladinArrowCoverage = 1, paladinSpellCoverage = 1, spawnCurve = 2.0, rpGrenadeMode = false, mageUeMode = false, rpGrenadeDmg = 0, rpGrenadeDelaySeconds = 3, rpGrenadeIntervalSeconds = 24, rpRuneStartWithRune = true, rpRuneShare = 0, rpRuneAfterRune = 0, rpRuneAfterSpell = 0, rpSpellDmgSim = 0, rpRuneDmgSim = 0, paladinRuneCoverage = 1, paladinGrenadeCoverage = 1, mageUeDmg = 0, mageUeIntervalSeconds = 50, mageUeLockoutSeconds = 4, startMode = 'fresh', intelSpawnModel = 'timed' } = config;
   const CHARM_R = 0.1, CRIT_R = 0.1, TD = 2.25;
   const POST_WALK_WAVE_PCTS = [0, 0.30, 0.65, 1.00], UE_COOLDOWN_SECONDS = 4;
   const RP_GRENADE_DELAY_SECONDS = 3, RP_GRENADE_DEFAULT_INTERVAL_SECONDS = 24, MAGE_UE_DEFAULT_INTERVAL_SECONDS = 50;
@@ -3142,6 +3144,8 @@ function collectSimHitDistribution(config, nSessions) {
         if (residualHits != null) histResidualGrenade = true;
         const aoeHits = residualHits != null
           ? residualHits
+          : flags.paladin && paladinGrenadeCoverage > 0
+          ? resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, 'screen_ratio', aoeBoxP90, exitThreshold, paladinGrenadeCoverage)
           : resolveAoeCoverage(aliveLen, flags, aoeHitSamples, rng, coverageMode === 'rp_split' ? 'screen_ratio' : coverageMode, aoeBoxP90, exitThreshold, coverageMode === 'rp_split' ? paladinSpellCoverage : aoeCoverage);
         const grenadePeakRaw = flags && flags.rpGrenadePeakRaw ? Math.max(0, Math.round(flags.rpGrenadePeakRaw + (Math.floor(rng() * 3) - 1))) : 0;
         const grenadeVisualHits = grenadePeakRaw > 0 ? grenadePeakRaw : aoeHits;
@@ -3505,13 +3509,15 @@ function scoreCandidateByVocation(realDiag, candidateDiag, data) {
     const v = Number.isFinite(value) ? Math.max(0, value) : 0;
     parts.push({ name, value: v, weight, contribution: v * weight });
   };
-  add('xp', Math.abs(candidateDiag.xphErr || 0) / 100, 35);
-  add('hist', (candidateDiag.histDist || 0) / 100, data.isPaladin ? 18 : 22);
+  // Paladino: xp deixa de dominar (35→18) e os termos estruturais (hist/box/special/hits)
+  // sobem, p/ o 'auto' escolher o modelo que casa a geometria do log, não o que espreme XP.
+  add('xp', Math.abs(candidateDiag.xphErr || 0) / 100, data.isPaladin ? 18 : 35);
+  add('hist', (candidateDiag.histDist || 0) / 100, data.isPaladin ? 20 : 22);
   add('kills', relativeDiff(realDiag.killsPerHour, candidateDiag.killsPerHour), 12);
-  add('box', relativeDiff(realDiag.observedBoxTime, candidateDiag.observedBoxTime), data.isPaladin ? 18 : 12);
+  add('box', relativeDiff(realDiag.observedBoxTime, candidateDiag.observedBoxTime), data.isPaladin ? 22 : 12);
   if (data.isPaladin) {
-    add('special', relativeDiff(realDiag.specialInterval, candidateDiag.specialInterval), 18);
-    add('hits', relativeDiff(realDiag.meanHits, candidateDiag.meanHits), 10);
+    add('special', relativeDiff(realDiag.specialInterval, candidateDiag.specialInterval), 20);
+    add('hits', relativeDiff(realDiag.meanHits, candidateDiag.meanHits), 12);
     add('subpeaks', relativeDiff(realDiag.cadenceSubpeaks, candidateDiag.cadenceSubpeaks), 8);
     add('entryFreq', relativeDiff(realDiag.cadenceEntryShare, candidateDiag.cadenceEntryShare), 7);
     add('entryRun', relativeDiff(realDiag.cadenceEntryRun, candidateDiag.cadenceEntryRun), 5);

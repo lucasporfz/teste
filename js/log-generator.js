@@ -25,6 +25,7 @@ function buildLogInputFromConfig(config) {
     paladinArrowCoverage: cfg.paladinArrowCoverage || 1,
     paladinSpellCoverage: cfg.paladinSpellCoverage || 1,
     paladinRuneCoverage: cfg.paladinRuneCoverage || 1,
+    paladinGrenadeCoverage: cfg.paladinGrenadeCoverage || 1,
     rpGrenadeMode: !!cfg.rpGrenadeMode,
     mageUeMode: !!cfg.mageUeMode,
     rpGrenadeDmg: cfg.rpGrenadeDmg || 0,
@@ -639,8 +640,15 @@ function generateHuntLog(level, maxTurns, seed, explicitConfig = null) {
       const charm = rollCharm('grenade');
       charmHits.push(...charm.hits);
       charmKills += charm.kills;
-      inp._currentComponentCoverage = inp.paladinSpellCoverage || 1;
+      // Granada honesta: fração de cobertura observada da própria granada sobre os vivos.
+      if (flags.paladin && (inp.paladinGrenadeCoverage || 0) > 0) {
+        inp._currentComponentCoverage = inp.paladinGrenadeCoverage;
+        inp._useComponentCoverage = true;
+      } else {
+        inp._currentComponentCoverage = inp.paladinSpellCoverage || 1;
+      }
       components.push(rollAttack('grenade', pendingGrenade, true));
+      inp._useComponentCoverage = false;
       pendingGrenade = 0;
     }
     delete inp._currentComponentCoverage;
