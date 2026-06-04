@@ -28,10 +28,10 @@ console.log('jogador: ' + (res.player || '—') + '   | spell: ' + (res.damageSp
   '   | granada: ' + ((res.grenadeSpells || []).join(', ') || '—'));
 
 console.log('\n--- ROTAÇÃO (tabela única) ---');
-console.log('  turnos  hits méd  dano méd  componente/spell');
+console.log('  turnos  hits méd  dano base  dano efet  componente/spell');
 for (const r of res.rows) {
   console.log('  ' + String(r.turns).padStart(6) + '  ' + r.hitsMean.toFixed(2).padStart(8) +
-    '  ' + String(r.dmgMean).padStart(8) + '  ' + r.label);
+    '  ' + String(r.dmgBase).padStart(9) + '  ' + String(r.dmgEff).padStart(9) + '  ' + r.label);
 }
 console.log('  (' + res.excludedTurns + '/' + res.totalTurns + ' turnos excluídos por não alinhar 100% os 2 logs)');
 

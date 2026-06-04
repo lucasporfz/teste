@@ -14,25 +14,178 @@
 // Tabela interna de spells: nome de exibição (null = mostrar a incantação) + tipo.
 // tipo 'attack' entra sempre na tabela; 'heal'/'support' nunca. Incantação
 // desconhecida cai no heurístico data-driven (turn-locked).
-// tipo: 'attack' (spell de dano, offset 0) · 'grenade' (granada: cast ~3s antes da
-// explosão) · 'heal'/'support' (nunca entram). name null = mostrar a incantação.
+// Tabela COMPLETA de spells (tibia.com/library + TibiaWiki), TODAS as vocações.
+// tipo: 'attack' (spell de dano) · 'grenade' (Divine Grenade: explode ~3s após o
+// cast) · 'heal'/'support' (nunca entram como dano). Incantações com alvo entre
+// aspas (exura sio "nome") são normalizadas removendo as aspas antes da consulta.
 const CLS_SPELLS = {
-  // ataques de paladino (tibia.com/library) — holy
-  'exori san':           { name: 'Divine Missile',        type: 'attack' },
-  'exori con':           { name: 'Ethereal Spear',        type: 'attack' },
-  'exori infir con':     { name: 'Lesser Ethereal Spear', type: 'attack' },
-  'exori gran con':      { name: 'Strong Ethereal Spear', type: 'attack' },
-  'utori san':           { name: 'Holy Flash',            type: 'attack' },
-  'exevo mas san':       { name: 'Divine Caldera',        type: 'attack' },
-  'exevo tempo mas san': { name: 'Divine Grenade',        type: 'grenade' },
-  // suporte / cura (nunca entram como dano)
-  'utito tempo san':     { name: 'Sharpshooter',          type: 'support' },
-  'exana amp res':       { name: null,                    type: 'support' },
-  'utevo grav san':      { name: null,                    type: 'support' },
-  'utamo tempo san':     { name: null,                    type: 'support' },
-  'utani hur':           { name: 'Haste',                 type: 'support' },
-  'exura san':           { name: 'Divine Healing',        type: 'heal' },
-  'exura gran san':      { name: 'Divine Healing',        type: 'heal' },
+  // ---- Paladin ----
+  'exori san':            { name: 'Divine Missile',         type: 'attack' },
+  'exori con':            { name: 'Ethereal Spear',         type: 'attack' },
+  'exori infir con':      { name: 'Lesser Ethereal Spear',  type: 'attack' },
+  'exori gran con':       { name: 'Strong Ethereal Spear',  type: 'attack' },
+  'exori dir moe':        { name: 'Ethereal Barrage',       type: 'attack' },
+  'exori dir san':        { name: 'Divine Barrage',         type: 'attack' },
+  'utori san':            { name: 'Holy Flash',             type: 'attack' },
+  'exevo mas san':        { name: 'Divine Caldera',         type: 'attack' },
+  'exevo tempo mas san':  { name: 'Divine Grenade',         type: 'grenade' },
+  'exura san':            { name: 'Divine Healing',         type: 'heal' },
+  'exura gran san':       { name: 'Salvation',              type: 'heal' },
+  'utevo grav san':       { name: 'Divine Empowerment',     type: 'support' },
+  'exana amp res':        { name: 'Divine Dazzle',          type: 'support' },
+  'utito tempo san':      { name: 'Sharpshooter',           type: 'support' },
+  'utamo tempo san':      { name: 'Swift Foot',             type: 'support' },
+  'utori hur':            { name: 'Divine Defiance',        type: 'support' },
+  'exevo infir con':      { name: 'Arrow Call',             type: 'support' },
+  'exevo con':            { name: 'Conjure Arrow',          type: 'support' },
+  'exevo con flam':       { name: 'Conjure Explosive Arrow', type: 'support' },
+  'exeta con':            { name: 'Enchant Spear',          type: 'support' },
+  'exana ina':            { name: 'Cancel Invisibility',    type: 'support' },
+  'exana mort':           { name: 'Cure Curse',             type: 'heal' },
+  'utamo mas sio':        { name: 'Protect Party',          type: 'support' },
+  'uteta res sac':        { name: 'Avatar of Light',        type: 'support' },
+  'utevo gran res sac':   { name: 'Summon Paladin Familiar', type: 'support' },
+  // ---- Knight ----
+  'exori':                { name: 'Berserk',                type: 'attack' },
+  'exori gran':           { name: 'Fierce Berserk',         type: 'attack' },
+  'exori mas':            { name: 'Groundshaker',           type: 'attack' },
+  'exori min':            { name: 'Front Sweep',            type: 'attack' },
+  'exori infir min':      { name: 'Lesser Front Sweep',     type: 'attack' },
+  'exori ico':            { name: 'Brutal Strike',          type: 'attack' },
+  'exori gran ico':       { name: 'Annihilation',           type: 'attack' },
+  'exori hur':            { name: 'Whirlwind Throw',        type: 'attack' },
+  'exori amp kor':        { name: "Executioner's Throw",    type: 'attack' },
+  'utori kor':            { name: 'Inflict Wound',          type: 'attack' },
+  'exori ico scu':        { name: 'Shield Bash',            type: 'attack' },
+  'exori scu':            { name: 'Shield Slam',            type: 'attack' },
+  'utito tempo':          { name: 'Blood Rage',             type: 'support' },
+  'utamo tempo':          { name: 'Protector',              type: 'support' },
+  'exeta res':            { name: 'Challenge',              type: 'support' },
+  'exeta amp res':        { name: 'Chivalrous Challenge',   type: 'support' },
+  'utani tempo hur':      { name: 'Charge',                 type: 'support' },
+  'utito mas sio':        { name: 'Train Party',            type: 'support' },
+  'uteta res eq':         { name: 'Avatar of Steel',        type: 'support' },
+  'utevo gran res eq':    { name: 'Summon Knight Familiar', type: 'support' },
+  'exura ico':            { name: 'Wound Cleansing',        type: 'heal' },
+  'exura med ico':        { name: 'Fair Wound Cleansing',   type: 'heal' },
+  'exura gran ico':       { name: 'Intense Wound Cleansing', type: 'heal' },
+  'exura infir ico':      { name: 'Bruise Bane',            type: 'heal' },
+  'exana kor':            { name: 'Cure Bleeding',          type: 'heal' },
+  // ---- Sorcerer ----
+  'exori vis':            { name: 'Energy Strike',          type: 'attack' },
+  'exori gran vis':       { name: 'Strong Energy Strike',   type: 'attack' },
+  'exori max vis':        { name: 'Ultimate Energy Strike', type: 'attack' },
+  'exori amp vis':        { name: 'Lightning',              type: 'attack' },
+  'exori flam':           { name: 'Flame Strike',           type: 'attack' },
+  'exori gran flam':      { name: 'Strong Flame Strike',    type: 'attack' },
+  'exori max flam':       { name: 'Ultimate Flame Strike',  type: 'attack' },
+  'exori min flam':       { name: "Apprentice's Strike",    type: 'attack' },
+  'exori mort':           { name: 'Death Strike',           type: 'attack' },
+  'exori infir vis':      { name: 'Buzz',                   type: 'attack' },
+  'exevo vis lux':        { name: 'Energy Beam',            type: 'attack' },
+  'exevo gran vis lux':   { name: 'Great Energy Beam',      type: 'attack' },
+  'exevo vis hur':        { name: 'Energy Wave',            type: 'attack' },
+  'exevo flam hur':       { name: 'Fire Wave',              type: 'attack' },
+  'exevo gran flam hur':  { name: 'Great Fire Wave',        type: 'attack' },
+  'exevo gran mas flam':  { name: "Hell's Core",            type: 'attack' },
+  'exevo gran mas vis':   { name: 'Rage of the Skies',      type: 'attack' },
+  'exevo max mort':       { name: 'Great Death Beam',       type: 'attack' },
+  'exevo mort ora':       { name: 'Death Echo',             type: 'attack' },
+  'utori mort':           { name: 'Curse',                  type: 'attack' },
+  'utori vis':            { name: 'Electrify',              type: 'attack' },
+  'utori flam':           { name: 'Ignite',                 type: 'attack' },
+  'uteta mort':           { name: 'Master of Decay',        type: 'support' },
+  'uteta flam':           { name: 'Master of Flames',       type: 'support' },
+  'uteta vis':            { name: 'Master of Thunder',      type: 'support' },
+  'exori moe':            { name: 'Expose Weakness',        type: 'support' },
+  'exori kor':            { name: 'Sap Strength',           type: 'support' },
+  'exori kor tempo':      { name: 'Aura of Exposed Weakness', type: 'support' },
+  'exori moe tempo':      { name: 'Aura of Sapped Strength', type: 'support' },
+  'uteta res ven':        { name: 'Avatar of Storm',        type: 'support' },
+  'exana vita':           { name: 'Cancel Magic Shield',    type: 'support' },
+  'utamo vita':           { name: 'Magic Shield',           type: 'support' },
+  'utana vid':            { name: 'Invisible',              type: 'support' },
+  'utori mas sio':        { name: 'Enchant Party',          type: 'support' },
+  'exevo gran mort':      { name: 'Conjure Wand of Darkness', type: 'support' },
+  'utevo gran res ven':   { name: 'Summon Sorcerer Familiar', type: 'support' },
+  // ---- Druid ----
+  'exori frigo':          { name: 'Ice Strike',             type: 'attack' },
+  'exori gran frigo':     { name: 'Strong Ice Strike',      type: 'attack' },
+  'exori max frigo':      { name: 'Ultimate Ice Strike',    type: 'attack' },
+  'exori tera':           { name: 'Terra Strike',           type: 'attack' },
+  'exori gran tera':      { name: 'Strong Terra Strike',    type: 'attack' },
+  'exori max tera':       { name: 'Ultimate Terra Strike',  type: 'attack' },
+  'exori moe ico':        { name: 'Physical Strike',        type: 'attack' },
+  'exevo frigo hur':      { name: 'Ice Wave',               type: 'attack' },
+  'exevo gran frigo hur': { name: 'Strong Ice Wave',        type: 'attack' },
+  'exevo tera hur':       { name: 'Terra Wave',             type: 'attack' },
+  'exevo gran mas frigo': { name: 'Eternal Winter',         type: 'attack' },
+  'exevo gran mas tera':  { name: 'Wrath of Nature',        type: 'attack' },
+  'exevo ulus frigo':     { name: 'Ice Burst',              type: 'attack' },
+  'exevo ulus tera':      { name: 'Terra Burst',            type: 'attack' },
+  'exevo fur frigo':      { name: 'Forked Glacier',         type: 'attack' },
+  'exevo fur tera':       { name: 'Forked Thorns',          type: 'attack' },
+  'exevo infir frigo hur': { name: 'Chill Out',             type: 'attack' },
+  'exori infir tera':     { name: 'Mud Attack',             type: 'attack' },
+  'utori pox':            { name: 'Envenom',                type: 'attack' },
+  'utito dru':            { name: 'Elemental Synthesis',    type: 'support' },
+  'uteta res dru':        { name: 'Avatar of Nature',       type: 'support' },
+  'exana flam':           { name: 'Cure Burning',           type: 'heal' },
+  'exana vis':            { name: 'Cure Electrification',   type: 'heal' },
+  'exura sio':            { name: 'Heal Friend',            type: 'heal' },
+  'utura mas sio':        { name: 'Heal Party',             type: 'support' },
+  'exura gran mas res':   { name: 'Mass Healing',           type: 'heal' },
+  'exura gran sio':       { name: "Nature's Embrace",       type: 'heal' },
+  'utura sio':            { name: 'Shared Conservation',    type: 'support' },
+  'utevo gran res dru':   { name: 'Summon Druid Familiar',  type: 'support' },
+  // ---- Monk ----
+  'exori pug':            { name: 'Double Jab',             type: 'attack' },
+  'exori infir pug':      { name: 'Swift Jab',              type: 'attack' },
+  'exori mas pug':        { name: 'Flurry of Blows',        type: 'attack' },
+  'exori gran pug':       { name: 'Forceful Uppercut',      type: 'attack' },
+  'exori gran mas pug':   { name: 'Greater Flurry of Blows', type: 'attack' },
+  'exori amp pug':        { name: 'Mystic Repulse',         type: 'attack' },
+  'exori infir amp pug':  { name: 'Lesser Mystic Repulse',  type: 'attack' },
+  'exori med pug':        { name: 'Chained Penance',        type: 'attack' },
+  'exori nia':            { name: 'Greater Tiger Clash',    type: 'attack' },
+  'exori infir nia':      { name: 'Tiger Clash',            type: 'attack' },
+  'exori gran nia':       { name: 'Devastating Knockout',   type: 'attack' },
+  'exori mas nia':        { name: 'Sweeping Takedown',      type: 'attack' },
+  'exori gran mas nia':   { name: 'Spiritual Outburst',     type: 'attack' },
+  'exori mas res':        { name: 'Balanced Brawl',         type: 'support' },
+  'utevo nia':            { name: 'Focus Harmony',          type: 'support' },
+  'utamo tio':            { name: 'Focus Serenity',         type: 'support' },
+  'utori virtu':          { name: 'Virtue of Harmony',      type: 'support' },
+  'utito virtu':          { name: 'Virtue of Justice',      type: 'support' },
+  'utura tio':            { name: 'Virtue of Sustain',      type: 'support' },
+  'exura gran tio':       { name: 'Spirit Mend',            type: 'heal' },
+  'exura mas nia':        { name: 'Mass Spirit Mend',       type: 'heal' },
+  'exura tio sio':        { name: 'Restore Balance',        type: 'heal' },
+  'uteta tio':            { name: 'Mentor Other',           type: 'support' },
+  'uteta res tio':        { name: 'Avatar of Balance',      type: 'support' },
+  'utevo mas sio':        { name: 'Enlighten Party',        type: 'support' },
+  'utevo gran res tio':   { name: 'Summon Monk Familiar',   type: 'support' },
+  // ---- comuns / utilitárias (várias vocações) ----
+  'exura':                { name: 'Light Healing',          type: 'heal' },
+  'exura gran':           { name: 'Intense Healing',        type: 'heal' },
+  'exura vita':           { name: 'Ultimate Healing',       type: 'heal' },
+  'exura max vita':       { name: 'Restoration',            type: 'heal' },
+  'exura infir':          { name: 'Magic Patch',            type: 'heal' },
+  'utura':                { name: 'Recovery',               type: 'heal' },
+  'utura gran':           { name: 'Intense Recovery',       type: 'heal' },
+  'exana pox':            { name: 'Cure Poison',            type: 'heal' },
+  'utani hur':            { name: 'Haste',                  type: 'support' },
+  'utani gran hur':       { name: 'Strong Haste',           type: 'support' },
+  'utevo lux':            { name: 'Light',                  type: 'support' },
+  'utevo gran lux':       { name: 'Great Light',            type: 'support' },
+  'utevo vis lux':        { name: 'Ultimate Light',         type: 'support' },
+  'exani hur':            { name: 'Levitate',               type: 'support' },
+  'exani tera':           { name: 'Magic Rope',             type: 'support' },
+  'exiva':                { name: 'Find Person',            type: 'support' },
+  'exiva moe res':        { name: 'Find Fiend',             type: 'support' },
+  'exevo pan':            { name: 'Food',                   type: 'support' },
+  'utevo res':            { name: 'Summon Creature',        type: 'support' },
+  'utevo res ina':        { name: 'Creature Illusion',      type: 'support' },
 };
 function clsSpellLabel(text) {
   const e = CLS_SPELLS[text];
@@ -47,10 +200,18 @@ const CLS_TS_RE = /^(\d{2}):(\d{2}):(\d{2})\b/;
 
 function clsMean(a) { return a.length ? a.reduce((s, x) => s + x, 0) / a.length : 0; }
 function clsAgg(label, kind, turnsList) {
-  // turnsList: [{hits, dmgs:[]}] -> {label, kind, turns, hitsMean, dmgMean}
+  // turnsList: [{hits, dmgs:[{v,raw,ok}]}] -> {label, kind, turns, hitsMean, dmgBase, dmgEff}
+  //   dmgBase = dano normalizado (sem crit/Onslaught/prey); dmgEff = dano cru do log.
+  // Ambos excluem overkill (capado distorce); se SÓ houver overkill, usa-o como
+  // fallback p/ não mostrar 0 quando houve hits.
   const hits = turnsList.map(x => x.hits);
-  const dmgs = [].concat(...turnsList.map(x => x.dmgs));
-  return { label, kind, turns: turnsList.length, hitsMean: clsMean(hits), dmgMean: Math.round(clsMean(dmgs)) };
+  const all = [].concat(...turnsList.map(x => x.dmgs || []));
+  const meanPref = sel => {
+    const clean = all.filter(d => !d.ok).map(sel);
+    const vals = clean.length ? clean : all.map(sel);
+    return Math.round(clsMean(vals));
+  };
+  return { label, kind, turns: turnsList.length, hitsMean: clsMean(hits), dmgBase: meanPref(d => d.v), dmgEff: meanPref(d => d.raw) };
 }
 
 // Conta hits e soma revertedDmg por componente, por turno (lê l.correctedComponent).
@@ -61,7 +222,7 @@ function clsBuildTurnRecords(turns) {
     for (const l of (t.rpComponentLines || [])) {
       const c = l.correctedComponent; if (!(c in counts)) continue;
       counts[c]++;
-      if (!l.overkill && Number.isFinite(l.revertedDmg) && l.revertedDmg > 0) dmgs[c].push(l.revertedDmg);
+      if (Number.isFinite(l.revertedDmg) && l.revertedDmg > 0) dmgs[c].push({ v: l.revertedDmg, raw: l.dmg, ok: !!l.overkill });
     }
     return { idx: i + 1, ts: t.ts, counts, dmgs };
   });
@@ -107,7 +268,8 @@ function parseLocalChat(text) {
     out.push({
       ts: +m[1] * 3600 + +m[2] * 60 + +m[3],
       speaker: m[4], level: m[5] ? +m[5] : null,
-      text: (m[6] || '').trim().toLowerCase(),
+      // remove alvo entre aspas (exura sio "nome" -> exura sio) p/ casar na tabela
+      text: (m[6] || '').trim().toLowerCase().replace(/\s*"[^"]*"\s*/g, ' ').replace(/\s+/g, ' ').trim(),
     });
   }
   return out;
@@ -210,9 +372,16 @@ function classifyWithLocalChat(serverLogText, localChatText) {
   const playerGrenCasts = casts.filter(c => c.speaker === player && grenadeSpells.includes(c.text));
   const runeUses = parseRuneUses(serverLogText);
 
-  // Boss single-target: o classificador de bandas não separa arrow×spell com 1 mob.
-  // Reclassifica por ORDEM (AA primeiro, depois power) e reconstrói os turnRecords.
-  if (data.distinctMobs === 1) {
+  // Regime de classificação:
+  //  • RP em pack (≥2 mobs): mantém o classificador de bandas (validado 38/38) —
+  //    no RP o "arrow" é AoE multi-hit e a separação holy por assinatura funciona.
+  //  • Boss single-target OU outras vocações (EK/mage/…): separação MECÂNICA por
+  //    ordem (AA single-target = hit[0]; AoE spell/runa depois), sem assinatura
+  //    elemental. (O AA do EK é melee single-target; o band classifier holy não serve.)
+  const RP_ATTACK = new Set(['exevo mas san', 'exori san', 'exori con', 'exori gran con',
+    'exori infir con', 'exori dir san', 'exori dir moe', 'utori san', 'exevo tempo mas san']);
+  const isRpRegime = damageSpells.concat(grenadeSpells).some(t => RP_ATTACK.has(t));
+  if (data.distinctMobs === 1 || !isRpRegime) {
     clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts);
     turnRecords = clsBuildTurnRecords(turns);
   }
@@ -240,7 +409,7 @@ function classifyWithLocalChat(serverLogText, localChatText) {
   // --- tabela única (ordem: arrow · runas · spells · granada) ---
   const grenLabel = text => clsSpellLabel(text);
   const rows = [];
-  if (arrowAligned.length) rows.push(clsAgg('arrow', 'arrow', arrowAligned));
+  if (arrowAligned.length) rows.push(clsAgg('Auto ataque', 'arrow', arrowAligned));
   for (const [name, list] of [...perRune.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(name, 'rune', list));
   for (const [text, list] of [...perSpell.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(clsSpellLabel(text), 'spell', list));
   for (const [text, list] of [...perGren.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(grenLabel(text), 'grenade', list));
@@ -248,7 +417,7 @@ function classifyWithLocalChat(serverLogText, localChatText) {
   for (const text of grenadeSpells) {
     if (perGren.has(text)) continue;
     const casts = playerGrenCasts.filter(c => c.text === text && c.ts >= winLo && c.ts <= winHi).length;
-    if (casts > 0) rows.push({ label: grenLabel(text), kind: 'grenade', turns: casts, hitsMean: 0, dmgMean: 0 });
+    if (casts > 0) rows.push({ label: grenLabel(text), kind: 'grenade', turns: casts, hitsMean: 0, dmgBase: 0, dmgEff: 0 });
   }
 
   return {

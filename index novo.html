@@ -4486,8 +4486,9 @@ function renderClassifier(res) {
   }
   const f2 = x => x.toFixed(2);
   const rowsHtml = res.rows.map(r =>
-    '<tr><td>' + r.label + '</td><td style="text-align:right">' + r.turns +
-    '</td><td style="text-align:right">' + f2(r.hitsMean) + '</td><td style="text-align:right">' + r.dmgMean + '</td></tr>'
+    '<tr><td>' + (r.kind === 'arrow' ? t('cls_comp_arrow') : r.label) + '</td><td style="text-align:right">' + r.turns +
+    '</td><td style="text-align:right">' + f2(r.hitsMean) + '</td><td style="text-align:right">' + r.dmgBase +
+    '</td><td style="text-align:right">' + r.dmgEff + '</td></tr>'
   ).join('');
   const kindLabel = { spell: t('cls_kind_spell'), grenade: t('cls_kind_grenade') };
   const detRows = res.ranked.slice(0, 8).map(g => {
@@ -4508,8 +4509,8 @@ function renderClassifier(res) {
       (dmgSummary.join(', ') || '—') + '</p>' +
     '<h3 style="font-size:14px;font-weight:500;margin:18px 0 8px;color:var(--accent)">' + t('cls_h_rotation') + '</h3>' +
     '<table class="cls-table"><thead><tr><th>' + t('cls_th_comp') + '</th><th style="text-align:right">' + t('cls_th_turns') +
-      '</th><th style="text-align:right">' + t('cls_th_hits') + '</th><th style="text-align:right">' + t('cls_th_dmg') +
-      '</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+      '</th><th style="text-align:right">' + t('cls_th_hits') + '</th><th style="text-align:right">' + t('cls_th_dmg_base') +
+      '</th><th style="text-align:right">' + t('cls_th_dmg_eff') + '</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
     '<p style="font-size:11.5px;color:var(--text-muted);margin:6px 0 0">' +
       t('cls_unmatched').replace('{u}', res.excludedTurns).replace('{n}', res.totalTurns) + '</p>' +
     '<h3 style="font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--accent)">' + t('cls_h_detection') + '</h3>' +

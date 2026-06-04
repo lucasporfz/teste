@@ -1,0 +1,722 @@
+15:17:12 Kikaro [962]: exeta amp res
+15:17:13 Kikaro [962]: exori gran
+15:17:13 Kikaro [962]: exura med ico
+15:17:14 Kikaro [962]: utito tempo
+15:17:15 Kikaro [962]: exori
+15:17:15 Kikaro [962]: exura med ico
+15:17:16 Kikaro [962]: exura med ico
+15:17:17 Kikaro [962]: exeta amp res
+15:17:17 Kikaro [962]: exori mas
+15:17:17 Kikaro [962]: exura med ico
+15:17:18 Kikaro [962]: exura med ico
+15:17:19 Kikaro [962]: utito tempo
+15:17:19 Kikaro [962]: exori gran
+15:17:19 Kikaro [962]: exura med ico
+15:17:20 Kikaro [962]: exura med ico
+15:17:21 Kikaro [962]: exeta amp res
+15:17:21 Kikaro [962]: exori
+15:17:22 Kikaro [962]: exura med ico
+15:17:23 Kikaro [962]: utito tempo
+15:17:23 Kikaro [962]: exori gran
+15:17:24 Kikaro [962]: exura med ico
+15:17:25 Kikaro [962]: exura med ico
+15:17:25 Kikaro [962]: exeta amp res
+15:17:25 Kikaro [962]: exori
+15:17:26 Kikaro [962]: exura med ico
+15:17:27 Kikaro [962]: exura med ico
+15:17:27 Kikaro [962]: exeta amp res
+15:17:27 Kikaro [962]: exori mas
+15:17:28 Kikaro [962]: exura med ico
+15:17:29 Kikaro [962]: exura med ico
+15:17:29 Kikaro [962]: exeta amp res
+15:17:29 Kikaro [962]: exori gran
+15:17:30 Kikaro [962]: exura med ico
+15:17:31 Kikaro [962]: exura med ico
+15:17:31 Kikaro [962]: utito tempo
+15:17:31 Kikaro [962]: exori
+15:17:32 Kikaro [962]: exura med ico
+15:17:33 Kikaro [962]: exura med ico
+15:17:33 Kikaro [962]: exeta amp res
+15:17:34 Kikaro [962]: exori mas
+15:17:34 Kikaro [962]: exura med ico
+15:17:35 Kikaro [962]: exura med ico
+15:17:35 Kikaro [962]: utito tempo
+15:17:36 Kikaro [962]: exori amp kor
+15:17:39 Kikaro [962]: exori hur
+15:17:41 Kikaro [962]: exura med ico
+15:17:41 Kikaro [962]: exeta amp res
+15:17:43 Kikaro [962]: exori gran
+15:17:43 Kikaro [962]: exura med ico
+15:17:45 Kikaro [962]: exura med ico
+15:17:45 Kikaro [962]: utito tempo
+15:17:45 Kikaro [962]: exori mas
+15:17:46 Kikaro [962]: exura med ico
+15:17:47 Kikaro [962]: exura med ico
+15:17:47 Kikaro [962]: exeta amp res
+15:17:47 Kikaro [962]: exori
+15:17:48 Kikaro [962]: exura med ico
+15:17:49 Kikaro [962]: exura med ico
+15:17:49 Kikaro [962]: exeta amp res
+15:17:50 Kikaro [962]: exori gran
+15:17:50 Kikaro [962]: exura med ico
+15:17:51 Kikaro [962]: exura med ico
+15:17:52 Kikaro [962]: utito tempo
+15:17:52 Kikaro [962]: exori
+15:17:52 Kikaro [962]: exura med ico
+15:17:53 Kikaro [962]: exura med ico
+15:17:54 Kikaro [962]: utito tempo
+15:17:54 Kikaro [962]: exori mas
+15:17:55 Kikaro [962]: exura med ico
+15:17:56 Kikaro [962]: exura med ico
+15:17:56 Kikaro [962]: exeta amp res
+15:17:56 Kikaro [962]: exori gran
+15:17:57 Kikaro [962]: exura med ico
+15:17:58 Kikaro [962]: exeta amp res
+15:17:58 Kikaro [962]: exori
+15:17:59 Kikaro [962]: exura med ico
+15:18:00 Kikaro [962]: exura med ico
+15:18:00 Kikaro [962]: exeta amp res
+15:18:00 Kikaro [962]: exori mas
+15:18:01 Kikaro [962]: exura med ico
+15:18:02 Kikaro [962]: utito tempo
+15:18:03 Kikaro [962]: exori gran
+15:18:03 Kikaro [962]: exura med ico
+15:18:04 Kikaro [962]: exura med ico
+15:18:04 Kikaro [962]: exeta amp res
+15:18:05 Kikaro [962]: exori
+15:18:05 Kikaro [962]: exura med ico
+15:18:07 Kikaro [962]: exura med ico
+15:18:07 Kikaro [962]: utito tempo
+15:18:07 Kikaro [962]: exori mas
+15:18:08 Kikaro [962]: exura med ico
+15:18:09 Kikaro [962]: exura med ico
+15:18:10 Kikaro [962]: exura med ico
+15:18:11 Kikaro [962]: exeta amp res
+15:18:11 Kikaro [962]: exura med ico
+15:18:12 Kikaro [962]: exori
+15:18:13 Kikaro [962]: exura med ico
+15:18:14 Kikaro [962]: exura med ico
+15:18:14 Kikaro [962]: utito tempo
+15:18:14 Kikaro [962]: exori gran
+15:18:15 Kikaro [962]: exura med ico
+15:18:16 Kikaro [962]: exura med ico
+15:18:16 Kikaro [962]: exeta amp res
+15:18:16 Kikaro [962]: exori
+15:18:17 Kikaro [962]: exura med ico
+15:18:18 Kikaro [962]: exura med ico
+15:18:18 Kikaro [962]: exori gran
+15:18:20 Kikaro [962]: exura med ico
+15:18:20 Kikaro [962]: utito tempo
+15:18:21 Kikaro [962]: exori
+15:18:21 Kikaro [962]: exura med ico
+15:18:22 Kikaro [962]: exura med ico
+15:18:22 Kikaro [962]: exeta amp res
+15:18:23 Kikaro [962]: exori mas
+15:18:23 Kikaro [962]: exura med ico
+15:18:24 Kikaro [962]: exura med ico
+15:18:25 Kikaro [962]: exeta amp res
+15:18:25 Kikaro [962]: exori gran
+15:18:25 Kikaro [962]: exura med ico
+15:18:27 Kikaro [962]: exura med ico
+15:18:27 Kikaro [962]: utito tempo
+15:18:27 Kikaro [962]: exori
+15:18:28 Kikaro [962]: exura med ico
+15:18:29 Kikaro [962]: exura med ico
+15:18:29 Kikaro [962]: exeta amp res
+15:18:29 Kikaro [962]: exori gran
+15:18:30 Kikaro [962]: exura med ico
+15:18:31 Kikaro [962]: exura med ico
+15:18:31 Kikaro [962]: utito tempo
+15:18:31 Kikaro [962]: exori
+15:18:32 Kikaro [962]: exura med ico
+15:18:33 Kikaro [962]: exori amp kor
+15:18:34 Kikaro [962]: exura med ico
+15:18:36 Kikaro [962]: exeta amp res
+15:18:36 Kikaro [962]: exori mas
+15:18:37 Kikaro [962]: exura med ico
+15:18:38 Kikaro [962]: exura med ico
+15:18:38 Kikaro [962]: utito tempo
+15:18:38 Kikaro [962]: exori gran
+15:18:40 Kikaro [962]: exura med ico
+15:18:40 Kikaro [962]: exeta amp res
+15:18:41 Kikaro [962]: exori
+15:18:41 Kikaro [962]: exura med ico
+15:18:42 Kikaro [962]: exura med ico
+15:18:43 Kikaro [962]: exori mas
+15:18:44 Kikaro [962]: exura med ico
+15:18:45 Kikaro [962]: utito tempo
+15:18:45 Kikaro [962]: exori gran
+15:18:45 Kikaro [962]: exura med ico
+15:18:47 Kikaro [962]: exura med ico
+15:18:47 Kikaro [962]: exori
+15:18:48 Kikaro [962]: exeta amp res
+15:18:49 Kikaro [962]: exura med ico
+15:18:49 Kikaro [962]: exori mas
+15:18:51 Kikaro [962]: exura med ico
+15:18:51 Kikaro [962]: exori gran
+15:18:53 Kikaro [962]: exura med ico
+15:18:54 Kikaro [962]: exura med ico
+15:18:55 Kikaro [962]: utito tempo
+15:18:56 Kikaro [962]: exori mas
+15:18:57 Kikaro [962]: exura med ico
+15:18:58 Kikaro [962]: exeta amp res
+15:18:58 Kikaro [962]: exori gran
+15:18:59 Kikaro [962]: exura med ico
+15:19:00 Kikaro [962]: exura med ico
+15:19:00 Kikaro [962]: exeta amp res
+15:19:01 Kikaro [962]: exori
+15:19:01 Kikaro [962]: exura med ico
+15:19:02 Kikaro [962]: exura med ico
+15:19:02 Kikaro [962]: exeta amp res
+15:19:03 Kikaro [962]: exori gran
+15:19:03 Kikaro [962]: exura med ico
+15:19:04 Kikaro [962]: exura med ico
+15:19:04 Kikaro [962]: exeta amp res
+15:19:05 Kikaro [962]: exori
+15:19:06 Kikaro [962]: exura med ico
+15:19:07 Kikaro [962]: utito tempo
+15:19:07 Kikaro [962]: exori mas
+15:19:07 Kikaro [962]: exura med ico
+15:19:09 Kikaro [962]: exura med ico
+15:19:09 Kikaro [962]: exeta amp res
+15:19:09 Kikaro [962]: exori gran
+15:19:10 Kikaro [962]: exura med ico
+15:19:11 Kikaro [962]: utito tempo
+15:19:11 Kikaro [962]: exori
+15:19:12 Kikaro [962]: exura med ico
+15:19:13 Kikaro [962]: exura med ico
+15:19:13 Kikaro [962]: exeta amp res
+15:19:13 Kikaro [962]: exori gran
+15:19:14 Kikaro [962]: exura med ico
+15:19:15 Kikaro [962]: exura med ico
+15:19:15 Kikaro [962]: utito tempo
+15:19:15 Kikaro [962]: exori
+15:19:17 Kikaro [962]: exura med ico
+15:19:17 Kikaro [962]: utito tempo
+15:19:17 Kikaro [962]: exori amp kor
+15:19:20 Kikaro [962]: exura med ico
+15:19:21 Kikaro [962]: exeta amp res
+15:19:22 Kikaro [962]: exori mas
+15:19:23 Kikaro [962]: exura med ico
+15:19:24 Kikaro [962]: exeta amp res
+15:19:24 Kikaro [962]: exori gran
+15:19:25 Kikaro [962]: exura med ico
+15:19:26 Kikaro [962]: exura med ico
+15:19:26 Kikaro [962]: utito tempo
+15:19:26 Kikaro [962]: exori
+15:19:27 Kikaro [962]: exura med ico
+15:19:28 Kikaro [962]: exura med ico
+15:19:28 Kikaro [962]: exeta amp res
+15:19:28 Kikaro [962]: exori mas
+15:19:29 Kikaro [962]: exura med ico
+15:19:30 Kikaro [962]: exura med ico
+15:19:30 Kikaro [962]: utito tempo
+15:19:30 Kikaro [962]: exori gran
+15:19:31 Kikaro [962]: exura med ico
+15:19:32 Kikaro [962]: exura med ico
+15:19:32 Kikaro [962]: utito tempo
+15:19:32 Kikaro [962]: exori
+15:19:33 Kikaro [962]: exura med ico
+15:19:34 Kikaro [962]: exura med ico
+15:19:34 Kikaro [962]: exeta amp res
+15:19:35 Kikaro [962]: exori mas
+15:19:35 Kikaro [962]: exura med ico
+15:19:36 Kikaro [962]: exura med ico
+15:19:37 Kikaro [962]: utito tempo
+15:19:37 Kikaro [962]: exori gran
+15:19:37 Kikaro [962]: exura med ico
+15:19:38 Kikaro [962]: exura med ico
+15:19:39 Kikaro [962]: exeta amp res
+15:19:39 Kikaro [962]: exori
+15:19:40 Kikaro [962]: exura med ico
+15:19:41 Kikaro [962]: exura med ico
+15:19:41 Kikaro [962]: exeta amp res
+15:19:41 Kikaro [962]: exori mas
+15:19:42 Kikaro [962]: exura med ico
+15:19:43 Kikaro [962]: exura med ico
+15:19:43 Kikaro [962]: utito tempo
+15:19:43 Kikaro [962]: exori gran
+15:19:44 Kikaro [962]: exura med ico
+15:19:45 Kikaro [962]: exura med ico
+15:19:46 Kikaro [962]: exori amp kor
+15:19:47 Kikaro [962]: exeta amp res
+15:19:48 Kikaro [962]: exori mas
+15:19:50 Kikaro [962]: exura med ico
+15:19:50 Kikaro [962]: utito tempo
+15:19:50 Kikaro [962]: exori gran
+15:19:51 Kikaro [962]: exura med ico
+15:19:52 Kikaro [962]: exura med ico
+15:19:52 Kikaro [962]: exeta amp res
+15:19:52 Kikaro [962]: exori
+15:19:53 Kikaro [962]: exura med ico
+15:19:54 Kikaro [962]: exura med ico
+15:19:55 Kikaro [962]: exori mas
+15:19:56 Kikaro [962]: exeta amp res
+15:19:56 Kikaro [962]: exura med ico
+15:19:57 Kikaro [962]: exori gran
+15:19:57 Kikaro [962]: exura med ico
+15:19:58 Kikaro [962]: exura med ico
+15:19:59 Kikaro [962]: utito tempo
+15:19:59 Kikaro [962]: exori
+15:19:59 Kikaro [962]: exura med ico
+15:20:00 Kikaro [962]: exura med ico
+15:20:01 Kikaro [962]: utito tempo
+15:20:01 Kikaro [962]: exori mas
+15:20:02 Kikaro [962]: exura med ico
+15:20:03 Kikaro [962]: exura med ico
+15:20:03 Kikaro [962]: exeta amp res
+15:20:03 Kikaro [962]: exori gran
+15:20:04 Kikaro [962]: exura med ico
+15:20:05 Kikaro [962]: exura med ico
+15:20:05 Kikaro [962]: exori
+15:20:07 Kikaro [962]: exura med ico
+15:20:07 Kikaro [962]: exori amp kor
+15:20:10 Kikaro [962]: exori mas
+15:20:10 Kikaro [962]: exeta amp res
+15:20:12 Kikaro [962]: exura med ico
+15:20:12 Kikaro [962]: exori gran
+15:20:13 Kikaro [962]: exura med ico
+15:20:14 Kikaro [962]: exura med ico
+15:20:14 Kikaro [962]: exeta amp res
+15:20:14 Kikaro [962]: exori
+15:20:15 Kikaro [962]: exura med ico
+15:20:16 Kikaro [962]: exura med ico
+15:20:16 Kikaro [962]: exeta amp res
+15:20:16 Kikaro [962]: exori mas
+15:20:17 Kikaro [962]: exura med ico
+15:20:18 Kikaro [962]: exura med ico
+15:20:18 Kikaro [962]: utito tempo
+15:20:18 Kikaro [962]: exori gran
+15:20:19 Kikaro [962]: exura med ico
+15:20:20 Kikaro [962]: exura med ico
+15:20:20 Kikaro [962]: exeta amp res
+15:20:20 Kikaro [962]: exori
+15:20:21 Kikaro [962]: exura med ico
+15:20:22 Kikaro [962]: exura med ico
+15:20:22 Kikaro [962]: exeta amp res
+15:20:23 Kikaro [962]: exori mas
+15:20:24 Kikaro [962]: exura med ico
+15:20:24 Kikaro [962]: exeta amp res
+15:20:25 Kikaro [962]: exori gran
+15:20:25 Kikaro [962]: exura med ico
+15:20:26 Kikaro [962]: exura med ico
+15:20:27 Kikaro [962]: utito tempo
+15:20:27 Kikaro [962]: exori
+15:20:27 Kikaro [962]: exura med ico
+15:20:29 Kikaro [962]: exura med ico
+15:20:29 Kikaro [962]: exeta amp res
+15:20:29 Kikaro [962]: exori mas
+15:20:30 Kikaro [962]: exura med ico
+15:20:31 Kikaro [962]: exura med ico
+15:20:31 Kikaro [962]: utito tempo
+15:20:31 Kikaro [962]: exori gran
+15:20:33 Kikaro [962]: exeta amp res
+15:20:34 Kikaro [962]: exori
+15:20:35 Kikaro [962]: exura med ico
+15:20:36 Kikaro [962]: exeta amp res
+15:20:36 Kikaro [962]: exori mas
+15:20:37 Kikaro [962]: exura med ico
+15:20:38 Kikaro [962]: exura med ico
+15:20:38 Kikaro [962]: utito tempo
+15:20:38 Kikaro [962]: exori gran
+15:20:39 Kikaro [962]: exura med ico
+15:20:40 Kikaro [962]: exura med ico
+15:20:40 Kikaro [962]: exeta amp res
+15:20:40 Kikaro [962]: exori
+15:20:42 Kikaro [962]: exori mas
+15:20:44 Kikaro [962]: exura med ico
+15:20:44 Kikaro [962]: utito tempo
+15:20:44 Kikaro [962]: exori gran
+15:20:45 Kikaro [962]: exura med ico
+15:20:46 Kikaro [962]: exura med ico
+15:20:47 Kikaro [962]: exori
+15:20:47 Kikaro [962]: exura med ico
+15:20:48 Kikaro [962]: exura med ico
+15:20:49 Kikaro [962]: utito tempo
+15:20:49 Kikaro [962]: exori mas
+15:20:49 Kikaro [962]: exura med ico
+15:20:50 Kikaro [962]: exura med ico
+15:20:51 Kikaro [962]: utito tempo
+15:20:51 Kikaro [962]: exori amp kor
+15:20:54 Kikaro [962]: exeta amp res
+15:20:54 Kikaro [962]: exori mas
+15:20:56 Kikaro [962]: exeta amp res
+15:20:56 Kikaro [962]: exori
+15:20:57 Kikaro [962]: exura med ico
+15:20:58 Kikaro [962]: exura med ico
+15:20:58 Kikaro [962]: utito tempo
+15:20:59 Kikaro [962]: exori gran
+15:20:59 Kikaro [962]: exura med ico
+15:21:00 Kikaro [962]: exura med ico
+15:21:00 Kikaro [962]: exeta amp res
+15:21:01 Kikaro [962]: exori
+15:21:02 Kikaro [962]: exura med ico
+15:21:03 Kikaro [962]: exeta amp res
+15:21:03 Kikaro [962]: exori mas
+15:21:03 Kikaro [962]: exura med ico
+15:21:05 Kikaro [962]: exura med ico
+15:21:05 Kikaro [962]: exori gran
+15:21:06 Kikaro [962]: exura med ico
+15:21:07 Kikaro [962]: utito tempo
+15:21:07 Kikaro [962]: exori
+15:21:08 Kikaro [962]: exura med ico
+15:21:09 Kikaro [962]: exeta amp res
+15:21:09 Kikaro [962]: exori gran
+15:21:10 Kikaro [962]: exura med ico
+15:21:11 Kikaro [962]: exeta amp res
+15:21:11 Kikaro [962]: exori
+15:21:12 Kikaro [962]: exura med ico
+15:21:13 Kikaro [962]: exura med ico
+15:21:13 Kikaro [962]: exeta amp res
+15:21:14 Kikaro [962]: exori mas
+15:21:14 Kikaro [962]: exura med ico
+15:21:15 Kikaro [962]: utito tempo
+15:21:16 Kikaro [962]: exori amp kor
+15:21:18 Kikaro [962]: exura med ico
+15:21:19 Kikaro [962]: exeta amp res
+15:21:20 Kikaro [962]: exori gran
+15:21:20 Kikaro [962]: exura med ico
+15:21:21 Kikaro [962]: exura med ico
+15:21:22 Kikaro [962]: exeta amp res
+15:21:22 Kikaro [962]: exori
+15:21:23 Kikaro [962]: exura med ico
+15:21:24 Kikaro [962]: exura med ico
+15:21:24 Kikaro [962]: utito tempo
+15:21:24 Kikaro [962]: exori mas
+15:21:25 Kikaro [962]: exura med ico
+15:21:26 Kikaro [962]: exura med ico
+15:21:26 Kikaro [962]: exeta amp res
+15:21:26 Kikaro [962]: exori gran
+15:21:27 Kikaro [962]: exura med ico
+15:21:28 Kikaro [962]: exura med ico
+15:21:28 Kikaro [962]: exeta amp res
+15:21:28 Kikaro [962]: exori
+15:21:29 Kikaro [962]: exura med ico
+15:21:30 Kikaro [962]: exura med ico
+15:21:30 Kikaro [962]: exeta amp res
+15:21:30 Kikaro [962]: exori mas
+15:21:31 Kikaro [962]: exura med ico
+15:21:32 Kikaro [962]: exura med ico
+15:21:32 Kikaro [962]: exeta amp res
+15:21:32 Kikaro [962]: exori gran
+15:21:33 Kikaro [962]: exura med ico
+15:21:34 Kikaro [962]: exura med ico
+15:21:35 Kikaro [962]: exori
+15:21:36 Kikaro [962]: exura med ico
+15:21:36 Kikaro [962]: utito tempo
+15:21:37 Kikaro [962]: exori amp kor
+15:21:37 Kikaro [962]: exura med ico
+15:21:40 Kikaro [962]: exeta amp res
+15:21:41 Kikaro [962]: exura med ico
+15:21:41 Kikaro [962]: exori mas
+15:21:43 Kikaro [962]: utito tempo
+15:21:43 Kikaro [962]: exori gran
+15:21:44 Kikaro [962]: exura med ico
+15:21:45 Kikaro [962]: exura med ico
+15:21:45 Kikaro [962]: utito tempo
+15:21:46 Kikaro [962]: exori
+15:21:46 Kikaro [962]: exura med ico
+15:21:47 Kikaro [962]: exura med ico
+15:21:47 Kikaro [962]: exeta amp res
+15:21:48 Kikaro [962]: exori gran
+15:21:49 Kikaro [962]: exura med ico
+15:21:50 Kikaro [962]: utito tempo
+15:21:50 Kikaro [962]: exori
+15:21:50 Kikaro [962]: exura med ico
+15:21:51 Kikaro [962]: exura med ico
+15:21:52 Kikaro [962]: exeta amp res
+15:21:52 Kikaro [962]: exori mas
+15:21:52 Kikaro [962]: exura med ico
+15:21:54 Kikaro [962]: exura med ico
+15:21:54 Kikaro [962]: exeta amp res
+15:21:54 Kikaro [962]: exori gran
+15:21:55 Kikaro [962]: exura med ico
+15:21:56 Kikaro [962]: exura med ico
+15:21:56 Kikaro [962]: exeta amp res
+15:21:56 Kikaro [962]: exori
+15:21:57 Kikaro [962]: exura med ico
+15:21:58 Kikaro [962]: exori hur
+15:21:59 Kikaro [962]: exura med ico
+15:22:00 Kikaro [962]: exeta amp res
+15:22:00 Kikaro [962]: exura med ico
+15:22:01 Kikaro [962]: exori gran
+15:22:01 Kikaro [962]: exura med ico
+15:22:03 Kikaro [962]: utito tempo
+15:22:03 Kikaro [962]: exori
+15:22:04 Kikaro [962]: exura med ico
+15:22:05 Kikaro [962]: exura med ico
+15:22:05 Kikaro [962]: exori mas
+15:22:06 Kikaro [962]: exura med ico
+15:22:07 Kikaro [962]: exura med ico
+15:22:07 Kikaro [962]: exeta amp res
+15:22:07 Kikaro [962]: exori gran
+15:22:08 Kikaro [962]: exura med ico
+15:22:09 Kikaro [962]: exeta amp res
+15:22:10 Kikaro [962]: exori
+15:22:10 Kikaro [962]: exura med ico
+15:22:11 Kikaro [962]: exura med ico
+15:22:11 Kikaro [962]: exeta amp res
+15:22:12 Kikaro [962]: exori gran
+15:22:12 Kikaro [962]: exura med ico
+15:22:14 Kikaro [962]: exura med ico
+15:22:14 Kikaro [962]: exori
+15:22:15 Kikaro [962]: exeta amp res
+15:22:16 Kikaro [962]: exura med ico
+15:22:16 Kikaro [962]: exori gran
+15:22:17 Kikaro [962]: exura med ico
+15:22:18 Kikaro [962]: utito tempo
+15:22:18 Kikaro [962]: exori
+15:22:19 Kikaro [962]: exura med ico
+15:22:20 Kikaro [962]: utito tempo
+15:22:21 Kikaro [962]: exori amp kor
+15:22:22 Kikaro [962]: exura med ico
+15:22:23 Kikaro [962]: exura med ico
+15:22:24 Kikaro [962]: utito tempo
+15:22:26 Kikaro [962]: exori mas
+15:22:26 Kikaro [962]: exura med ico
+15:22:26 Kikaro [962]: exeta amp res
+15:22:27 Kikaro [962]: exura med ico
+15:22:28 Kikaro [962]: exori gran
+15:22:29 Kikaro [962]: exeta amp res
+15:22:29 Kikaro [962]: exura med ico
+15:22:30 Kikaro [962]: exori
+15:22:30 Kikaro [962]: exura med ico
+15:22:32 Kikaro [962]: exeta amp res
+15:22:32 Kikaro [962]: exori mas
+15:22:33 Kikaro [962]: exura med ico
+15:22:34 Kikaro [962]: exura med ico
+15:22:34 Kikaro [962]: utito tempo
+15:22:34 Kikaro [962]: exori gran
+15:22:35 Kikaro [962]: exura med ico
+15:22:36 Kikaro [962]: exura med ico
+15:22:37 Kikaro [962]: exori
+15:22:37 Kikaro [962]: exura med ico
+15:22:37 Kikaro [962]: exeta amp res
+15:22:38 Kikaro [962]: exura med ico
+15:22:39 Kikaro [962]: exori mas
+15:22:39 Kikaro [962]: exura med ico
+15:22:40 Kikaro [962]: utito tempo
+15:22:41 Kikaro [962]: exori gran
+15:22:41 Kikaro [962]: exura med ico
+15:22:42 Kikaro [962]: exura med ico
+15:22:43 Kikaro [962]: utito tempo
+15:22:43 Kikaro [962]: exori
+15:22:43 Kikaro [962]: exura med ico
+15:22:44 Kikaro [962]: exura med ico
+15:22:45 Kikaro [962]: utito tempo
+15:22:45 Kikaro [962]: exori mas
+15:22:45 Kikaro [962]: exura med ico
+15:22:47 Kikaro [962]: exura med ico
+15:22:47 Kikaro [962]: exeta amp res
+15:22:47 Kikaro [962]: exori gran
+15:22:49 Kikaro [962]: exori amp kor
+15:22:53 Kikaro [962]: exura med ico
+15:22:53 Kikaro [962]: exeta amp res
+15:22:54 Kikaro [962]: exori mas
+15:22:55 Kikaro [962]: exura med ico
+15:22:56 Kikaro [962]: exura med ico
+15:22:56 Kikaro [962]: exeta amp res
+15:22:57 Kikaro [962]: exori gran
+15:22:57 Kikaro [962]: exura med ico
+15:22:58 Kikaro [962]: utito tempo
+15:22:59 Kikaro [962]: exori
+15:22:59 Kikaro [962]: exura med ico
+15:23:00 Kikaro [962]: exura med ico
+15:23:00 Kikaro [962]: exeta amp res
+15:23:01 Kikaro [962]: exori mas
+15:23:01 Kikaro [962]: exura med ico
+15:23:02 Kikaro [962]: exura med ico
+15:23:03 Kikaro [962]: utito tempo
+15:23:03 Kikaro [962]: exori gran
+15:23:03 Kikaro [962]: exura med ico
+15:23:05 Kikaro [962]: exura med ico
+15:23:05 Kikaro [962]: utito tempo
+15:23:05 Kikaro [962]: exori
+15:23:06 Kikaro [962]: exura med ico
+15:23:07 Kikaro [962]: exura med ico
+15:23:07 Kikaro [962]: exeta amp res
+15:23:07 Kikaro [962]: exori mas
+15:23:08 Kikaro [962]: exura med ico
+15:23:09 Kikaro [962]: exura med ico
+15:23:09 Kikaro [962]: exori gran
+15:23:10 Kikaro [962]: exura med ico
+15:23:11 Kikaro [962]: exura med ico
+15:23:11 Kikaro [962]: exeta amp res
+15:23:12 Kikaro [962]: exori
+15:23:12 Kikaro [962]: exura med ico
+15:23:13 Kikaro [962]: exura med ico
+15:23:13 Kikaro [962]: utito tempo
+15:23:14 Kikaro [962]: exori mas
+15:23:14 Kikaro [962]: exura med ico
+15:23:16 Kikaro [962]: exori gran
+15:23:16 Kikaro [962]: exura med ico
+15:23:18 Kikaro [962]: exori amp kor
+15:23:19 Kikaro [962]: exura med ico
+15:23:20 Kikaro [962]: exeta amp res
+15:23:20 Kikaro [962]: exori mas
+15:23:21 Kikaro [962]: exura med ico
+15:23:22 Kikaro [962]: exura med ico
+15:23:22 Kikaro [962]: exeta amp res
+15:23:23 Kikaro [962]: exori gran
+15:23:23 Kikaro [962]: exura med ico
+15:23:24 Kikaro [962]: exura med ico
+15:23:24 Kikaro [962]: utito tempo
+15:23:25 Kikaro [962]: exori
+15:23:25 Kikaro [962]: exura med ico
+15:23:26 Kikaro [962]: exura med ico
+15:23:27 Kikaro [962]: utito tempo
+15:23:27 Kikaro [962]: exori mas
+15:23:28 Kikaro [962]: exura med ico
+15:23:29 Kikaro [962]: exura med ico
+15:23:30 Kikaro [962]: exori gran
+15:23:30 Kikaro [962]: exura med ico
+15:23:31 Kikaro [962]: exura med ico
+15:23:32 Kikaro [962]: utito tempo
+15:23:32 Kikaro [962]: exori
+15:23:33 Kikaro [962]: exura med ico
+15:23:34 Kikaro [962]: exura med ico
+15:23:34 Kikaro [962]: exori mas
+15:23:35 Kikaro [962]: exeta amp res
+15:23:36 Kikaro [962]: exura med ico
+15:23:36 Kikaro [962]: exori amp kor
+15:23:38 Kikaro [962]: exura med ico
+15:23:40 Kikaro [962]: exeta amp res
+15:23:42 Kikaro [962]: exori mas
+15:23:42 Kikaro [962]: exura med ico
+15:23:43 Kikaro [962]: exura med ico
+15:23:44 Kikaro [962]: utito tempo
+15:23:44 Kikaro [962]: exori gran
+15:23:44 Kikaro [962]: exura med ico
+15:23:46 Kikaro [962]: exeta amp res
+15:23:46 Kikaro [962]: exori
+15:23:47 Kikaro [962]: exura med ico
+15:23:48 Kikaro [962]: exura med ico
+15:23:48 Kikaro [962]: exeta amp res
+15:23:48 Kikaro [962]: exori mas
+15:23:49 Kikaro [962]: exura med ico
+15:23:50 Kikaro [962]: exura med ico
+15:23:50 Kikaro [962]: utito tempo
+15:23:50 Kikaro [962]: exori gran
+15:23:51 Kikaro [962]: exura med ico
+15:23:52 Kikaro [962]: exura med ico
+15:23:52 Kikaro [962]: exeta amp res
+15:23:52 Kikaro [962]: exori
+15:23:53 Kikaro [962]: exura med ico
+15:23:54 Kikaro [962]: exura med ico
+15:23:54 Kikaro [962]: exeta amp res
+15:23:54 Kikaro [962]: exori mas
+15:23:56 Kikaro [962]: exura med ico
+15:23:56 Kikaro [962]: utito tempo
+15:23:56 Kikaro [962]: exori gran
+15:23:57 Kikaro [962]: exura med ico
+15:23:58 Kikaro [962]: utito tempo
+15:23:58 Kikaro [962]: exori
+15:23:59 Kikaro [962]: exura med ico
+15:24:00 Kikaro [962]: exura med ico
+15:24:01 Kikaro [962]: exori amp kor
+15:24:02 Kikaro [962]: exura med ico
+15:24:02 Kikaro [962]: exeta amp res
+15:24:03 Kikaro [962]: exori mas
+15:24:04 Kikaro [962]: exura med ico
+15:24:05 Kikaro [962]: exura med ico
+15:24:05 Kikaro [962]: utito tempo
+15:24:05 Kikaro [962]: exori gran
+15:24:06 Kikaro [962]: exura med ico
+15:24:07 Kikaro [962]: exura med ico
+15:24:07 Kikaro [962]: exeta amp res
+15:24:08 Kikaro [962]: exori
+15:24:08 Kikaro [962]: exura med ico
+15:24:09 Kikaro [962]: exura med ico
+15:24:10 Kikaro [962]: exeta amp res
+15:24:10 Kikaro [962]: exori mas
+15:24:11 Kikaro [962]: exura med ico
+15:24:12 Kikaro [962]: utito tempo
+15:24:12 Kikaro [962]: exori gran
+15:24:12 Kikaro [962]: exura med ico
+15:24:14 Kikaro [962]: exura med ico
+15:24:14 Kikaro [962]: exori
+15:24:15 Kikaro [962]: exura med ico
+15:24:16 Kikaro [962]: exura med ico
+15:24:16 Kikaro [962]: exeta amp res
+15:24:16 Kikaro [962]: exori mas
+15:24:17 Kikaro [962]: exura med ico
+15:24:18 Kikaro [962]: exura med ico
+15:24:18 Kikaro [962]: utito tempo
+15:24:18 Kikaro [962]: exori gran
+15:24:19 Kikaro [962]: exura med ico
+15:24:20 Kikaro [962]: exura med ico
+15:24:20 Kikaro [962]: exori
+15:24:22 Kikaro [962]: exura med ico
+15:24:22 Kikaro [962]: utito tempo
+15:24:22 Kikaro [962]: exori amp kor
+15:24:24 Kikaro [962]: exura med ico
+15:24:25 Kikaro [962]: exeta amp res
+15:24:25 Kikaro [962]: exori mas
+15:24:27 Kikaro [962]: exura med ico
+15:24:27 Kikaro [962]: exeta amp res
+15:24:27 Kikaro [962]: exori gran
+15:24:28 Kikaro [962]: exura med ico
+15:24:29 Kikaro [962]: exura med ico
+15:24:29 Kikaro [962]: utito tempo
+15:24:29 Kikaro [962]: exori
+15:24:30 Kikaro [962]: exura med ico
+15:24:31 Kikaro [962]: exeta amp res
+15:24:31 Kikaro [962]: exori mas
+15:24:32 Kikaro [962]: exura med ico
+15:24:33 Kikaro [962]: exura med ico
+15:24:33 Kikaro [962]: exeta amp res
+15:24:34 Kikaro [962]: exori gran
+15:24:35 Kikaro [962]: exura med ico
+15:24:36 Kikaro [962]: utito tempo
+15:24:36 Kikaro [962]: exori
+15:24:36 Kikaro [962]: exura med ico
+15:24:37 Kikaro [962]: exura med ico
+15:24:38 Kikaro [962]: exori mas
+15:24:39 Kikaro [962]: exeta amp res
+15:24:40 Kikaro [962]: exura med ico
+15:24:40 Kikaro [962]: exori gran
+15:24:41 Kikaro [962]: exura med ico
+15:24:42 Kikaro [962]: exura med ico
+15:24:42 Kikaro [962]: utito tempo
+15:24:42 Kikaro [962]: exori
+15:24:43 Kikaro [962]: exura med ico
+15:24:44 Kikaro [962]: exura med ico
+15:24:44 Kikaro [962]: utito tempo
+15:24:45 Kikaro [962]: exori amp kor
+15:24:45 Kikaro [962]: exura med ico
+15:24:46 Kikaro [962]: exura med ico
+15:24:47 Kikaro [962]: exori gran
+15:24:47 Kikaro [962]: exura med ico
+15:24:50 Kikaro [962]: exeta amp res
+15:24:51 Kikaro [962]: exori mas
+15:24:53 Kikaro [962]: exura med ico
+15:24:53 Kikaro [962]: exeta amp res
+15:24:54 Kikaro [962]: exori gran
+15:24:56 Kikaro [962]: exura med ico
+15:24:56 Kikaro [962]: utito tempo
+15:24:56 Kikaro [962]: exori
+15:24:57 Kikaro [962]: exura med ico
+15:24:58 Kikaro [962]: utito tempo
+15:24:58 Kikaro [962]: exori mas
+15:24:59 Kikaro [962]: exura med ico
+15:25:00 Kikaro [962]: exori gran
+15:25:01 Kikaro [962]: exura med ico
+15:25:02 Kikaro [962]: exura med ico
+15:25:02 Kikaro [962]: utito tempo
+15:25:02 Kikaro [962]: exori
+15:25:03 Kikaro [962]: exura med ico
+15:25:04 Kikaro [962]: exura med ico
+15:25:04 Kikaro [962]: utito tempo
+15:25:04 Kikaro [962]: exori mas
+15:25:05 Kikaro [962]: exura med ico
+15:25:06 Kikaro [962]: exura med ico
+15:25:06 Kikaro [962]: exeta amp res
+15:25:06 Kikaro [962]: exori gran
+15:25:07 Kikaro [962]: exura med ico
+15:25:08 Kikaro [962]: exura med ico
+15:25:08 Kikaro [962]: utito tempo
+15:25:08 Kikaro [962]: exori
+15:25:09 Kikaro [962]: exura med ico
+15:25:10 Kikaro [962]: exura med ico
+15:25:10 Kikaro [962]: utito tempo
+15:25:11 Kikaro [962]: exori amp kor
