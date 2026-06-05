@@ -54,13 +54,18 @@ function parseLogForClassifier(logText) {
   events.forEach((e, i) => { e.seq = i; });
 
   const attackEvents = events.filter(e => e.type === 'normal' || e.type === 'crit');
-  const xpEvents = events.filter(e => e.type === 'xp');
   const runeEvents = events.filter(e => e.type === 'rune');
   if (attackEvents.length < 20) return { turnStats: [], error: 'log_too_short', attackCount: attackEvents.length };
 
-  // overkill: ataque cujo evento seguinte (seq) é um ganho de XP (matou o mob).
-  const xpSeqSet = new Set(xpEvents.map(e => e.seq));
-  for (const e of attackEvents) e.overkill = xpSeqSet.has(e.seq + 1);
+  // overkill (killing blow, dano capado): o evento seguinte (seq+1) é um XP logado em
+  // ≤1s (mesmo turno) — o XP do golpe que mata sai imediato. Um XP vários segundos à
+  // frente, com só linhas não-evento (heal/mana/dano de terceiros) no meio, é de OUTRA
+  // leva de kills da party: NÃO torna o hit anterior um killing blow. Ex.: uhax 19:52:18
+  // (runa que não saiu) era pareado com o XP em 19:52:20 → falso overkill.
+  for (const e of attackEvents) {
+    const nxt = events[e.seq + 1];
+    e.overkill = !!(nxt && nxt.type === 'xp' && nxt.ts - e.ts <= 1);
+  }
 
   // crit/prey (iguais ao parser, só o necessário p/ a normalização da classificação)
   const cleanNormals = attackEvents.filter(e => e.type === 'normal' && !e.isPrey).map(e => e.dmg);

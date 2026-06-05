@@ -275,8 +275,10 @@ function clsSplitExecutionTiers(lines, elemKey) {
 //     nem sempre é o 1º hit e nem sempre existe. Só separa AA se o menor hit não-overkill
 //     for ≤ AA_DEPTH× o 2º menor; senão o turno é AoE puro (sem AA). A posição NÃO serve
 //     (o 1º log pode ser um hit da AoE), então aqui manda a magnitude.
-// 1 hit = poder se há cast/runa alinhado, senão AA.
+// 1 hit = poder se há cast/runa alinhado, senão AA — EXCETO se o hit for em magnitude de
+// AA (≤ AA_FALSE_POWER_FACTOR× a referência), caso em que a runa/spell não saiu (varinha).
 const AA_DEPTH = 0.5;
+const AA_FALSE_POWER_FACTOR = 1.5;
 function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts, usePositional) {
   // granada: marca 1 hit por cast, no exato C+3
   const allLines = [];
@@ -292,6 +294,22 @@ function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts
   // ser colado num turno de 1 hit (o AA de varinha) e o AA virar "spell".
   const nearRune = T => runeUses.some(u => u.ts >= T - 1 && u.ts <= T + 1);
   const nearSpell = T => playerSpellCasts.some(c => c.ts >= T - 1 && c.ts <= T + 1);
+  // Referência de magnitude do AA (caster): nos turnos multi-hit, o AA de varinha é o
+  // outlier baixo profundo (≤ AA_DEPTH× o 2º menor). A mediana dessas amostras serve p/
+  // detectar runa/spell que foi "usada" mas NÃO saiu: nesse caso o único hit do turno é a
+  // varinha (~aaRef), muito abaixo da banda do poder (ex.: uhax 19:52:18 — gfb base ~945,
+  // AA ~120). EK/positional não tem essa assinatura → mantém o comportamento por cast.
+  let aaRef = 0;
+  if (!usePositional) {
+    const samples = [];
+    for (const t of turns) {
+      const ng = (t.rpComponentLines || []).filter(l => !grenSet.has(l) && !l.overkill);
+      if (ng.length < 2) continue;
+      const s = ng.slice().sort((a, b) => a.revertedDmg - b.revertedDmg);
+      if (s[0].revertedDmg <= AA_DEPTH * s[1].revertedDmg) samples.push(s[0].revertedDmg);
+    }
+    aaRef = samples.length ? median(samples) : 0;
+  }
   for (const t of turns) {
     const ordered = (t.rpComponentLines || []).slice().sort((a, b) => (a.ts - b.ts) || ((a.seq || 0) - (b.seq || 0)));
     const nonGren = [];
@@ -300,7 +318,9 @@ function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts
     const rune = nearRune(t.ts), spell = nearSpell(t.ts);
     const power = rune ? 'rune' : 'spell';
     if (nonGren.length === 1) {
-      nonGren[0].correctedComponent = (rune || spell) ? power : 'arrow';
+      // 1 hit em magnitude de AA (≪ banda do poder) ⇒ a runa/spell não saiu, é varinha.
+      const looksAA = aaRef > 0 && nonGren[0].revertedDmg <= aaRef * AA_FALSE_POWER_FACTOR;
+      nonGren[0].correctedComponent = ((rune || spell) && !looksAA) ? power : 'arrow';
       continue;
     }
     if (usePositional) {
