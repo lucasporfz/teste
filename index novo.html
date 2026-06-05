@@ -2704,6 +2704,10 @@ let valRpArrowHistogramChart = null;
 let valRpSpellHistogramChart = null;
 let valRpRuneHistogramChart = null;
 let valRpGrenadeHistogramChart = null;
+let clsTimelineHitsChart = null;
+let clsTimelineDamageChart = null;
+let clsImpactChart = null;
+let clsRowHistCharts = [];
 let lastSimHitsHist = null;
 let lastSimTemporalSeries = null;
 const VALIDATOR_TURN_DURATION = 2.25;
@@ -4485,11 +4489,21 @@ function renderClassifier(res) {
     return;
   }
   const f2 = x => x.toFixed(2);
-  const rowsHtml = res.rows.map(r =>
-    '<tr><td>' + (r.kind === 'arrow' ? t('cls_comp_arrow') : r.label) + '</td><td style="text-align:right">' + r.turns +
-    '</td><td style="text-align:right">' + f2(r.hitsMean) + '</td><td style="text-align:right">' + r.dmgBase +
-    '</td><td style="text-align:right">' + r.dmgEff + '</td></tr>'
-  ).join('');
+  const tierLabel = (tier, mult) => tier.kind === 'tier_bonus'
+    ? t('cls_tier_bonus') + (mult ? ' (×' + f2(mult) + ')' : '')
+    : t('cls_tier_base');
+  const rowsHtml = res.rows.map(r => {
+    const main = '<tr><td>' + (r.kind === 'arrow' ? t('cls_comp_arrow') : r.label) + '</td><td style="text-align:right">' + r.turns +
+      '</td><td style="text-align:right">' + f2(r.hitsMean) + '</td><td style="text-align:right">' + r.dmgBase +
+      '</td><td style="text-align:right">' + r.dmgEff + '</td></tr>';
+    if (!r.tiers || !r.tiers.length) return main;
+    const sub = r.tiers.map(tier =>
+      '<tr style="color:var(--text-muted);font-size:12px"><td style="padding-left:22px">└ ' + tierLabel(tier, r.bonusMult) +
+      '</td><td></td><td style="text-align:right">' + f2(tier.hitsMean) +
+      '</td><td style="text-align:right">' + tier.dmgBase + '</td><td style="text-align:right">' + tier.dmgEff + '</td></tr>'
+    ).join('');
+    return main + sub;
+  }).join('');
   const kindLabel = { spell: t('cls_kind_spell'), grenade: t('cls_kind_grenade') };
   const detRows = res.ranked.slice(0, 8).map(g => {
     const isDmg = g.speaker === res.player && (g.kind === 'spell' || g.kind === 'grenade');
@@ -4501,6 +4515,28 @@ function renderClassifier(res) {
   }).join('');
   const dmgSummary = res.damageSpells.map(clsSpellNameSafe)
     .concat((res.grenadeSpells || []).map(x => clsSpellNameSafe(x) + ' (' + t('cls_kind_grenade') + ')'));
+
+  // gráficos do log (só dados observados, sem simulação) — um histograma de hits por
+  // LINHA da rotação (cada spell/componente: AA, cada spell nominal, runa, granada).
+  const kindColor = { arrow: '#F59E0B', spell: '#22C55E', rune: '#60A5FA', grenade: '#F87171' };
+  const compDefs = (res.rows || [])
+    .filter(r => Array.isArray(r.hitsPerTurn) && r.hitsPerTurn.some(v => v > 0))
+    .map((r, i) => ({
+      canvas: 'clsHist' + i,
+      vals: r.hitsPerTurn.filter(v => v > 0),
+      label: (r.kind === 'arrow' ? t('cls_comp_arrow') : r.label),
+      color: kindColor[r.kind] || '#22C55E',
+    }));
+  const hasSeries = (res.temporalSeries || []).length > 0;
+  const chartsHtml = !hasSeries ? '' : (
+    '<h3 style="font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--accent)">' + t('cls_h_charts') + '</h3>' +
+    '<div style="position:relative;height:240px;margin-bottom:14px"><canvas id="clsTimelineHits"></canvas></div>' +
+    (compDefs.length ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">' +
+      compDefs.map(d => '<div style="position:relative;height:220px"><canvas id="' + d.canvas + '"></canvas></div>').join('') +
+      '</div>' : '') +
+    '<div style="position:relative;height:240px;margin-bottom:14px"><canvas id="clsTimelineDamage"></canvas></div>' +
+    '<div style="position:relative;height:230px"><canvas id="clsImpactAnalyser"></canvas></div>'
+  );
 
   box.style.display = 'block';
   box.innerHTML =
@@ -4516,7 +4552,45 @@ function renderClassifier(res) {
     '<h3 style="font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--accent)">' + t('cls_h_detection') + '</h3>' +
     '<table class="cls-table"><thead><tr><th>' + t('cls_th_incant') + '</th><th style="text-align:right">' + t('cls_th_covered') +
       '</th><th style="text-align:right">recall</th><th style="text-align:right">overcast</th><th style="text-align:right">' +
-      t('cls_th_total') + '</th><th></th></tr></thead><tbody>' + detRows + '</tbody></table>';
+      t('cls_th_total') + '</th><th></th></tr></thead><tbody>' + detRows + '</tbody></table>' +
+    chartsHtml;
+  renderClassifierCharts(res, compDefs);
+}
+
+// Gráficos do classificador — mesmos do validador na análise do log real (hits/turno,
+// histograma de hits por componente, dano/turno, impact analyser), mas SÓ com o log
+// observado (sem linha de simulação). Reusa movingImpact + renderSmallComponentHistogram.
+function renderClassifierCharts(res, compDefs) {
+  const destroy = c => { try { if (c && typeof c.destroy === 'function') c.destroy(); } catch (e) {} };
+  destroy(clsTimelineHitsChart); destroy(clsTimelineDamageChart); destroy(clsImpactChart);
+  clsRowHistCharts.forEach(destroy); clsRowHistCharts = [];
+  clsTimelineHitsChart = clsTimelineDamageChart = clsImpactChart = null;
+  const series = res.temporalSeries || [];
+  if (typeof Chart === 'undefined' || !series.length) return;
+  const labels = series.map((_, i) => i + 1);
+  const gridColor = 'rgba(139,164,194,0.1)';
+  const toRgba = (hex, a) => { const [r, g, b] = [hex.slice(1, 3), hex.slice(3, 5), hex.slice(5, 7)].map(h => parseInt(h, 16)); return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')'; };
+  const scales = () => ({
+    x: { grid: { color: gridColor }, ticks: { color: '#8BA4C2', font: { size: 10 }, maxTicksLimit: 12 }, title: { display: true, text: t('val_axis_turn'), color: '#8BA4C2' } },
+    y: { grid: { color: gridColor }, ticks: { color: '#8BA4C2', font: { size: 11 } }, beginAtZero: true }
+  });
+  const lineChart = (canvasId, data, title, color) => {
+    const cv = $(canvasId);
+    if (!cv) return null;
+    try {
+      return new Chart(cv, {
+        type: 'line',
+        data: { labels, datasets: [{ label: t('val_timeline_real'), data, borderColor: color, backgroundColor: toRgba(color, 0.12), borderWidth: 1.5, pointRadius: 0, tension: .25 }] },
+        options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { display: false }, title: { display: true, text: title, color: '#DDE6F3' } }, scales: scales() }
+      });
+    } catch (err) { console.error('[classifier chart] failed:', canvasId, err); return null; }
+  };
+  clsTimelineHitsChart = lineChart('clsTimelineHits', series.map(p => p.mobsHit), t('val_timeline_hits'), '#3B82F6');
+  clsTimelineDamageChart = lineChart('clsTimelineDamage', series.map(p => p.damage), t('val_timeline_damage'), '#F59E0B');
+  clsImpactChart = lineChart('clsImpactAnalyser', movingImpact(series), t('val_impact_analyser'), '#3B82F6');
+  for (const d of (compDefs || [])) {
+    renderSmallComponentHistogram(d.canvas, c => { clsRowHistCharts.push(c); }, d.vals, null, d.label, undefined, d.color);
+  }
 }
 function clsSpellNameSafe(text) {
   return typeof clsSpellLabel === 'function' ? clsSpellLabel(text) : text;

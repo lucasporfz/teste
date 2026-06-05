@@ -72,6 +72,7 @@ const I18N = {
     cls_h_spells: 'spell detalhado por incantação',
     cls_h_rotation: 'rotação — hits e dano por componente/spell',
     cls_h_detection: 'detecção das incantações',
+    cls_h_charts: 'gráficos do log',
     cls_th_comp: 'componente',
     cls_th_spell: 'spell',
     cls_th_turns: 'turnos',
@@ -86,6 +87,8 @@ const I18N = {
     cls_comp_spell: 'spell',
     cls_comp_rune: 'runa',
     cls_comp_grenade: 'granada',
+    cls_tier_base: 'sem bônus',
+    cls_tier_bonus: 'com bônus',
     cls_unmatched: '{u}/{n} turnos excluídos por não alinhar 100% os dois logs (cast fora da janela ou fora da cobertura do local chat).',
 
     val_title: 'Validador — comparar calculadora com hunt real',
@@ -636,6 +639,7 @@ const I18N = {
     cls_h_spells: 'spell detailed per incantation',
     cls_h_rotation: 'rotation — hits and damage per component/spell',
     cls_h_detection: 'incantation detection',
+    cls_h_charts: 'log charts',
     cls_th_comp: 'component',
     cls_th_spell: 'spell',
     cls_th_turns: 'turns',
@@ -650,6 +654,8 @@ const I18N = {
     cls_comp_spell: 'spell',
     cls_comp_rune: 'rune',
     cls_comp_grenade: 'grenade',
+    cls_tier_base: 'no bonus',
+    cls_tier_bonus: 'with bonus',
     cls_unmatched: '{u}/{n} turns excluded for not aligning both logs 100% (cast outside the window or beyond the local chat coverage).',
 
     val_title: 'Validator — compare calculator vs real hunt',

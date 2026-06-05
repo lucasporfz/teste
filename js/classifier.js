@@ -211,7 +211,7 @@ function clsAgg(label, kind, turnsList) {
     const vals = clean.length ? clean : all.map(sel);
     return Math.round(clsMean(vals));
   };
-  return { label, kind, turns: turnsList.length, hitsMean: clsMean(hits), dmgBase: meanPref(d => d.v), dmgEff: meanPref(d => d.raw) };
+  return { label, kind, turns: turnsList.length, hitsMean: clsMean(hits), dmgBase: meanPref(d => d.v), dmgEff: meanPref(d => d.raw), hitsPerTurn: hits };
 }
 
 // Conta hits e soma revertedDmg por componente, por turno (lê l.correctedComponent).
@@ -228,13 +228,56 @@ function clsBuildTurnRecords(turns) {
   });
 }
 
-// Single-target (boss, 1 mob): o classificador de bandas precisa de ≥2 mobs, então
-// aqui classificamos por ORDEM (regra do jogo: AA primeiro, depois spell/runa).
-// Granada (Divine Grenade) explode EXATAMENTE 3s após o cast → só conta se houver um
-// hit no segundo C+3 (senão a granada errou o alvo e deu 0 dano — não rouba o turno).
-// Demais hits do turno: hit[0]=arrow (AA); seguintes=power (runa/spell pelo cast).
-// 1 hit não-granada = power-only se houver cast/runa alinhado (AA pulado), senão AA.
-function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts) {
+// Spells de EXECUÇÃO: dano com bônus quando o alvo está abaixo do limiar de vida
+// (Terra Burst / Ice Burst / Executioner's Throw). O bônus é um multiplicador discreto
+// sobre o roll-base do cast (Terra Burst observado = ×1.60). Como o roll-base muda a
+// cada cast, o salto só aparece TURNO A TURNO, relativo ao base do próprio turno.
+// Valor = a chave do dano normalizado pelo elemento (dano ÷ mod do elemento do mob),
+// que isola o bônus da resistência elemental e permite comparar entre mobs.
+const CLS_EXECUTION_ELEMENT = {
+  'exevo ulus tera':  'earthOriginal',     // Terra Burst (earth)
+  'exevo ulus frigo': 'iceOriginal',       // Ice Burst (ice)
+  'exori amp kor':    'physicalOriginal',  // Executioner's Throw (physical)
+};
+// salto que separa base de bônus dentro de um turno. Base interno é ~constante (mesmo
+// roll → normalizado idêntico entre mobs), bônus observado = 1.6 → 1.4 separa com folga.
+const CLS_BONUS_JUMP = 1.4;
+
+// Separa os hits de UM cast de spell de execução em tiers base/bônus, pelo salto de dano
+// normalizado dentro do turno. Regra do usuário: turno com 1 tier só = bônus ATIVO
+// (quando todos os mobs do cast estão no mesmo nível, é o bônus rolando — confirmado nos
+// logs: single-tier cai na faixa de bônus). Retorna {base:{hits,dmgs}, bonus:{hits,dmgs}}.
+function clsSplitExecutionTiers(lines, elemKey) {
+  const normOf = l => (Number.isFinite(l[elemKey]) && l[elemKey] > 0) ? l[elemKey] : (l.revertedDmg || l.dmg || 0);
+  const clean = lines.filter(l => !l.overkill && normOf(l) > 0);
+  const base = clean.length ? Math.min(...clean.map(normOf)) : 0;
+  const twoTiers = base > 0 && clean.some(l => normOf(l) >= CLS_BONUS_JUMP * base);
+  const out = { base: { hits: 0, dmgs: [] }, bonus: { hits: 0, dmgs: [] } };
+  for (const l of lines) {
+    const isBonus = !twoTiers ? true : (base > 0 && normOf(l) >= CLS_BONUS_JUMP * base);
+    const slot = isBonus ? out.bonus : out.base;
+    slot.hits++;
+    if (Number.isFinite(l.revertedDmg) && l.revertedDmg > 0) slot.dmgs.push({ v: l.revertedDmg, raw: l.dmg, ok: !!l.overkill });
+  }
+  return out;
+}
+
+// Classificação MECÂNICA (não-RP / single-target) — regra do jogo: AA single-target +
+// poder AoE (spell/runa). Granada (Divine Grenade) explode EXATAMENTE 3s após o cast →
+// só conta se houver um hit no segundo C+3 (senão errou o alvo e deu 0 dano — não rouba
+// o turno). O AA tem assinatura DIFERENTE por vocação, então `usePositional` decide:
+//   • usePositional=true (single-target OU EK melee): AA = hit[0] (mais cedo por ts/seq),
+//     SEMPRE presente. O golpe melee é logado ANTES da AoE e fere todo turno; a magnitude
+//     não separa (a AoE acerta mobs de armaduras diferentes, e o AA pode estar ACIMA por
+//     crit ou ABAIXO da banda da spell — confirmado nos turnos do EK).
+//   • usePositional=false (caster druida/mage em pack): o AA de varinha é single-target e
+//     INTERMITENTE — um outlier baixo PROFUNDO (~0.15× a banda AoE, ex.: 122 vs ~900) que
+//     nem sempre é o 1º hit e nem sempre existe. Só separa AA se o menor hit não-overkill
+//     for ≤ AA_DEPTH× o 2º menor; senão o turno é AoE puro (sem AA). A posição NÃO serve
+//     (o 1º log pode ser um hit da AoE), então aqui manda a magnitude.
+// 1 hit = poder se há cast/runa alinhado, senão AA.
+const AA_DEPTH = 0.5;
+function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts, usePositional) {
   // granada: marca 1 hit por cast, no exato C+3
   const allLines = [];
   for (const t of turns) for (const l of (t.rpComponentLines || [])) allLines.push(l);
@@ -243,8 +286,12 @@ function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts
     const hit = allLines.find(l => l.ts === c.ts + 3 && !grenSet.has(l));
     if (hit) grenSet.add(hit);
   }
-  const nearRune = T => runeUses.some(u => u.ts >= T - 1 && u.ts <= T + 2);
-  const nearSpell = T => playerSpellCasts.some(c => c.ts >= T - 1 && c.ts <= T + 2);
+  // Janela cast→turno: o cast PRECEDE os hits (uma spell não bate antes de ser lançada),
+  // e o offset cast→hit observado é ~0. Logo [T-1, T+1] (só ±1 p/ skew de relógio). NÃO
+  // olhar T+2: lá já é o turno seguinte — era o que fazia o cast do próximo Terra Burst
+  // ser colado num turno de 1 hit (o AA de varinha) e o AA virar "spell".
+  const nearRune = T => runeUses.some(u => u.ts >= T - 1 && u.ts <= T + 1);
+  const nearSpell = T => playerSpellCasts.some(c => c.ts >= T - 1 && c.ts <= T + 1);
   for (const t of turns) {
     const ordered = (t.rpComponentLines || []).slice().sort((a, b) => (a.ts - b.ts) || ((a.seq || 0) - (b.seq || 0)));
     const nonGren = [];
@@ -252,10 +299,17 @@ function clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts
     if (!nonGren.length) continue;
     const rune = nearRune(t.ts), spell = nearSpell(t.ts);
     const power = rune ? 'rune' : 'spell';
-    nonGren.forEach((l, i) => {
-      if (nonGren.length >= 2) l.correctedComponent = (i === 0) ? 'arrow' : power;
-      else l.correctedComponent = (rune || spell) ? power : 'arrow';
-    });
+    if (nonGren.length === 1) {
+      nonGren[0].correctedComponent = (rune || spell) ? power : 'arrow';
+      continue;
+    }
+    if (usePositional) {
+      nonGren.forEach((l, i) => { l.correctedComponent = (i === 0) ? 'arrow' : power; });
+    } else {
+      const clean = nonGren.filter(l => !l.overkill).slice().sort((a, b) => a.revertedDmg - b.revertedDmg);
+      const aa = (clean.length >= 2 && clean[0].revertedDmg <= AA_DEPTH * clean[1].revertedDmg) ? clean[0] : null;
+      nonGren.forEach(l => { l.correctedComponent = (l === aa) ? 'arrow' : power; });
+    }
   }
 }
 
@@ -301,7 +355,7 @@ function clsNearest(arr, T) {
 }
 
 // Núcleo: cruza os dois logs e devolve a tabela única + diagnóstico de detecção.
-function classifyWithLocalChat(serverLogText, localChatText) {
+function classifyWithLocalChat(serverLogText, localChatText, opts) {
   const { data, turns } = clsCaptureTurns(serverLogText);
   if (!turns.length) return { error: 'no_turns', data };
 
@@ -358,7 +412,12 @@ function classifyWithLocalChat(serverLogText, localChatText) {
   if (dmgCandidates.length) {
     const known = dmgCandidates.filter(g => clsKnownType(g.text) === 'attack' || clsKnownType(g.text) === 'grenade');
     const pool = known.length ? known : dmgCandidates;
-    player = pool.slice().sort((a, b) => b.recall - a.recall || a.overcast - b.overcast)[0].speaker;
+    // O jogador (dono do server log) tem suas casts TURN-LOCKED (≈1 por turno de
+    // dano deste log); party-mates aparecem com overcast alto (castam mais do que
+    // cai neste log, ou em mobs que não são os do log). Prefere turn-locked
+    // (overcast<=OVERCAST), depois maior recall.
+    const lock = g => (g.overcast <= OVERCAST ? 1 : 0);
+    player = pool.slice().sort((a, b) => lock(b) - lock(a) || b.recall - a.recall || a.overcast - b.overcast)[0].speaker;
   }
   const damageSpells = dmgCandidates.filter(g => g.speaker === player && g.kind === 'spell').map(g => g.text);
   const grenadeSpells = dmgCandidates.filter(g => g.speaker === player && g.kind === 'grenade').map(g => g.text);
@@ -382,7 +441,11 @@ function classifyWithLocalChat(serverLogText, localChatText) {
     'exori infir con', 'exori dir san', 'exori dir moe', 'utori san', 'exevo tempo mas san']);
   const isRpRegime = damageSpells.concat(grenadeSpells).some(t => RP_ATTACK.has(t));
   if (data.distinctMobs === 1 || !isRpRegime) {
-    clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts);
+    // AA posicional p/ single-target (1 mob, sem banda) e p/ EK melee (golpe físico todo
+    // turno, logado 1º); caster (druida/mage: spell exevo / runa) usa o AA por outlier.
+    const isMeleeVoc = damageSpells.some(t => /^exori\b/.test(t));
+    const usePositional = data.distinctMobs === 1 || isMeleeVoc;
+    clsReclassifyByOrder(turns, runeUses, playerSpellCasts, playerGrenCasts, usePositional);
     turnRecords = clsBuildTurnRecords(turns);
   }
 
@@ -393,7 +456,16 @@ function classifyWithLocalChat(serverLogText, localChatText) {
   };
 
   const perSpell = new Map(), perGren = new Map(), perRune = new Map();
+  const perSpellTiers = new Map();  // spells de execução: {base:[...], bonus:[...]} por cast
   const arrowAligned = []; let excludedTurns = 0;
+  // Séries por turno ALINHADO p/ os gráficos (mesma base do validador, sem simulação):
+  // temporalSeries = hits/dano/relTime por turno; componentSeries = hits por componente.
+  const baseTs = turns[0].ts;
+  const temporalSeries = [];
+  const componentSeries = { arrowHitsPerTurn: [], spellHitsPerTurn: [], runeHitsPerTurn: [], grenadeHitsPerShot: [] };
+  // diagnóstico opcional (oráculo): traço por turno alinhado, sem footprint no app.
+  const traceOn = !!(opts && opts.trace);
+  const turnTrace = [];
   for (const r of turnRecords) {
     const sCast = r.counts.spell > 0 ? clsNearest(playerSpellCasts, r.ts) : null;
     const gCast = r.counts.grenade > 0 ? nearestGren(r.ts) : null;
@@ -402,8 +474,38 @@ function classifyWithLocalChat(serverLogText, localChatText) {
     if (!aligned) { excludedTurns++; continue; }
     if (r.counts.arrow > 0) arrowAligned.push({ hits: r.counts.arrow, dmgs: r.dmgs.arrow });
     if (sCast) { if (!perSpell.has(sCast.text)) perSpell.set(sCast.text, []); perSpell.get(sCast.text).push({ hits: r.counts.spell, dmgs: r.dmgs.spell }); }
+    if (sCast && CLS_EXECUTION_ELEMENT[sCast.text] && r.counts.spell > 0) {
+      const spellLines = (turns[r.idx - 1].rpComponentLines || []).filter(l => l.correctedComponent === 'spell');
+      const tiers = clsSplitExecutionTiers(spellLines, CLS_EXECUTION_ELEMENT[sCast.text]);
+      if (!perSpellTiers.has(sCast.text)) perSpellTiers.set(sCast.text, { base: [], bonus: [] });
+      const pt = perSpellTiers.get(sCast.text);
+      if (tiers.base.hits) pt.base.push(tiers.base);
+      if (tiers.bonus.hits) pt.bonus.push(tiers.bonus);
+    }
     if (gCast) { if (!perGren.has(gCast.text)) perGren.set(gCast.text, []); perGren.get(gCast.text).push({ hits: r.counts.grenade, dmgs: r.dmgs.grenade }); }
     if (rUse) { if (!perRune.has(rUse.name)) perRune.set(rUse.name, []); perRune.get(rUse.name).push({ hits: r.counts.rune, dmgs: r.dmgs.rune }); }
+    const sumRaw = c => r.dmgs[c].reduce((a, d) => a + (d.raw || 0), 0);
+    temporalSeries.push({
+      relTime: r.ts - baseTs,
+      mobsHit: r.counts.arrow + r.counts.spell + r.counts.rune + r.counts.grenade,
+      components: { arrow: r.counts.arrow, spell: r.counts.spell, rune: r.counts.rune, grenade: r.counts.grenade },
+      damage: sumRaw('arrow') + sumRaw('spell') + sumRaw('rune') + sumRaw('grenade'),
+    });
+    componentSeries.arrowHitsPerTurn.push(r.counts.arrow);
+    componentSeries.spellHitsPerTurn.push(r.counts.spell);
+    componentSeries.runeHitsPerTurn.push(r.counts.rune);
+    if (r.counts.grenade > 0) componentSeries.grenadeHitsPerShot.push(r.counts.grenade);
+    if (traceOn) {
+      turnTrace.push({
+        idx: r.idx, ts: r.ts,
+        spell: sCast ? sCast.text : null, rune: rUse ? rUse.name : null, gren: gCast ? gCast.text : null,
+        counts: r.counts,
+        lines: (turns[r.idx - 1].rpComponentLines || []).map(l => ({
+          mob: l.mob, dmg: l.dmg, base: l.revertedDmg, comp: l.correctedComponent, ok: !!l.overkill,
+          ts: l.ts, seq: l.seq || 0,
+        })),
+      });
+    }
   }
 
   // --- tabela única (ordem: arrow · runas · spells · granada) ---
@@ -411,7 +513,25 @@ function classifyWithLocalChat(serverLogText, localChatText) {
   const rows = [];
   if (arrowAligned.length) rows.push(clsAgg('Auto ataque', 'arrow', arrowAligned));
   for (const [name, list] of [...perRune.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(name, 'rune', list));
-  for (const [text, list] of [...perSpell.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(clsSpellLabel(text), 'spell', list));
+  for (const [text, list] of [...perSpell.entries()].sort((a, b) => b[1].length - a[1].length)) {
+    const row = clsAgg(clsSpellLabel(text), 'spell', list);
+    const pt = perSpellTiers.get(text);
+    if (pt && (pt.base.length || pt.bonus.length)) {
+      row.tiers = [];
+      // hits méd do tier = total de hits do tier / turnos do PAI (list.length), p/ que
+      // base + bônus somem a média da linha pai (não a média por turno só do tier).
+      const tierAgg = (kind, tierList) => {
+        const a = clsAgg('', kind, tierList);
+        a.hitsMean = list.length ? tierList.reduce((s, x) => s + x.hits, 0) / list.length : 0;
+        return a;
+      };
+      if (pt.base.length) row.tiers.push(tierAgg('tier_base', pt.base));
+      if (pt.bonus.length) row.tiers.push(tierAgg('tier_bonus', pt.bonus));
+      const b = row.tiers.find(x => x.kind === 'tier_base'), bo = row.tiers.find(x => x.kind === 'tier_bonus');
+      if (b && bo && b.dmgBase > 0) row.bonusMult = bo.dmgBase / b.dmgBase;
+    }
+    rows.push(row);
+  }
   for (const [text, list] of [...perGren.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(grenLabel(text), 'grenade', list));
   // granadas castadas que NÃO deram dano (erraram): mostra a linha com 0 hits / 0 dano.
   for (const text of grenadeSpells) {
@@ -424,5 +544,7 @@ function classifyWithLocalChat(serverLogText, localChatText) {
     data, player, damageSpells, grenadeSpells, ranked, rows,
     totalTurns: turns.length, excludedTurns,
     spellTurnCount: spellTurns.length, grenadeTurnCount: grenadeTurns.length, runeTurnCount: runeTurns.length,
+    temporalSeries, componentSeries,
+    turnTrace: traceOn ? turnTrace : undefined,
   };
 }

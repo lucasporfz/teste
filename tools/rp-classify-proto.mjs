@@ -18,9 +18,18 @@ for (const n of ['MOBS_TABLE', 'percentile', 'extractRpGrenadePeakResidual']) if
 vm.runInContext(read(path.join(ROOT, 'js/classifier-parser.js')), ctx);
 vm.runInContext(read(path.join(ROOT, 'js/classifier.js')), ctx);
 
-const serverLogPath = process.argv[2] || 'logs/server log rp.txt';
-const localChatPath = process.argv[3] || 'logs/localchat rp.txt';
-const res = ctx.classifyWithLocalChat(read(serverLogPath), read(localChatPath));
+// args: <server log> <local chat> [--spell "<incant|label>"] [--hits N] (filtros opcionais
+// imprimem os turnos alinhados que casam, hit a hit).
+const argv = process.argv.slice(2);
+const positional = [], flags = {};
+for (let i = 0; i < argv.length; i++) {
+  if (argv[i].startsWith('--')) { flags[argv[i].slice(2)] = (argv[i + 1] && !argv[i + 1].startsWith('--')) ? argv[++i] : true; }
+  else positional.push(argv[i]);
+}
+const serverLogPath = positional[0] || 'logs/server log rp.txt';
+const localChatPath = positional[1] || 'logs/localchat rp.txt';
+const wantTrace = flags.spell != null || flags.hits != null;
+const res = ctx.classifyWithLocalChat(read(serverLogPath), read(localChatPath), { trace: wantTrace });
 
 console.log('=== ' + serverLogPath.replace(/^logs\//, '') + ' + ' + localChatPath.replace(/^logs\//, '') + ' ===');
 if (res.error) { console.log('ERRO: ' + res.error); process.exit(1); }
@@ -32,8 +41,39 @@ console.log('  turnos  hits méd  dano base  dano efet  componente/spell');
 for (const r of res.rows) {
   console.log('  ' + String(r.turns).padStart(6) + '  ' + r.hitsMean.toFixed(2).padStart(8) +
     '  ' + String(r.dmgBase).padStart(9) + '  ' + String(r.dmgEff).padStart(9) + '  ' + r.label);
+  if (r.tiers && r.tiers.length) {
+    for (const tier of r.tiers) {
+      const tlabel = tier.kind === 'tier_bonus'
+        ? 'com bônus' + (r.bonusMult ? ' (×' + r.bonusMult.toFixed(2) + ')' : '')
+        : 'sem bônus';
+      console.log('  ' + ''.padStart(6) + '  ' + tier.hitsMean.toFixed(2).padStart(8) +
+        '  ' + String(tier.dmgBase).padStart(9) + '  ' + String(tier.dmgEff).padStart(9) + '    └ ' + tlabel);
+    }
+  }
 }
 console.log('  (' + res.excludedTurns + '/' + res.totalTurns + ' turnos excluídos por não alinhar 100% os 2 logs)');
+
+if (wantTrace) {
+  const spellFilter = typeof flags.spell === 'string' ? flags.spell.toLowerCase() : null;
+  const hitsFilter = flags.hits != null && flags.hits !== true ? Number(flags.hits) : null;
+  const label = t => (typeof ctx.clsSpellLabel === 'function' ? ctx.clsSpellLabel(t) : t) || t;
+  const matchSpell = sp => !spellFilter || (sp && (sp.toLowerCase() === spellFilter || label(sp).toLowerCase() === spellFilter));
+  // hits do componente principal do turno (spell se houver cast, senão granada/runa).
+  const compCount = tr => tr.spell ? tr.counts.spell : (tr.gren ? tr.counts.grenade : (tr.rune ? tr.counts.rune : tr.counts.arrow));
+  const hits = (res.turnTrace || []).filter(tr => matchSpell(tr.spell) && (hitsFilter == null || compCount(tr) === hitsFilter));
+  console.log('\n--- TURNOS' +
+    (spellFilter ? ' · spell="' + flags.spell + '"' : '') +
+    (hitsFilter != null ? ' · hits=' + hitsFilter : '') +
+    ' (' + hits.length + ') ---');
+  for (const tr of hits) {
+    const sp = tr.spell ? (label(tr.spell) + ' [' + tr.spell + ']') : (tr.gren ? 'granada [' + tr.gren + ']' : (tr.rune ? 'runa [' + tr.rune + ']' : 'só AA'));
+    console.log('  turno ' + tr.idx + '  ts=' + tr.ts + '  ' + sp +
+      '  | comp: arrow=' + tr.counts.arrow + ' spell=' + tr.counts.spell + ' rune=' + tr.counts.rune + ' gren=' + tr.counts.grenade);
+    const lns = tr.lines.slice().sort((a, b) => (a.ts - b.ts) || (a.seq - b.seq));
+    lns.forEach((l, i) => console.log('      ' + String(i).padStart(2) + '  ts=' + l.ts + '.' + l.seq + '  ' + String(l.mob).padEnd(22) +
+      ' dmg=' + String(l.dmg).padStart(5) + '  base=' + String(Math.round(l.base)).padStart(5) + '  ' + (l.comp || '—').padEnd(8) + (l.ok ? ' (overkill)' : '')));
+  }
+}
 
 console.log('\n--- detecção das incantações (top 8) ---');
 console.log('  covered  recall  overcast  total  classe   speaker: incantação');
