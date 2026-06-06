@@ -219,12 +219,18 @@ function clsBuildTurnRecords(turns) {
   return turns.map((t, i) => {
     const counts = { arrow: 0, spell: 0, rune: 0, grenade: 0 };
     const dmgs = { arrow: [], spell: [], rune: [], grenade: [] };
+    // ts em que a SPELL realmente bateu — a spell AoE cai ~1s depois do AA, então alinhar
+    // o cast pelo ts das hits de spell (e não pelo ts do AA, que é a 1ª hit do turno) evita
+    // pegar o cast anterior por empate de distância. Default = ts do turno se não houver spell.
+    const spellTsList = [];
     for (const l of (t.rpComponentLines || [])) {
       const c = l.correctedComponent; if (!(c in counts)) continue;
       counts[c]++;
+      if (c === 'spell' && Number.isFinite(l.ts)) spellTsList.push(l.ts);
       if (Number.isFinite(l.revertedDmg) && l.revertedDmg > 0) dmgs[c].push({ v: l.revertedDmg, raw: l.dmg, ok: !!l.overkill });
     }
-    return { idx: i + 1, ts: t.ts, counts, dmgs };
+    const spellTs = spellTsList.length ? Math.min(...spellTsList) : t.ts;
+    return { idx: i + 1, ts: t.ts, spellTs, counts, dmgs };
   });
 }
 
@@ -482,12 +488,15 @@ function classifyWithLocalChat(serverLogText, localChatText, opts) {
   // temporalSeries = hits/dano/relTime por turno; componentSeries = hits por componente.
   const baseTs = turns[0].ts;
   const temporalSeries = [];
+  // por turno alinhado, a contribuição de cada componente/spell (p/ o gráfico "componentes
+  // por turno"): uma linha por linha real da rotação, não o set fixo do validador.
+  const alignedTurns = [];
   const componentSeries = { arrowHitsPerTurn: [], spellHitsPerTurn: [], runeHitsPerTurn: [], grenadeHitsPerShot: [] };
   // diagnóstico opcional (oráculo): traço por turno alinhado, sem footprint no app.
   const traceOn = !!(opts && opts.trace);
   const turnTrace = [];
   for (const r of turnRecords) {
-    const sCast = r.counts.spell > 0 ? clsNearest(playerSpellCasts, r.ts) : null;
+    const sCast = r.counts.spell > 0 ? clsNearest(playerSpellCasts, r.spellTs) : null;
     const gCast = r.counts.grenade > 0 ? nearestGren(r.ts) : null;
     const rUse = r.counts.rune > 0 ? clsNearest(runeUses, r.ts) : null;
     const aligned = (r.counts.spell === 0 || sCast) && (r.counts.grenade === 0 || gCast) && (r.counts.rune === 0 || rUse);
@@ -515,6 +524,12 @@ function classifyWithLocalChat(serverLogText, localChatText, opts) {
     componentSeries.spellHitsPerTurn.push(r.counts.spell);
     componentSeries.runeHitsPerTurn.push(r.counts.rune);
     if (r.counts.grenade > 0) componentSeries.grenadeHitsPerShot.push(r.counts.grenade);
+    alignedTurns.push({
+      arrow: r.counts.arrow,
+      spellText: sCast ? sCast.text : null, spellHits: r.counts.spell,
+      runeName: rUse ? rUse.name : null, runeHits: r.counts.rune,
+      grenText: gCast ? gCast.text : null, grenHits: r.counts.grenade,
+    });
     if (traceOn) {
       turnTrace.push({
         idx: r.idx, ts: r.ts,
@@ -531,10 +546,19 @@ function classifyWithLocalChat(serverLogText, localChatText, opts) {
   // --- tabela única (ordem: arrow · runas · spells · granada) ---
   const grenLabel = text => clsSpellLabel(text);
   const rows = [];
-  if (arrowAligned.length) rows.push(clsAgg('Auto ataque', 'arrow', arrowAligned));
-  for (const [name, list] of [...perRune.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(name, 'rune', list));
+  if (arrowAligned.length) {
+    const aRow = clsAgg('Auto ataque', 'arrow', arrowAligned);
+    aRow.hitsTimeline = alignedTurns.map(a => a.arrow);
+    rows.push(aRow);
+  }
+  for (const [name, list] of [...perRune.entries()].sort((a, b) => b[1].length - a[1].length)) {
+    const rRow = clsAgg(name, 'rune', list);
+    rRow.hitsTimeline = alignedTurns.map(a => a.runeName === name ? a.runeHits : 0);
+    rows.push(rRow);
+  }
   for (const [text, list] of [...perSpell.entries()].sort((a, b) => b[1].length - a[1].length)) {
     const row = clsAgg(clsSpellLabel(text), 'spell', list);
+    row.hitsTimeline = alignedTurns.map(a => a.spellText === text ? a.spellHits : 0);
     const pt = perSpellTiers.get(text);
     if (pt && (pt.base.length || pt.bonus.length)) {
       row.tiers = [];
@@ -552,7 +576,11 @@ function classifyWithLocalChat(serverLogText, localChatText, opts) {
     }
     rows.push(row);
   }
-  for (const [text, list] of [...perGren.entries()].sort((a, b) => b[1].length - a[1].length)) rows.push(clsAgg(grenLabel(text), 'grenade', list));
+  for (const [text, list] of [...perGren.entries()].sort((a, b) => b[1].length - a[1].length)) {
+    const gRow = clsAgg(grenLabel(text), 'grenade', list);
+    gRow.hitsTimeline = alignedTurns.map(a => a.grenText === text ? a.grenHits : 0);
+    rows.push(gRow);
+  }
   // granadas castadas que NÃO deram dano (erraram): mostra a linha com 0 hits / 0 dano.
   for (const text of grenadeSpells) {
     if (perGren.has(text)) continue;

@@ -2704,6 +2704,7 @@ let valRpArrowHistogramChart = null;
 let valRpSpellHistogramChart = null;
 let valRpRuneHistogramChart = null;
 let valRpGrenadeHistogramChart = null;
+let clsTimelineComponentsChart = null;
 let clsTimelineHitsChart = null;
 let clsTimelineDamageChart = null;
 let clsImpactChart = null;
@@ -4504,15 +4505,6 @@ function renderClassifier(res) {
     ).join('');
     return main + sub;
   }).join('');
-  const kindLabel = { spell: t('cls_kind_spell'), grenade: t('cls_kind_grenade') };
-  const detRows = res.ranked.slice(0, 8).map(g => {
-    const isDmg = g.speaker === res.player && (g.kind === 'spell' || g.kind === 'grenade');
-    return '<tr style="' + (isDmg ? 'color:var(--accent)' : 'color:var(--text-muted)') + '"><td>' +
-      g.speaker + ': ' + g.text + '</td><td style="text-align:right">' + g.covered +
-      '</td><td style="text-align:right">' + (g.recall * 100).toFixed(0) + '%</td><td style="text-align:right">' +
-      (isFinite(g.overcast) ? g.overcast.toFixed(2) : '∞') + '</td><td style="text-align:right">' + g.total +
-      '</td><td>' + (isDmg ? '✔ ' + (kindLabel[g.kind] || '') : '') + '</td></tr>';
-  }).join('');
   const dmgSummary = res.damageSpells.map(clsSpellNameSafe)
     .concat((res.grenadeSpells || []).map(x => clsSpellNameSafe(x) + ' (' + t('cls_kind_grenade') + ')'));
 
@@ -4530,10 +4522,11 @@ function renderClassifier(res) {
   const hasSeries = (res.temporalSeries || []).length > 0;
   const chartsHtml = !hasSeries ? '' : (
     '<h3 style="font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--accent)">' + t('cls_h_charts') + '</h3>' +
-    '<div style="position:relative;height:240px;margin-bottom:14px"><canvas id="clsTimelineHits"></canvas></div>' +
     (compDefs.length ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">' +
       compDefs.map(d => '<div style="position:relative;height:220px"><canvas id="' + d.canvas + '"></canvas></div>').join('') +
       '</div>' : '') +
+    '<div style="position:relative;height:240px;margin-bottom:14px"><canvas id="clsTimelineComponents"></canvas></div>' +
+    '<div style="position:relative;height:240px;margin-bottom:14px"><canvas id="clsTimelineHits"></canvas></div>' +
     '<div style="position:relative;height:240px;margin-bottom:14px"><canvas id="clsTimelineDamage"></canvas></div>' +
     '<div style="position:relative;height:230px"><canvas id="clsImpactAnalyser"></canvas></div>'
   );
@@ -4549,10 +4542,6 @@ function renderClassifier(res) {
       '</th><th style="text-align:right">' + t('cls_th_dmg_eff') + '</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
     '<p style="font-size:11.5px;color:var(--text-muted);margin:6px 0 0">' +
       t('cls_unmatched').replace('{u}', res.excludedTurns).replace('{n}', res.totalTurns) + '</p>' +
-    '<h3 style="font-size:14px;font-weight:500;margin:22px 0 8px;color:var(--accent)">' + t('cls_h_detection') + '</h3>' +
-    '<table class="cls-table"><thead><tr><th>' + t('cls_th_incant') + '</th><th style="text-align:right">' + t('cls_th_covered') +
-      '</th><th style="text-align:right">recall</th><th style="text-align:right">overcast</th><th style="text-align:right">' +
-      t('cls_th_total') + '</th><th></th></tr></thead><tbody>' + detRows + '</tbody></table>' +
     chartsHtml;
   renderClassifierCharts(res, compDefs);
 }
@@ -4562,9 +4551,9 @@ function renderClassifier(res) {
 // observado (sem linha de simulação). Reusa movingImpact + renderSmallComponentHistogram.
 function renderClassifierCharts(res, compDefs) {
   const destroy = c => { try { if (c && typeof c.destroy === 'function') c.destroy(); } catch (e) {} };
-  destroy(clsTimelineHitsChart); destroy(clsTimelineDamageChart); destroy(clsImpactChart);
+  destroy(clsTimelineComponentsChart); destroy(clsTimelineHitsChart); destroy(clsTimelineDamageChart); destroy(clsImpactChart);
   clsRowHistCharts.forEach(destroy); clsRowHistCharts = [];
-  clsTimelineHitsChart = clsTimelineDamageChart = clsImpactChart = null;
+  clsTimelineComponentsChart = clsTimelineHitsChart = clsTimelineDamageChart = clsImpactChart = null;
   const series = res.temporalSeries || [];
   if (typeof Chart === 'undefined' || !series.length) return;
   const labels = series.map((_, i) => i + 1);
@@ -4585,6 +4574,29 @@ function renderClassifierCharts(res, compDefs) {
       });
     } catch (err) { console.error('[classifier chart] failed:', canvasId, err); return null; }
   };
+  // componentes por turno — uma linha por componente/spell REAL da rotação (das linhas
+  // observadas), não o set fixo do validador. Assim pega as spells de qualquer vocação e
+  // não inventa runa/granada quando não há. Usa o hitsTimeline alinhado de cada linha.
+  const compPalette = ['#F59E0B', '#22C55E', '#60A5FA', '#F87171', '#A78BFA', '#FBBF24', '#34D399', '#F472B6', '#38BDF8', '#FB923C', '#C084FC'];
+  const compRows = (res.rows || []).filter(r => Array.isArray(r.hitsTimeline) && r.hitsTimeline.some(v => v > 0));
+  const compCv = $('clsTimelineComponents');
+  if (compCv && compRows.length) {
+    try {
+      clsTimelineComponentsChart = new Chart(compCv, {
+        type: 'line',
+        data: { labels, datasets: compRows.map((r, idx) => {
+          const color = compPalette[idx % compPalette.length];
+          return {
+            label: r.kind === 'arrow' ? t('cls_comp_arrow') : r.label,
+            data: r.hitsTimeline,
+            borderColor: color, backgroundColor: color,
+            borderWidth: 2, pointRadius: 0, tension: 0.35, fill: false
+          };
+        }) },
+        options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { color: '#8BA4C2', font: { size: 11 } } }, title: { display: true, text: t('val_timeline_components'), color: '#DDE6F3' } }, scales: scales() }
+      });
+    } catch (err) { console.error('[classifier chart] failed: clsTimelineComponents', err); }
+  }
   clsTimelineHitsChart = lineChart('clsTimelineHits', series.map(p => p.mobsHit), t('val_timeline_hits'), '#3B82F6');
   clsTimelineDamageChart = lineChart('clsTimelineDamage', series.map(p => p.damage), t('val_timeline_damage'), '#F59E0B');
   clsImpactChart = lineChart('clsImpactAnalyser', movingImpact(series), t('val_impact_analyser'), '#3B82F6');
