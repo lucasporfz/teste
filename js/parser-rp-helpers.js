@@ -318,23 +318,15 @@ function rpApplyGrenadePositionBlock(lines, rotationEnd, boundaryInfo = null) {
   return { ambiguous: 0, delaySpillover: hasDelaySpillover };
 }
 
-// Classificador arrow→spell→granada por ASSINATURA DE DANO (método do usuário, validado
-// contra gabarito de 24 turnos em tools/rp-gabarito.mjs — 24/24).
-// Regras:
-//  • Mesmo mob + mesmo componente = MESMO dano EXATO (spell/granada são holy, sem armadura).
-//    Arrow é físico → varia por armadura. ⇒ "âncora de mob" = 1º dano visto numa banda; um hit
-//    quebra a banda se (não-overkill) E (mob já visto na banda) E (dano ≠ âncora).
-//  • Backward-scan: banda1 (do fim) = granada (se explode) ou spell; banda2 = spell; resto = arrow.
-//  • crit-run: troca crit↔não-crit é fronteira de componente (2 trocas = arrow/spell/granada;
-//    1 troca com sufixo-crit = granada crit no fim).
-//  • overkill (dano capado) = ambíguo, herda posição (não quebra banda).
-//  • 2º segundo desambigua granada quando spell e granada têm dano-base holy ~igual.
-// `lines` aqui têm {dmg, mob, type, overkill, holyOriginal, ts}. Retorna {arrowEnd, spellEnd}.
+// Classificador arrow→spell→granada por assinatura de dano + consistência local por mob.
+// Backward-scan usa dmg cru (comportamento original). Detecção de dois componentes holy
+// (spell + granada) usa revertedDmg por mob — normaliza crit, revelando dois níveis distintos.
+// `lines` têm {dmg, revertedDmg, mob, type, overkill, holyOriginal, ts}. Retorna {arrowEnd, spellEnd}.
 function rpClassifyTurnByBands(lines, mark) {
   const n = lines.length;
   if (n === 0) return { arrowEnd: 0, spellEnd: 0, reason: 'bands_empty' };
   if (mark === 'cast') return { arrowEnd: n, spellEnd: n, reason: 'bands_cast' };
-  const EQ = 0; // holy é determinístico: mesmo mob + mesma componente = dano cru EXATO (±0).
+  const EQ = 0;
   const eq = (a, b) => Math.abs(a - b) <= EQ;
   const val = i => lines[i].dmg;
   const mobOf = i => lines[i].mob || '';
@@ -361,9 +353,6 @@ function rpClassifyTurnByBands(lines, mark) {
     for (const m in c) { const ds = c[m]; for (let a = 0; a < ds.length; a++) for (let b = a + 1; b < ds.length; b++) if (eq(ds[a], ds[b])) return true; }
     return false;
   }
-  // banda holy-constante cross-mob: spell/granada normalizam ao MESMO holyBase entre mobs.
-  // Tolerância APERTADA (~2%, holy é quase exato; cauda de arrow tem spread maior), mas tolera
-  // 1 mob com mod impreciso (liod/striker) exigindo só MAIORIA dos mobs concordando.
   function holyConst(lo, hi) {
     const byMob = Object.create(null);
     for (let i = lo; i < hi; i++) { if (isOK(i)) continue; const h = lines[i].holyOriginal; if (!Number.isFinite(h) || h <= 0) continue; const m = mobOf(i); (byMob[m] = byMob[m] || []).push(h); }
@@ -374,66 +363,93 @@ function rpClassifyTurnByBands(lines, mark) {
     const agree = meds.filter(v => Math.abs(v - c) <= tol).length;
     return agree >= 2 && agree * 2 >= meds.length;
   }
-  // banda holy REAL (consistência exata): (a) cada mob com ≥2 hits não-overkill tem dano cru
-  // IDÊNTICO (holy é determinístico; arrow varia) E (b) holyConst cross-mob. Cobre spell que
-  // acerta cada mob 1× (via b) e rejeita cauda de arrow que repete mas varia (via a, t99/t131).
+  // isHolyBand: per-mob dmg consistency + holyConst cross-mob.
+  // Usado para all-arrow escape e crit_run_precrit_holy (onde mobs estão em MOB_ELEMENT_MODS).
   function isHolyBand(lo, hi) {
     const byMob = Object.create(null);
     for (let i = lo; i < hi; i++) { if (isOK(i)) continue; const m = mobOf(i); (byMob[m] = byMob[m] || []).push(val(i)); }
     for (const m in byMob) { const ds = byMob[m]; for (let k = 1; k < ds.length; k++) if (ds[k] !== ds[0]) return false; }
     return holyConst(lo, hi);
   }
+  // isHoly: consistência de revertedDmg por mob (crit-normalizado). Funciona com qualquer mob,
+  // inclusive mobs não catalogados em MOB_ELEMENT_MODS. Exige ao menos um mob com ≥2 hits
+  // idênticos — evita falso-positivo quando cada mob aparece 1× (cauda de arrow).
+  function isHoly(lo, hi) {
+    const byMob = Object.create(null);
+    for (let i = lo; i < hi; i++) {
+      if (isOK(i)) continue;
+      const m = mobOf(i), v = lines[i].revertedDmg;
+      if (!Number.isFinite(v)) continue;
+      (byMob[m] = byMob[m] || []).push(v);
+    }
+    let hasPair = false;
+    for (const m in byMob) {
+      const ds = byMob[m];
+      for (let k = 1; k < ds.length; k++) if (!eq(ds[k], ds[0])) return false;
+      if (ds.length >= 2) hasPair = true;
+    }
+    return hasPair;
+  }
+  // Dois níveis holy distintos: algum mob aparece em ambas as bandas com revertedDmg diferente.
+  // spell crit tem o mesmo revertedDmg que spell não-crit; granada tem revertedDmg diferente.
+  function twoDistinctLevels(lo1, hi1, lo2, hi2) {
+    const lvl1 = Object.create(null);
+    for (let i = lo1; i < hi1; i++) { if (isOK(i)) continue; const m = mobOf(i), v = lines[i].revertedDmg; if (Number.isFinite(v) && lvl1[m] === undefined) lvl1[m] = v; }
+    for (let i = lo2; i < hi2; i++) { if (isOK(i)) continue; const m = mobOf(i), v = lines[i].revertedDmg; if (Number.isFinite(v) && lvl1[m] !== undefined && !eq(v, lvl1[m])) return true; }
+    return false;
+  }
 
-  // segundo (timestamp) em que cada hit cai: 0 = mesmo segundo do 1º hit; ≥1 = depois.
   const t0ts = lines[0].ts;
   const secStartFrom = (lo) => { for (let i = lo; i < n; i++) if (Number.isFinite(lines[i].ts) && lines[i].ts > t0ts) return i; return -1; };
 
   if (critChanges.length === 2) return { arrowEnd: critChanges[0], spellEnd: critChanges[1], reason: 'crit_run_3blocks' };
   if (critChanges.length === 1) {
-    // 1 troca de crit-run → dois runs de crit-state. Como há 3 componentes possíveis
-    // (arrow→spell→granada) e só 1 troca, UM dos dois runs contém 2 componentes:
-    //  (a) prefixo = arrow+spell (mesma crit-state), sufixo = granada — ex. t158;
-    //  (b) prefixo = arrow, sufixo = spell+granada (mesma crit-state) — ex. t2.
     const c0 = critChanges[0];
+    // Dois níveis holy distintos na fronteira de crit → spell + granada (independe de mark).
+    // Funciona mesmo quando o detector de granada por heurística (low/high) não marcou explode.
+    if (isHoly(c0, n)) {
+      const innerBandStart = bandStart(c0);
+      if (innerBandStart < c0 && isHoly(innerBandStart, c0) && twoDistinctLevels(innerBandStart, c0, c0, n)) {
+        return { arrowEnd: innerBandStart, spellEnd: c0, reason: 'crit_two_holy_levels' };
+      }
+    }
     if (mark === 'explode') {
-      // (b') prefixo crit = arrow inteiro; sufixo não-crit = spell + granada (DUAS bandas holy).
       const sg1 = bandStart(n);
       const sg2 = sg1 > c0 ? bandStart(sg1) : c0;
-      if (sg2 >= c0 && sg1 > sg2 && sustained(sg2, sg1) && holyConst(sg2, sg1) && holyConst(sg1, n)) {
+      if (sg2 >= c0 && sg1 > sg2 && sustained(sg2, sg1) && isHoly(sg2, sg1) && isHoly(sg1, n)) {
         return { arrowEnd: c0, spellEnd: sg1, reason: 'crit_arrow_then_spell_grenade_bands' };
       }
       const aEndPrefix = bandStart(c0);
       if (aEndPrefix < c0 && sustained(aEndPrefix, c0)) {
-        // (a) prefixo splittável em arrow+spell; sufixo [c0,n) = granada.
         return { arrowEnd: aEndPrefix, spellEnd: c0, reason: 'crit_prefix_arrowspell_grenade' };
       }
-      // (b) prefixo = arrow; sufixo [c0,n) = spell+granada → separa por 2º segundo (ou banda).
       const sec = secStartFrom(c0);
       let sEnd;
       if (sec > c0) sEnd = sec;
       else { sEnd = bandStart(n); if (sEnd <= c0 || !sustained(sEnd, n)) sEnd = n; }
       return { arrowEnd: c0, spellEnd: sEnd, reason: 'crit_arrow_then_spell_grenade' };
     }
-    // normal (sem granada): arrow | spell na troca de crit.
+    if (c0 > 0) {
+      const innerBandStart = bandStart(c0);
+      if (innerBandStart < c0 && sustained(innerBandStart, c0) && isHolyBand(innerBandStart, c0)) {
+        return { arrowEnd: innerBandStart, spellEnd: n, reason: 'crit_run_precrit_holy' };
+      }
+    }
     return { arrowEnd: c0, spellEnd: n, reason: 'crit_run_arrow_spell' };
   }
 
   const b1 = bandStart(n);
-  // banda final mágica = sustentada OU banda holy real (spell que acerta cada mob 1× — t34).
-  // Senão o fim é arrow → tudo arrow (t78, t155).
+  // all-arrow escape: usa isHolyBand (holyConst) para detectar spell que acerta cada mob 1× (t34).
   if (!sustained(b1, n) && !isHolyBand(b1, n)) return { arrowEnd: n, spellEnd: n, reason: 'bands_all_arrow' };
   const b2 = b1 > 0 ? bandStart(b1) : 0;
 
-  // GRANADA = DUAS bandas holy REAIS empilhadas (spell [b2,b1) + granada [b1,n)). A 2ª banda
-  // precisa: (i) sustained = algum mob repete (descarta cauda de arrow SEM repetição — t87/t26),
-  // E (ii) isHolyBand = mesmo mob com dano IDÊNTICO (descarta cauda que repete mas VARIA —
-  // t99 cyclursus 771≠772, t131). Prefixo arrow [0,b2). t47 (b2=0) → NÃO dispara. Vale p/ normal
-  // E explode, independente do segundo (granada pode cair no mesmo segundo — t16/t75).
-  if (b2 > 0 && sustained(b2, b1) && isHolyBand(b2, b1) && isHolyBand(b1, n)) {
+  // Duas bandas holy empilhadas: spell [b2,b1) + granada [b1,n).
+  // sustained(b2,b1) descarta cauda de arrow sem repetição (t87/t26).
+  // isHoly(revertedDmg) detecta granada mesmo em mobs fora de MOB_ELEMENT_MODS.
+  if (b2 > 0 && sustained(b2, b1) && isHoly(b2, b1) && isHoly(b1, n)) {
     return { arrowEnd: b2, spellEnd: b1, reason: 'bands_arrow_spell_grenade' };
   }
 
-  // Sem granada: arrow + spell (banda final = spell; resto = arrow).
   return { arrowEnd: b1, spellEnd: n, reason: 'bands_arrow_spell' };
 }
 
