@@ -47,15 +47,16 @@ function parseLogForClassifier(logText) {
     const dmg = +a[2];
     if (isReflection && !hasCharm) { events.push({ ts, type: 'reflect', mob, dmg }); continue; }
     const isPreyEffective = isPrey || hasBountyTalisman;
-    if (hasCritCharm || hasOnslaught) { events.push({ ts, type: 'crit', mob, dmg, isPrey: isPreyEffective, onslaught: hasOnslaught, realCrit: isCrit || hasCritCharm }); continue; }
+    const hasExposeWeakness = /Expose Weakness/i.test(suffix);
+    if (hasCritCharm || hasOnslaught) { events.push({ ts, type: 'crit', mob, dmg, isPrey: isPreyEffective, onslaught: hasOnslaught, realCrit: isCrit || hasCritCharm, exposeWeakness: hasExposeWeakness }); continue; }
     if (hasCharm) { events.push({ ts, type: 'charm', mob, dmg, isPassive: isReflection }); continue; }
-    events.push({ ts, type: isCrit ? 'crit' : 'normal', mob, dmg, isPrey: isPreyEffective, onslaught: false, realCrit: isCrit });
+    events.push({ ts, type: isCrit ? 'crit' : 'normal', mob, dmg, isPrey: isPreyEffective, onslaught: false, realCrit: isCrit, exposeWeakness: hasExposeWeakness });
   }
   events.forEach((e, i) => { e.seq = i; });
 
   const attackEvents = events.filter(e => e.type === 'normal' || e.type === 'crit');
   const runeEvents = events.filter(e => e.type === 'rune');
-  if (attackEvents.length < 20) return { turnStats: [], error: 'log_too_short', attackCount: attackEvents.length };
+  if (attackEvents.length < 4) return { turnStats: [], error: 'log_too_short', attackCount: attackEvents.length };
 
   // overkill (killing blow, dano capado): o evento seguinte (seq+1) é um XP logado em
   // ≤1s (mesmo turno) — o XP do golpe que mata sai imediato. Um XP vários segundos à
@@ -63,7 +64,13 @@ function parseLogForClassifier(logText) {
   // leva de kills da party: NÃO torna o hit anterior um killing blow. Ex.: uhax 19:52:18
   // (runa que não saiu) era pareado com o XP em 19:52:20 → falso overkill.
   for (const e of attackEvents) {
-    const nxt = events[e.seq + 1];
+    let nxt = null;
+    for (let j = e.seq + 1; j < events.length; j++) {
+      const ev = events[j];
+      if (ev.ts - e.ts > 1) break;
+      if (ev.type === 'charm' || ev.type === 'reflect') continue;
+      nxt = ev; break;
+    }
     e.overkill = !!(nxt && nxt.type === 'xp' && nxt.ts - e.ts <= 1);
   }
 
@@ -115,6 +122,7 @@ function parseLogForClassifier(logText) {
       rawAttackHits,
       mobsHit: Math.max(0, rawAttackHits),
       rpGrenade: rpGrenadeMarks[idx],
+      rpGrenadeHeuristic: rpGrenadeMarks[idx] === 'explode',
       components: { arrow: 0, spell: 0, rune: 0, grenade: rpGrenadeMarks[idx] === 'explode' ? Math.max(0, Math.round(rawAttackHits - rpNormalRotationRaw)) : 0 },
       normalHits: t.filter(e => e.type === 'normal').length,
       critHits: t.filter(e => e.type === 'crit').length,

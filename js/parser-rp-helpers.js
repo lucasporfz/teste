@@ -2,6 +2,28 @@ function getMobElementMods(name) {
   return MOB_ELEMENT_MODS[(name || '').toLowerCase().trim()] || null;
 }
 
+// Expose Weakness: +8% de elemental pierce. Se mod > 100%: metade do pierce.
+// Se mod ≤ 100%: sobe até 100% (full), depois metade do resto.
+function ewHolyMod(baseMod) {
+  const pierce = 0.08;
+  if (baseMod >= 1) return baseMod + pierce / 2;
+  const toHundred = 1 - baseMod;
+  if (pierce <= toHundred) return baseMod + pierce;
+  return 1 + (pierce - toHundred) / 2;
+}
+// Igualdade EW-aware: mesmo status EW → igualdade exata; status diferente → normaliza o
+// hit com EW para base sem EW e compara com tolerância ±1 (arredondamento de ceil).
+function ewAwareEq(v1, hasEW1, v2, hasEW2, mob) {
+  if (hasEW1 === hasEW2) return v1 === v2;
+  const mods = getMobElementMods(mob);
+  if (!mods) return v1 === v2;
+  const base = mods.holyDmgMod || 1;
+  const ew = ewHolyMod(base);
+  const ewHit   = hasEW1 ? v1 : v2;
+  const noEWHit = hasEW1 ? v2 : v1;
+  return Math.abs(Math.ceil(ewHit * base / ew) - noEWHit) <= 1;
+}
+
 // Onslaught: proc de +60% fixo, ADITIVO sobre a base (não multiplica com o crit).
 const ONSLAUGHT_MULT = 1.6;
 // Divisor de amplificação aditivo: base × (1 + (crit-1)? + 0.6?). Ex.: crit puro = critMult;
@@ -331,6 +353,7 @@ function rpClassifyTurnByBands(lines, mark) {
   const val = i => lines[i].dmg;
   const mobOf = i => lines[i].mob || '';
   const isOK = i => !!lines[i].overkill;
+  const ewOf = i => !!lines[i].exposeWeakness;
 
   const critChanges = [];
   for (let i = 1; i < n; i++) if ((lines[i].type === 'crit') !== (lines[i - 1].type === 'crit')) critChanges.push(i);
@@ -340,9 +363,10 @@ function rpClassifyTurnByBands(lines, mark) {
     let start = hi;
     for (let i = hi - 1; i >= 0; i--) {
       if (isOK(i)) { start = i; continue; }
-      const m = mobOf(i), v = val(i);
-      if (anchor[m] === undefined) { anchor[m] = v; start = i; continue; }
-      if (eq(v, anchor[m])) { start = i; continue; }
+      const m = mobOf(i), v = val(i), hasEW = ewOf(i);
+      if (anchor[m] === undefined) { anchor[m] = { v, hasEW }; start = i; continue; }
+      const a = anchor[m];
+      if (ewAwareEq(v, hasEW, a.v, a.hasEW, m)) { start = i; continue; }
       break;
     }
     return start;
@@ -380,12 +404,13 @@ function rpClassifyTurnByBands(lines, mark) {
       if (isOK(i)) continue;
       const m = mobOf(i), v = lines[i].revertedDmg;
       if (!Number.isFinite(v)) continue;
-      (byMob[m] = byMob[m] || []).push(v);
+      (byMob[m] = byMob[m] || []).push({ v, hasEW: ewOf(i) });
     }
     let hasPair = false;
     for (const m in byMob) {
       const ds = byMob[m];
-      for (let k = 1; k < ds.length; k++) if (!eq(ds[k], ds[0])) return false;
+      const ref = ds[0];
+      for (let k = 1; k < ds.length; k++) if (!ewAwareEq(ds[k].v, ds[k].hasEW, ref.v, ref.hasEW, m)) return false;
       if (ds.length >= 2) hasPair = true;
     }
     return hasPair;
@@ -440,7 +465,17 @@ function rpClassifyTurnByBands(lines, mark) {
 
   const b1 = bandStart(n);
   // all-arrow escape: usa isHolyBand (holyConst) para detectar spell que acerta cada mob 1× (t34).
-  if (!sustained(b1, n) && !isHolyBand(b1, n)) return { arrowEnd: n, spellEnd: n, reason: 'bands_all_arrow' };
+  if (!sustained(b1, n) && !isHolyBand(b1, n)) {
+    // Grenade de 1 hit: b1 aponta para um único hit inconsistente no final (ex.: único hit de
+    // grenade para o mob). O early-escape seria prematuro se existir uma spell band antes.
+    if (b1 > 0) {
+      const b2c = bandStart(b1);
+      if (b2c > 0 && sustained(b2c, b1) && isHoly(b2c, b1)) {
+        return { arrowEnd: b2c, spellEnd: b1, reason: 'bands_arrow_spell_grenade_single' };
+      }
+    }
+    return { arrowEnd: n, spellEnd: n, reason: 'bands_all_arrow' };
+  }
   const b2 = b1 > 0 ? bandStart(b1) : 0;
 
   // Duas bandas holy empilhadas: spell [b2,b1) + granada [b1,n).
@@ -499,6 +534,7 @@ function classifyRpTurnComponents(turn, stat, mark, critMultObserved = 0, preyMu
       type: e.type,
       isPrey: !!e.isPrey,
       overkill: !!e.overkill,
+      exposeWeakness: !!e.exposeWeakness,
       physicalOriginal: mods ? normalizeSeenDamageForElement(ev, 'physicalDmgMod', critMultObserved, preyMult) : null,
       holyOriginal: mods ? normalizeSeenDamageForElement(ev, 'holyDmgMod', critMultObserved, preyMult) : null,
       fireOriginal: mods ? normalizeSeenDamageForElement(ev, 'fireDmgMod', critMultObserved, preyMult) : null,
